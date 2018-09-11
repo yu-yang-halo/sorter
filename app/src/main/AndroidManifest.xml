@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yy.sorter.activity">
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:icon="${APP_ICON}"
+        android:label="${APP_NAME}"
+        android:supportsRtl="true"
+        android:name="com.yy.sorter.application.ThApplication"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup"
+        android:allowBackup="false">
+        <activity android:name="com.yy.sorter.activity.LaunchActivity"
+            android:theme="@style/AppTheme2"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.yy.sorter.activity.MainActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+
+        <meta-data android:value="${BUG_HD_TH_VALUE}" android:name="BUG_HD_SDK_GENERAL_KEY" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${AUTH_PROVIDER_VALUE}"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!--元数据-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service android:name="com.yy.sorter.service.RestartService">
+
+        </service>
+
+    </application>
+
+</manifest>

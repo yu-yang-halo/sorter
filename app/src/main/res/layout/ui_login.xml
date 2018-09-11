@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#80888888"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:id="@+id/appversionLabel"
+            />
+        <Button
+            android:id="@+id/btn_share_qr"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icon_share_qrcode_selector"
+            android:layout_toRightOf="@+id/appversionLabel"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/localLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <Button
+            android:id="@+id/localLogin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/button_selector"
+            android:focusable="true"
+            android:text="本地登录"
+            android:textAllCaps="false"
+            android:textColor="@color/whiteFont" />
+
+        <Button
+            android:id="@+id/remoteLogin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="38dp"
+            android:background="@drawable/button_selector"
+            android:focusable="true"
+            android:text="远程登录"
+            android:textAllCaps="false"
+            android:textColor="@color/whiteFont" />
+
+
+    </RelativeLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <Button
+            android:text="语言选择"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/button9"
+            android:background="@null"
+            android:textColor="@color/buttonNormal"
+            android:layout_weight="1"
+            android:textAllCaps="false" />
+
+        </LinearLayout>
+
+
+
+</RelativeLayout>

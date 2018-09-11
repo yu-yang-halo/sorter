@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="layers">
+        <item>1层</item>
+        <item>2层</item>
+        <item>3层</item>
+        <item>4层</item>
+    </string-array>
+    <string-array name="ejectorTypes">
+        <item>类型1</item>
+        <item>类型2</item>
+    </string-array>
+    <string-array name="componentTypes">
+        <item>单独吹</item>
+        <item>左侧也吹</item>
+        <item>右侧也吹</item>
+        <item>左右都吹</item>
+    </string-array>
+    <string-array name="channels">
+        <item>料槽1</item>
+        <item>料槽2</item>
+        <item>料槽3</item>
+        <item>料槽4</item>
+        <item>料槽5</item>
+        <item>料槽6</item>
+    </string-array>
+    <string-array name="colors1">
+        <item>红色</item>
+        <item>绿色</item>
+        <item>蓝色</item>
+        <item>红色+绿色</item>
+        <item>红色+蓝色</item>
+        <item>绿色+蓝色</item>
+        <item>红色+绿色+蓝色</item>
+    </string-array>
+    <string-array name="colors2">
+        <item>红色>绿色</item>
+        <item>红色>蓝色</item>
+        <item>绿色>红色</item>
+        <item>绿色>蓝色</item>
+        <item>蓝色>红色</item>
+        <item>蓝色>绿色</item>
+    </string-array>
+    <string-array name="shapes">
+        <item>无</item>
+        <item>大米形选</item>
+        <item>小麦</item>
+        <item>标准形选</item>
+        <item>玉米</item>
+        <item>甘草</item>
+        <item>葵花籽</item>
+        <item>红茶</item>
+        <item>腰果</item>
+        <item>花生芽头</item>
+        <item>蚕豆</item>
+        <item>铁观音</item>
+    </string-array>
+</resources>

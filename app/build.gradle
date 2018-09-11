@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 25
+    buildToolsVersion '27.0.3'
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 25
+        versionCode 220
+        versionName "1.0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        /**
+         *  一般机型的协议版本
+         */
+        buildConfigField 'byte', 'PROTOCOL_VERSION_BIG','3'//大版本 提示屏程序协议与手机协议不匹配问题
+        buildConfigField 'byte', 'PROTOCOL_VERSION_SMALL','5'//小版本
+        /**
+         * 特殊机型的协议版本 大米机器
+         */
+        buildConfigField 'byte', 'PROTOCOL_RICE_VERSION_BIG','2'
+        buildConfigField 'byte', 'PROTOCOL_RICE_VERSION_SMALL','2'
+        /**
+         * 特殊机型的协议版本 1R大米机器
+         */
+        buildConfigField 'byte', 'PROTOCOL_RICE_1R_VERSION_BIG','2'
+        buildConfigField 'byte', 'PROTOCOL_RICE_1R_VERSION_SMALL','1'
+        /**
+         * 必须要保证所有的flavor 都属于同一个维度
+         */
+        flavorDimensions "default"
+    }
+
+    productFlavors {
+        /**
+         * 公司使用 【user,engineer】
+         * *********************************************************************************************************
+         * *********************************************************************************************************
+         * *********************************************************************************************************
+         */
+        user {
+            applicationId "com.yy.sorter"
+            buildConfigField 'String', 'AUTH_PROVIDER', '"com.yy.sorter.fileprovider"'
+            buildConfigField 'Integer', 'SOFT_VERSION_TYPE','0x01'//用户版
+            buildConfigField 'String', 'LOGO', '"logo"'  //logo
+            buildConfigField 'String', 'VKEY', '"user"'//软件版本KEY 索引
+            manifestPlaceholders = [AUTH_PROVIDER_VALUE: "com.yy.sorter.fileprovider",
+                                    BUG_HD_TH_VALUE:"70868c1737ac2f2512b6094dc20f2f3d",
+                                    APP_ICON:"@drawable/ic_user",
+                                    APP_NAME:"@string/app_name"]
+        }
+        engineer {
+            applicationId "com.yy.sorter.engineer"
+            buildConfigField 'String', 'AUTH_PROVIDER', '"com.yy.sorter.engineer.fileprovider"'
+            buildConfigField 'Integer', 'SOFT_VERSION_TYPE','0x02'//工程师版
+            buildConfigField 'String', 'LOGO', '"logo"'
+            buildConfigField 'String', 'VKEY', '"engineer"'//软件版本
+            manifestPlaceholders = [AUTH_PROVIDER_VALUE: "com.yy.sorter.engineer.fileprovider",
+                                    BUG_HD_TH_VALUE:" e61405791a43b0bb7fd28c4fd5f73e65",
+                                    APP_ICON:"@drawable/ic_engineer",
+                                    APP_NAME:"@string/app_name"]
+        }
+
+
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        release {
+            v2SigningEnabled false
+        }
+    }
+
+}
+
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-dynamic-animation:25.3.1'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
+    /** 下拉刷新组件   **/
+    /** UI测试框架 引入uiautomator **/
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.0'
+    compile 'com.kaopiz:kprogresshud:1.0.5'
+    /**Chart**/
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    compile files('libs/gson-2.8.1.jar')
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="taiheColor">#bef1ed</color>
+    <color name="themeColor">#f5f5f5</color>
+    <color name="barItemColor">#1b82d2</color>
+    <color name="bottomItemColor">#ffffff</color>
+    <color name="topTitle">#ffffff</color>
+    <color name="bottomItemSelected">#bef1ed</color>
+
+    <color name="buttonSelected">#4ed265</color>
+    <color name="lightblue">#63bdd6</color>
+    <color name="buttonNormal">#1b82ff</color>
+    <color name="buttonNormal1">#1b82d2</color>
+
+    <color name="gray">#666</color>
+    <color name="red">#f00</color>
+    <color name="fontColor">#000000</color>
+    <color name="lineColor">#40aaaaaa</color>
+    <color name="background">#ffffff</color>
+    <color name="whiteFont">#ffffff</color>
+    <color name="msgbg">#804ed265</color>
+    <color name="blue">#1983d1</color>
+    <color name="orange">#fe9a11</color>
+    <color name="grayColor">#30bbbbbb</color>
+    <color name="disableColor">#30666666</color>
+    <color name="hintColor">#80888888</color>
+    <color name="green">#FF00FF00</color>
+    <color name="alphaBlack80">#40000000</color>
+    <color name="alphaWhite80">#90ffffff</color>
+</resources>

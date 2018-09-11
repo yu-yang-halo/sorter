@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/themeColor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center|left"
+            android:id="@+id/lanNameLabel"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/fontColor" />
+        <CheckBox
+            android:text=""
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/ckLan"
+            style="@style/CustomCheckBoxStyle"/>
+
+        <Button
+            android:id="@+id/updateBtn"
+            android:textColor="@color/whiteFont"
+            android:background="@drawable/red_radius"
+            android:layout_width="70dp"
+            android:gravity="center"
+            android:layout_height="30dp"
+            android:text="new"
+            android:textAllCaps="false"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

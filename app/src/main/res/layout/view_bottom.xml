@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_bottom"
+    android:background="@color/bottomItemColor">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#40888888"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/home_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/button_tab_home"
+                android:layout_width="@dimen/tab_item_image_side"
+                android:layout_height="@dimen/tab_item_image_side"
+                android:background="@mipmap/tab_home1" />
+
+            <TextView
+                android:id="@+id/tv_tab_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12dp"
+                android:textColor="@color/bottomItemSelected"
+                android:text="主页" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lmd_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/button_tab_lmd"
+                android:layout_width="@dimen/tab_item_image_side"
+                android:layout_height="@dimen/tab_item_image_side"
+                android:background="@mipmap/tab_sensitive0" />
+
+            <TextView
+                android:id="@+id/tv_tab_lmd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12dp"
+                android:textColor="@color/fontColor"
+                android:text="灵敏度" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/m_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+           <com.yy.sorter.view.AnimtionButton
+               android:id="@+id/animBtn"
+               android:layout_width="60dp"
+               android:layout_height="60dp"
+               >
+           </com.yy.sorter.view.AnimtionButton>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/xtxx_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/button_tab_xtxx"
+                android:layout_width="@dimen/tab_item_image_side"
+                android:layout_height="@dimen/tab_item_image_side"
+                android:background="@mipmap/tab_settings0" />
+
+            <TextView
+                android:id="@+id/tv_tab_xtxx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12dp"
+                android:textColor="@color/fontColor"
+                android:text="系统信息" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/xtsz_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/button_tab_xtsz"
+                android:layout_width="@dimen/tab_item_image_side"
+                android:layout_height="@dimen/tab_item_image_side"
+                android:background="@mipmap/tab_sysinfo0" />
+
+            <TextView
+                android:id="@+id/tv_tab_xtsz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12dp"
+                android:textColor="@color/fontColor"
+                android:text="系统设置" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
