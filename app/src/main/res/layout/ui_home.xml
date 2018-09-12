@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/themeColor">
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/la"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/r5"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="当前方案"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:id="@+id/tv_title_scheme"
+                    android:paddingLeft="10dp"
+                    android:gravity="center|left"
+                    android:textColor="@color/buttonNormal"
+                    android:background="@color/themeColor"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@color/background"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:src="@mipmap/advance"/>
+
+                    <TextView
+                        android:text="方案"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/nameTxt"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:layout_marginRight="40dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:background="@color/background"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:id="@+id/tv_feeder"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center|left"
+                    android:text="给料器"
+                    android:textColor="@color/fontColor"
+                    android:textSize="@dimen/fontSize" />
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/btn_switch_feeder"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    app:kswTintColor="#1b82d2"
+                    tools:ignore="RtlHardcoded"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/r4"
+                android:layout_alignParentStart="true"
+                android:background="@color/background"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:id="@+id/tv_valve"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/fontSize"
+                    android:textColor="@color/fontColor"
+                    android:text="喷阀"
+                    />
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/btn_switch_valve"
+                    android:layout_centerVertical="true"
+                    app:kswTintColor="#1b82d2"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    tools:ignore="RtlHardcoded"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/r4"
+                android:layout_alignParentStart="true"
+                android:background="@color/background"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:layout_marginTop="1dp">
+
+
+                <Button
+                    android:text="清灰"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:textAllCaps="false"
+                    android:id="@+id/btn_clean"
+                    android:textColor="@drawable/selector_btn_click_text_color"
+                    android:background="@drawable/th_button_selector"
+                    android:layout_centerVertical="true"
+                    />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/r32"
+                android:background="@color/background"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="1dp"
+                >
+
+                <Button
+                    android:text="系统关"
+                    android:textColor="@drawable/selector_btn_click_text_color"
+                    android:background="@drawable/th_button_selector"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:textAllCaps="false"
+                    android:id="@+id/btn_system"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    </com.baoyz.widget.PullRefreshLayout>
+</RelativeLayout>

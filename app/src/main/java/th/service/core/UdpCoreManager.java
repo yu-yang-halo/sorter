@@ -254,7 +254,7 @@ public class UdpCoreManager extends IReceiveListenser {
         }
 
         /**
-         * UIManager 发送消息给【BaseUI】界面
+         * UIManager 发送消息给【BaseUi】界面
          */
         ThUIManger.getInstance().setChanged();
         ThUIManger.getInstance().notifyObservers(thPackage);

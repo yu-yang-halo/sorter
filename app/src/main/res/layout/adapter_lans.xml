@@ -10,14 +10,15 @@
 
 
         <TextView
-            android:text=""
+            android:id="@+id/lanNameLabel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:gravity="center|left"
-            android:id="@+id/lanNameLabel"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:gravity="center|left"
+            android:text=""
+            android:textSize="20sp"
             android:textColor="@color/fontColor" />
         <CheckBox
             android:text=""

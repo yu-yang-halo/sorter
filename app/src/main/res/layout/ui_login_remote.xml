@@ -12,30 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true">
-        <TextView
-            android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#80888888"
-            android:textSize="15sp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:id="@+id/appversionLabel"
-            />
-        <Button
-            android:id="@+id/btn_share_qr"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/icon_share_qrcode_selector"
-            android:layout_toRightOf="@+id/appversionLabel"
-            />
-    </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/remoteLayout"
             android:layout_width="match_parent"

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import com.yy.sorter.ui.base.BaseUI;
+import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.FadeUtils;
 import com.yy.sorter.version.PageVersionManager;
@@ -31,9 +31,9 @@ public class MiddleManger extends ThManagerSubject {
     /**
      * 当前中间层的UI
      */
-    private BaseUI currentUI;
+    private BaseUi currentUI;
 
-    public BaseUI getCurrentUI() {
+    public BaseUi getCurrentUI() {
         return currentUI;
     }
 
@@ -44,7 +44,7 @@ public class MiddleManger extends ThManagerSubject {
     /**
      * 页面缓存
      */
-    private Map<Integer, BaseUI> VIEW_CACHES = new HashMap<>();
+    private Map<Integer, BaseUi> VIEW_CACHES = new HashMap<>();
 
     private MiddleManger() {
 
@@ -92,13 +92,13 @@ public class MiddleManger extends ThManagerSubject {
     }
 
 
-    public boolean isCurrentUI(BaseUI baseUI) {
+    public boolean isCurrentUI(BaseUi baseUi) {
         boolean isEqual = false;
-        if (currentUI == null || baseUI == null) {
+        if (currentUI == null || baseUi == null) {
             return isEqual;
         }
 
-        isEqual = (currentUI.getID() == baseUI.getID());
+        isEqual = (currentUI.getID() == baseUi.getID());
 
         return isEqual;
     }
@@ -134,12 +134,16 @@ public class MiddleManger extends ThManagerSubject {
      * onViewDestory
      */
 
+    public synchronized void changeUI(int pageId, int index) {
+        String title = FileManager.getInstance().getString(index);
+        changeUI(pageId,title);
+    }
     public synchronized void changeUI(int pageId, String title) {
 
         if (currentUI != null && currentUI.getID() == pageId) {
             return;
         }
-        BaseUI targetUI = null;
+        BaseUi targetUI = null;
 
         if (VIEW_CACHES.containsKey(pageId)) {
             cacheCheck(pageId);
@@ -147,7 +151,7 @@ public class MiddleManger extends ThManagerSubject {
             targetUI.setTitle(title);
         } else {
             Map<Integer, Class> pagesMap = PageVersionManager.getInstance().getPagesMap();
-            Class<? extends BaseUI> targetClazz = pagesMap.get(pageId);
+            Class<? extends BaseUi> targetClazz = pagesMap.get(pageId);
 
             if (targetClazz == null) {
                 Toast.makeText(ctx,"不支持的界面跳转",Toast.LENGTH_SHORT).show();
@@ -168,7 +172,7 @@ public class MiddleManger extends ThManagerSubject {
         }
         middleContainer.removeAllViews();
 
-        View targetChild = targetUI.getChild();
+        View targetChild = targetUI.getView();
 
         /**
          *  如果属于同意级别就替换
@@ -233,21 +237,21 @@ public class MiddleManger extends ThManagerSubject {
     {
         if(VIEW_CACHES.containsKey(pageId)) {
             Map<Integer, Class> pagesMap = PageVersionManager.getInstance().getPagesMap();
-            Class<? extends BaseUI> targetClazz = pagesMap.get(pageId);
+            Class<? extends BaseUi> targetClazz = pagesMap.get(pageId);
             if (targetClazz != null) {
                 if (VIEW_CACHES.get(pageId).getClass() != targetClazz) {
-                    BaseUI targetUI;
+                    BaseUi targetUI;
                     try {
                         targetUI = targetClazz.getConstructor(Context.class).newInstance(ctx);
                     } catch (Exception e) {
                         targetUI = null;
                     }
                     if (targetUI != null) {
-                        BaseUI baseUI = VIEW_CACHES.get(pageId);
+                        BaseUi baseUi = VIEW_CACHES.get(pageId);
 
-                        if (baseUI != null) {
-                            targetUI.setTitle(baseUI.getTitle());
-                            ThUIManger.getInstance().deleteObserver(baseUI);
+                        if (baseUi != null) {
+                            targetUI.setTitle(baseUi.getTitle());
+                            ThUIManger.getInstance().deleteObserver(baseUi);
                         }
 
                         VIEW_CACHES.put(pageId, targetUI);
@@ -262,7 +266,7 @@ public class MiddleManger extends ThManagerSubject {
 
         cacheCheck(key);
 
-        BaseUI targetUI = VIEW_CACHES.get(key);
+        BaseUi targetUI = VIEW_CACHES.get(key);
 
         if(targetUI == null)
         {
@@ -273,7 +277,7 @@ public class MiddleManger extends ThManagerSubject {
             currentUI.onViewStop();
         }
         middleContainer.removeAllViews();
-        View view = targetUI.getChild();
+        View view = targetUI.getView();
         middleContainer.addView(view);
         currentUI = targetUI;
         updateChanges(currentUI.getTitle());
@@ -305,15 +309,15 @@ public class MiddleManger extends ThManagerSubject {
             Integer key = HISTORYS.removeFirst();
 
             if (!onlyRemoveHistory) {
-                BaseUI baseUI = VIEW_CACHES.remove(key);
+                BaseUi baseUi = VIEW_CACHES.remove(key);
 
-                if (baseUI != null) {
-                    ThUIManger.getInstance().deleteObserver(baseUI);
+                if (baseUi != null) {
+                    ThUIManger.getInstance().deleteObserver(baseUi);
 
-                    if (baseUI.getLeaver() != ConstantValues.LEAVER_DEFAULT) {
-                        for (Iterator<Map.Entry<Integer, BaseUI>> it = VIEW_CACHES.entrySet().iterator(); it.hasNext(); ) {
-                            Map.Entry<Integer, BaseUI> entry = it.next();
-                            if (baseUI.getLeaver() == entry.getValue().getLeaver()) {
+                    if (baseUi.getLeaver() != ConstantValues.LEAVER_DEFAULT) {
+                        for (Iterator<Map.Entry<Integer, BaseUi>> it = VIEW_CACHES.entrySet().iterator(); it.hasNext(); ) {
+                            Map.Entry<Integer, BaseUi> entry = it.next();
+                            if (baseUi.getLeaver() == entry.getValue().getLeaver()) {
 
                                 ThUIManger.getInstance().deleteObserver(entry.getValue());
                                 it.remove();

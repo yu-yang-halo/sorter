@@ -43,7 +43,6 @@ public class ThDevice {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((deviceSN == null) ? 0 : deviceSN.hashCode());
-		result = prime * result + ((localIp == null) ? 0 : localIp.hashCode());
 		return result;
 	}
 

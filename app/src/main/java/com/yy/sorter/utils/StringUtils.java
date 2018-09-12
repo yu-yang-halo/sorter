@@ -25,21 +25,7 @@ import th.service.core.AbstractDataServiceFactory;
 
 public class StringUtils {
 
-    public static  boolean isOnlyViewMachine()
-    {
-        byte[] hasRearView = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData().getHasRearView();
 
-        boolean isOnlyView = true;
-        for(byte b:hasRearView)
-        {
-            if(b == 1)
-            {
-                isOnlyView = false;
-                break;
-            }
-        }
-        return  isOnlyView;
-    }
 
     public static List<ThAutoLayout.Item> getGroupItem()
     {
@@ -82,50 +68,6 @@ public class StringUtils {
         return itemList;
     }
 
-    public static List<ThAutoLayout.Item> getLayerViewItem()
-    {
-        int layerNumber=AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData().getLayerNumber();
-        byte[] hasRearView = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData().getHasRearView();
-
-        String[] frontRearStrArr = new String[]{FileManager.getInstance().getString(75),
-                FileManager.getInstance().getString(76)};//75#前视 76#后视
-
-        List<ThAutoLayout.Item> itemList = new ArrayList<>();
-
-        boolean isOnlyView = isOnlyViewMachine();
-
-        for(int i=0;i<layerNumber;i++)
-        {
-
-            String layerStr = getLayerStr(i+1);
-            if(layerNumber == 1)
-            {
-                layerStr = "";
-            }
-
-            for(int view=0;view<2;view++)
-            {
-
-                if( (view == 1 && hasRearView[i] == 1)  || view == 0)
-                {
-
-                    String viewStr = frontRearStrArr[view];
-
-                    if(isOnlyView)
-                    {
-                        viewStr = "";
-                    }
-                    ThAutoLayout.Item item = new ThAutoLayout.Item(layerStr+""+viewStr,i,view);
-
-                    itemList.add(item);
-                }
-
-            }
-
-        }
-
-        return itemList;
-    }
 
     /**
      * @param currentLayer start 1....

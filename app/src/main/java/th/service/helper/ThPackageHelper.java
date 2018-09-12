@@ -6,13 +6,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.utils.ConvertUtils;
+import com.yy.sorter.utils.StringUtils;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import th.service.data.MachineData;
 import th.service.data.ThConfig;
+import th.service.data.ThDevice;
 
 /**
  * 注意包体的长度计算，同意TCP和UDP包体长度的计算
@@ -22,7 +26,37 @@ import th.service.data.ThConfig;
 
 public class ThPackageHelper {
 	private static final int PACKET_HEADER_SIZE=ThPackage.PACKET_HEADER_SIZE;
-	
+	/**
+	 * 解析UDP搜索到的设备
+	 * @param retData
+	 * @return
+	 */
+	public static ThDevice parseMyDevice(ThPackage retData){
+		//茶叶机#SN0000
+
+		if(retData!=null){
+			byte[] contents=retData.getContents();
+			if(retData.getType()==(byte)0x02&&contents!=null){
+
+				String data= StringUtils.convertByteArrayToString(contents);
+
+				String[] snAndName=data.split("#");
+
+				if(snAndName!=null&&snAndName.length==2){
+
+					ThDevice thDevice=new ThDevice(retData.getSenderIP(),snAndName[1], snAndName[0]);
+					thDevice.setControlStatus(retData.getData1()[0]);//是否控制状态
+					return thDevice;
+
+				}
+
+
+			}
+
+
+		}
+		return null;
+	}
 
 	static byte[] buffers;
 	static int  buffersLength=0;
@@ -109,15 +143,8 @@ public class ThPackageHelper {
 
 			machineData.setProtocolVersionBig(retData.getData1()[0]);
 			machineData.setProtocolVersionSmall(retData.getData1()[1]);
-			machineData.setProtocolVersionType(retData.getData1()[2]);//协议类型 0-普通机型 1-大米机型 2-1R大米机
+			machineData.setProtocolVersionType(retData.getData1()[2]);//协议类型 0-普通机型
 
-
-			if(machineData.getProtocolVersionType() == 2){
-				machineData.setGroupNumbers(retData.getData1()[3]);
-			}else if(machineData.getProtocolVersionType() == 1){
-				int groupInfo= ConvertUtils.bytes2ToInt(retData.getData1()[3],retData.getData1()[4]);
-				machineData.setGroupInfo(groupInfo);
-			}
 
 			ThLogger.debug("MachineData",machineData.toString());
 			return machineData;

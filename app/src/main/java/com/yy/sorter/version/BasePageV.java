@@ -1,10 +1,13 @@
 package com.yy.sorter.version;
 
 
-import com.yy.sorter.ui.LanUI;
-import com.yy.sorter.ui.LoginUI;
-import com.yy.sorter.ui.RegisterUI;
-import com.yy.sorter.ui.ShareQRUI;
+import com.yy.sorter.ui.DeviceListUi;
+import com.yy.sorter.ui.HomeUi;
+import com.yy.sorter.ui.LanUi;
+import com.yy.sorter.ui.LoginUi;
+import com.yy.sorter.ui.RegisterUi;
+import com.yy.sorter.ui.RemoteLoginUi;
+import com.yy.sorter.ui.ShareQRUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
 import java.util.HashMap;
@@ -64,6 +67,10 @@ public abstract class BasePageV {
             }
         }
 
+        if(clazz == null)
+        {
+            clazz = PageVNotFound.class;
+        }
         if(currentPageV==null||currentPageV.getClass()!=clazz){
             try {
                 currentPageV=clazz.newInstance();
@@ -85,10 +92,12 @@ public abstract class BasePageV {
      * 子类可以重写该方法，来定制特定版本的UI
      */
     protected void initPages(){
-        basePages.put(ConstantValues.VIEW_LOGIN, LoginUI.class);//登录
-        basePages.put(ConstantValues.VIEW_REGISTER, RegisterUI.class);//注册（授权）
-        basePages.put(ConstantValues.VIEW_LAN, LanUI.class);//语言设置界面
-        basePages.put(ConstantValues.VIEW_SHARE_QR, ShareQRUI.class);//给料器设置
+        basePages.put(ConstantValues.VIEW_LOGIN, LoginUi.class);//登录
+        basePages.put(ConstantValues.VIEW_LOGIN_REMOTE, RemoteLoginUi.class);//远程登录
+        basePages.put(ConstantValues.VIEW_REGISTER, RegisterUi.class);//注册（授权）
+        basePages.put(ConstantValues.VIEW_LAN, LanUi.class);//语言设置界面
+        basePages.put(ConstantValues.VIEW_HOME, HomeUi.class);//主界面
+        basePages.put(ConstantValues.VIEW_DEVICE_LIST, DeviceListUi.class);//设备列表
 
 
     }

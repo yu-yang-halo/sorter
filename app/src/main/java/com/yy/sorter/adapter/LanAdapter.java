@@ -108,7 +108,7 @@ public class LanAdapter extends BaseAdapter {
         }
 
         int lanCountryId=TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID, ConstantValues.LAN_COUNTRY_EN);
-        updateBtn.setText(FileManager.getInstance().getString(254));//254#有更新
+        updateBtn.setText(FileManager.getInstance().getString(1018));//1018#有更新
 
 
         if(lan.getCountryId()==lanCountryId){
@@ -150,11 +150,13 @@ public class LanAdapter extends BaseAdapter {
             switchLan(position);
             return;
         }
+        //41#确定
+        //42#取消
         if(lanList.get(position).getLastVersion()!=lanList.get(position).getVersion()){
             new AlertDialog.Builder(ctx)
-                    .setTitle(FileManager.getInstance().getString(244))//244#提示
-                    .setMessage(lanList.get(position).getName()+" "+FileManager.getInstance().getString(255))//255#发现新的语言包,请及时更新
-                    .setPositiveButton(FileManager.getInstance().getString(130), new DialogInterface.OnClickListener() {
+                    .setTitle(FileManager.getInstance().getString(6))//6#提示
+                    .setMessage(lanList.get(position).getName()+" "+FileManager.getInstance().getString(1019))//1019#发现新的语言包,请及时更新
+                    .setPositiveButton(FileManager.getInstance().getString(41), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
@@ -187,13 +189,13 @@ public class LanAdapter extends BaseAdapter {
                         if (success){
                             TextCacheUtils.loadInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,lanList.get(position).getCountryId());
                             TextCacheUtils.loadString(TextCacheUtils.KEY_LAN_URL,lanList.get(position).getUrl());
-                            ThToast.showToast(ctx,FileManager.getInstance().getString(220));//220#加载语言成功
+                            ThToast.showToast(ctx,FileManager.getInstance().getString(1020));//1020#加载语言成功
 
                             TopManager.getInstance().changeTitle(FileManager.getInstance().getString(3));
                             notifyDataSetChanged();
 
                         }else{
-                            ThToast.showToast(ctx,FileManager.getInstance().getString(240));//240#加载语言失败
+                            ThToast.showToast(ctx,FileManager.getInstance().getString(1021));//1021#加载语言失败
                         }
                     }
                 });

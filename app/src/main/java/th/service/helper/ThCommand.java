@@ -102,8 +102,8 @@ public class ThCommand {
 
 	/**控制命令**/
 	public static final byte CONTROL_CMD=0x03;
-	public static final byte EXTEND_CONTROL_CMD_GEILIAO=0x01;//给料器
-	public static final byte EXTEND_CONTROL_CMD_FA=0x02;//阀
+	public static final byte EXTEND_CONTROL_CMD_FEEDER=0x01;//给料器
+	public static final byte EXTEND_CONTROL_CMD_VALVE=0x02;//阀
 	public static final byte EXTEND_CONTROL_CMD_START=0x03;//启动
 	public static final byte EXTEND_CONTROL_CMD_CLEAR=0x04;//清灰
     /**

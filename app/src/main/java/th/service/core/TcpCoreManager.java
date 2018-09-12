@@ -271,7 +271,7 @@ public class TcpCoreManager extends IReceiveListenser{
 		ThLogger.debug(TAG,"len:: "+len+"\n"+thPackage);
 
 		/**
-		 * UIManager 发送消息给【BaseUI】界面
+		 * UIManager 发送消息给【BaseUi】界面
 		 */
 
 		ThUIManger.getInstance().setChanged();

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.manager.MiddleManger;
-import com.yy.sorter.ui.LoginUI;
+import com.yy.sorter.ui.LoginUi;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.StringUtils;
 
@@ -39,8 +39,8 @@ import th.service.helper.ThPackage;
  *
  */
 
-public abstract class BaseUI implements ThObserver{
-    private static final String TAG="BaseUI";
+public abstract class BaseUi implements ThObserver{
+    private static final String TAG="BaseUi";
     protected ExecutorService singleThreadExecutor= Executors.newSingleThreadExecutor();
     protected Context ctx;
     protected Handler mainUIHandler=new Handler(Looper.getMainLooper());
@@ -71,10 +71,10 @@ public abstract class BaseUI implements ThObserver{
      * 已经定义好需要显示的view
      */
     protected View    view;
-    public BaseUI(Context ctx){
+    public BaseUi(Context ctx){
         this.ctx=ctx;
     }
-    protected void initViewWidthHeight(){
+    private void initViewWidthHeight(){
         if(view==null){
             return;
         }
@@ -90,7 +90,18 @@ public abstract class BaseUI implements ThObserver{
      * 建议只做一些页面View初始化工作
      * @return
      */
-    public abstract View getChild();
+    protected abstract View onInitView();
+
+    public View getView()
+    {
+        view = onInitView();
+        /**
+         * 初始化宽度和高度
+         */
+        initViewWidthHeight();
+        return view;
+    }
+
 
     /**
      * UI界面的唯一标识
@@ -188,7 +199,7 @@ public abstract class BaseUI implements ThObserver{
 
             if(System.currentTimeMillis()-lastTime>3000){
                 lastTime=System.currentTimeMillis();
-                Toast.makeText(ctx, FileManager.getInstance().getString(330),Toast.LENGTH_SHORT).show();  //330#再按一次退出界面
+                Toast.makeText(ctx, FileManager.getInstance().getString(1017),Toast.LENGTH_SHORT).show();  //1017#再按一次退出界面
             }else{
                 MiddleManger.getInstance().goBack();
                 /**
@@ -206,7 +217,7 @@ public abstract class BaseUI implements ThObserver{
 
                 if(System.currentTimeMillis()-lastTime>3000){
                     lastTime=System.currentTimeMillis();
-                    Toast.makeText(ctx, FileManager.getInstance().getString(222),Toast.LENGTH_SHORT).show();  //222#再按一次退出
+                    Toast.makeText(ctx, FileManager.getInstance().getString(1003),Toast.LENGTH_SHORT).show();  //1003#再按一次退出
                 }else{
                     ((Activity)ctx).finish();
                 }
@@ -234,13 +245,17 @@ public abstract class BaseUI implements ThObserver{
         Toast.makeText(ctx,message,Toast.LENGTH_LONG).show();
     }
 
+
+
+
+
     @Override
     public void update(Object var1, final Object var2) {
         mainUIHandler.post(new Runnable() {
             @Override
             public void run() {
 
-                if(MiddleManger.getInstance().isCurrentUI(BaseUI.this)){
+                if(MiddleManger.getInstance().isCurrentUI(BaseUi.this)){
 
                     if(var2.getClass()== ThPackage.class){
                         ThPackage thPackage= (ThPackage) var2;
@@ -260,13 +275,13 @@ public abstract class BaseUI implements ThObserver{
                             }
                             onDeviceOffline();
                             if(thPackage.getExtendType()==0x01){
-                                showToast(FileManager.getInstance().getString(213)+ FileManager.getInstance().getString(214)); //213#设备 214#已经下线
+                                showToast( FileManager.getInstance().getString(1007)); //1007#设备已经下线
                                 MiddleManger.getInstance().goBack(ConstantValues.VIEW_DEVICE_LIST);
                                 ThLogger.addLog("UDP--设备已经下线");
                             }else{
                                 String devSN= StringUtils.convertByteArrayToString(thPackage.getContents());
-                                showToast(FileManager.getInstance().getString(213)+"["+devSN+"]"+ FileManager.getInstance().getString(214)); //213#设备 214#已经下线
-                                MiddleManger.getInstance().goBack(ConstantValues.VIEW_LOGIN);
+                                showToast("["+devSN+"]"+ FileManager.getInstance().getString(1007)); //1007#设备已经下线
+                                MiddleManger.getInstance().goBack(ConstantValues.VIEW_LOGIN_REMOTE);
                                 ThLogger.addLog("TCP--设备已经下线");
                             }
 
@@ -280,43 +295,43 @@ public abstract class BaseUI implements ThObserver{
                         int errorCode=(int)var2;
                         switch (errorCode){
                             case ThCommand.NETWORK_TIMEOUT_RECONNECT:
-                                showToast(FileManager.getInstance().getString(319)); //319#网络不稳定，重连中...
+                                showToast(FileManager.getInstance().getString(1008)); //1008#网络不稳定，重连中...
                                 break;
                             case ThCommand.NETWORK_LOGGIN_SUCCESS:
-                                showToast(FileManager.getInstance().getString(329)); //329#连接成功
+                                showToast(FileManager.getInstance().getString(1009)); //1009#连接成功
                                 break;
                             case ThCommand.UDP_NETWORK_UNREACHABLE:
-                                showToast(FileManager.getInstance().getString(9)); //9#请确保手机与设备处于同一局域网内
-                                BaseUI currentUI= MiddleManger.getInstance().getCurrentUI();
-                                if(!(currentUI instanceof LoginUI)){
+                                showToast(FileManager.getInstance().getString(1010)); //1010#请确保手机与设备处于同一局域网内
+                                BaseUi currentUI= MiddleManger.getInstance().getCurrentUI();
+                                if(!(currentUI instanceof LoginUi)){
                                     MiddleManger.getInstance().goBack(ConstantValues.VIEW_DEVICE_LIST);
                                 }
                                 break;
                             case ThCommand.UDP_HEART_CMD_TIMEOUT_TIPS:
-                                showToast(FileManager.getInstance().getString(215)); //215#信号不稳定或者设备已经下线
+                                showToast(FileManager.getInstance().getString(1011)); //1011#信号不稳定或者设备已经下线
                                 break;
-                            case ThCommand.UDP_HEART_CMD_TIMEOUT_TIPS_RETURN: //216#抱歉,设备不稳定,退出当前设备
-                                showToast(FileManager.getInstance().getString(216));
+                            case ThCommand.UDP_HEART_CMD_TIMEOUT_TIPS_RETURN: //1012#抱歉,设备不稳定,退出当前设备
+                                showToast(FileManager.getInstance().getString(1012));
                                 MiddleManger.getInstance().goBack(ConstantValues.VIEW_DEVICE_LIST);
                                 break;
                             case ThCommand.TCP_CONNECT_CLOSE:
-                                //217#连接已断开,需要重新登录
-                                toLoginUI(217);
+                                //1013#连接已断开,需要重新登录
+                                toLoginUI(1013);
                                 break;
                             case ThCommand.TCP_CONNECT_TIMEOUT:
-                                //218#连接超时,请重试
-                                toLoginUI(218);
+                                //1014#连接超时,请重试
+                                toLoginUI(1014);
                                 break;
                             case ThCommand.TCP_RECEIVE_TIMEOUT:
-                                //219#网络不稳定，请重新登录
-                                toLoginUI(219);
+                                //1015#网络不稳定，请重新登录
+                                toLoginUI(1015);
                                 break;
                             case ThCommand.TCP_CONNECT_CLOSE_NOMESSAGE:
                                 toLoginUI(-1);
                                 break;
                             case ThCommand.TCP_CONNECT_OFFLINE:
-                                //328#请检查手机网络是否可用
-                                toLoginUI(328);
+                                //1016#请检查手机网络是否可用
+                                toLoginUI(1016);
                                 break;
                         }
 
@@ -332,7 +347,7 @@ public abstract class BaseUI implements ThObserver{
 
     private void toLoginUI(int lanId){
 
-        BaseUI currentUI=MiddleManger.getInstance().getCurrentUI();
+        BaseUi currentUI=MiddleManger.getInstance().getCurrentUI();
 
         if(currentUI==null){
             return;

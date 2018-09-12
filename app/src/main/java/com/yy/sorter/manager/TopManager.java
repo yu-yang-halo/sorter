@@ -148,56 +148,34 @@ public class TopManager implements ThMangerObserver{
                     &&targetViewID!=ConstantValues.VIEW_LAN){
                 AbstractDataServiceFactory.getFileDownloadService().closeFileSocket();
             }
-            /**
-             * 悬浮按钮
-             */
-
-//            if(AuthUtils.isEngineerVersion()){
-//                if(!ThStrategy.isFloatsDisable(targetViewID)){
-//                    if(!context.isFinishing()){
-//                        ViewHelper.getInstance().showDragView(context);
-//                    }
-//                }else{
-//                    ViewHelper.getInstance().hideDragView();
-//                }
-//            }
-
             String title=MiddleManger.getInstance().getCurrentUI().getTitle();
             if(title!=null){
                 changeTitle(title);
             }else{
                 changeTitle("");
             }
-            switch (targetViewID){
+            switch (targetViewID) {
                 case ConstantValues.VIEW_LOGIN:
-                case ConstantValues.VIEW_NOT_FOUND:
-                {
+                case ConstantValues.VIEW_NOT_FOUND: {
                     hideTopView();
                 }
                 break;
                 case ConstantValues.VIEW_SENSITIVE:
-                case ConstantValues.VIEW_VALVE_RATE:{
+                case ConstantValues.VIEW_VALVE_RATE: {
                     // showOnlyTitleAndMenu();
                     showOnlyTitle();
                 }
                 break;
-                case ConstantValues.VIEW_HOME:{
+                case ConstantValues.VIEW_HOME: {
                     showOnlyTitle();
                 }
                 break;
-                case ConstantValues.VIEW_CHILD_SVM:
-                case ConstantValues.VIEW_CHILD_HSV:
                 case ConstantValues.VIEW_VALVE_SETTINGS:
                 case ConstantValues.VIEW_VERSION:
                 case ConstantValues.VIEW_SIGNAL_SETTINGS:
                 case ConstantValues.VIEW_SCHEME_DETAIL:
                 case ConstantValues.VIEW_WHEEL_SETTINGS:
-                case ConstantValues.VIEW_OPTICS_ADJUST:
-                case ConstantValues.VIEW_SENSE_ADVANCE_COLOR_GRAY://灵敏度高级设置---灰度 （斑点，区域）
-                case ConstantValues.VIEW_SENSE_ADVANCE_COLOR_DIFF://灵敏度高级设置---色差
-                case ConstantValues.VIEW_SENSE_ADVANCE_BRIGHTNESS: //灵敏度高级设置---亮度
-                case ConstantValues.VIEW_SENSE_ADVANCE_IR_GRAY://灵敏度高级设置---红外灰度
-                case ConstantValues.VIEW_SENSE_ADVANCE_IR_RATIO: { //灵敏度高级设置---红外比值
+                case ConstantValues.VIEW_OPTICS_ADJUST: {
                     showAllContent();
                 }
                 break;

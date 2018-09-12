@@ -45,7 +45,7 @@ public class IPUtils {
 		String broadcastAddress=intToIp(a&b|c);
 
 		if(BuildConfig.DEBUG){
-			broadcastAddress="192.168.137.255";
+			broadcastAddress="192.168.1.255";
 		}
 		ThLogger.debug(TAG,"广播地址为：：："+broadcastAddress);
 		return broadcastAddress;

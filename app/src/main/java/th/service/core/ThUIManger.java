@@ -2,7 +2,7 @@ package th.service.core;
 
 
 import com.yy.sorter.manager.MiddleManger;
-import com.yy.sorter.ui.base.BaseUI;
+import com.yy.sorter.ui.base.BaseUi;
 
 import java.util.Vector;
 
@@ -81,8 +81,8 @@ public class ThUIManger {
         for(int var3 = var2.length - 1; var3 >= 0; --var3) {
             ThObserver observer= (ThObserver) var2[var3];
 
-            if(observer instanceof BaseUI){
-                BaseUI baseUI= (BaseUI) observer;
+            if(observer instanceof BaseUi){
+                BaseUi baseUi = (BaseUi) observer;
 
                 /**
                  * 定制发送，发送给需要的界面
@@ -93,24 +93,24 @@ public class ThUIManger {
                  *
                  */
                 if(B_SEND_TO_CURRENT_PAGE){
-                    if(MiddleManger.getInstance().isCurrentUI(baseUI)){
-                        baseUI.update(this, var1);
+                    if(MiddleManger.getInstance().isCurrentUI(baseUi)){
+                        baseUi.update(this, var1);
                         break;
                     }
                 }else{
                     if(var1 instanceof ThPackage){
                         ThPackage packet= (ThPackage) var1;
                         if(ThStrategy.isMustBeReceiveMessage(packet.getType()&0xFF)){
-                            baseUI.update(this, var1);
+                            baseUi.update(this, var1);
                         }else{
-                            if(ThStrategy.isNeedSendMessage(baseUI,packet.getType()&0xFF)){
-                                baseUI.update(this, var1);
+                            if(ThStrategy.isNeedSendMessage(baseUi,packet.getType()&0xFF)){
+                                baseUi.update(this, var1);
                             }
                         }
 
                     }else{
-                        if(MiddleManger.getInstance().isCurrentUI(baseUI)){
-                            baseUI.update(this, var1);
+                        if(MiddleManger.getInstance().isCurrentUI(baseUi)){
+                            baseUi.update(this, var1);
                         }
                     }
                 }

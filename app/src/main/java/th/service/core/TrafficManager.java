@@ -44,8 +44,8 @@ public class TrafficManager {
         ThToast.showToast(ctx,message);
     }
     public void showErrorMessage(){
-        ThToast.showToast(ctx, FileManager.getInstance().getString(241));//241#协议不匹配请检查版本是否一致
-    }
+        ThToast.showToast(ctx, FileManager.getInstance().getString(1002));//1002#协议不匹配请检查版本是否一致
+}
 
     public void forceWrite() {
         forceWrite=true;

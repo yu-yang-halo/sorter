@@ -1,6 +1,6 @@
 package th.service.helper;
 
-import com.yy.sorter.ui.base.BaseUI;
+import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
 import java.util.Arrays;
@@ -29,33 +29,13 @@ public class ThStrategy {
          * 配置页面消息接收权限
          */
         strategyTables.put(ConstantValues.VIEW_LOGIN,Arrays.asList(0x01,0x02,0x51,0x53,0xc1,0xc2));
+        strategyTables.put(ConstantValues.VIEW_LOGIN_REMOTE,Arrays.asList(0x01,0x02,0x51,0x53,0xc1,0xc2));
         strategyTables.put(ConstantValues.VIEW_DEVICE_LIST,Arrays.asList(0x01,0x02));
         strategyTables.put(ConstantValues.VIEW_HOME,Arrays.asList(0x01,0x03,0x08,0x0d,0x0f));
         strategyTables.put(ConstantValues.VIEW_SENSITIVE,Arrays.asList(0x04,0x10,0x12,0x13,0x14,
                 0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F,0x20,0x21,0x30,0x05));
 
-        strategyTables.put(ConstantValues.VIEW_CHILD_HSV,Arrays.asList(0x30,0x05));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SVM,Arrays.asList(0x10,0x05));
 
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_CASHEWS,Arrays.asList(0x12));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_PEANUTBUD,Arrays.asList(0x13));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_STANDARD,Arrays.asList(0x14));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_TEA,Arrays.asList(0x15));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_RICE,Arrays.asList(0x16));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_LIQUORICE,Arrays.asList(0x17));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_WHEAT,Arrays.asList(0x18));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_SEED,Arrays.asList(0x19));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_SUNFLOWER,Arrays.asList(0x1A));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_CORN,Arrays.asList(0x1B));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_HORSEBEAN,Arrays.asList(0x1C));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_GREENTEA,Arrays.asList(0x1D));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_RED_TEA,Arrays.asList(0x1E));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_GREENTEASG,Arrays.asList(0x1F));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_LENGTH_RICE,Arrays.asList(0x20));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_BROKEN_RICE,Arrays.asList(0x21));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_DAHONGPAO_TEA,Arrays.asList(0x22));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_PEANUT_NEW,Arrays.asList(0x23));
-        strategyTables.put(ConstantValues.VIEW_CHILD_SHAPE_HOT_PEPPER,Arrays.asList(0x24));
 
 
         /***
@@ -64,11 +44,7 @@ public class ThStrategy {
          * ****************************************************************************
          */
 
-        strategyTables.put(ConstantValues.VIEW_SENSE_ADVANCE_COLOR_GRAY,Arrays.asList(0x04,0x05));
-        strategyTables.put(ConstantValues.VIEW_SENSE_ADVANCE_COLOR_DIFF,Arrays.asList(0x04,0x05));
-        strategyTables.put(ConstantValues.VIEW_SENSE_ADVANCE_BRIGHTNESS,Arrays.asList(0x04,0x05));
-        strategyTables.put(ConstantValues.VIEW_SENSE_ADVANCE_IR_GRAY,Arrays.asList(0x04,0x05));
-        strategyTables.put(ConstantValues.VIEW_SENSE_ADVANCE_IR_RATIO,Arrays.asList(0x04,0x05));
+
 
 
         strategyTables.put(ConstantValues.VIEW_VALVE_SETTINGS,Arrays.asList(0x09,0x03));
@@ -95,9 +71,9 @@ public class ThStrategy {
     }
 
 
-    public static boolean isNeedSendMessage(BaseUI baseUI, int type){
+    public static boolean isNeedSendMessage(BaseUi baseUi, int type){
 
-        List<Integer> permissions=strategyTables.get(baseUI.getID());
+        List<Integer> permissions=strategyTables.get(baseUi.getID());
 
         if(permissions!=null){
             return permissions.contains(type);

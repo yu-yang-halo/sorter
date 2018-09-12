@@ -10,8 +10,8 @@
 
     <color name="buttonSelected">#4ed265</color>
     <color name="lightblue">#63bdd6</color>
-    <color name="buttonNormal">#1b82ff</color>
-    <color name="buttonNormal1">#1b82d2</color>
+    <color name="buttonNormal">#1b82d2</color>
+    <color name="buttonNormal1">#801b82d2</color>
 
     <color name="gray">#666</color>
     <color name="red">#f00</color>
@@ -28,4 +28,5 @@
     <color name="green">#FF00FF00</color>
     <color name="alphaBlack80">#40000000</color>
     <color name="alphaWhite80">#90ffffff</color>
+    <color name="whiteColor">#ffffff</color>
 </resources>

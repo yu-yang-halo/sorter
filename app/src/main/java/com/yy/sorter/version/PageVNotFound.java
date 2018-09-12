@@ -1,7 +1,7 @@
 package com.yy.sorter.version;
 
 
-import com.yy.sorter.ui.NotFoundUI;
+import com.yy.sorter.ui.NotFoundUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class PageVNotFound extends BasePageV {
     protected void initPages() {
         super.initPages();
 
-        basePages.put(ConstantValues.VIEW_HOME, NotFoundUI.class);//主界面
+       // basePages.put(ConstantValues.VIEW_HOME, NotFoundUi.class);//主界面
 
     }
 }

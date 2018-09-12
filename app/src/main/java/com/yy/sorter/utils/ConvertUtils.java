@@ -174,11 +174,8 @@ public class ConvertUtils {
             case 0:
                 n_version= BuildConfig.PROTOCOL_VERSION_BIG;
                 break;
-            case 1:
-                n_version=BuildConfig.PROTOCOL_RICE_VERSION_BIG;
-                break;
-            case 2:
-                n_version=BuildConfig.PROTOCOL_RICE_1R_VERSION_BIG;
+            default:
+                n_version = 0;
                 break;
         }
         return n_version;
@@ -189,11 +186,8 @@ public class ConvertUtils {
             case 0:
                 n_version=BuildConfig.PROTOCOL_VERSION_SMALL;
                 break;
-            case 1:
-                n_version=BuildConfig.PROTOCOL_RICE_VERSION_SMALL;
-                break;
-            case 2:
-                n_version=BuildConfig.PROTOCOL_RICE_1R_VERSION_SMALL;
+            default:
+                n_version=0;
                 break;
         }
         return n_version;

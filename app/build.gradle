@@ -14,16 +14,6 @@ android {
         buildConfigField 'byte', 'PROTOCOL_VERSION_BIG','3'//大版本 提示屏程序协议与手机协议不匹配问题
         buildConfigField 'byte', 'PROTOCOL_VERSION_SMALL','5'//小版本
         /**
-         * 特殊机型的协议版本 大米机器
-         */
-        buildConfigField 'byte', 'PROTOCOL_RICE_VERSION_BIG','2'
-        buildConfigField 'byte', 'PROTOCOL_RICE_VERSION_SMALL','2'
-        /**
-         * 特殊机型的协议版本 1R大米机器
-         */
-        buildConfigField 'byte', 'PROTOCOL_RICE_1R_VERSION_BIG','2'
-        buildConfigField 'byte', 'PROTOCOL_RICE_1R_VERSION_SMALL','1'
-        /**
          * 必须要保证所有的flavor 都属于同一个维度
          */
         flavorDimensions "default"
@@ -36,17 +26,17 @@ android {
          * *********************************************************************************************************
          * *********************************************************************************************************
          */
-        user {
-            applicationId "com.yy.sorter"
-            buildConfigField 'String', 'AUTH_PROVIDER', '"com.yy.sorter.fileprovider"'
-            buildConfigField 'Integer', 'SOFT_VERSION_TYPE','0x01'//用户版
-            buildConfigField 'String', 'LOGO', '"logo"'  //logo
-            buildConfigField 'String', 'VKEY', '"user"'//软件版本KEY 索引
-            manifestPlaceholders = [AUTH_PROVIDER_VALUE: "com.yy.sorter.fileprovider",
-                                    BUG_HD_TH_VALUE:"70868c1737ac2f2512b6094dc20f2f3d",
-                                    APP_ICON:"@drawable/ic_user",
-                                    APP_NAME:"@string/app_name"]
-        }
+//        user {
+//            applicationId "com.yy.sorter"
+//            buildConfigField 'String', 'AUTH_PROVIDER', '"com.yy.sorter.fileprovider"'
+//            buildConfigField 'Integer', 'SOFT_VERSION_TYPE','0x01'//用户版
+//            buildConfigField 'String', 'LOGO', '"logo"'  //logo
+//            buildConfigField 'String', 'VKEY', '"user"'//软件版本KEY 索引
+//            manifestPlaceholders = [AUTH_PROVIDER_VALUE: "com.yy.sorter.fileprovider",
+//                                    BUG_HD_TH_VALUE:"70868c1737ac2f2512b6094dc20f2f3d",
+//                                    APP_ICON:"@drawable/ic_user",
+//                                    APP_NAME:"@string/app_name"]
+//        }
         engineer {
             applicationId "com.yy.sorter.engineer"
             buildConfigField 'String', 'AUTH_PROVIDER', '"com.yy.sorter.engineer.fileprovider"'
@@ -74,10 +64,16 @@ android {
         }
     }
 
+    //Add the following configuration
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.kyleduo.switchbutton:library:2.0.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

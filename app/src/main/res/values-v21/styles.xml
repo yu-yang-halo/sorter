@@ -3,7 +3,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Color palette -->
-        <item name="android:colorBackground">@color/barItemColor</item>
+        <item name="android:colorBackground">@color/whiteColor</item>
         <item name="android:listDivider">@drawable/divider_horizontal_bright</item>
         <item name="android:dividerHeight">0.5dp</item>
         <item name="android:statusBarColor">@color/barItemColor</item>
@@ -11,7 +11,7 @@
 
     <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Color palette -->
-        <item name="android:colorBackground">@color/barItemColor</item>
+        <item name="android:colorBackground">@color/whiteColor</item>
         <item name="android:listDivider">@drawable/divider_horizontal_bright</item>
         <item name="android:dividerHeight">0.5dp</item>
         <item name="android:statusBarColor">@color/barItemColor</item>

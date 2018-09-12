@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
 import com.yy.sorter.manager.FileManager;
-import com.yy.sorter.ui.base.BaseUI;
+import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
 /**
@@ -15,24 +15,20 @@ import com.yy.sorter.ui.base.ConstantValues;
  * 分享应用二维码  用户版和工程师版
  */
 
-public class ShareQRUI extends BaseUI {
+public class ShareQRUi extends BaseUi {
     private TextView  tv_app_share_desc_user,tv_app_share_desc_engineer,tv_app_share;
-    public ShareQRUI(Context ctx) {
+    public ShareQRUi(Context ctx) {
         super(ctx);
     }
 
     @Override
-    public View getChild() {
+    protected View onInitView() {
         if(view==null){
             view= LayoutInflater.from(ctx).inflate(R.layout.ui_share_qr,null);
             tv_app_share_desc_user= (TextView) view.findViewById(R.id.tv_app_share_desc);
             tv_app_share_desc_engineer= (TextView) view.findViewById(R.id.tv_app_share_desc_engineer);
             tv_app_share= (TextView) view.findViewById(R.id.tv_app_share);
         }
-        /**
-         * 初始化宽度和高度
-         */
-        initViewWidthHeight();
         initView();
         return view;
     }

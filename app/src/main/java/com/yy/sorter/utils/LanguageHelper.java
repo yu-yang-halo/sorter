@@ -15,8 +15,8 @@ import com.yy.sorter.activity.LaunchActivity;
 import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.permission.PermissionUtils;
-import com.yy.sorter.ui.LanUI;
-import com.yy.sorter.ui.base.BaseUI;
+import com.yy.sorter.ui.LanUi;
+import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.view.LoadProgress;
 
 import java.util.Locale;
@@ -74,7 +74,7 @@ public class LanguageHelper {
 
     static LoadProgress loadProgress;
 
-    public static void onCallbackFileHandler(final Context ctx, final ThPackage thPackage, BaseUI currentUI, final IProgressListenser iProgressListenser){
+    public static void onCallbackFileHandler(final Context ctx, final ThPackage thPackage, BaseUi currentUI, final IProgressListenser iProgressListenser){
 
         if(!MiddleManger.getInstance().isCurrentUI(currentUI)){
             return;
@@ -161,7 +161,7 @@ public class LanguageHelper {
 
                             if (!isLastestNew) {
 
-                                if(!(MiddleManger.getInstance().getCurrentUI() instanceof LanUI)){
+                                if(!(MiddleManger.getInstance().getCurrentUI() instanceof LanUi)){
 
                                     AlertDialog alertDialog = new AlertDialog.Builder(ctx)
                                             .setTitle(FileManager.getInstance().getString(6))//6#提示

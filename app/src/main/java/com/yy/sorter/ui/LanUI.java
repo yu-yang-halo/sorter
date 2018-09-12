@@ -9,7 +9,7 @@ import com.baoyz.widget.PullRefreshLayout;
 import com.yy.sorter.activity.R;
 import com.yy.sorter.adapter.LanAdapter;
 import com.yy.sorter.manager.FileManager;
-import com.yy.sorter.ui.base.BaseUI;
+import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.LanguageHelper;
 import com.yy.sorter.view.LoadProgress;
@@ -29,7 +29,7 @@ import th.service.helper.ThPackage;
  * 语言选择界面
  */
 
-public class LanUI extends BaseUI {
+public class LanUi extends BaseUi {
     private View view;
     private ListView lanListView;
     private List<ThConfig.LanguageVersion> thLanList;
@@ -38,12 +38,12 @@ public class LanUI extends BaseUI {
     private LoadProgress loadProgress;
     private boolean isConnectToInternet=false;
     private ExecutorService executorService= Executors.newCachedThreadPool();
-    public LanUI(Context ctx) {
+    public LanUi(Context ctx) {
         super(ctx);
     }
 
     @Override
-    public View getChild() {
+    protected View onInitView() {
         if(view==null){
             view=LayoutInflater.from(ctx).inflate(R.layout.ui_lan,null);
             lanListView= (ListView) view.findViewById(R.id.lanListView);
@@ -74,10 +74,6 @@ public class LanUI extends BaseUI {
                 }
             });
         }
-        /**
-         * 初始化宽度和高度
-         */
-        initViewWidthHeight();
 
         reloadUI();
         return view;
@@ -150,7 +146,7 @@ public class LanUI extends BaseUI {
                     /**
                      * 网络下载逻辑处理
                      */
-                    LanguageHelper.onCallbackFileHandler(ctx, thPackage, LanUI.this, new LanguageHelper.IProgressListenser() {
+                    LanguageHelper.onCallbackFileHandler(ctx, thPackage, LanUi.this, new LanguageHelper.IProgressListenser() {
                         @Override
                         public void onFinished(byte fileType, boolean success,ThConfig config) {
                             if(success){

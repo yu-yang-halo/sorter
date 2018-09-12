@@ -64,7 +64,6 @@ public class BottomManager implements ThMangerObserver{
     private TextView tv_tab_lmd;
     private TextView tv_tab_xtsz;
     private TextView tv_tab_xtxx;
-    private AnimtionButton animBtn;
 
     public void release(){
         synchronized (TopManager.class){
@@ -96,7 +95,6 @@ public class BottomManager implements ThMangerObserver{
         tv_tab_xtsz= (TextView) activity.findViewById(R.id.tv_tab_xtsz);
         tv_tab_xtxx= (TextView) activity.findViewById(R.id.tv_tab_xtxx);
 
-        animBtn = (AnimtionButton) activity.findViewById(R.id.animBtn);
         setListenser();
         setLanguage();
     }
@@ -107,50 +105,29 @@ public class BottomManager implements ThMangerObserver{
         layout_tab_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME, FileManager.getInstance().getString(13));
+                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME, FileManager.getInstance().getString(32));//32#主页
             }
         });
         layout_tab_lmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_SENSITIVE, FileManager.getInstance().getString(14));
+                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_SENSITIVE, FileManager.getInstance().getString(38));//38#灵敏度
             }
         });
         layout_tab_xtxx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_FEEDER_SETTINGS, FileManager.getInstance().getString(333));//333#给料量
+                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_FEEDER_SETTINGS, FileManager.getInstance().getString(39));//39#给料量
             }
         });
         layout_tab_xtsz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE, FileManager.getInstance().getString(149));//149#喷阀指示
+                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE, FileManager.getInstance().getString(40));//40#更多
             }
         });
 
 
-        animBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AbstractDataServiceFactory.getInstance().controlDevice((byte) 0x01, true);
-            }
-        });
-
-    }
-
-    public void setVibBtnStatus(boolean isOn)
-    {
-        String feederStr = FileManager.getInstance().getString(19);
-
-        String str = "";
-        if(isOn)
-        {
-            str = feederStr+""+FileManager.getInstance().getString(368);
-        }else {
-            str = feederStr+""+FileManager.getInstance().getString(369);
-        }
-        animBtn.setButtonTextStatus(str,isOn);
 
     }
 
@@ -178,10 +155,10 @@ public class BottomManager implements ThMangerObserver{
 
     private void setLanguage()
     {
-        tv_tab_home.setText(FileManager.getInstance().getString(13)); //13#主页
-        tv_tab_lmd.setText(FileManager.getInstance().getString(14)); //14#灵敏度
-        tv_tab_xtxx.setText(FileManager.getInstance().getString(333)); //333#给料量
-        tv_tab_xtsz.setText(FileManager.getInstance().getString(149)); //149#喷阀指示
+        tv_tab_home.setText(FileManager.getInstance().getString(32)); //32#主页
+        tv_tab_lmd.setText(FileManager.getInstance().getString(38)); //38#灵敏度
+        tv_tab_xtxx.setText(FileManager.getInstance().getString(39)); //39#给料量
+        tv_tab_xtsz.setText(FileManager.getInstance().getString(40)); //40#更多
     }
 
 

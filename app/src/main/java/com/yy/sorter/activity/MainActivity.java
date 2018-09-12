@@ -11,7 +11,7 @@ import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.manager.TopManager;
 import com.yy.sorter.permission.PermissionUtils;
 import com.yy.sorter.receiver.NetworkChangeListenser;
-import com.yy.sorter.ui.base.BaseUI;
+import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
 import th.service.core.AbstractDataServiceFactory;
@@ -56,7 +56,7 @@ public class MainActivity extends Activity implements NetworkChangeListenser {
          * 每次重新启用应用下载配置文件
          */
 
-        AbstractDataServiceFactory.getFileDownloadService().requestDownloadWhatFile((byte) ThCommand.BUILD_VERSION,ThCommand.DOWNLOAD_FILE_TYPE_CONFIG,null);
+      //  AbstractDataServiceFactory.getFileDownloadService().requestDownloadWhatFile((byte) ThCommand.BUILD_VERSION,ThCommand.DOWNLOAD_FILE_TYPE_CONFIG,null);
 
 
 
@@ -67,13 +67,6 @@ public class MainActivity extends Activity implements NetworkChangeListenser {
             }
         });
 
-//        PermissionUtils.requestMultiPermissions(this,new PermissionUtils.PermissionGrant() {
-//            @Override
-//            public void onPermissionGranted(int requestCode) {
-//
-//            }
-//        });
-
     }
 
 
@@ -81,7 +74,7 @@ public class MainActivity extends Activity implements NetworkChangeListenser {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        BaseUI currentUI=MiddleManger.getInstance().getCurrentUI();
+        BaseUi currentUI=MiddleManger.getInstance().getCurrentUI();
         if(currentUI!=null){
             currentUI.onConfigurationChanged(newConfig);
         }
@@ -89,7 +82,7 @@ public class MainActivity extends Activity implements NetworkChangeListenser {
     @Override
     protected void onStart() {
         super.onStart();
-        BaseUI currentUI= MiddleManger.getInstance().getCurrentUI();
+        BaseUi currentUI= MiddleManger.getInstance().getCurrentUI();
         if(currentUI!=null){
             currentUI.onActivityStart();
         }
@@ -98,7 +91,7 @@ public class MainActivity extends Activity implements NetworkChangeListenser {
     @Override
     protected void onStop() {
         super.onStop();
-        BaseUI currentUI=MiddleManger.getInstance().getCurrentUI();
+        BaseUi currentUI=MiddleManger.getInstance().getCurrentUI();
         if(currentUI!=null){
             currentUI.onActivityStop();
         }
@@ -106,7 +99,7 @@ public class MainActivity extends Activity implements NetworkChangeListenser {
 
     @Override
     public void onBackPressed() {
-        BaseUI currentUI=MiddleManger.getInstance().getCurrentUI();
+        BaseUi currentUI=MiddleManger.getInstance().getCurrentUI();
         if(currentUI!=null){
             currentUI.onViewBackPress();
         }else{
