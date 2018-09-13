@@ -57,4 +57,10 @@ public class IDataServiceUdpImpl extends AbstractIDataService {
 		udpCoreManager.sendData(thPackage.myByteArrays(),ip);
 	}
 
+	@Override
+	public void sendPacketData(ThPackage thPackage) {
+		String currentIp=this.getCurrentDevice().getLocalIp();
+		sendPacketData(thPackage,currentIp);
+	}
+
 }

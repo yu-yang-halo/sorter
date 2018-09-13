@@ -28,6 +28,16 @@ public interface IDataService {
 	public void logout();
 	public void controlDevice(byte extendType, boolean isOn);
 
+	public void requestModeList();
+	public void readMode(byte bigModeIndex,byte smallModeIndex);
+	public void saveMode();
+
+
+	public void requestFeederInfo();
+	public void setFeederValue(byte setType,byte chuteOrGroup,byte value);
+	public void controlFeederSwitch(byte controlType,byte chuteOrGroup,byte value);
+
+
 
 
 	/**
@@ -43,6 +53,7 @@ public interface IDataService {
 	 * @param ip
      */
 	public void sendPacketData(ThPackage thPackage,String ip);
+	public void sendPacketData(ThPackage thPackage);
 	public void closeConnect();
 	public void reSetReconnectFlag();
 

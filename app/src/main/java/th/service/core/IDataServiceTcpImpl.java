@@ -103,6 +103,10 @@ public class IDataServiceTcpImpl extends AbstractIDataService {
         tcpCoreManager.sendData(thPackage.myByteArrays());
     }
 
+    @Override
+    public void sendPacketData(ThPackage thPackage) {
+        sendPacketData(thPackage,"");
+    }
 
     public void sendFilePacketData(ThPackage thPackage, String ip) {
         tcpFileManager.sendData(thPackage.myByteArrays());

@@ -80,8 +80,7 @@ public abstract class AbstractIDataService implements IDataService{
     public void requestDeviceList(String broadcastAddress,String username, String password,int code) {
         // TODO Auto-generated method stub
         String sendData=username+"#"+password;
-        byte[] data1=new byte[]{(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
-        ThPackage packet= new ThPackage(ThCommand.BROADCAST_DEV_CMD,(byte)0, data1,(byte)0, (byte)0, (byte)0,sendData.getBytes());
+        ThPackage packet= new ThPackage(ThCommand.BROADCAST_DEV_CMD,(byte)0, null,(byte)0, (byte)0, (byte)0,sendData.getBytes());
 
         sendPacketData(packet,broadcastAddress);
     }
@@ -96,36 +95,64 @@ public abstract class AbstractIDataService implements IDataService{
             //工程师版
             loginType=(byte)2;
         }
-
-        String currentIp=this.getCurrentDevice().getLocalIp();
-        byte[] data1=new byte[]{lanCountryId,loginType,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
+        byte[] data1=new byte[]{lanCountryId,loginType};
         ThPackage packet= new ThPackage(ThCommand.LOGIN_CMD,ThCommand.EXTEND_LOGIN_CMD, data1,(byte)0, (byte)0, (byte)0,null);
 
-        sendPacketData(packet,currentIp);
+        sendPacketData(packet);
 
     }
 
 
     @Override
     public void logout() {
-        String currentIp=this.getCurrentDevice().getLocalIp();
-        byte[] data1=new byte[]{(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
-        ThPackage packet= new ThPackage(ThCommand.LOGIN_CMD,(byte)ThCommand.EXTEND_LOGOUT_CMD, data1,(byte)0, (byte)0, (byte)0,null);
-
-        sendPacketData(packet,currentIp);
+        ThPackage packet= new ThPackage(ThCommand.LOGIN_CMD,ThCommand.EXTEND_LOGOUT_CMD, null,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
     }
 
     @Override
     public void controlDevice(byte extendType, boolean isOn) {
-        String currentIp=this.getCurrentDevice().getLocalIp();
-        byte[] data1=new byte[]{isOn?ThCommand.RESERVED_SEND_ON:ThCommand.RESERVED_SEND_OFF,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
-        ThPackage packet= new ThPackage(ThCommand.CONTROL_CMD,extendType, data1,(byte)0, (byte)0, (byte)0,null);
-
-
-        sendPacketData(packet,currentIp);
+        ThPackage packet= new ThPackage(ThCommand.CONTROL_CMD,extendType, null,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
     }
 
 
+    @Override
+    public void requestModeList() {
+        ThPackage packet= new ThPackage(ThCommand.MODE_CMD, (byte) 0x01, null,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    @Override
+    public void readMode(byte bigModeIndex, byte smallModeIndex) {
+        byte[] data1=new byte[]{smallModeIndex,bigModeIndex};
+        ThPackage packet= new ThPackage(ThCommand.MODE_CMD, (byte) 0x02, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    @Override
+    public void saveMode() {
+        ThPackage packet= new ThPackage(ThCommand.MODE_CMD, (byte) 0x03, null,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    @Override
+    public void requestFeederInfo() {
+        ThPackage packet= new ThPackage(ThCommand.FEEDER_CMD, (byte) 0x01, null,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    @Override
+    public void setFeederValue(byte setType, byte chuteOrGroup, byte value) {
+        byte[] data1=new byte[]{setType,chuteOrGroup,value};
+        ThPackage packet= new ThPackage(ThCommand.FEEDER_CMD, (byte) 0x02, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    @Override
+    public void controlFeederSwitch(byte controlType, byte chuteOrGroup, byte value) {
+        byte[] data1=new byte[]{controlType,chuteOrGroup,value};
+        ThPackage packet= new ThPackage(ThCommand.FEEDER_CMD, (byte) 0x03, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
 
 
 }

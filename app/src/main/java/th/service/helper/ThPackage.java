@@ -60,9 +60,13 @@ public class ThPackage {
 		this.extendType = extendType;
 
 		this.data1=new byte[8];
-		if(data1==null||data1.length<=8){
-			if(data1!=null){
+		if(data1!=null){
+			if(data1.length<=8)
+			{
 				System.arraycopy(data1,0,this.data1,0,data1.length);
+			}else
+			{
+				System.arraycopy(data1,0,this.data1,0,this.data1.length);
 			}
 		}
 

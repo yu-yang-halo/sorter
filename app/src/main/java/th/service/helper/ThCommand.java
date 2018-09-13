@@ -106,23 +106,11 @@ public class ThCommand {
 	public static final byte EXTEND_CONTROL_CMD_VALVE=0x02;//阀
 	public static final byte EXTEND_CONTROL_CMD_START=0x03;//启动
 	public static final byte EXTEND_CONTROL_CMD_CLEAR=0x04;//清灰
-    /**
-	预留1:0/1 开/关
-	 **/
-	public static final byte RESERVED_SEND_ON=0x00;
-	public static final byte RESERVED_SEND_OFF=0x01;
 	/**
 	预留1:0/1 开/关
 	清灰：1:表示清灰中，0：清灰结束
 	启动：0：停止，1：启动成功 2：启动中 3：启动失败
 	 **/
-	public static final byte RESERVED_RECIVE_CLEARINGE=0x01;//1:表示清灰中，
-	public static final byte RESERVED_RECIVE_CLEAR_OVER=0x00;//0：清灰结束
-
-	public static final byte RESERVED_RECIVE_START_STOP=0x00;//0：停止
-	public static final byte RESERVED_RECIVE_START_SUCCESS=0x01;//1：启动成功
-	public static final byte RESERVED_RECIVE_START_STARTING=0x02;//2：启动中
-	public static final byte RESERVED_RECIVE_START_FAILED=0x03;//3：启动失败
 
 
 	/**
@@ -130,124 +118,15 @@ public class ThCommand {
 	 *  1: 配置文件错误 2: 控制板通信异常，不能启动3: 气压异常，不能启动
      *
 	 */
-	public static final byte RESERVED2_RECIVE_CONFIGFILE_ERROR=0x01;// 1: 配置文件错误
-	public static final byte RESERVED2_RECIVE_COMMUNICATION_ERROR=0x02;//  2: 控制板通信异常，不能启动
-	public static final byte RESERVED2_RECIVE_PRESSURE_ERROR=0x03;//  3: 气压异常，不能启动
+	public static final byte MODE_CMD=0x04;
 
-
-	/**
-	 * 灵敏度
-	 */
-	public static final byte VIEW_FRONT=0x00;
-	public static final byte VIEW_BACK=0x01;
-
-	public static final byte SENSITIVE_CMD=0x04;
-	public static final byte EXTEND_COLOR_SORT_CMD=0x01;    //获取算法
-	public static final byte EXTEND_SET_COLOR_SORT_CMD=0x02;//设置灵敏度
-	public static final byte EXTEND_GET_SENSES_CMD=0x03;    //获取所有通道的灵敏度
-	public static final byte EXTEND_SET_ENABLE_CMD=0x04;    //设置使能
-	public static final byte EXTEND_SET_SIZE_CMD=0x05;    //设置杂质的大小
-	public static final byte EXTEND_REQ_REVERSE_SHARPEN=0x07;//请求反选锐化信息
-	public static final byte EXTEND_SET_REVERSE_SHARPEN=0x08;//设置反选锐化信息
-
-	public static final byte EXTEND_IR_CMD=0x11;    //获取红外算法
-	public static final byte EXTEND_SET_IR_CMD=0x12;//设置红外灵敏度
-	public static final byte EXTEND_GET_IR_SENSES_CMD=0x13;    //获取红外所有通道的灵敏度
-	public static final byte EXTEND_SET_IR_ENABLE_CMD=0x14;    //设置红外使能
-	public static final byte EXTEND_SET_IR_SIZE_CMD=0x15;    //设置红外杂质的大小
-	public static final byte EXTEND_REQ_IR_SHARPEN=0x17;//请求锐化信息
-	public static final byte EXTEND_SET_IR_SHARPEN=0x18;//设置锐化信息
-
-	public static final byte EXTEND_RICE_CMD=0x21; //获取大米用户版算法
-	public static final byte EXTEND_SET_RICE_CMD=0x22;    //设置大米用户版灵敏度
-	public static final byte EXTEND_SET_RICE_ENABLE_CMD=0x24;    //设置大米用户版使能
-
-	//public static final byte EXTEND_GET_RICE_SENSES_CMD=0x23;    //获取所有通道的灵敏度
-	public static final byte EXTEND_SET_RICE_SIZE_CMD=0x25;    //设置杂质的大小
-
-
-
-	public static final byte RESERVED2_ALL_CHINNEL_MINUS=0x02;    //设置所有通道减
-	public static final byte RESERVED2_ALL_CHINNEL_ADD=0x01;    //设置所有通道加
-	public static final byte RESERVED2_ONE_CHINNEL=0x00;    //设置一个通道
-
-	/**
-	 * 请求波形
-	 * WAVE_RGB  =0;
-	 *
-	 * WAVE_DIFF_1 =2;  色差1
-	 * WAVE_DIFF_2 =3;  色差2
-	 *
-	 *  WAVE_CALIBRATION=1; 亮度
-	 */
-
-	public static final byte REQ_WAVE_CMD=0x05;
-	public static final byte EXTEND_WAVE_CMD=0x01;
-
-	public static final byte WAVE_TYPE_RGB=0x00;              //RGB
-	public static final byte WAVE_TYPE_WAVE_DIFF=0x01;        //色差
-	public static final byte WAVE_TYPE_WAVE_LIGHT=0x02; //亮度
-	public static final byte WAVE_TYPE_WAVE_BACKGROUND=0x03; //背景灯光
-	public static final byte WAVE_TYPE_WAVE_CAMERAGAIN=0x04; //相机增益
-	public static final byte WAVE_TYPE_WAVE_CAMERAGAINDIGIT=0x05; //相机增益数字
-	public static final byte WAVE_TYPE_WAVE_IR_RGB=0x06; //红外RGB
-	public static final byte WAVE_TYPE_WAVE_IR_DIFF=0x07; //红外diff
-	public static final byte WAVE_TYPE_WAVE_ORIGIN=0x08;  //原始数据波形
-	public static final byte WAVE_TYPE_WAVE_CALIBRATION=0x09;//校正数据波形
-	public static final byte WAVE_TYPE_WAVE_TEST_DATA=0x0A;//测试数据波形
-	public static final byte WAVE_TYPE_WAVE_RGB_RESTRAIN=0x11;//亮度区域
-	public static final byte WAVE_TYPE_WAVE_HSV=0x12;//HSV
-	public static final byte WAVE_TYPE_WAVE_LIGHT_1R_RICE=0x13;//亮度1R大米
-	public static final byte WAVE_TYPE_WAVE_IR_NEAR=0x15;//近红外
-	public static final byte WAVE_TYPE_WAVE_IR_RATIO_LIGHT=0x16;//红外比值
-
-
-
-
-	/**
-	 * 清灰设置
-	 */
-	public static final byte CLEAN_CMD=0x07;
-	public static final byte EXTEND_CLEAN_CMD_GO=0x01;
-	public static final byte EXTEND_CLEAN_CMD_BACK=0x02;
-	public static final byte EXTEND_CLEAN_CMD_PARAM_GET=0x03;
-	public static final byte EXTEND_CLEAN_CMD_PARAM_POST=0x04;
-	public static final byte EXTEND_CLEAN_CMD_VALVE_STATUS_POST=0x05;
 
 	/**
 	 * 给料量
 	 */
-	public static final byte FEEDER_CMD=0x08;
-	public static final byte EXTEND_FEEDER_CMD_CONTROL_IN=0x01;
-	public static final byte EXTEND_FEEDER_CMD_CONTROL_OUT=0x02;
-	public static final byte EXTEND_FEEDER_CMD_CONTROL_NORMAL=0x03;
-	public static final byte EXTEND_FEEDER_CMD_SET=0x04;
-	public static final byte EXTEND_FEEDER_CMD_GET=0x05;
-	public static final byte EXTEND_FEEDER_CMD_IN_OUT=0x06;
-	public static final byte EXTEND_FEEDER_CMD_SWITCH=0x08;
+	public static final byte FEEDER_CMD=0x05;
 
-	/**
-	 * 阀设置
-	 */
-	public static final byte VALVE_CMD=0x09;
-	public static final byte EXTEND_VALVE_PARAM_GET_CMD=0x01;
-	public static final byte EXTEND_VALVE_PARAM_CONFIG_CMD=0x02;
-	public static final byte EXTEND_VALVE_PARAM_GET_FIX_CMD=0x11;
-	public static final byte EXTEND_VALVE_PARAM_CONFIG_FIX_CMD=0x12;
-	public static final byte EXTEND_VALVE_PARAM_IR_GET_CMD=0x13;
-	public static final byte EXTEND_VALVE_PARAM_IR_CONFIG_CMD=0x14;
-	public static final byte EXTEND_VALVE_RICE_PARAM_GET_CMD=0x21;
-	public static final byte EXTEND_VALVE_RICE_PARAM_CONFIG_CMD=0x22;
-	public static final byte EXTEND_VALVE_RICE_IR_PARAM_GET_CMD=0x23;
-	public static final byte EXTEND_VALVE_RICE_IR_PARAM_CONFIG_CMD=0x24;
 
-	/**
-	 * 系统信息
-	 */
-	public static final byte SYSTEM_VERSION_CMD=0x0A;
-	public static final byte EXTEND_SYSTEM_VERSION_BASE_CMD=0x01;//基础版本
-	public static final byte EXTEND_SYSTEM_VERSION_COLOR_CMD=0x02;//色选板版本
-	public static final byte EXTEND_SYSTEM_VERSION_CAMERA_CMD=0x03;//相机版本
 
 	/**
 	 * 信号设置 灯光
