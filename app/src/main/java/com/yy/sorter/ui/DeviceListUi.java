@@ -62,23 +62,18 @@ public class DeviceListUi extends BaseUi {
 
                     int lanCountryId=TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,ConstantValues.LAN_COUNTRY_EN);
 
-                    if(AbstractDataServiceFactory.isTcp()){
-                        // AbstractDataServiceFactory.getInstance().login(device.getDeviceSN(), (byte) lanCountryId);
-                    }else{
-                        AbstractDataServiceFactory.getInstance().login(null,(byte) lanCountryId);
-                        hud= KProgressHUD.create(ctx).setLabel( FileManager.getInstance().getString(13)).show(); //13#本地登录中...
-                        mainUIHandler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(hud!=null){
-                                    hud.dismiss();
-                                    hud=null;
-                                    showToast(FileManager.getInstance().getString(1000)); //1000#信号不稳定或者设备已经下线
-                                }
+                    AbstractDataServiceFactory.getInstance().login(null,(byte) lanCountryId);
+                    hud= KProgressHUD.create(ctx).setLabel( FileManager.getInstance().getString(13)).show(); //13#本地登录中...
+                    mainUIHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(hud!=null){
+                                hud.dismiss();
+                                hud=null;
+                                showToast(FileManager.getInstance().getString(1000)); //1000#信号不稳定或者设备已经下线
                             }
-                        },3000);
-
-                    }
+                        }
+                    },3000);
 
 
 

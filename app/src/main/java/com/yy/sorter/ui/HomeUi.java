@@ -1,11 +1,11 @@
 package com.yy.sorter.ui;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +14,7 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.yy.sorter.activity.R;
 import com.yy.sorter.manager.FileManager;
+import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
@@ -29,6 +30,7 @@ import th.service.data.ThDevice;
 import th.service.helper.ThCommand;
 import th.service.helper.ThLogger;
 import th.service.helper.ThPackage;
+import th.service.helper.ThPackageHelper;
 
 /**
  * Created by Administrator on 2017/3/17.
@@ -43,6 +45,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     private Button btn_clean,btn_system;
     private boolean systemBegin,cleanBegin;
     private Timer systemTimer,cleanTimer;
+    private RelativeLayout modeLayout;
     public HomeUi(Context ctx) {
         super(ctx);
     }
@@ -56,6 +59,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             view = LayoutInflater.from(ctx).inflate(R.layout.ui_home, null);
 
             layout = (PullRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+            modeLayout = (RelativeLayout)view.findViewById(R.id.modeLayout);
             nameTxt = (TextView) view.findViewById(R.id.nameTxt);
             tv_valve = (TextView) view.findViewById(R.id.tv_valve);
             tv_feeder = (TextView) view.findViewById(R.id.tv_feeder);
@@ -99,6 +103,14 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 }
             });
 
+
+
+            modeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MiddleManger.getInstance().changeUI(ConstantValues.VIEW_MODE_LIST,43);//43#我的方案
+                }
+            });
 
 
 
@@ -158,10 +170,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
         int mobileVersion =  ConvertUtils.getPhoneProtocolVersion(machineData);
         if(mobileVersion < screenVersion){
             //手机版本低于屏版本--提示手机程序要升级才可以正常使用所有功能
-            showLongToast(FileManager.getInstance().getString(371));
-        }else {
-            //手机版本向下兼容，无需提示
-
+            showLongToast(FileManager.getInstance().getString(1022));//1022#手机协议版本过旧，部分功能可能无法使用，升级版本正在开发中，请耐心等待.
         }
 
     }
@@ -369,7 +378,16 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                                 break;
                         }
 
-
+                    }else if (thPackage.getType() == 0x01) {
+                        if (thPackage.getExtendType() == 0x01) {
+                            MachineData machineData = ThPackageHelper.parseMachineData(thPackage);
+                            ThDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
+                            if (currentDevice != null) {
+                                currentDevice.setMachineData(machineData);
+                            }
+                            onViewStart();
+                        }
+                        layout.setRefreshing(false);
                     }
 
                 }

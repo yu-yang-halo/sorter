@@ -3,7 +3,7 @@
 
     <item android:state_enabled="false" android:color="#80aaaaaa"/>
     <item android:state_selected="false" android:color = "#80808080"/>
-    <item android:state_selected="true" android:color = "@color/bottomItemSelected"/>
-    <item android:color = "@color/bottomItemSelected"></item>
+    <item android:state_selected="true" android:color = "@color/barItemColor"/>
+    <item android:color = "@color/barItemColor"></item>
 
 </selector>

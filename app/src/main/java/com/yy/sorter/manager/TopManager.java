@@ -160,7 +160,7 @@ public class TopManager implements ThMangerObserver{
                     hideTopView();
                 }
                 break;
-                case ConstantValues.VIEW_SENSITIVE:
+                case ConstantValues.VIEW_SENSE:
                 case ConstantValues.VIEW_VALVE_RATE: {
                     // showOnlyTitleAndMenu();
                     showOnlyTitle();

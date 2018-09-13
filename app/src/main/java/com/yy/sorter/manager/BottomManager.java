@@ -13,9 +13,6 @@ import android.widget.TextView;
 import com.yy.sorter.activity.R;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.StringUtils;
-import com.yy.sorter.view.AnimtionButton;
-
-import th.service.core.AbstractDataServiceFactory;
 
 
 /**
@@ -28,6 +25,8 @@ import th.service.core.AbstractDataServiceFactory;
 
 public class BottomManager implements ThMangerObserver{
     private Handler mainHandler=new Handler(Looper.getMainLooper());
+    private int selectedColor = Color.parseColor("#1b82d2");
+    private int unSelectedColor = Color.parseColor("#9c9c9c");
     private static BottomManager instance=null;
     private BottomManager(){
 
@@ -40,6 +39,7 @@ public class BottomManager implements ThMangerObserver{
         }
         return instance;
     }
+
 
 
     /**
@@ -111,7 +111,7 @@ public class BottomManager implements ThMangerObserver{
         layout_tab_lmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_SENSITIVE, FileManager.getInstance().getString(38));//38#灵敏度
+                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_SENSE, FileManager.getInstance().getString(38));//38#灵敏度
             }
         });
         layout_tab_xtxx.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +123,7 @@ public class BottomManager implements ThMangerObserver{
         layout_tab_xtsz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE, FileManager.getInstance().getString(40));//40#更多
+                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_MORE, FileManager.getInstance().getString(40));//40#更多
             }
         });
 
@@ -135,20 +135,20 @@ public class BottomManager implements ThMangerObserver{
         reImage();
         switch (pageIndex){
             case ConstantValues.VIEW_HOME:
-                tv_tab_home.setTextColor(Color.rgb(0,152,157));
-                button_tab_home.setBackgroundResource(R.mipmap.tab_home1);
+                tv_tab_home.setTextColor(selectedColor);
+                button_tab_home.setBackgroundResource(R.mipmap.tab_home_01);
                 break;
-            case ConstantValues.VIEW_SENSITIVE:
-                tv_tab_lmd.setTextColor(Color.rgb(0,152,157));
-                button_tab_lmd.setBackgroundResource(R.mipmap.tab_sensitive1);
+            case ConstantValues.VIEW_SENSE:
+                tv_tab_lmd.setTextColor(selectedColor);
+                button_tab_lmd.setBackgroundResource(R.mipmap.tab_sense_01);
                 break;
             case ConstantValues.VIEW_FEEDER_SETTINGS:
-                tv_tab_xtxx.setTextColor(Color.rgb(0,152,157));
-                button_tab_xtxx.setBackgroundResource(R.mipmap.icon_feeder1);
+                tv_tab_xtxx.setTextColor(selectedColor);
+                button_tab_xtxx.setBackgroundResource(R.mipmap.tab_feeder_01);
                 break;
-            case ConstantValues.VIEW_VALVE_RATE:
-                tv_tab_xtsz.setTextColor(Color.rgb(0,152,157));
-                button_tab_xtsz.setBackgroundResource(R.mipmap.icon_valve1);
+            case ConstantValues.VIEW_MORE:
+                tv_tab_xtsz.setTextColor(selectedColor);
+                button_tab_xtsz.setBackgroundResource(R.mipmap.tab_more_01);
                 break;
         }
     }
@@ -183,15 +183,15 @@ public class BottomManager implements ThMangerObserver{
 
     public void reImage()
     {
-        tv_tab_home.setTextColor(Color.rgb(0,0,0));
-        tv_tab_lmd.setTextColor(Color.rgb(0,0,0));
-        tv_tab_xtxx.setTextColor(Color.rgb(0,0,0));
-        tv_tab_xtsz.setTextColor(Color.rgb(0,0,0));
+        tv_tab_home.setTextColor(unSelectedColor);
+        tv_tab_lmd.setTextColor(unSelectedColor);
+        tv_tab_xtxx.setTextColor(unSelectedColor);
+        tv_tab_xtsz.setTextColor(unSelectedColor);
 
-        button_tab_home.setBackgroundResource(R.mipmap.tab_home0);
-        button_tab_lmd.setBackgroundResource(R.mipmap.tab_sensitive0);
-        button_tab_xtxx.setBackgroundResource(R.mipmap.icon_feeder0);
-        button_tab_xtsz.setBackgroundResource(R.mipmap.icon_valve0);
+        button_tab_home.setBackgroundResource(R.mipmap.tab_home_00);
+        button_tab_lmd.setBackgroundResource(R.mipmap.tab_sense_00);
+        button_tab_xtxx.setBackgroundResource(R.mipmap.tab_feeder_00);
+        button_tab_xtsz.setBackgroundResource(R.mipmap.tab_more_00);
     }
 
     @Override
@@ -203,9 +203,9 @@ public class BottomManager implements ThMangerObserver{
 
             switch (targetViewID){
                 case ConstantValues.VIEW_HOME:
-                case ConstantValues.VIEW_SENSITIVE:
+                case ConstantValues.VIEW_SENSE:
                 case ConstantValues.VIEW_FEEDER_SETTINGS:
-                case ConstantValues.VIEW_VALVE_RATE:
+                case ConstantValues.VIEW_MORE:
                 {
                     initTabStyle(targetViewID);
                     showTabItemLayout();

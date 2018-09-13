@@ -26,7 +26,7 @@
                 android:id="@+id/button_tab_home"
                 android:layout_width="@dimen/tab_item_image_side"
                 android:layout_height="41dp"
-                android:background="@mipmap/tab_home1" />
+                android:background="@mipmap/tab_home_00" />
 
             <TextView
                 android:id="@+id/tv_tab_home"
@@ -34,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="12dp"
-                android:textColor="@color/bottomItemSelected"
                 android:text="主页" />
 
         </LinearLayout>
@@ -51,7 +50,7 @@
                 android:id="@+id/button_tab_lmd"
                 android:layout_width="@dimen/tab_item_image_side"
                 android:layout_height="@dimen/tab_item_image_side"
-                android:background="@mipmap/tab_sensitive0" />
+                android:background="@mipmap/tab_sense_00" />
 
             <TextView
                 android:id="@+id/tv_tab_lmd"
@@ -76,7 +75,7 @@
                 android:id="@+id/button_tab_xtxx"
                 android:layout_width="@dimen/tab_item_image_side"
                 android:layout_height="@dimen/tab_item_image_side"
-                android:background="@mipmap/tab_settings0" />
+                android:background="@mipmap/tab_feeder_00" />
 
             <TextView
                 android:id="@+id/tv_tab_xtxx"
@@ -101,7 +100,7 @@
                 android:id="@+id/button_tab_xtsz"
                 android:layout_width="@dimen/tab_item_image_side"
                 android:layout_height="@dimen/tab_item_image_side"
-                android:background="@mipmap/tab_sysinfo0" />
+                android:background="@mipmap/tab_more_00" />
 
             <TextView
                 android:id="@+id/tv_tab_xtsz"

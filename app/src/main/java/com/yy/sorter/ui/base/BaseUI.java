@@ -193,7 +193,7 @@ public abstract class BaseUi implements ThObserver{
 
 
         if(MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_HOME
-                ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_SENSITIVE
+                ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_SENSE
                 ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_FEEDER_SETTINGS
                 ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_VALVE_RATE){
 

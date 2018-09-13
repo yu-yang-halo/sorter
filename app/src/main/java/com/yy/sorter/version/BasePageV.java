@@ -5,9 +5,11 @@ import com.yy.sorter.ui.DeviceListUi;
 import com.yy.sorter.ui.HomeUi;
 import com.yy.sorter.ui.LanUi;
 import com.yy.sorter.ui.LoginUi;
+import com.yy.sorter.ui.ModeListUi;
+import com.yy.sorter.ui.MoreUi;
 import com.yy.sorter.ui.RegisterUi;
 import com.yy.sorter.ui.RemoteLoginUi;
-import com.yy.sorter.ui.ShareQRUi;
+import com.yy.sorter.ui.SenseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
 import java.util.HashMap;
@@ -98,6 +100,9 @@ public abstract class BasePageV {
         basePages.put(ConstantValues.VIEW_LAN, LanUi.class);//语言设置界面
         basePages.put(ConstantValues.VIEW_HOME, HomeUi.class);//主界面
         basePages.put(ConstantValues.VIEW_DEVICE_LIST, DeviceListUi.class);//设备列表
+        basePages.put(ConstantValues.VIEW_MODE_LIST, ModeListUi.class);//方案
+        basePages.put(ConstantValues.VIEW_SENSE, SenseUi.class);//灵敏度主界面
+        basePages.put(ConstantValues.VIEW_MORE, MoreUi.class);//
 
 
     }

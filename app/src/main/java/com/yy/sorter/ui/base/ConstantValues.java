@@ -11,11 +11,11 @@ public class ConstantValues {
      */
     public static final int VIEW_LOGIN=1;              //登录
     public static final int VIEW_LOGIN_REMOTE = 2;     //远程登录界面
-    public static final int VIEW_DEVICE_LIST = 7;
-    public static final int VIEW_HOME=3;               //主界面
-    public static final int VIEW_SENSITIVE=4;          //灵敏度
-    public static final int VIEW_SYSTEM_INFO=5;        //系统信息
-    public static final int VIEW_SYSTEM_SETTINGS=6;    //系统设置
+    public static final int VIEW_DEVICE_LIST = 3;
+    public static final int VIEW_HOME=4;               //主界面
+    public static final int VIEW_SENSE=5;          //灵敏度
+    public static final int VIEW_MODE_LIST = 6; //方案列表
+    public static final int VIEW_MORE = 7;      //更多
 
     public static final int VIEW_LAN=8;    //语言设置界面
     public static final int VIEW_VALVE_SETTINGS = 9; //喷阀设置
@@ -25,11 +25,9 @@ public class ConstantValues {
     public static final int VIEW_SCHEME_DETAIL= 13; //方案设置
     public static final int VIEW_SCHEME_LIST= 14; //方案列表
 
-    public static final int  VIEW_TRAFFIC = 15;       //手机流量管理
     public static final int  VIEW_VALVE_RATE = 16;    //喷阀指示
     public static final int  VIEW_WHEEL_SETTINGS= 17; //履带设置
     public static final int  VIEW_OPTICS_ADJUST = 18; //光学校准
-    public static final int  VIEW_ONLINE_UPDATE= 19;  //在线升级
     public static final int  VIEW_REGISTER  = 20;     //注册（授权）
     public static final int  VIEW_WORK_INFO = 21;     //工作信息
     public static final int  VIEW_SELF_CHECK= 22;     //自检信息
