@@ -11,6 +11,14 @@ import com.yy.sorter.activity.R;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
+import java.util.List;
+
+import th.service.core.AbstractDataServiceFactory;
+import th.service.data.ThMode;
+import th.service.helper.ThCommand;
+import th.service.helper.ThPackage;
+import th.service.helper.ThPackageHelper;
+
 public class ModeListUi extends BaseUi {
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
@@ -33,21 +41,42 @@ public class ModeListUi extends BaseUi {
     }
 
     @Override
+    public void onViewStart() {
+        super.onViewStart();
+
+        AbstractDataServiceFactory.getInstance().requestModeList((byte) 1);
+    }
+
+    @Override
+    public void receivePacketData(ThPackage packet) {
+        if(packet.getType() == ThCommand.MODE_CMD)
+        {
+            if(packet.getExtendType() == 0x01)
+            {
+                List<ThMode> thModeList = ThPackageHelper.parseThModeList(packet);
+
+                myAdapter.setThModeList(thModeList);
+                myAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
     public int getID() {
         return ConstantValues.VIEW_MODE_LIST;
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
     {
-
-        private String[] strList = new String[]{"选长米","选花生","选果子","选长米","选花生"
-                ,"选果子","选长米","选花生","选果子","选长米",
-                "选花生","选果子","选长米","选花生","选果子"
-                ,"选长米","选花生","选果子"};
+        List<ThMode> thModeList;
         public MyAdapter()
         {
 
         }
+        public void setThModeList(List<ThMode> thModeList) {
+            this.thModeList = thModeList;
+        }
+
         @Override
         public MyItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_recycler_mode_item,parent,false);
@@ -62,12 +91,18 @@ public class ModeListUi extends BaseUi {
 
         @Override
         public void onBindViewHolder(MyItemHolder holder, int position) {
-            holder.tv_modeName.setText(strList[position]);
+            holder.tv_modeName.setText(thModeList.get(position).getModeName());
         }
 
         @Override
         public int getItemCount() {
-            return strList.length;
+            if(thModeList == null)
+            {
+                return 0;
+            }else
+            {
+                return thModeList.size();
+            }
         }
 
         class MyItemHolder extends RecyclerView.ViewHolder

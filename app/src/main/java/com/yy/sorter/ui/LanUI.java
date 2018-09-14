@@ -36,21 +36,22 @@ public class LanUi extends BaseUi {
     private LanAdapter lanAdapter;
     private PullRefreshLayout layout;
     private LoadProgress loadProgress;
-    private boolean isConnectToInternet=false;
-    private ExecutorService executorService= Executors.newCachedThreadPool();
+    private boolean isConnectToInternet = false;
+    private ExecutorService executorService = Executors.newCachedThreadPool();
+
     public LanUi(Context ctx) {
         super(ctx);
     }
 
     @Override
     protected View onInitView() {
-        if(view==null){
-            view=LayoutInflater.from(ctx).inflate(R.layout.ui_lan,null);
-            lanListView= (ListView) view.findViewById(R.id.lanListView);
+        if (view == null) {
+            view = LayoutInflater.from(ctx).inflate(R.layout.ui_lan, null);
+            lanListView = (ListView) view.findViewById(R.id.lanListView);
             layout = (PullRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
 
-            lanAdapter=new LanAdapter(ctx,null);
+            lanAdapter = new LanAdapter(ctx, null);
             lanListView.setAdapter(lanAdapter);
             layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
                 @Override
@@ -61,14 +62,14 @@ public class LanUi extends BaseUi {
                     AbstractDataServiceFactory
                             .getFileDownloadService()
                             .requestDownloadWhatFile((byte) ThCommand.BUILD_VERSION,
-                                    ThCommand.DOWNLOAD_FILE_TYPE_CONFIG,null);
+                                    ThCommand.DOWNLOAD_FILE_TYPE_CONFIG, null);
 
                     mainUIHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             reloadUI();
                         }
-                    },2500);
+                    }, 2500);
 
 
                 }
@@ -79,18 +80,18 @@ public class LanUi extends BaseUi {
         return view;
     }
 
-    private void reloadUI(){
+    private void reloadUI() {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                isConnectToInternet=IPUtils.netAvaliable();
+                isConnectToInternet = IPUtils.netAvaliable();
                 mainUIHandler.post(new Runnable() {
-                     @Override
-                     public void run() {
-                         lanAdapter.setConnectToInternet(isConnectToInternet);
-                         lanAdapter.notifyDataSetChanged();
-                         layout.setRefreshing(false);
-                     }
+                    @Override
+                    public void run() {
+                        lanAdapter.setConnectToInternet(isConnectToInternet);
+                        lanAdapter.notifyDataSetChanged();
+                        layout.setRefreshing(false);
+                    }
                 });
 
             }
@@ -107,7 +108,7 @@ public class LanUi extends BaseUi {
                 mainUIHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if(thConfig!=null){
+                        if (thConfig != null) {
 
                             lanAdapter.setNewConfig(thConfig);
                             lanAdapter.notifyDataSetChanged();
@@ -117,9 +118,7 @@ public class LanUi extends BaseUi {
                 });
 
             }
-        },null);
-
-
+        }, null);
 
 
     }
@@ -134,40 +133,29 @@ public class LanUi extends BaseUi {
         return ConstantValues.LEAVER_DEFAULT;
     }
 
-
     @Override
-    public void update(Object var1, final Object var2) {
-        super.update(var1, var2);
-        mainUIHandler.post(new Runnable() {
+    public void receivePacketData(ThPackage packet) {
+        /**
+         * 网络下载逻辑处理
+         */
+        LanguageHelper.onCallbackFileHandler(ctx, packet, LanUi.this, new LanguageHelper.IProgressListenser() {
             @Override
-            public void run() {
-                if(var2.getClass()== ThPackage.class){
-                    ThPackage thPackage= (ThPackage) var2;
-                    /**
-                     * 网络下载逻辑处理
-                     */
-                    LanguageHelper.onCallbackFileHandler(ctx, thPackage, LanUi.this, new LanguageHelper.IProgressListenser() {
-                        @Override
-                        public void onFinished(byte fileType, boolean success,ThConfig config) {
-                            if(success){
-                                if(fileType==ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE){
-                                    lanAdapter.notifyDownloadSuccess();
-                                }else if(fileType==ThCommand.DOWNLOAD_FILE_TYPE_CONFIG){
+            public void onFinished(byte fileType, boolean success, ThConfig config) {
+                if (success) {
+                    if (fileType == ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE) {
+                        lanAdapter.notifyDownloadSuccess();
+                    } else if (fileType == ThCommand.DOWNLOAD_FILE_TYPE_CONFIG) {
 
-                                    onViewStart();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onVersionUpdate(boolean isLastestNew) {
-
-                        }
-                    });
-
+                        onViewStart();
+                    }
                 }
             }
-        });
 
+            @Override
+            public void onVersionUpdate(boolean isLastestNew) {
+
+            }
+        });
     }
+
 }

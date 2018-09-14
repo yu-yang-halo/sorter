@@ -105,6 +105,7 @@ public class LoginUi extends BaseUi {
         super.onViewStop();
     }
 
+
     @Override
     public void initViewContent() {
         super.initViewContent();
@@ -202,60 +203,51 @@ public class LoginUi extends BaseUi {
     }
 
     @Override
-    public void update(Object var1, final Object var2) {
-        super.update(var1,var2);
-        ThLogger.debug(TAG,var1+""+var2);
-        mainUIHandler.post(new Runnable(){
+    public void receivePacketData(ThPackage packet) {
+        /**
+         * 网络下载逻辑处理
+         */
+        LanguageHelper.onCallbackFileHandler(ctx, packet, LoginUi.this, new LanguageHelper.IProgressListenser() {
             @Override
-            public void run() {
-                if(var2.getClass()== ThPackage.class){
-                    ThPackage thPackage= (ThPackage) var2;
-                    /**
-                     * 网络下载逻辑处理
-                     */
-                    LanguageHelper.onCallbackFileHandler(ctx, thPackage, LoginUi.this, new LanguageHelper.IProgressListenser() {
-                        @Override
-                        public void onFinished(byte fileType, boolean success,ThConfig config) {
-                            if(config!=null){
-                               boolean lanHasUpdate=false;
-                               List<ThConfig.LanguageVersion> languageVersions= config.getLanguage();
-                               if(languageVersions!=null){
-                                   for (ThConfig.LanguageVersion languageVersion:languageVersions){
-                                       if(languageVersion.getVersion()!=languageVersion.getLastVersion()){
-                                           int currentCountryId=TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,0);
-                                           if(currentCountryId == languageVersion.getCountryId()){
-                                               //当前语言有更新才会提示
-                                               lanHasUpdate=true;
-                                               break;
-                                           }
-                                       }
-                                   }
-                               }
-                                final boolean finalLanHasUpdate = lanHasUpdate;
-                                mainUIHandler.post(new Runnable() {
-                                   @Override
-                                   public void run() {
-                                       if(finalLanHasUpdate){
-                                           showLongToast(FileManager.getInstance().getString(15,"语言包有更新啦，快去更新一下吧！"));//15#语言包有更新啦，快去更新一下吧！
-                                       }
-                                   }
-                               });
-
+            public void onFinished(byte fileType, boolean success,ThConfig config) {
+                if(config!=null){
+                    boolean lanHasUpdate=false;
+                    List<ThConfig.LanguageVersion> languageVersions= config.getLanguage();
+                    if(languageVersions!=null){
+                        for (ThConfig.LanguageVersion languageVersion:languageVersions){
+                            if(languageVersion.getVersion()!=languageVersion.getLastVersion()){
+                                int currentCountryId=TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,0);
+                                if(currentCountryId == languageVersion.getCountryId()){
+                                    //当前语言有更新才会提示
+                                    lanHasUpdate=true;
+                                    break;
+                                }
                             }
                         }
+                    }
+                    final boolean finalLanHasUpdate = lanHasUpdate;
+                    mainUIHandler.post(new Runnable() {
                         @Override
-                        public void onVersionUpdate(boolean isLastestNew) {
-                            initAppVersion(isLastestNew);
+                        public void run() {
+                            if(finalLanHasUpdate){
+                                showLongToast(FileManager.getInstance().getString(15,"语言包有更新啦，快去更新一下吧！"));//15#语言包有更新啦，快去更新一下吧！
+                            }
                         }
                     });
 
-                    if(thPackage.getType()==0x02){
-                        ThDevice device=ThPackageHelper.parseMyDevice(thPackage);
-                        AbstractDataServiceFactory.getInstance().addDevice(device);
-                    }
                 }
+            }
+            @Override
+            public void onVersionUpdate(boolean isLastestNew) {
+                initAppVersion(isLastestNew);
             }
         });
 
+        if(packet.getType()==0x02){
+            ThDevice device=ThPackageHelper.parseMyDevice(packet);
+            AbstractDataServiceFactory.getInstance().addDevice(device);
+        }
+
     }
+
 }

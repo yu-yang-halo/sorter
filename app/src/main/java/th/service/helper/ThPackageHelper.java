@@ -9,14 +9,19 @@ import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.StringUtils;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.ThConfig;
 import th.service.data.ThDevice;
+import th.service.data.ThMode;
 
 /**
  * 注意包体的长度计算，同意TCP和UDP包体长度的计算
@@ -151,7 +156,36 @@ public class ThPackageHelper {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * 解析方案
+	 * @param retData
+	 * @return
+	 */
+	public static List<ThMode> parseThModeList(ThPackage retData){
+
+		List<ThMode> modeList=new ArrayList<>();
+
+		byte[] contents=retData.getContents();
+		String devsStr=StringUtils.convertByteArrayToString(contents);
+		String[] arr=devsStr.split("\\$");
+		for (int i=0;i<arr.length;i++){
+			String[] name_time_mode=arr[i].split("#");
+			if(name_time_mode.length==3||name_time_mode.length==4) {
+
+				//名称#时间#小模式索引#大模式的索引#方案flag
+
+				byte smallIndex = (byte) ConvertUtils.toIntExt(name_time_mode[2],0);
+				byte bigIndex = 0;
+				byte flag  = 0;
+
+				ThMode mode=new ThMode(bigIndex,smallIndex,name_time_mode[0],name_time_mode[1],flag);
+				modeList.add(mode);
+			}
+		}
+
+		return modeList;
+	}
 
 
 	public static int getHashId(byte view,byte type,byte subType,byte extType)

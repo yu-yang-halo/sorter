@@ -1,8 +1,8 @@
-﻿1#中文
+﻿1#Chinese
 2#English
-3#语言
-4#本地登录
-5#远端登录
+3#Language
+4#Local Login
+5#Remote Login
 6#提示
 7#确定
 8#取消

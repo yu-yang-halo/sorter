@@ -34,6 +34,7 @@ public class ThStrategy {
         strategyTables.put(ConstantValues.VIEW_HOME,Arrays.asList(0x01,0x03,0x08,0x0d,0x0f));
         strategyTables.put(ConstantValues.VIEW_SENSE,Arrays.asList(0x04,0x10,0x12,0x13,0x14,
                 0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F,0x20,0x21,0x30,0x05));
+        strategyTables.put(ConstantValues.VIEW_MODE_LIST,Arrays.asList(0x0d));
 
 
 
@@ -61,7 +62,7 @@ public class ThStrategy {
         strategyTables.put(ConstantValues.VIEW_REGISTER,Arrays.asList(0x56));
         strategyTables.put(ConstantValues.VIEW_WORK_INFO,Arrays.asList(0xa0));
         strategyTables.put(ConstantValues.VIEW_SELF_CHECK,Arrays.asList(0xa0));
-        strategyTables.put(ConstantValues.VIEW_FEEDER_SETTINGS,Arrays.asList(0x08,0x03));
+        strategyTables.put(ConstantValues.VIEW_FEEDER,Arrays.asList(0x08,0x03));
 
 
 

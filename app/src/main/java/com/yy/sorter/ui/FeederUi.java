@@ -10,8 +10,8 @@ import com.yy.sorter.ui.base.ConstantValues;
 
 import th.service.helper.ThPackage;
 
-public class SenseUi extends BaseUi {
-    public SenseUi(Context ctx) {
+public class FeederUi extends BaseUi {
+    public FeederUi(Context ctx) {
         super(ctx);
     }
 
@@ -19,14 +19,14 @@ public class SenseUi extends BaseUi {
     protected View onInitView() {
         if(view == null)
         {
-            view = LayoutInflater.from(ctx).inflate(R.layout.ui_sense,null);
+            view = LayoutInflater.from(ctx).inflate(R.layout.ui_feeder, null);
         }
         return view;
     }
 
     @Override
     public int getID() {
-        return ConstantValues.VIEW_SENSE;
+        return ConstantValues.VIEW_FEEDER;
     }
     @Override
     public int getLeaver() {

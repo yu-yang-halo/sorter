@@ -92,6 +92,8 @@ public class DeviceListUi extends BaseUi {
     public void onViewStop() {
     }
 
+
+
     private void reqDeviceList(String username,String password){
         AbstractDataServiceFactory.getInstance().requestDeviceList(IPUtils.getBroadCastAddress(ctx),username,password,0);
         try {
@@ -153,59 +155,44 @@ public class DeviceListUi extends BaseUi {
     }
 
     @Override
-    public void update(Object var1, final Object var2) {
-        super.update(var1,var2);
-        mainUIHandler.post(new Runnable() {
-            @Override
-            public void run() {
-
-                if(var2.getClass()== ThPackage.class){
-                    ThPackage thPackage= (ThPackage) var2;
-                    if(thPackage.getType()==0x01){
-                        if(hud!=null){
-                            hud.dismiss();
-                            hud=null;
-                        }
-                        if(thPackage.getExtendType()==0x03){
-                            if(MiddleManger.getInstance().isCurrentUI(DeviceListUi.this)){
-                                ThToast.showToast(ctx, FileManager.getInstance().getString(1001));  //1001#该屏幕已被锁定
-                            }
-                        }else if(thPackage.getExtendType()==0x01) {
-                            if(MiddleManger.getInstance().isCurrentUI(DeviceListUi.this)){
-                                MachineData machineData= ThPackageHelper.parseMachineData(thPackage);
-                                ThDevice currentDevice=AbstractDataServiceFactory.getInstance().getCurrentDevice();
-                                if(currentDevice!=null){
-                                    currentDevice.setMachineData(machineData);
-                                }
-                                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME, FileManager.getInstance().getString(32));
-                            }
-                        }
-                    }else if(thPackage.getType()==0x02){
-
-                        final ThDevice device=ThPackageHelper.parseMyDevice(thPackage);
-                        if (device!=null){
-                            AbstractDataServiceFactory.getInstance().addDevice(device);
-                        }
-                        final Set<ThDevice> devices=AbstractDataServiceFactory.getInstance().getDevices();
-
-
-                        mainUIHandler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                devicesAdapter.setDevices(devices);
-                                devicesAdapter.notifyDataSetChanged();
-                                refreshLayout.setRefreshing(false);
-                            }
-                        },100);
-
-                    }
-
-                }
-
-
+    public void receivePacketData(ThPackage packet) {
+        if(packet.getType()==0x01){
+            if(hud!=null){
+                hud.dismiss();
+                hud=null;
             }
-        });
+            if(packet.getExtendType()==0x03){
+                if(MiddleManger.getInstance().isCurrentUI(DeviceListUi.this)){
+                    ThToast.showToast(ctx, FileManager.getInstance().getString(1001));  //1001#该屏幕已被锁定
+                }
+            }else if(packet.getExtendType()==0x01) {
+                if(MiddleManger.getInstance().isCurrentUI(DeviceListUi.this)){
+                    MachineData machineData= ThPackageHelper.parseMachineData(packet);
+                    ThDevice currentDevice=AbstractDataServiceFactory.getInstance().getCurrentDevice();
+                    if(currentDevice!=null){
+                        currentDevice.setMachineData(machineData);
+                    }
+                    MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME, FileManager.getInstance().getString(32));
+                }
+            }
+        }else if(packet.getType()==0x02){
+
+            final ThDevice device=ThPackageHelper.parseMyDevice(packet);
+            if (device!=null){
+                AbstractDataServiceFactory.getInstance().addDevice(device);
+            }
+            final Set<ThDevice> devices=AbstractDataServiceFactory.getInstance().getDevices();
 
 
+            mainUIHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    devicesAdapter.setDevices(devices);
+                    devicesAdapter.notifyDataSetChanged();
+                    refreshLayout.setRefreshing(false);
+                }
+            },100);
+
+        }
     }
 }

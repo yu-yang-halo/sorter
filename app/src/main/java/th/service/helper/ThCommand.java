@@ -118,7 +118,7 @@ public class ThCommand {
 	 *  1: 配置文件错误 2: 控制板通信异常，不能启动3: 气压异常，不能启动
      *
 	 */
-	public static final byte MODE_CMD=0x04;
+	public static final byte MODE_CMD=0x0d;
 
 
 	/**

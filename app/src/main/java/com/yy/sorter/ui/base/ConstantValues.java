@@ -16,8 +16,9 @@ public class ConstantValues {
     public static final int VIEW_SENSE=5;          //灵敏度
     public static final int VIEW_MODE_LIST = 6; //方案列表
     public static final int VIEW_MORE = 7;      //更多
+    public static final int VIEW_FEEDER=8; //给料器设置
 
-    public static final int VIEW_LAN=8;    //语言设置界面
+    public static final int VIEW_LAN=11;    //语言设置界面
     public static final int VIEW_VALVE_SETTINGS = 9; //喷阀设置
     public static final int VIEW_VERSION = 10; //版本信息界面
     public static final int VIEW_DEASH_SETTINGS = 11; //清灰设置界面
@@ -31,7 +32,7 @@ public class ConstantValues {
     public static final int  VIEW_REGISTER  = 20;     //注册（授权）
     public static final int  VIEW_WORK_INFO = 21;     //工作信息
     public static final int  VIEW_SELF_CHECK= 22;     //自检信息
-    public static final int  VIEW_FEEDER_SETTINGS=23; //给料器设置
+
     public static final int  VIEW_SHARE_QR=24; //分享APP二维码
     public static final int  VIEW_CAMERA_ADJUST = 25; //相机校准
     public static final int  VIEW_NOT_FOUND=404;//404页面无法找到

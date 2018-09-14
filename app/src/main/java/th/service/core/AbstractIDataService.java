@@ -117,8 +117,9 @@ public abstract class AbstractIDataService implements IDataService{
 
 
     @Override
-    public void requestModeList() {
-        ThPackage packet= new ThPackage(ThCommand.MODE_CMD, (byte) 0x01, null,(byte)0, (byte)0, (byte)0,null);
+    public void requestModeList(byte bigModeIndex) {
+        byte[] data1=new byte[]{bigModeIndex};
+        ThPackage packet= new ThPackage(ThCommand.MODE_CMD, (byte) 0x01, data1,(byte)0, (byte)0, (byte)0,null);
         sendPacketData(packet);
     }
 

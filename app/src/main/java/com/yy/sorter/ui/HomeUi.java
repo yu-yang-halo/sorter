@@ -349,52 +349,35 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     }
 
     @Override
-    public void update(Object var1, Object var2) {
-        super.update(var1, var2);
-        /**
-         * 更新数据
-         */
-        ThLogger.debug(TAG, var1 + "" + var2);
+    public void receivePacketData(ThPackage packet) {
+        if (packet.getType() == 0x03) {
+            switch (packet.getExtendType()) {
+                case 0x01:
+                    initFeederStatus(packet.getData1()[0]);
+                    break;
+                case 0x02:
+                    initValveStatus(packet.getData1()[0]);
+                    break;
+                case 0x03:
+                    initSystemButton(packet.getData1()[0], packet.getData1()[1]);
+                    break;
+                case 0x04:
+                    initCleanButton(packet.getData1()[0]);
+                    break;
+            }
 
-        if (var2.getClass() == ThPackage.class) {
-            final ThPackage thPackage = (ThPackage) var2;
-
-            mainUIHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (thPackage.getType() == 0x03) {
-                        switch (thPackage.getExtendType()) {
-                            case 0x01:
-                                initFeederStatus(thPackage.getData1()[0]);
-                                break;
-                            case 0x02:
-                                initValveStatus(thPackage.getData1()[0]);
-                                break;
-                            case 0x03:
-                                initSystemButton(thPackage.getData1()[0], thPackage.getData1()[1]);
-                                break;
-                            case 0x04:
-                                initCleanButton(thPackage.getData1()[0]);
-                                break;
-                        }
-
-                    }else if (thPackage.getType() == 0x01) {
-                        if (thPackage.getExtendType() == 0x01) {
-                            MachineData machineData = ThPackageHelper.parseMachineData(thPackage);
-                            ThDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
-                            if (currentDevice != null) {
-                                currentDevice.setMachineData(machineData);
-                            }
-                            onViewStart();
-                        }
-                        layout.setRefreshing(false);
-                    }
-
+        }else if (packet.getType() == 0x01) {
+            if (packet.getExtendType() == 0x01) {
+                MachineData machineData = ThPackageHelper.parseMachineData(packet);
+                ThDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
+                if (currentDevice != null) {
+                    currentDevice.setMachineData(machineData);
                 }
-            });
-
+                onViewStart();
+            }
+            layout.setRefreshing(false);
         }
-
     }
+
 
 }

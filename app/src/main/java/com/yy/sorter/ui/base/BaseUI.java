@@ -194,8 +194,8 @@ public abstract class BaseUi implements ThObserver{
 
         if(MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_HOME
                 ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_SENSE
-                ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_FEEDER_SETTINGS
-                ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_VALVE_RATE){
+                ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_FEEDER
+                ||MiddleManger.getInstance().getCurrentUI().getID()==ConstantValues.VIEW_MORE){
 
             if(System.currentTimeMillis()-lastTime>3000){
                 lastTime=System.currentTimeMillis();
@@ -246,8 +246,7 @@ public abstract class BaseUi implements ThObserver{
     }
 
 
-
-
+    public  abstract void receivePacketData(ThPackage packet);
 
     @Override
     public void update(Object var1, final Object var2) {
@@ -255,6 +254,14 @@ public abstract class BaseUi implements ThObserver{
             @Override
             public void run() {
 
+                if(var2 == null)
+                {
+                    return;
+                }
+                if(var2.getClass()== ThPackage.class){
+                    ThPackage thPackage= (ThPackage) var2;
+                    receivePacketData(thPackage);
+                }
                 if(MiddleManger.getInstance().isCurrentUI(BaseUi.this)){
 
                     if(var2.getClass()== ThPackage.class){

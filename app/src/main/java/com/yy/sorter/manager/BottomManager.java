@@ -117,7 +117,7 @@ public class BottomManager implements ThMangerObserver{
         layout_tab_xtxx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_FEEDER_SETTINGS, FileManager.getInstance().getString(39));//39#给料量
+                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_FEEDER, FileManager.getInstance().getString(39));//39#给料量
             }
         });
         layout_tab_xtsz.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +142,7 @@ public class BottomManager implements ThMangerObserver{
                 tv_tab_lmd.setTextColor(selectedColor);
                 button_tab_lmd.setBackgroundResource(R.mipmap.tab_sense_01);
                 break;
-            case ConstantValues.VIEW_FEEDER_SETTINGS:
+            case ConstantValues.VIEW_FEEDER:
                 tv_tab_xtxx.setTextColor(selectedColor);
                 button_tab_xtxx.setBackgroundResource(R.mipmap.tab_feeder_01);
                 break;
@@ -204,7 +204,7 @@ public class BottomManager implements ThMangerObserver{
             switch (targetViewID){
                 case ConstantValues.VIEW_HOME:
                 case ConstantValues.VIEW_SENSE:
-                case ConstantValues.VIEW_FEEDER_SETTINGS:
+                case ConstantValues.VIEW_FEEDER:
                 case ConstantValues.VIEW_MORE:
                 {
                     initTabStyle(targetViewID);

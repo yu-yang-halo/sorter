@@ -12,6 +12,8 @@ import com.yy.sorter.activity.R;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
+import th.service.helper.ThPackage;
+
 public class MoreUi extends BaseUi {
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
@@ -40,6 +42,11 @@ public class MoreUi extends BaseUi {
     @Override
     public int getLeaver() {
         return ConstantValues.LEAVER_TAB;
+    }
+
+    @Override
+    public void receivePacketData(ThPackage packet) {
+
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>

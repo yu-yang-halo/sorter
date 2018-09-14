@@ -21,6 +21,7 @@ import com.yy.sorter.utils.TextCacheUtils;
 import com.yy.sorter.utils.ThToast;
 
 import th.service.core.AbstractDataServiceFactory;
+import th.service.helper.ThPackage;
 
 public class RemoteLoginUi extends BaseUi {
     private Button remoteLogin;
@@ -60,6 +61,7 @@ public class RemoteLoginUi extends BaseUi {
         super.onViewStart();
         initAutoCompleteDeviceNumber(deviceNumberEdit);
     }
+
 
     private void setListenser(){
         remoteLogin.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +157,12 @@ public class RemoteLoginUi extends BaseUi {
                 }
             }
         });
+    }
+
+
+    @Override
+    public void receivePacketData(ThPackage packet) {
+
     }
 
 }

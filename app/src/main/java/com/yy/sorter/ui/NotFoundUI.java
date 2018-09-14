@@ -10,6 +10,8 @@ import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
+import th.service.helper.ThPackage;
+
 
 /**
  * Created by Administrator on 2017/12/13.
@@ -38,6 +40,11 @@ public class NotFoundUi extends BaseUi {
     @Override
     public int getID() {
         return ConstantValues.VIEW_NOT_FOUND;
+    }
+
+    @Override
+    public void receivePacketData(ThPackage packet) {
+
     }
 
 }

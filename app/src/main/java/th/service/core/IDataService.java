@@ -28,7 +28,7 @@ public interface IDataService {
 	public void logout();
 	public void controlDevice(byte extendType, boolean isOn);
 
-	public void requestModeList();
+	public void requestModeList(byte bigModeIndex);
 	public void readMode(byte bigModeIndex,byte smallModeIndex);
 	public void saveMode();
 

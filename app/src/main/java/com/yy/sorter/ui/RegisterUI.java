@@ -87,35 +87,29 @@ public class RegisterUi extends BaseUi {
     }
 
 
+
+
     @Override
     public int getID() {
         return ConstantValues.VIEW_REGISTER;
     }
 
     @Override
-    public void update(Object var1, final Object var2) {
-        super.update(var1,var2);
-        mainUIHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (var2.getClass() == ThPackage.class) {
-                    ThPackage thPackage = (ThPackage) var2;
-                    if(thPackage.getType()== ThCommand.TCP_USER_REGISTER_CMD){
-                        //1:注册成功 2:用户已经注册 3：用户名或密码错误
-                         if(thPackage.getExtendType()==1){
-                             showToast(FileManager.getInstance().getString(28));//28#注册成功
-                             AuthUtils.buildLocalCertificationFile(ctx,username,password);
-                             MiddleManger.getInstance().goBack();
-                         }else if(thPackage.getExtendType()==2){
-                             showToast(FileManager.getInstance().getString(29));//  29#用户已经注册
-                         }else if(thPackage.getExtendType()==3){
-                             showToast(FileManager.getInstance().getString(30));//  30#用户名或密码错误
-                         }
-                        AbstractDataServiceFactory.getInstance().closeConnect();
-                    }
-                }
+    public void receivePacketData(ThPackage packet) {
+        if(packet.getType()== ThCommand.TCP_USER_REGISTER_CMD){
+            //1:注册成功 2:用户已经注册 3：用户名或密码错误
+            if(packet.getExtendType()==1){
+                showToast(FileManager.getInstance().getString(28));//28#注册成功
+                AuthUtils.buildLocalCertificationFile(ctx,username,password);
+                MiddleManger.getInstance().goBack();
+            }else if(packet.getExtendType()==2){
+                showToast(FileManager.getInstance().getString(29));//  29#用户已经注册
+            }else if(packet.getExtendType()==3){
+                showToast(FileManager.getInstance().getString(30));//  30#用户名或密码错误
             }
-        });
+            AbstractDataServiceFactory.getInstance().closeConnect();
+        }
     }
+
 
 }

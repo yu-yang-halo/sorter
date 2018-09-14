@@ -2,6 +2,7 @@ package com.yy.sorter.version;
 
 
 import com.yy.sorter.ui.DeviceListUi;
+import com.yy.sorter.ui.FeederUi;
 import com.yy.sorter.ui.HomeUi;
 import com.yy.sorter.ui.LanUi;
 import com.yy.sorter.ui.LoginUi;
@@ -103,6 +104,7 @@ public abstract class BasePageV {
         basePages.put(ConstantValues.VIEW_MODE_LIST, ModeListUi.class);//方案
         basePages.put(ConstantValues.VIEW_SENSE, SenseUi.class);//灵敏度主界面
         basePages.put(ConstantValues.VIEW_MORE, MoreUi.class);//
+        basePages.put(ConstantValues.VIEW_FEEDER, FeederUi.class);//给料量
 
 
     }
