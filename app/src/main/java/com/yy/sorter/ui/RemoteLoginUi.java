@@ -21,7 +21,11 @@ import com.yy.sorter.utils.TextCacheUtils;
 import com.yy.sorter.utils.ThToast;
 
 import th.service.core.AbstractDataServiceFactory;
+import th.service.data.MachineData;
+import th.service.data.ThDevice;
+import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
+import th.service.helper.ThPackageHelper;
 
 public class RemoteLoginUi extends BaseUi {
     private Button remoteLogin;
@@ -67,8 +71,6 @@ public class RemoteLoginUi extends BaseUi {
         remoteLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME,31);//31#主页
 
                 if(hud!=null){
                     hud.dismiss();
@@ -162,7 +164,53 @@ public class RemoteLoginUi extends BaseUi {
 
     @Override
     public void receivePacketData(ThPackage packet) {
+        if(hud!=null){
+            hud.dismiss();
+        }
+        if(packet.getType()==0x51){
 
+            if(packet.getExtendType()==0x01){
+                ThDevice currentDevice=new ThDevice("","",deviceSN);
+                AbstractDataServiceFactory.getInstance().setCurrentDevice(currentDevice);
+                int lanCountryId=TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,ConstantValues.LAN_COUNTRY_EN);
+                AbstractDataServiceFactory.getInstance().login(null,(byte) lanCountryId);
+            }else if(packet.getExtendType()==0x02){
+                if(packet.getData1()[0]==2){
+                    showToast(FileManager.getInstance().getString(1023)); //1023#您还没有注册
+                }else  if(packet.getData1()[0]==3){
+                    showToast(FileManager.getInstance().getString(1024)); //1024#用户数据错误
+                }
+            }
+        }else if(packet.getType()== ThCommand.LOGIN_CMD) {
+
+            if (packet.getExtendType() == 0x03) {
+                AbstractDataServiceFactory.getInstance().closeConnect();
+                if (MiddleManger.getInstance().isCurrentUI(RemoteLoginUi.this)) {
+                    ThToast.showToast(ctx, FileManager.getInstance().getString(1001));  //1001#该屏幕已被锁定
+                }
+            } else if (packet.getExtendType() == 0x04) {
+                AbstractDataServiceFactory.getInstance().closeConnect();
+                if (MiddleManger.getInstance().isCurrentUI(RemoteLoginUi.this)) {
+                    ThToast.showToast(ctx, FileManager.getInstance().getString(1025)); //1025#设备不在线
+                }
+            } else if (packet.getExtendType() == 0x05) {
+                AbstractDataServiceFactory.getInstance().closeConnect();
+                if (MiddleManger.getInstance().isCurrentUI(RemoteLoginUi.this)) {
+                    ThToast.showToast(ctx, FileManager.getInstance().getString(1026)); //1026#授权码错误
+                }
+            }else if (packet.getExtendType() == 0x01) {
+                if (MiddleManger.getInstance().isCurrentUI(RemoteLoginUi.this)) {
+                    MachineData machineData = ThPackageHelper.parseMachineData(packet);
+                    ThDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
+                    if (currentDevice != null) {
+                        currentDevice.setMachineData(machineData);
+                    }
+                    MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME, FileManager.getInstance().getString(32));//32#主页
+
+                    TextCacheUtils.loadInt(TextCacheUtils.KEY_LOGIN_TYPE,1);
+                }
+            }
+        }
     }
 
 }

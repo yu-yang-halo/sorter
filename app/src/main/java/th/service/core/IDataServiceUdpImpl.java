@@ -32,11 +32,7 @@ public class IDataServiceUdpImpl extends AbstractIDataService {
 		thPackage.setSenderIP(ip);
 		if(thPackage.getType()==0x02
 				|| (thPackage.getType()==0x01&&thPackage.getExtendType()==0x02)
-				||thPackage.getType()==0x05
-				||thPackage.getType()==0x0e
-				||thPackage.getType()==0x06
-				||(thPackage.getType()==0x11&&thPackage.getExtendType()==0x05)
-				||(thPackage.getType()==(byte)0xA0&&thPackage.getExtendType()==0x05)){
+				||thPackage.getType()==0x06){
 
 			/**
 			 * -----忽略------

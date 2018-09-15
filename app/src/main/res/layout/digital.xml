@@ -144,7 +144,7 @@
                 android:textColor="@color/fontColor"
                 android:background="@drawable/selector_btn_digital_bk"
                 />
-            <com.th.colorsorter.utils.AlwaysClickButton
+            <com.yy.sorter.view.AlwaysClickButton
                 android:id="@+id/add"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -202,7 +202,7 @@
                 android:background="@drawable/selector_btn_digital_bk"
                 />
 
-            <com.th.colorsorter.utils.AlwaysClickButton
+            <com.yy.sorter.view.AlwaysClickButton
                 android:id="@+id/reduce"
                 android:layout_width="0dp"
                 android:layout_weight="1"

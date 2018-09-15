@@ -10,7 +10,6 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.yy.sorter.activity.R;
-import com.yy.sorter.utils.AlwaysClickButton;
 
 /**
  * Created by Administrator on 2017/7/28.

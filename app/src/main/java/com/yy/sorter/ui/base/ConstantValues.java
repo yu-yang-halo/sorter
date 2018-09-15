@@ -19,23 +19,21 @@ public class ConstantValues {
     public static final int VIEW_FEEDER=8; //给料器设置
 
     public static final int VIEW_LAN=11;    //语言设置界面
-    public static final int VIEW_VALVE_SETTINGS = 9; //喷阀设置
-    public static final int VIEW_VERSION = 10; //版本信息界面
-    public static final int VIEW_DEASH_SETTINGS = 11; //清灰设置界面
-    public static final int VIEW_SIGNAL_SETTINGS = 12; //信号界面
-    public static final int VIEW_SCHEME_DETAIL= 13; //方案设置
-    public static final int VIEW_SCHEME_LIST= 14; //方案列表
 
-    public static final int  VIEW_VALVE_RATE = 16;    //喷阀指示
+
+
+
     public static final int  VIEW_WHEEL_SETTINGS= 17; //履带设置
     public static final int  VIEW_OPTICS_ADJUST = 18; //光学校准
     public static final int  VIEW_REGISTER  = 20;     //注册（授权）
-    public static final int  VIEW_WORK_INFO = 21;     //工作信息
-    public static final int  VIEW_SELF_CHECK= 22;     //自检信息
 
     public static final int  VIEW_SHARE_QR=24; //分享APP二维码
-    public static final int  VIEW_CAMERA_ADJUST = 25; //相机校准
     public static final int  VIEW_NOT_FOUND=404;//404页面无法找到
+
+
+
+    public static final int VIEW_PAGE_RGB_IR = 0x100;
+    public static final int VIEW_PAGE_SVM = 0x101;
 
 
 

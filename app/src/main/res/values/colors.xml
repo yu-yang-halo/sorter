@@ -25,4 +25,5 @@
     <color name="alphaBlack80">#40000000</color>
     <color name="alphaWhite80">#90ffffff</color>
     <color name="whiteColor">#ffffff</color>
+    <color name="textColor">#1b82d2</color>
 </resources>

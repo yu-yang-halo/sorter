@@ -1,8 +1,14 @@
 package com.yy.sorter.version;
 
 
+import android.content.Context;
+import android.widget.Toast;
+
+import com.yy.sorter.ui.base.BaseUi;
+import com.yy.sorter.ui.page.PageBaseUi;
 import com.yy.sorter.utils.ConvertUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import th.service.core.AbstractDataServiceFactory;
@@ -40,6 +46,26 @@ public class PageVersionManager {
         return basePageV.getBasePages();
     }
 
+
+    public PageBaseUi createPage(int pageId, Context ctx)
+    {
+        Map<Integer, Class> pagesMap = getPagesMap();
+        Class<? extends PageBaseUi> targetClazz = pagesMap.get(pageId);
+        PageBaseUi pageUi=null;
+
+        if (targetClazz == null) {
+            Toast.makeText(ctx,"不支持的界面Create",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        try {
+            pageUi = targetClazz.getConstructor(Context.class).newInstance(ctx);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return pageUi;
+    }
 
 
 }

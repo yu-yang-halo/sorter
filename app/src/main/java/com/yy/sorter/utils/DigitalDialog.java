@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.yy.sorter.activity.R;
 import com.yy.sorter.manager.FileManager;
+import com.yy.sorter.view.AlwaysClickButton;
 
 
 /**

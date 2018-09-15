@@ -1,4 +1,4 @@
-package com.yy.sorter.utils;
+package com.yy.sorter.view;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.yy.sorter.view.ThSegmentView
+        android:id="@+id/segmentView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/background"
+        >
+    </com.yy.sorter.view.ThSegmentView>
 
-</android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/segmentView"
+        android:layout_above="@+id/layoutBottom"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/layoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@color/whiteColor">
+
+        <com.yy.sorter.view.AlwaysClickButton
+            android:id="@+id/addBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/editText"
+            android:background="@drawable/selector_circle_btn_bk"
+            android:src="@mipmap/plus"
+            android:layout_centerVertical="true"
+            android:textColor="@drawable/selector_btn_click_text_color"
+            android:textSize="20dp" />
+
+        <com.yy.sorter.view.AlwaysClickButton
+            android:id="@+id/minusBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_circle_btn_bk"
+            android:src="@mipmap/minus"
+            android:layout_toRightOf="@+id/editText"
+            android:textColor="@drawable/selector_btn_click_text_color"
+            android:layout_centerVertical="true"
+            android:textSize="20dp" />
+
+        <com.yy.sorter.view.KeyboardDigitalEdit
+            android:id="@+id/editText"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@drawable/selector_edit_bk"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="0"
+            android:textColor="@color/fontColor" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

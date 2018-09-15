@@ -1,6 +1,7 @@
 package th.service.core;
 
 import com.yy.sorter.utils.AuthUtils;
+import com.yy.sorter.utils.ConvertUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -154,6 +155,42 @@ public abstract class AbstractIDataService implements IDataService{
         ThPackage packet= new ThPackage(ThCommand.FEEDER_CMD, (byte) 0x03, data1,(byte)0, (byte)0, (byte)0,null);
         sendPacketData(packet);
     }
+
+    public void requestSenseInfo(byte group,byte reqType)
+    {
+        byte[] data1=new byte[]{group,reqType};
+        ThPackage packet= new ThPackage(ThCommand.SENSE_CMD, (byte) 0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void setSenseValue(byte group,byte view,byte setType,byte subType,byte extType,int value)
+    {
+        byte[] arr = ConvertUtils.intTo2Bytes(value);
+
+        byte[] data1=new byte[]{group,view,setType,subType,extType,arr[0],arr[1]};
+        ThPackage packet= new ThPackage(ThCommand.SENSE_CMD, (byte) 0x02, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void setSenseEnable(byte group,byte view,byte setType,byte subType,byte extType)
+    {
+        byte[] data1=new byte[]{group,view,setType,subType,extType};
+        ThPackage packet= new ThPackage(ThCommand.SENSE_CMD, (byte) 0x03, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    public void requestSvmInfo(byte group)
+    {
+        byte[] data1=new byte[]{group};
+        ThPackage packet= new ThPackage(ThCommand.SVM_CMD, (byte) 0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void setSvmInfo(byte group,byte view,byte setType,int value)
+    {
+        byte[] arr = ConvertUtils.intTo2Bytes(value);
+        byte[] data1=new byte[]{group,view,setType,arr[0],arr[1]};
+        ThPackage packet= new ThPackage(ThCommand.SVM_CMD, (byte) 0x02, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
 
 
 }

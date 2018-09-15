@@ -30,6 +30,7 @@ public class StringUtils {
     public static List<ThAutoLayout.Item> getGroupItem()
     {
         int groupNumber=AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData().getGroupNumbers();
+        groupNumber = 4;
         List<ThAutoLayout.Item> itemList = new ArrayList<>();
         for(int i=0;i<groupNumber;i++)
         {
@@ -208,25 +209,25 @@ public class StringUtils {
 
     }
     /**
-     * 331#一次
-     * 332#二次
-     * 401#三次
-     * 402#四次
+     44#一次
+     45#二次
+     46#三次
+     47#四次
      */
     public static String getGroupStr(int groupNo){
         String groupStr="";
         switch (groupNo){
             case 1:
-                groupStr=FileManager.getInstance().getString(331);
+                groupStr=FileManager.getInstance().getString(44);
                 break;
             case 2:
-                groupStr=FileManager.getInstance().getString(332);
+                groupStr=FileManager.getInstance().getString(45);
                 break;
             case 3:
-                groupStr=FileManager.getInstance().getString(401);
+                groupStr=FileManager.getInstance().getString(46);
                 break;
             case 4:
-                groupStr=FileManager.getInstance().getString(402);
+                groupStr=FileManager.getInstance().getString(47);
                 break;
         }
 

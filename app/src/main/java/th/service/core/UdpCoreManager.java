@@ -2,6 +2,7 @@ package th.service.core;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.yy.sorter.utils.ConvertUtils;
 
@@ -251,6 +252,10 @@ public class UdpCoreManager extends IReceiveListenser {
                 heartTimer.purge();
             }
             deviceInControl = false;
+        }
+        if(thPackage.getType() == 0x05)
+        {
+            ThLogger.addLog("获取机器数据成功。。。");
         }
 
         /**

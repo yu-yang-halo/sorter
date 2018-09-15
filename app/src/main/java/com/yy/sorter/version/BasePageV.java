@@ -12,6 +12,8 @@ import com.yy.sorter.ui.RegisterUi;
 import com.yy.sorter.ui.RemoteLoginUi;
 import com.yy.sorter.ui.SenseUi;
 import com.yy.sorter.ui.base.ConstantValues;
+import com.yy.sorter.ui.page.RgbIrPage;
+import com.yy.sorter.ui.page.SvmPage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -105,6 +107,13 @@ public abstract class BasePageV {
         basePages.put(ConstantValues.VIEW_SENSE, SenseUi.class);//灵敏度主界面
         basePages.put(ConstantValues.VIEW_MORE, MoreUi.class);//
         basePages.put(ConstantValues.VIEW_FEEDER, FeederUi.class);//给料量
+
+
+        /**
+         * child page
+         */
+        basePages.put(ConstantValues.VIEW_PAGE_RGB_IR, RgbIrPage.class);//色选
+        basePages.put(ConstantValues.VIEW_PAGE_SVM, SvmPage.class);//SVM
 
 
     }

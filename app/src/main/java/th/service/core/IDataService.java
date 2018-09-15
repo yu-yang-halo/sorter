@@ -37,6 +37,13 @@ public interface IDataService {
 	public void setFeederValue(byte setType,byte chuteOrGroup,byte value);
 	public void controlFeederSwitch(byte controlType,byte chuteOrGroup,byte value);
 
+	public void requestSenseInfo(byte group,byte reqType);
+	public void setSenseValue(byte group,byte view,byte setType,byte subType,byte extType,int value);
+	public void setSenseEnable(byte group,byte view,byte setType,byte subType,byte extType);
+
+	public void requestSvmInfo(byte group);
+	public void setSvmInfo(byte group,byte view,byte setType,int value);
+
 
 
 

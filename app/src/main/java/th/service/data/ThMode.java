@@ -6,6 +6,7 @@ public class ThMode {
     private String modeName;
     private String modeTime;
     private byte   flag;
+    private boolean isCurrentMode = false;
 
     public ThMode(byte bigIndex, byte smallIndex, String modeName, String modeTime, byte flag) {
         this.bigIndex = bigIndex;
@@ -53,5 +54,13 @@ public class ThMode {
 
     public void setFlag(byte flag) {
         this.flag = flag;
+    }
+
+    public boolean isCurrentMode() {
+        return isCurrentMode;
+    }
+
+    public void setCurrentMode(boolean currentMode) {
+        isCurrentMode = currentMode;
     }
 }

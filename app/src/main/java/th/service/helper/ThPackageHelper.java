@@ -21,6 +21,7 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.ThConfig;
 import th.service.data.ThDevice;
+import th.service.data.ThFeeder;
 import th.service.data.ThMode;
 
 /**
@@ -166,27 +167,53 @@ public class ThPackageHelper {
 
 		List<ThMode> modeList=new ArrayList<>();
 
+		byte bigIndex = retData.getData1()[0];
+		byte currentSmallIndex = retData.getData1()[1];
+
 		byte[] contents=retData.getContents();
 		String devsStr=StringUtils.convertByteArrayToString(contents);
 		String[] arr=devsStr.split("\\$");
 		for (int i=0;i<arr.length;i++){
 			String[] name_time_mode=arr[i].split("#");
-			if(name_time_mode.length==3||name_time_mode.length==4) {
+			if(name_time_mode.length==4) {
 
-				//名称#时间#小模式索引#大模式的索引#方案flag
+				//   名称#时间#小模式索引#方案flag
 
 				byte smallIndex = (byte) ConvertUtils.toIntExt(name_time_mode[2],0);
-				byte bigIndex = 0;
-				byte flag  = 0;
+
+				byte flag  = (byte) ConvertUtils.toIntExt(name_time_mode[3],0);;
 
 				ThMode mode=new ThMode(bigIndex,smallIndex,name_time_mode[0],name_time_mode[1],flag);
+
+
+				if(currentSmallIndex == smallIndex)
+				{
+					mode.setCurrentMode(true);
+				}else {
+					mode.setCurrentMode(false);
+				}
+
 				modeList.add(mode);
 			}
 		}
 
 		return modeList;
 	}
+	/**
+	 * 解析给料量
+	 * @param retData
+	 * @return
+	 */
+	public static ThFeeder parseThFeeder(ThPackage retData){
+		byte[] contents=retData.getContents();
+		if(contents!=null){
+			ThFeeder thFeeder=new ThFeeder(contents);
 
+			ThLogger.debug("thFeeder",thFeeder.toString());
+			return thFeeder;
+		}
+		return null;
+	}
 
 	public static int getHashId(byte view,byte type,byte subType,byte extType)
 	{
