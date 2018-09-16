@@ -25,6 +25,10 @@ public class SenseUi extends BaseUi {
     private ThAutoLayout groupLayout;
     private RelativeLayout container;
     private int tabIndex = 0;
+
+    private PageBaseUi rgbIrPage,svmPage,hsvPage;
+
+
     public SenseUi(Context ctx) {
         super(ctx);
     }
@@ -53,14 +57,45 @@ public class SenseUi extends BaseUi {
     {
         if(tabIndex == 0)
         {
-            PageBaseUi pageBaseUi = PageVersionManager.getInstance().createPage(ConstantValues.VIEW_PAGE_RGB_IR,ctx);
-
-            pageBaseUi.loadToContainer(container);
+            loadPageToContainer(rgbIrPage,ConstantValues.VIEW_PAGE_RGB_IR);
         }else if(tabIndex == 1)
         {
-            PageBaseUi pageBaseUi = PageVersionManager.getInstance().createPage(ConstantValues.VIEW_PAGE_SVM,ctx);
-
-            pageBaseUi.loadToContainer(container);
+            loadPageToContainer(svmPage,ConstantValues.VIEW_PAGE_SVM);
+        }else if(tabIndex == 2)
+        {
+            loadPageToContainer(hsvPage,ConstantValues.VIEW_PAGE_HSV);
+        }
+    }
+    private void loadPageToContainer(PageBaseUi page,int pageId)
+    {
+        if(page == null)
+        {
+            page = PageVersionManager.getInstance().createPage(pageId,ctx);
+            System.out.println("create page "+pageId+" "+page.getClass());
+        }else
+        {
+            Class targetClzz = PageVersionManager.getInstance().getPageClass(pageId);
+            if(page.getClass() != targetClzz)
+            {
+                System.out.println("change page "+pageId+" "+page.getClass()+" to "+targetClzz);
+                page = PageVersionManager.getInstance().createPage(pageId,ctx);
+            }else
+            {
+                System.out.println("page "+pageId+" "+page.getClass()+" cache bingo");
+            }
+        }
+        page.loadToContainer(container);
+        switch (tabIndex)
+        {
+            case 0:
+                rgbIrPage = page;
+                break;
+            case 1:
+                svmPage = page;
+                break;
+            case 2:
+                hsvPage = page;
+                break;
         }
     }
 
@@ -81,7 +116,6 @@ public class SenseUi extends BaseUi {
         items.add(item3);
 
         segmentView.setContents(items);
-        segmentView.setSelectPos(1);
 
         List<ThAutoLayout.Item> itemList = StringUtils.getGroupItem();
         int currentGroup = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();

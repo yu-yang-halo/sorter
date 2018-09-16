@@ -45,7 +45,13 @@ public class PageVersionManager {
         BasePageV basePageV=BasePageV.createPageV(screenVersion);
         return basePageV.getBasePages();
     }
+    public Class<? extends BaseUi>  getPageClass(int pageId)
+    {
+        Map<Integer, Class> pagesMap = getPagesMap();
+        Class<? extends PageBaseUi> targetClazz = pagesMap.get(pageId);
 
+        return targetClazz;
+    }
 
     public PageBaseUi createPage(int pageId, Context ctx)
     {

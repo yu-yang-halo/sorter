@@ -23,6 +23,7 @@ public class ConstantValues {
 
 
 
+
     public static final int  VIEW_WHEEL_SETTINGS= 17; //履带设置
     public static final int  VIEW_OPTICS_ADJUST = 18; //光学校准
     public static final int  VIEW_REGISTER  = 20;     //注册（授权）
@@ -34,7 +35,8 @@ public class ConstantValues {
 
     public static final int VIEW_PAGE_RGB_IR = 0x100;
     public static final int VIEW_PAGE_SVM = 0x101;
-
+    public static final int VIEW_PAGE_HSV=0x102;
+    public static final int VIEW_PAGE_SHAPE=0x102;
 
 
 

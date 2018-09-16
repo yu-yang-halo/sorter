@@ -10,19 +10,67 @@
         android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp">
 
-        <TextView
-            android:id="@+id/tv_modeName"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+        <CheckBox
+            android:id="@+id/ckSense"
+            android:checked="true"
+            style="@style/CustomCheckBoxStyle"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            android:textSize="18sp"
-            android:gravity="center|left"
-            android:textColor="@color/fontColor"
             android:text="" />
 
+        <RelativeLayout
+            android:id="@+id/layoutBottom"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="17dp"
+            android:background="@color/whiteColor">
 
+            <com.yy.sorter.view.AlwaysClickButton
+                android:id="@+id/addBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/editText"
+                android:background="@drawable/selector_circle_btn_bk"
+                android:src="@mipmap/plus"
+                android:textColor="@drawable/selector_btn_click_text_color"
+                android:textSize="20dp" />
+
+            <com.yy.sorter.view.AlwaysClickButton
+                android:id="@+id/minusBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/editText"
+                android:background="@drawable/selector_circle_btn_bk"
+                android:src="@mipmap/minus"
+                android:textColor="@drawable/selector_btn_click_text_color"
+                android:textSize="20dp" />
+
+            <com.yy.sorter.view.KeyboardDigitalEdit
+                android:id="@+id/editText"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@drawable/selector_edit_bk"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="0"
+                android:textColor="@color/fontColor" />
+
+
+        </RelativeLayout>
     </RelativeLayout>
 
 

@@ -12,6 +12,7 @@ import com.yy.sorter.ui.RegisterUi;
 import com.yy.sorter.ui.RemoteLoginUi;
 import com.yy.sorter.ui.SenseUi;
 import com.yy.sorter.ui.base.ConstantValues;
+import com.yy.sorter.ui.page.HsvPage;
 import com.yy.sorter.ui.page.RgbIrPage;
 import com.yy.sorter.ui.page.SvmPage;
 
@@ -114,7 +115,7 @@ public abstract class BasePageV {
          */
         basePages.put(ConstantValues.VIEW_PAGE_RGB_IR, RgbIrPage.class);//色选
         basePages.put(ConstantValues.VIEW_PAGE_SVM, SvmPage.class);//SVM
-
+        basePages.put(ConstantValues.VIEW_PAGE_HSV, HsvPage.class);//hsv
 
     }
 

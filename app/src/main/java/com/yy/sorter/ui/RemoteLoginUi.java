@@ -71,7 +71,12 @@ public class RemoteLoginUi extends BaseUi {
         remoteLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME, FileManager.getInstance().getString(32));//32#主页
 
+                if(true)
+                {
+                    return;
+                }
                 if(hud!=null){
                     hud.dismiss();
                 }
