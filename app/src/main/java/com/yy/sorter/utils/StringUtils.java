@@ -30,7 +30,6 @@ public class StringUtils {
     public static List<ThAutoLayout.Item> getGroupItem()
     {
         int groupNumber=AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData().getGroupNumbers();
-        groupNumber = 4;
         List<ThAutoLayout.Item> itemList = new ArrayList<>();
         for(int i=0;i<groupNumber;i++)
         {

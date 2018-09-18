@@ -59,6 +59,16 @@ public class ConstantValues {
     public static final int LAN_COUNTRY_EN=2;//英文
 
 
+    /**
+     * View_TYPE
+     */
+    public static final int VIEW_TYPE_ITEM = 0x100;
+    public static final int VIEW_TYPE_NONE = 0x101;
+    public static final int VIEW_TYPE_FRONT = 0x102;
+    public static final int VIEW_TYPE_REAR = 0x103;
+
+
+
 
 
 }

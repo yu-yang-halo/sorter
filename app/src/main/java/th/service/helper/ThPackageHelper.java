@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.yy.sorter.manager.FileManager;
+import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.StringUtils;
 
@@ -22,7 +23,10 @@ import th.service.data.MachineData;
 import th.service.data.ThConfig;
 import th.service.data.ThDevice;
 import th.service.data.ThFeeder;
+import th.service.data.ThHsvInfo;
 import th.service.data.ThMode;
+import th.service.data.ThSense;
+import th.service.data.ThSvmInfo;
 
 /**
  * 注意包体的长度计算，同意TCP和UDP包体长度的计算
@@ -175,16 +179,13 @@ public class ThPackageHelper {
 		String[] arr=devsStr.split("\\$");
 		for (int i=0;i<arr.length;i++){
 			String[] name_time_mode=arr[i].split("#");
-			if(name_time_mode.length==4) {
+			if(name_time_mode.length==3) {
 
-				//   名称#时间#小模式索引#方案flag
+				//   名称#时间#小模式索引
 
 				byte smallIndex = (byte) ConvertUtils.toIntExt(name_time_mode[2],0);
 
-				byte flag  = (byte) ConvertUtils.toIntExt(name_time_mode[3],0);;
-
-				ThMode mode=new ThMode(bigIndex,smallIndex,name_time_mode[0],name_time_mode[1],flag);
-
+				ThMode mode=new ThMode(bigIndex,smallIndex,name_time_mode[0],name_time_mode[1], (byte) 0);
 
 				if(currentSmallIndex == smallIndex)
 				{
@@ -214,6 +215,124 @@ public class ThPackageHelper {
 		}
 		return null;
 	}
+	public static List<ThSense> parseThSenses(ThPackage retData)
+	{
+		List<ThSense> thSenseList=new ArrayList<>();
+		int size=ThSense.TEXT_MAX_BYTES + 12;
+		int totalSize = (retData.getLength()-PACKET_HEADER_SIZE);
+		if(totalSize % size != 0)
+		{
+			ThLogger.debug("Error","协议格式有误");
+			return null;
+		}
+		int count=totalSize/size;
+
+		byte[] contents=retData.getContents();
+
+		ThLogger.debug("算法数","count="+count);
+		byte[] buffer=new byte[size];
+
+		ThSense item0=ThSense.createThSense((byte) 0);
+		item0.setView((byte) 0);
+		item0.setViewType(ConstantValues.VIEW_TYPE_FRONT);
+		item0.setName("前视");
+		thSenseList.add(item0);
+
+		for(int i=0;i<count;i++){
+			System.arraycopy(contents,i*size,buffer,0,size);
+
+			ThSense thSense=new ThSense(buffer);
+			thSense.setViewType(ConstantValues.VIEW_TYPE_ITEM);
+
+
+			if(thSenseList.size()>=1)
+			{
+
+				int length=thSenseList.size();
+				if(thSense.getView() == 1 && thSenseList.get(length-1).getView() == 0 )
+				{
+
+					ThSense item1=ThSense.createThSense((byte) 0);
+					item1.setView((byte) 1);
+					item1.setViewType(ConstantValues.VIEW_TYPE_REAR);
+					item1.setName("后视");
+					thSenseList.add(item1);
+				}
+
+			}
+
+
+			thSenseList.add(thSense);
+
+
+		}
+
+
+
+		if(retData.getData1()[2] == 0x01)
+		{
+
+			ThSense item2=ThSense.createThSense((byte) 0);
+			item2.setViewType(ConstantValues.VIEW_TYPE_NONE);
+			item2.setName("");
+			thSenseList.add(item2);
+
+
+			ThSense thSense=ThSense.createThSense(retData.getData1()[3]);
+			thSense.setViewType(ConstantValues.VIEW_TYPE_ITEM);
+			thSenseList.add(thSense);
+		}
+
+		return thSenseList;
+	}
+	public static List<ThSvmInfo> parseThSvmInfos(ThPackage retData)
+	{
+		List<ThSvmInfo> thSvmInfoList=new ArrayList<>();
+		int totalSize = (retData.getLength()-PACKET_HEADER_SIZE);
+		if(totalSize % ThSvmInfo.SIZE != 0)
+		{
+			ThLogger.debug("Error","协议格式有误");
+			return null;
+		}
+		int count=totalSize/ThSvmInfo.SIZE;
+		byte[] buffer=new byte[ThSvmInfo.SIZE];
+		byte[] contents=retData.getContents();
+		for(int i=0;i<count;i++)
+		{
+			System.arraycopy(contents,i*ThSvmInfo.SIZE,buffer,0,ThSvmInfo.SIZE);
+
+			ThSvmInfo thSvmInfo = new ThSvmInfo(buffer);
+			thSvmInfo.setView((byte) i);
+			thSvmInfoList.add(thSvmInfo);
+		}
+
+		return thSvmInfoList;
+	}
+
+	public static List<ThHsvInfo> parseThHsvInfos(ThPackage retData)
+	{
+		List<ThHsvInfo> thHsvInfoList=new ArrayList<>();
+		int totalSize = (retData.getLength()-PACKET_HEADER_SIZE);
+		if(totalSize % ThHsvInfo.SIZE != 0)
+		{
+			ThLogger.debug("Error","协议格式有误");
+			return null;
+		}
+		int count=totalSize/ThHsvInfo.SIZE;
+		byte[] buffer=new byte[ThHsvInfo.SIZE];
+		byte[] contents=retData.getContents();
+		for(int i=0;i<count;i++)
+		{
+			System.arraycopy(contents,i*ThHsvInfo.SIZE,buffer,0,ThHsvInfo.SIZE);
+
+			ThHsvInfo thHsvInfo = new ThHsvInfo(buffer);
+
+			thHsvInfoList.add(thHsvInfo);
+		}
+
+		return thHsvInfoList;
+	}
+
 
 	public static int getHashId(byte view,byte type,byte subType,byte extType)
 	{

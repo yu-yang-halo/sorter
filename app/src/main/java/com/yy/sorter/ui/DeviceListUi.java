@@ -23,6 +23,7 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.ThDevice;
 import th.service.helper.IPUtils;
+import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
@@ -156,7 +157,7 @@ public class DeviceListUi extends BaseUi {
 
     @Override
     public void receivePacketData(ThPackage packet) {
-        if(packet.getType()==0x01){
+        if(packet.getType()==ThCommand.LOGIN_CMD){
             if(hud!=null){
                 hud.dismiss();
                 hud=null;
@@ -175,7 +176,7 @@ public class DeviceListUi extends BaseUi {
                     MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME, FileManager.getInstance().getString(32));
                 }
             }
-        }else if(packet.getType()==0x02){
+        }else if(packet.getType()== ThCommand.BROADCAST_DEV_CMD){
 
             final ThDevice device=ThPackageHelper.parseMyDevice(packet);
             if (device!=null){

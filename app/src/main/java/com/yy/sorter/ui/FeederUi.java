@@ -20,6 +20,7 @@ import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
 import com.yy.sorter.utils.StringUtils;
 import com.yy.sorter.view.KeyboardDigitalEdit;
+import com.yy.sorter.view.PageSwitchView;
 import com.yy.sorter.view.ThAutoLayout;
 import com.yy.sorter.view.ThGroupView;
 import com.yy.sorter.view.ThSegmentView;
@@ -30,6 +31,7 @@ import java.util.List;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.ThFeeder;
 import th.service.data.ThMode;
+import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
@@ -41,6 +43,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
     private MyAdapter myAdapter;
     private ThFeeder thFeeder;
     private KeyboardDigitalEdit feederEditText;
+    private PageSwitchView pageSwitchView;
     public FeederUi(Context ctx) {
         super(ctx);
     }
@@ -54,6 +57,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
             layoutBottom = (RelativeLayout)view.findViewById(R.id.layoutBottom);
             recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
             feederEditText = (KeyboardDigitalEdit) view.findViewById(R.id.editText);
+            pageSwitchView = (PageSwitchView) view.findViewById(R.id.pageSwitchView);
 
             feederEditText.setLVCallback(this);
             feederEditText.setValue(99,1,100);
@@ -83,6 +87,23 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
             recyclerView.setAdapter(myAdapter);
 
 
+            pageSwitchView.setPageSwitchListenser(new PageSwitchView.PageSwitchListenser() {
+                @Override
+                public void onPageSwitch(int pageIndex, int flag) {
+                    if(flag == PageSwitchView.FLAG_OK)
+                    {
+                        segmentView.setSelectPos(pageIndex);
+                        tabSelectPos = pageIndex;
+                        initLayout();
+                        AbstractDataServiceFactory.getInstance().requestFeederInfo();
+                    }
+
+                }
+            });
+
+            pageSwitchView.setmNumbers(2);
+
+
 
         }
         return view;
@@ -96,6 +117,8 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
         {
             layoutBottom.setVisibility(View.VISIBLE);
         }
+
+        pageSwitchView.setmCurrentIndex(tabSelectPos);
     }
 
     @Override
@@ -126,7 +149,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
 
     @Override
     public void receivePacketData(ThPackage packet) {
-        if(packet.getType() == 0x05)
+        if(packet.getType() == ThCommand.FEEDER_CMD)
         {
 
             if(packet.getExtendType() == 0x01)

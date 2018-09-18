@@ -162,6 +162,11 @@ public abstract class BaseUi implements ThObserver{
 
     }
 
+    public void onGroupChanged()
+    {
+
+    }
+
     /**
      * Topmanager 左侧按钮点击事件触发
      */

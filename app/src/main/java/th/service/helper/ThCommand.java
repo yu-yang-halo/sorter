@@ -126,6 +126,21 @@ public class ThCommand {
 	public static final byte FEEDER_CMD = 0x05;
 	public static final byte SENSE_CMD = 0x07;
 	public static final byte SVM_CMD = 0x08;
+	public static final byte HSV_CMD = 0x09;
 
+
+
+	/**
+	 * 颜色组合类型（灰度使用）
+	 */
+	public static final int COLOR_COMB_CLR_RED=0;//红色
+	public static final int COLOR_COMB_CLR_GREEN=1;//绿色
+	public static final int COLOR_COMB_CLR_BLUE=2;  //蓝色
+	public static final int COLOR_COMB_CLR_RED_GREEN=3;//红色+绿色
+	public static final int COLOR_COMB_CLR_RED_BLUE=4; //红色+蓝色
+	public static final int COLOR_COMB_CLR_GREEN_BLUE=5;//绿色+蓝色
+	public static final int COLOR_COMB_CLR_RED_GREEN_BLUE=6;//红色+绿色+蓝色
+	public static final int COLOR_COMB_CLR_IR1=7; //红外1
+	public static final int COLOR_COMB_CLR_IR2=8; //红外2
 
 }

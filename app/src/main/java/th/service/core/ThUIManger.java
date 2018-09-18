@@ -100,10 +100,10 @@ public class ThUIManger {
                 }else{
                     if(var1 instanceof ThPackage){
                         ThPackage packet= (ThPackage) var1;
-                        if(ThStrategy.isMustBeReceiveMessage(packet.getType()&0xFF)){
+                        if(ThStrategy.isMustBeReceiveMessage(packet.getType())){
                             baseUi.update(this, var1);
                         }else{
-                            if(ThStrategy.isNeedSendMessage(baseUi,packet.getType()&0xFF)){
+                            if(ThStrategy.isNeedSendMessage(baseUi,packet.getType())){
                                 baseUi.update(this, var1);
                             }
                         }

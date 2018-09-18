@@ -42,7 +42,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     private TextView nameTxt;
     private TextView tv_feeder,tv_valve;
     private SwitchButton btn_switch_feeder,btn_switch_valve;
-    private Button btn_clean,btn_system;
+    private Button btn_clean,btn_system,btn_save;
     private boolean systemBegin,cleanBegin;
     private Timer systemTimer,cleanTimer;
     private RelativeLayout modeLayout;
@@ -67,6 +67,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             btn_switch_feeder = (SwitchButton) view.findViewById(R.id.btn_switch_feeder);
             btn_clean = (Button) view.findViewById(R.id.btn_clean);
             btn_system = (Button) view.findViewById(R.id.btn_system);
+            btn_save = (Button) view.findViewById(R.id.btn_save);
 
 
             layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
@@ -104,6 +105,12 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             });
 
 
+            btn_save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AbstractDataServiceFactory.getInstance().saveMode();
+                }
+            });
 
             modeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -350,7 +357,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
 
     @Override
     public void receivePacketData(ThPackage packet) {
-        if (packet.getType() == 0x03) {
+        if (packet.getType() == ThCommand.CONTROL_CMD) {
             switch (packet.getExtendType()) {
                 case 0x01:
                     initFeederStatus(packet.getData1()[0]);
@@ -366,7 +373,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                     break;
             }
 
-        }else if (packet.getType() == 0x01) {
+        }else if (packet.getType() == ThCommand.LOGIN_CMD) {
             if (packet.getExtendType() == 0x01) {
                 MachineData machineData = ThPackageHelper.parseMachineData(packet);
                 ThDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
@@ -376,6 +383,18 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 onViewStart();
             }
             layout.setRefreshing(false);
+        }else if(packet.getType() == ThCommand.MODE_CMD)
+        {
+            if(packet.getExtendType() == 0x03)
+            {
+                if(packet.getData1()[0] == 1)
+                {
+                    showToast("保存成功");
+                }else {
+                    showToast("保存失败");
+                }
+            }
+
         }
     }
 

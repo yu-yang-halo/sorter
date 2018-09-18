@@ -139,6 +139,30 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:background="@color/background"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:layout_marginTop="1dp">
+
+
+                <Button
+                    android:text="保存参数到方案 "
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:textAllCaps="false"
+                    android:id="@+id/btn_save"
+                    android:textColor="@drawable/selector_btn_click_text_color"
+                    android:background="@drawable/th_button_selector"
+                    android:layout_centerVertical="true"
+                    />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:layout_below="@+id/r4"
                 android:layout_alignParentStart="true"
                 android:background="@color/background"

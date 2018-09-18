@@ -12,6 +12,7 @@ import com.yy.sorter.ui.page.PageBaseUi;
 import com.yy.sorter.utils.StringUtils;
 import com.yy.sorter.version.PageVersionManager;
 import com.yy.sorter.view.ThAutoLayout;
+import com.yy.sorter.view.ThGroupView;
 import com.yy.sorter.view.ThSegmentView;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class SenseUi extends BaseUi {
     private int tabIndex = 0;
 
     private PageBaseUi rgbIrPage,svmPage,hsvPage;
+    private PageBaseUi currentPage;
 
 
     public SenseUi(Context ctx) {
@@ -47,6 +49,17 @@ public class SenseUi extends BaseUi {
                 public void onSelected(int pos, ThSegmentView.TSegmentItem tSegmentItem) {
                     tabIndex = pos;
                     loadChildPage();
+                }
+            });
+
+            groupLayout.setOnSelectedListenser(new ThGroupView.OnSelectedListenser() {
+                @Override
+                public void onSelected(int pos) {
+                    AbstractDataServiceFactory.getInstance().getCurrentDevice().setCurrentGroup((byte) pos);
+                    if(currentPage != null)
+                    {
+                       currentPage.onGroupChanged();
+                    }
                 }
             });
         }
@@ -97,6 +110,9 @@ public class SenseUi extends BaseUi {
                 hsvPage = page;
                 break;
         }
+        currentPage = page;
+        currentPage.onViewStart();
+
     }
 
     @Override
@@ -137,6 +153,9 @@ public class SenseUi extends BaseUi {
 
     @Override
     public void receivePacketData(ThPackage packet) {
-
+        if(currentPage != null)
+        {
+            currentPage.receivePacketData(packet);
+        }
     }
 }

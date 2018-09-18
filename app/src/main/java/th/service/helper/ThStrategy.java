@@ -17,28 +17,27 @@ import java.util.Map;
  */
 
 public class ThStrategy {
-    private static  Map<Integer,List<Integer>> strategyTables=new HashMap<>();
+    private static  Map<Integer,List<Byte>> strategyTables=new HashMap<>();
 
     /**
      * 所有页面都会接收到此类消息
      */
-    private static List<Integer> mustBeReceiveMessages=Arrays.asList(0x55,0xb0);
+    private static List<Byte> mustBeReceiveMessages=Arrays.asList((byte)0x55,(byte)0xb0);
 
     static {
         /**
          * 配置页面消息接收权限
          */
-        strategyTables.put(ConstantValues.VIEW_LOGIN,Arrays.asList(0x01,0x02,0x51,0x53,0xc1,0xc2));
-        strategyTables.put(ConstantValues.VIEW_LOGIN_REMOTE,Arrays.asList(0x01,0x02,0x51,0x53,0xc1,0xc2));
-        strategyTables.put(ConstantValues.VIEW_DEVICE_LIST,Arrays.asList(0x01,0x02));
-        strategyTables.put(ConstantValues.VIEW_HOME,Arrays.asList(0x01,0x03,0x08,0x0d,0x0f));
-        strategyTables.put(ConstantValues.VIEW_SENSE,Arrays.asList(0x07));
-        strategyTables.put(ConstantValues.VIEW_MODE_LIST,Arrays.asList(0x04));
-        strategyTables.put(ConstantValues.VIEW_FEEDER,Arrays.asList(0x05));
-
-
-
-
+        strategyTables.put(ConstantValues.VIEW_LOGIN,Arrays.asList(ThCommand.LOGIN_CMD,
+                ThCommand.BROADCAST_DEV_CMD,(byte)0x51,(byte)0x53,(byte)0xc1,(byte)0xc2));
+        strategyTables.put(ConstantValues.VIEW_LOGIN_REMOTE,Arrays.asList(ThCommand.LOGIN_CMD,(byte)0x51));
+        strategyTables.put(ConstantValues.VIEW_DEVICE_LIST,Arrays.asList(ThCommand.LOGIN_CMD,ThCommand.BROADCAST_DEV_CMD));
+        strategyTables.put(ConstantValues.VIEW_HOME,Arrays.asList(ThCommand.LOGIN_CMD,ThCommand.CONTROL_CMD,
+                ThCommand.MODE_CMD));
+        strategyTables.put(ConstantValues.VIEW_SENSE,Arrays.asList(ThCommand.SENSE_CMD,
+                ThCommand.SVM_CMD,ThCommand.HSV_CMD));
+        strategyTables.put(ConstantValues.VIEW_MODE_LIST,Arrays.asList(ThCommand.MODE_CMD));
+        strategyTables.put(ConstantValues.VIEW_FEEDER,Arrays.asList(ThCommand.FEEDER_CMD));
 
 
 
@@ -46,9 +45,9 @@ public class ThStrategy {
     }
 
 
-    public static boolean isNeedSendMessage(BaseUi baseUi, int type){
+    public static boolean isNeedSendMessage(BaseUi baseUi, byte type){
 
-        List<Integer> permissions=strategyTables.get(baseUi.getID());
+        List<Byte> permissions=strategyTables.get(baseUi.getID());
 
         if(permissions!=null){
             boolean contain = permissions.contains(type);
@@ -58,7 +57,7 @@ public class ThStrategy {
         return false;
     }
 
-    public static boolean isMustBeReceiveMessage(int type){
+    public static boolean isMustBeReceiveMessage(byte type){
         if(mustBeReceiveMessages!=null){
             return mustBeReceiveMessages.contains(type);
         }

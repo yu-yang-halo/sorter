@@ -28,6 +28,7 @@ import th.service.data.MachineData;
 import th.service.data.ThConfig;
 import th.service.data.ThDevice;
 import th.service.helper.IPUtils;
+import th.service.helper.ThCommand;
 import th.service.helper.ThLogger;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -243,7 +244,7 @@ public class LoginUi extends BaseUi {
             }
         });
 
-        if(packet.getType()==0x02){
+        if(packet.getType()== ThCommand.BROADCAST_DEV_CMD){
             ThDevice device=ThPackageHelper.parseMyDevice(packet);
             AbstractDataServiceFactory.getInstance().addDevice(device);
         }

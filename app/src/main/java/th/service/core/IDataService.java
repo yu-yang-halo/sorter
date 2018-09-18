@@ -44,6 +44,10 @@ public interface IDataService {
 	public void requestSvmInfo(byte group);
 	public void setSvmInfo(byte group,byte view,byte setType,int value);
 
+	public void reqHsvInfo(byte group,byte view);
+	public void setHsvInfo(byte group,byte view,byte senseIndex,byte setType,int value);
+
+
 
 
 

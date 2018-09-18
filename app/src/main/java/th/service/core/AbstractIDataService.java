@@ -191,6 +191,19 @@ public abstract class AbstractIDataService implements IDataService{
         sendPacketData(packet);
     }
 
+    public void reqHsvInfo(byte group,byte view)
+    {
+        byte[] data1=new byte[]{group,view};
+        ThPackage packet= new ThPackage(ThCommand.HSV_CMD, (byte) 0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void setHsvInfo(byte group,byte view,byte senseIndex,byte setType,int value)
+    {
+        byte[] arr = ConvertUtils.intTo2Bytes(value);
+        byte[] data1=new byte[]{group,view,senseIndex,setType,arr[0],arr[1]};
+        ThPackage packet= new ThPackage(ThCommand.HSV_CMD, (byte) 0x02, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
 
 
 }
