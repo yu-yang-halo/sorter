@@ -11,8 +11,8 @@ android {
         /**
          *  一般机型的协议版本
          */
-        buildConfigField 'byte', 'PROTOCOL_VERSION_BIG','3'//大版本 提示屏程序协议与手机协议不匹配问题
-        buildConfigField 'byte', 'PROTOCOL_VERSION_SMALL','5'//小版本
+        buildConfigField 'byte', 'PROTOCOL_VERSION_BIG','1'//大版本 提示屏程序协议与手机协议不匹配问题
+        buildConfigField 'byte', 'PROTOCOL_VERSION_SMALL','0'//小版本
         /**
          * 必须要保证所有的flavor 都属于同一个维度
          */

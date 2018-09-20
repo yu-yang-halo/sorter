@@ -1,6 +1,4 @@
 package th.service.core;
-
-import com.yy.sorter.utils.AuthUtils;
 import com.yy.sorter.utils.ConvertUtils;
 
 import th.service.helper.ThCommand;
@@ -66,16 +64,9 @@ public class IDataServiceTcpImpl extends AbstractIDataService {
     public void requestDeviceList(String devSN, String username, String password,int code){
         byte[] codeBytes= ConvertUtils.intTo2Bytes(code);
 
-        int versionType=AuthUtils.getRealVersionType(ThCommand.BUILD_VERSION);
 
-        byte[] data1=new byte[]{(byte) versionType,ThCommand.ANDROID_DEVICE,codeBytes[0],codeBytes[1],(byte)0,(byte)0,(byte)0,(byte)0};
-        byte[] extDatas=null;
-        if(!AuthUtils.isEngineerVersion()){
-            extDatas=devSN.getBytes();
-        }else{
-            String loginStr=username+"#"+password+"#"+devSN;
-            extDatas=loginStr.getBytes();
-        }
+        byte[] data1=new byte[]{(byte) 1,ThCommand.ANDROID_DEVICE,codeBytes[0],codeBytes[1]};
+        byte[] extDatas=devSN.getBytes();
         ThPackage packet= new ThPackage(ThCommand.TCP_LOGIN_CMD,(byte)1, data1,(byte)0, (byte)0, (byte)0,extDatas);
         sendPacketData(packet,null);
     }

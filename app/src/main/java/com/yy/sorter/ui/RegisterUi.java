@@ -72,18 +72,12 @@ public class RegisterUi extends BaseUi {
     }
 
     @Override
-    public void initViewContent() {
-        super.initViewContent();
-
+    public void onViewStart() {
+        super.onViewStart();
         usernameEdit.setHint(FileManager.getInstance().getString(24));//   24#用户名
         passwordEdit.setHint(FileManager.getInstance().getString(25));// 25#密码
         repasswordEdit.setHint(FileManager.getInstance().getString(26));//26#确认密码
         registerBtn.setText(FileManager.getInstance().getString(27));// 27#注册
-    }
-
-    @Override
-    public void onViewStart() {
-        super.onViewStart();
     }
 
 

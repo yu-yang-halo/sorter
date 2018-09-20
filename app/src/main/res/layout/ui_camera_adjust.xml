@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/themeColor">
+    <TextView
+        android:layout_alignParentTop="true"
+        android:id="@+id/tv_layer"
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:text="1层"
+        android:textSize="@dimen/statusFontSize"
+        android:gravity="center|left"
+        android:textColor="@color/buttonNormal"
+        android:layout_height="50dp" />
+
+    <com.yy.sorter.view.PageSwitchView
+        android:id="@+id/pageSwitchView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_below="@+id/tv_layer"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/layout_spot"
+                    android:paddingRight="20dp"
+                    android:background="@color/background">
+
+                    <TextView
+                        android:id="@+id/tv_chute"
+                        android:text="料槽"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="@color/fontColor"
+                        android:layout_marginStart="10dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true" />
+
+                    <com.yy.sorter.view.KeyboardDigitalEdit
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:inputType="textPersonName"
+                        android:text="1"
+                        android:paddingLeft="5dp"
+                        android:id="@+id/et_chute"
+                        android:textColor="@color/fontColor"
+                        android:background="@drawable/selector_edit_bk"
+                        android:textAlignment="center"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_marginStart="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/tv_chute" />
+                </RelativeLayout>
+
+                <com.yy.sorter.view.ThWaveView
+                    android:id="@+id/thwaveView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/wave_height"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/seekLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/seekBar"
+                        android:thumbTint="@color/buttonNormal"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/bottomLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:id="@+id/radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="@color/background"
+                            android:layout_marginTop="3dp"
+                            android:paddingLeft="20dp">
+
+                            <RadioButton
+                                android:text="相机调整"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radio1"
+                                android:textColor="@color/fontColor"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:textAllCaps="false"
+                                style="@style/CustomRadioButtonStyle"/>
+
+
+                            <RadioButton
+                                android:text="详细数据"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radio2"
+                                android:textColor="@color/fontColor"
+                                android:textAllCaps="false"
+                                android:layout_weight="1"
+                                style="@style/CustomRadioButtonStyle"/>
+
+                            <RadioButton
+                                android:text="压缩数据"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radio3"
+                                android:textColor="@color/fontColor"
+                                android:textAllCaps="false"
+                                android:layout_weight="1"
+                                style="@style/CustomRadioButtonStyle"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:background="@color/background">
+                        <Button
+                            android:id="@+id/btnTest"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:textAllCaps="false"
+                            android:text="测试数据"
+                            android:layout_marginRight="10dp"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:background="@drawable/th_button_selector"/>
+                        <Button
+                            android:id="@+id/btnOrigin"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="原始数据"
+                            android:textAllCaps="false"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:background="@drawable/th_button_selector"/>
+                        <Button
+                            android:id="@+id/btnCalibration"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:textAllCaps="false"
+                            android:text="校正数据"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:background="@drawable/th_button_selector"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </com.yy.sorter.view.PageSwitchView>
+
+</LinearLayout>

@@ -14,7 +14,7 @@
             android:id="@+id/ckSense"
             android:checked="true"
             style="@style/CustomCheckBoxStyle"
-            android:layout_width="160dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
@@ -36,8 +36,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/editText"
-                android:background="@drawable/selector_circle_btn_bk"
-                android:src="@mipmap/plus"
+                android:background="@mipmap/plus"
                 android:textColor="@drawable/selector_btn_click_text_color"
                 android:textSize="20dp" />
 
@@ -48,8 +47,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/editText"
-                android:background="@drawable/selector_circle_btn_bk"
-                android:src="@mipmap/minus"
+                android:background="@mipmap/minus"
                 android:textColor="@drawable/selector_btn_click_text_color"
                 android:textSize="20dp" />
 
@@ -71,6 +69,17 @@
 
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="50dp"
+            android:gravity="center|left"
+            android:layout_toLeftOf="@+id/layoutBottom"
+            android:text="" />
     </RelativeLayout>
 
 

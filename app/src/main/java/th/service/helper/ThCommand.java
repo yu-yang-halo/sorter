@@ -10,7 +10,7 @@ public class ThCommand {
 
 	public static final int UDP_CORE_SERVER_PORT=1234; //udp核心服务端口
 	public static final String TCP_CORE_SERVER_IP="www.taiheservice.com";//核心服务器 www.taiheservice.com
-	public static final int TCP_CORE_SERVER_PORT=1234; //核心服务端口
+	public static final int TCP_CORE_SERVER_PORT=13133; //核心服务端口
 	public static final String TCP_FILE_SERVER_IP="www.taiheservice.com";//文件服务器 www.taiheservice.com
 	public static final int TCP_FILE_SERVER_PORT=10023;//文件服务端口
 	public static final boolean DEBUG= BuildConfig.DEBUG;//调试版本
@@ -128,6 +128,13 @@ public class ThCommand {
 	public static final byte SVM_CMD = 0x08;
 	public static final byte HSV_CMD = 0x09;
 
+	public static final byte WAVE_CMD = 0x0b;
+	public static final byte VERSION_CMD = 0x0c;
+	public static final byte PAGE_SWITCH_CMD = 0x0d;
+	public static final byte VALVE_RATE_CMD = 0x0e;
+	public static final byte LIGHT_CMD = 0x0f;
+	//public static final byte CAMERA_PLUS_CMD = 0x0e;
+
 
 
 	/**
@@ -142,5 +149,15 @@ public class ThCommand {
 	public static final int COLOR_COMB_CLR_RED_GREEN_BLUE=6;//红色+绿色+蓝色
 	public static final int COLOR_COMB_CLR_IR1=7; //红外1
 	public static final int COLOR_COMB_CLR_IR2=8; //红外2
+
+	/**
+	 * 波形类型定义
+	 */
+	public static final int WAVE_TYPE_BACKGROUN_LIGHT = 0x03;
+	public static final int WAVE_TYPE_CAMERA_ORIGIN = 0x08;
+	public static final int WAVE_TYPE_CAMERA_TEST = 0x0a;
+	public static final int WAVE_TYPE_CAMERA_ADJUST = 0x09;
+	public static final int WAVE_TYPE_HSV = 0x12;
+
 
 }

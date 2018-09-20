@@ -94,6 +94,11 @@ public class LoginUi extends BaseUi {
     @Override
     public void onViewStart() {
         super.onViewStart();
+
+        localLogin.setText(FileManager.getInstance().getString(4));//4#本地登录
+        remoteLogin.setText(FileManager.getInstance().getString(5));//5#远端登录
+        lanBtn.setText(FileManager.getInstance().getString(3));//3#语言
+
         AbstractDataServiceFactory.getInstance().emptyDeviceSets();
         AbstractDataServiceFactory.getInstance().reSetReconnectFlag();
         AbstractDataServiceFactory.getInstance().closeConnect();
@@ -107,13 +112,6 @@ public class LoginUi extends BaseUi {
     }
 
 
-    @Override
-    public void initViewContent() {
-        super.initViewContent();
-        localLogin.setText(FileManager.getInstance().getString(4));//4#本地登录
-        remoteLogin.setText(FileManager.getInstance().getString(5));//5#远端登录
-        lanBtn.setText(FileManager.getInstance().getString(3));//3#语言
-    }
 
     @Override
     public int getID() {

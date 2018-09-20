@@ -1,6 +1,8 @@
 package com.yy.sorter.version;
 
 
+import com.yy.sorter.ui.BackgroundUi;
+import com.yy.sorter.ui.CameraAdjustUi;
 import com.yy.sorter.ui.DeviceListUi;
 import com.yy.sorter.ui.FeederUi;
 import com.yy.sorter.ui.HomeUi;
@@ -11,6 +13,8 @@ import com.yy.sorter.ui.MoreUi;
 import com.yy.sorter.ui.RegisterUi;
 import com.yy.sorter.ui.RemoteLoginUi;
 import com.yy.sorter.ui.SenseUi;
+import com.yy.sorter.ui.ValveRateUi;
+import com.yy.sorter.ui.VersionUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.ui.page.HsvPage;
 import com.yy.sorter.ui.page.RgbIrPage;
@@ -36,8 +40,8 @@ public abstract class BasePageV {
          *   大版本  ： 0-255
          *   小版本  ： 0-255
          */
-        public static final int VN_0_NEW=0x000000;///默认最新版本
-        public static final int VN_0_2_0=0x000200;
+        public static final int VN_0_NEW=0x000100;///默认最新版本
+        public static final int VN_0_1_0=0x000100;
 
 
         public static final int VN_1_NEW=0x010000;///默认最新版本
@@ -47,7 +51,7 @@ public abstract class BasePageV {
     }
     static {
 
-        map.put(VersionNumber.VN_0_2_0, PageV020.class);
+        map.put(VersionNumber.VN_0_1_0, PageV010.class);
 
     }
 
@@ -108,6 +112,10 @@ public abstract class BasePageV {
         basePages.put(ConstantValues.VIEW_SENSE, SenseUi.class);//灵敏度主界面
         basePages.put(ConstantValues.VIEW_MORE, MoreUi.class);//
         basePages.put(ConstantValues.VIEW_FEEDER, FeederUi.class);//给料量
+        basePages.put(ConstantValues.VIEW_CAMERAADJUST, CameraAdjustUi.class);//相机校准
+        basePages.put(ConstantValues.VIEW_VERSION, VersionUi.class);//相机校准
+        basePages.put(ConstantValues.VIEW_BACKGROUND, BackgroundUi.class);//背景灯光
+        basePages.put(ConstantValues.VIEW_VALVE, ValveRateUi.class);//背景灯光
 
 
         /**

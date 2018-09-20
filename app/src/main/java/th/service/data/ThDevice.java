@@ -91,8 +91,9 @@ public class ThDevice {
 	private byte controlStatus;//0 没有被控制 1 已被控制
 
 
-	private byte currentLayer=0x01; //当前层  默认1层  从1开始
-	private byte currentView=0x00;  //当前视  前视
+	private byte currentLayer=0; //当前层  默认0层  从0开始
+	private byte currentView=0;  //当前视  前视
+	private byte currentGroup=0;//当前组
 	private byte currentAlgorithm=-1;  //当前算法
 	private byte currentEnable=-1;  //当前算法使能
 	private int currentType=0;  //当前类型 0.色选 1.红外
@@ -101,7 +102,7 @@ public class ThDevice {
 	private byte lookSelectBigMode;
 	private boolean disableChange;
 
-	private byte currentGroup=0;//当前组
+
 
 	public byte getCurrentGroup() {
 		return currentGroup;

@@ -19,13 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
+import th.service.data.MachineData;
 import th.service.helper.ThPackage;
 
 public class SenseUi extends BaseUi {
     private ThSegmentView segmentView;
     private ThAutoLayout groupLayout;
     private RelativeLayout container;
-    private int tabIndex = 0;
 
     private PageBaseUi rgbIrPage,svmPage,hsvPage;
     private PageBaseUi currentPage;
@@ -47,7 +47,6 @@ public class SenseUi extends BaseUi {
             segmentView.setOnSelectedListenser(new ThSegmentView.OnSelectedListenser() {
                 @Override
                 public void onSelected(int pos, ThSegmentView.TSegmentItem tSegmentItem) {
-                    tabIndex = pos;
                     loadChildPage();
                 }
             });
@@ -68,18 +67,24 @@ public class SenseUi extends BaseUi {
 
     private void loadChildPage()
     {
-        if(tabIndex == 0)
+        if(segmentView.getSelectItem() != null)
         {
-            loadPageToContainer(rgbIrPage,ConstantValues.VIEW_PAGE_RGB_IR);
-        }else if(tabIndex == 1)
-        {
-            loadPageToContainer(svmPage,ConstantValues.VIEW_PAGE_SVM);
-        }else if(tabIndex == 2)
-        {
-            loadPageToContainer(hsvPage,ConstantValues.VIEW_PAGE_HSV);
+            int tag = segmentView.getSelectItem().getItemTag();
+            if(tag == 0)
+            {
+                loadPageToContainer(rgbIrPage,ConstantValues.VIEW_PAGE_RGB_IR,tag);
+            }else if(tag == 1)
+            {
+                loadPageToContainer(svmPage,ConstantValues.VIEW_PAGE_SVM,tag);
+            }else if(tag == 2)
+            {
+                loadPageToContainer(hsvPage,ConstantValues.VIEW_PAGE_HSV,tag);
+            }
         }
+
+
     }
-    private void loadPageToContainer(PageBaseUi page,int pageId)
+    private void loadPageToContainer(PageBaseUi page,int pageId,int tag)
     {
         if(page == null)
         {
@@ -98,7 +103,7 @@ public class SenseUi extends BaseUi {
             }
         }
         page.loadToContainer(container);
-        switch (tabIndex)
+        switch (tag)
         {
             case 0:
                 rgbIrPage = page;
@@ -110,6 +115,10 @@ public class SenseUi extends BaseUi {
                 hsvPage = page;
                 break;
         }
+        if(currentPage != null)
+        {
+            currentPage.onViewStop();
+        }
         currentPage = page;
         currentPage.onViewStart();
 
@@ -119,27 +128,54 @@ public class SenseUi extends BaseUi {
     public void onViewStart() {
         super.onViewStart();
 
+        MachineData machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
+
         List<ThSegmentView.TSegmentItem> items=new ArrayList<>();
 
-        ThSegmentView.TSegmentItem item0 = new ThSegmentView.TSegmentItem("色选",0);
-        ThSegmentView.TSegmentItem item1 = new ThSegmentView.TSegmentItem("智能分选",1);
-        ThSegmentView.TSegmentItem item2 = new ThSegmentView.TSegmentItem("色度分选",2);
-        ThSegmentView.TSegmentItem item3 = new ThSegmentView.TSegmentItem("形选",3);
-
-        items.add(item0);
-        items.add(item1);
-        items.add(item2);
-        items.add(item3);
+        if(machineData.getUserColor() == 0x01)
+        {
+            ThSegmentView.TSegmentItem item0 = new ThSegmentView.TSegmentItem("色选",0);
+            items.add(item0);
+        }
+        if(machineData.getUseSvm() == 0x01)
+        {
+            ThSegmentView.TSegmentItem item1 = new ThSegmentView.TSegmentItem("智能分选",1);
+            items.add(item1);
+        }
+        if(machineData.getUseHsv() == 0x01)
+        {
+            ThSegmentView.TSegmentItem item2 = new ThSegmentView.TSegmentItem("色度分选",2);
+            items.add(item2);
+        }
+        if(machineData.getUseShape() == 0x01)
+        {
+            ThSegmentView.TSegmentItem item3 = new ThSegmentView.TSegmentItem("形选",3);
+            items.add(item3);
+        }
+        if(machineData.getUseIR() == 0x01)
+        {
+            ThSegmentView.TSegmentItem item4 = new ThSegmentView.TSegmentItem("红外",4);
+            items.add(item4);
+        }
 
         segmentView.setContents(items);
 
         List<ThAutoLayout.Item> itemList = StringUtils.getGroupItem();
-        int currentGroup = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+        currentGroup = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
 
         groupLayout.setContents(itemList,currentGroup,0);
 
         loadChildPage();
 
+    }
+
+    @Override
+    public void onViewStop() {
+        super.onViewStop();
+        if(currentPage != null)
+        {
+            currentPage.onViewStop();
+        }
     }
 
     @Override

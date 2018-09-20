@@ -58,7 +58,7 @@
             android:id="@+id/vcodeEdit"
             android:layout_width="270dp"
             android:layout_height="50dp"
-            android:hint="授权码"
+            android:hint="登录口令"
             android:textColorHint="@color/hintColor"
             android:textColor="@color/fontColor"
             android:ems="10"
@@ -85,6 +85,7 @@
 
         <Button
             android:text="注册"
+            android:visibility="gone"
             android:layout_weight="1"
             android:layout_width="100dp"
             android:layout_height="match_parent"

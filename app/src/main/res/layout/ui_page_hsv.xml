@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/themeColor">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,9 +32,41 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp" />
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/background"
+                    android:layout_marginTop="1dp">
+                    <Button
+                        android:id="@+id/frontBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="78dp"
+                        android:background="@drawable/th_button_selector"
+                        android:text="前视"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/selector_btn_click_text_color" />
+
+                    <Button
+                        android:id="@+id/rearBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="78dp"
+                        android:background="@drawable/th_button_selector"
+                        android:text="后视"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/selector_btn_click_text_color" />
+                </RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
+                    android:background="@color/background"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -45,10 +77,11 @@
 
                         <com.yy.sorter.view.DirectionView
                             android:id="@+id/directionView"
-                            android:layout_width="120dp"
+                            android:layout_width="121dp"
                             android:layout_height="120dp"
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
                             android:background="@drawable/direction_circle_bg">
 
                         </com.yy.sorter.view.DirectionView>
@@ -105,7 +138,8 @@
                     android:id="@+id/paramsGroup"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    android:layout_marginTop="1dp"
+                    android:background="@color/background"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <LinearLayout

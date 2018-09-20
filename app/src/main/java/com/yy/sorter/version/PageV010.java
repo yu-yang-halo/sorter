@@ -9,8 +9,8 @@ import java.util.HashMap;
  * V020 版本页面配置表
  */
 
-public class PageV020 extends BasePageV {
-    public PageV020(){
+public class PageV010 extends BasePageV {
+    public PageV010(){
         basePages=new HashMap<>();
         initPages();
     }

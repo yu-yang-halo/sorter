@@ -19,6 +19,10 @@ public class ConstantValues {
     public static final int VIEW_FEEDER=8; //给料器设置
 
     public static final int VIEW_LAN=11;    //语言设置界面
+    public static final int VIEW_CAMERAADJUST=12; //相机校准
+    public static final int VIEW_VERSION=13;  //版本信息
+    public static final int VIEW_BACKGROUND=14;//背景灯光
+    public static final int VIEW_VALVE=15;//阀指示
 
 
 
@@ -66,6 +70,17 @@ public class ConstantValues {
     public static final int VIEW_TYPE_NONE = 0x101;
     public static final int VIEW_TYPE_FRONT = 0x102;
     public static final int VIEW_TYPE_REAR = 0x103;
+
+
+    /**
+     * USER LEVEL 权限定义
+     * 权限 0:user 1:工程师 2:厂家
+     */
+
+    public static final byte LEVEL_NOMAL = 0;
+    public static final byte LEVEL_ENGINNER = 1;
+    public static final byte LEVEL_PRODUCT = 2;
+
 
 
 

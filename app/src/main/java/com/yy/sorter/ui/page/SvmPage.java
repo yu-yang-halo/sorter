@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
@@ -53,8 +52,8 @@ public class SvmPage extends PageBaseUi {
     }
     private void reqSvmInfo()
     {
-        byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
-        AbstractDataServiceFactory.getInstance().requestSvmInfo(group);
+        currentGroup = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+        AbstractDataServiceFactory.getInstance().requestSvmInfo(currentGroup);
     }
 
     @Override

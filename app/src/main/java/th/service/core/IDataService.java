@@ -46,9 +46,18 @@ public interface IDataService {
 
 	public void reqHsvInfo(byte group,byte view);
 	public void setHsvInfo(byte group,byte view,byte senseIndex,byte setType,int value);
+	public void hsvSwitch(byte switchType,byte value);
 
+	public void requestWave(byte waveType,byte[] params);
 
+	public void requestVersionInfo(byte versionType,byte layer,byte visable);
 
+	public void pageSwitch(byte page,byte exitOrEnter);//page:0-相机校准  exitOrEnter：0 退出  1 进入
+
+	public void requestLightInfo(byte layer);
+	public void setLightData(byte layer,byte view,byte setType,byte value);
+
+	public void requestValveRate(byte layer,byte chute);
 
 
 	/**

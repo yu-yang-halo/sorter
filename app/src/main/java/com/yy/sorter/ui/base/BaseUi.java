@@ -44,6 +44,7 @@ public abstract class BaseUi implements ThObserver{
     protected ExecutorService singleThreadExecutor= Executors.newSingleThreadExecutor();
     protected Context ctx;
     protected Handler mainUIHandler=new Handler(Looper.getMainLooper());
+    protected byte currentLayer,currentGroup,currentView;
     /**
      * 子类需要使用该对象以便父类可见
      */
@@ -122,15 +123,13 @@ public abstract class BaseUi implements ThObserver{
      * onViewStop  界面移除时
      */
 
-    public  void initViewContent(){
-
-    }
-
     /**
      * 建议做数据加载工作
      */
     public  void onViewStart(){
-        initViewContent();
+        currentLayer = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentLayer();
+        currentGroup = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+        currentView = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentView();
 
     }
 
@@ -286,15 +285,19 @@ public abstract class BaseUi implements ThObserver{
                                 hud.dismiss();
                             }
                             onDeviceOffline();
+                            if(AbstractDataServiceFactory.isTcp())
+                            {
+                                MiddleManger.getInstance().goBack(ConstantValues.VIEW_LOGIN_REMOTE);
+                            }else
+                            {
+                                MiddleManger.getInstance().goBack(ConstantValues.VIEW_DEVICE_LIST);
+                            }
+
                             if(thPackage.getExtendType()==0x01){
                                 showToast( FileManager.getInstance().getString(1007)); //1007#设备已经下线
-                                MiddleManger.getInstance().goBack(ConstantValues.VIEW_DEVICE_LIST);
-                                ThLogger.addLog("UDP--设备已经下线");
                             }else{
                                 String devSN= StringUtils.convertByteArrayToString(thPackage.getContents());
                                 showToast("["+devSN+"]"+ FileManager.getInstance().getString(1007)); //1007#设备已经下线
-                                MiddleManger.getInstance().goBack(ConstantValues.VIEW_LOGIN_REMOTE);
-                                ThLogger.addLog("TCP--设备已经下线");
                             }
 
                         }
@@ -371,7 +374,7 @@ public abstract class BaseUi implements ThObserver{
             if(lanId>0){
                 showToast(FileManager.getInstance().getString(lanId));
             }
-            MiddleManger.getInstance().goBack(ConstantValues.VIEW_LOGIN);
+            MiddleManger.getInstance().goBack(ConstantValues.VIEW_LOGIN_REMOTE);
         }
 
     }

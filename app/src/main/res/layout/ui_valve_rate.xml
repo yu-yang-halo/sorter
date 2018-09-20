@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/themeColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_layer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:text="1层"
+            android:textColor="@color/buttonNormal"
+            android:textSize="@dimen/statusFontSize"
+            android:visibility="gone" />
+
+        <com.yy.sorter.view.ThAutoLayout
+            android:id="@+id/autoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="2dp">
+
+        </com.yy.sorter.view.ThAutoLayout>
+
+
+        <com.yy.sorter.view.PageSwitchView
+            android:id="@+id/pageSwitchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/layout_spot"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_chute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center|left"
+                        android:text="料槽"
+                        android:textColor="@color/fontColor" />
+
+                    <com.yy.sorter.view.KeyboardDigitalEdit
+                        android:id="@+id/et_chute"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toEndOf="@+id/tv_chute"
+                        android:background="@drawable/selector_edit_bk"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="5dp"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/fontColor" />
+
+                    <TextView
+                        android:id="@+id/tv_chutenumbers"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_toEndOf="@+id/et_chute"
+                        android:gravity="center|left"
+                        android:text="~ 6"
+                        android:textColor="#cccccc"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+                <com.yy.sorter.view.ThRateView
+                    android:id="@+id/thrateView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/wave_height" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp">
+
+                    <TextView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/mfrontText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="3dp"
+                        android:gravity="center"
+                        android:text="" />
+
+                    <TextView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@color/green" />
+
+                    <TextView
+                        android:id="@+id/mbackText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="3dp"
+                        android:gravity="center"
+                        android:text="" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.yy.sorter.view.PageSwitchView>
+    </LinearLayout>
+
+
+</LinearLayout>

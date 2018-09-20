@@ -81,24 +81,24 @@ public class StringUtils {
         String layerStr="";
         String[] arrs = new String[0];
 
-        if(currentLayer>layerNumber||(currentLayer-1)<0){
+        if(currentLayer>=layerNumber||(currentLayer)<0){
             return layerStr;
         }
         switch (layerNumber){
-            case 1:
+            case 0:
                 arrs=new String[]{"1 "+ FileManager.getInstance().getString(142)};
                 break;
-            case 2:
+            case 1:
                 if(machineType==2){//双层滑道式
                     arrs=new String[]{FileManager.getInstance().getString(397), FileManager.getInstance().getString(398)};  //398#后排 397#前排
                 }else {
                     arrs=new String[]{FileManager.getInstance().getString(140), FileManager.getInstance().getString(139)};  //139#上层 140#下层
                 }
                 break;
-            case 3:
+            case 2:
                 arrs=new String[]{FileManager.getInstance().getString(140), FileManager.getInstance().getString(141), FileManager.getInstance().getString(139)};//139#上层 140#下层 141#中层
                 break;
-            case 4:
+            case 3:
                 if(machineType==6){
                     arrs=new String[]{FileManager.getInstance().getString(396),FileManager.getInstance().getString(395),
                             FileManager.getInstance().getString(394),FileManager.getInstance().getString(393)};
@@ -107,7 +107,7 @@ public class StringUtils {
                             + FileManager.getInstance().getString(142),"4 "+ FileManager.getInstance().getString(142)}; // 142#层
                 }
                 break;
-            case 5:
+            case 4:
                 //414#下中
                 //415#前下
                 //416#前中
@@ -119,14 +119,14 @@ public class StringUtils {
                                   FileManager.getInstance().getString(417,"前上"),
                                   FileManager.getInstance().getString(418,"下后")};
                 break;
-            case 6:
+            case 5:
                 arrs=new String[]{"1 "+ FileManager.getInstance().getString(142),"2 "+ FileManager.getInstance().getString(142),"3 "+ FileManager.getInstance().getString(142),
                         "4 "+ FileManager.getInstance().getString(142),"5 "+ FileManager.getInstance().getString(142),"6 "+ FileManager.getInstance().getString(142)};
                 break;
         }
 
-        if(currentLayer-1>=0&&currentLayer-1<arrs.length){
-            return arrs[currentLayer-1];
+        if(currentLayer>=0 && currentLayer<arrs.length){
+            return arrs[currentLayer];
         }else{
             return "";
         }

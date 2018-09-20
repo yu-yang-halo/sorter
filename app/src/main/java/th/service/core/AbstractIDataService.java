@@ -205,5 +205,50 @@ public abstract class AbstractIDataService implements IDataService{
         sendPacketData(packet);
     }
 
+    public void hsvSwitch(byte switchType,byte value)
+    {
+        byte[] data1=new byte[]{switchType,value};
+        ThPackage packet= new ThPackage(ThCommand.HSV_CMD, (byte) 0x03, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    public void pageSwitch(byte page,byte exitOrEnter)
+    {
+        byte[] data1=new byte[]{page,exitOrEnter};
+        ThPackage packet= new ThPackage(ThCommand.PAGE_SWITCH_CMD, (byte) 0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void requestWave(byte waveType,byte[] params)
+    {
+        ThPackage packet= new ThPackage(ThCommand.WAVE_CMD,waveType, params,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    public void requestVersionInfo(byte versionType,byte layer,byte visable)
+    {
+        byte[] data1=new byte[]{layer,visable};
+        ThPackage packet= new ThPackage(ThCommand.VERSION_CMD, versionType, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    public void requestLightInfo(byte layer)
+    {
+        byte[] data1=new byte[]{layer};
+        ThPackage packet= new ThPackage(ThCommand.LIGHT_CMD,(byte)0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void setLightData(byte layer,byte view,byte setType,byte value)
+    {
+        byte[] data1=new byte[]{layer,view,setType,value};
+        ThPackage packet= new ThPackage(ThCommand.LIGHT_CMD,(byte)0x02, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    public void requestValveRate(byte layer,byte chute)
+    {
+        byte[] data1=new byte[]{layer,chute};
+        ThPackage packet= new ThPackage(ThCommand.VALVE_RATE_CMD,(byte)0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
 
 }

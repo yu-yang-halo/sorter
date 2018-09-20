@@ -1,7 +1,6 @@
 package th.service.data;
 
 import com.yy.sorter.utils.StringUtils;
-import java.util.Arrays;
 
 import th.service.core.TrafficManager;
 
@@ -21,6 +20,7 @@ public class MachineData {
 	private byte userColor;                 //是否使用色选算法
 	private byte useHsv;                    //是否使用色度分选
 	private byte useSensor;          //使用料位传器
+	private byte userLevel;//用户权限 0:user 1:工程师 2:厂家
 
 
 	//方案参数
@@ -30,7 +30,7 @@ public class MachineData {
 
 
 
-	private final int FIX_SIZE=16;//固定大小部分
+	private final int FIX_SIZE=17;//固定大小部分
 	private final int OFFSET_BYTES = FIX_SIZE;
 	private final int STRING_SIZE=100;
 	private final int RESERVE_SIZE=100;
@@ -87,10 +87,11 @@ public class MachineData {
 			this.userColor= contents[11];
 			this.useHsv= contents[12];
 			this.useSensor= contents[13];
+			this.userLevel= contents[14];
 
 
-			this.sortModeBig= contents[14];
-			this.sortModeSmall= contents[15];
+			this.sortModeBig= contents[15];
+			this.sortModeSmall= contents[16];
 
 
 		}

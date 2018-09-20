@@ -20,13 +20,19 @@ import java.util.concurrent.Executors;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
+import th.service.data.ThCameraPlusRet;
 import th.service.data.ThConfig;
 import th.service.data.ThDevice;
 import th.service.data.ThFeeder;
 import th.service.data.ThHsvInfo;
+import th.service.data.ThHsvWave;
+import th.service.data.ThLightRet;
 import th.service.data.ThMode;
+import th.service.data.ThSVersion;
 import th.service.data.ThSense;
 import th.service.data.ThSvmInfo;
+import th.service.data.ThValveRateRet;
+import th.service.data.ThWaveData;
 
 /**
  * 注意包体的长度计算，同意TCP和UDP包体长度的计算
@@ -333,6 +339,193 @@ public class ThPackageHelper {
 		return thHsvInfoList;
 	}
 
+	public static ThHsvWave parseHSVWaveData(ThPackage retData){
+		ThHsvWave thHSVWave=new ThHsvWave(retData.getContents());
+		return thHSVWave;
+	}
+	/**
+	 * 解析波形数据
+	 * @param retData
+	 */
+	public static ThWaveData parseWaveData(ThPackage retData){
+
+		ThWaveData ret=new ThWaveData(retData);
+		return ret;
+	}
+	private static int binaryFindLocation(byte[] bytes,byte val){
+		int pos=-1;
+		for (int i=0;i<bytes.length;i++){
+			if(val==bytes[i]){
+				pos=i;
+				break;
+			}
+		}
+		return pos;
+	}
+	/**
+	 * 解析软件版本数据
+	 * @param retData
+	 * @return
+	 */
+	public static ThSVersion parseThSVersion(ThPackage retData){
+		int chuteNumber= AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData().getChuteNumber();
+		ThSVersion sVersion=ThSVersion.getInstance();
+		switch (retData.getExtendType()){
+			case 0x01:
+				int split='#';
+				int pos=binaryFindLocation(retData.getContents(),(byte) split);
+				if(pos>0&&pos<(retData.getLength()-PACKET_HEADER_SIZE)){
+					byte[] str=new byte[pos];
+					System.arraycopy(retData.getContents(),0,str,0,str.length);
+					byte[] others=new byte[retData.getLength()-PACKET_HEADER_SIZE-pos-1];
+					System.arraycopy(retData.getContents(),pos+1,others,0,others.length);
+					ThSVersion.BaseVersion baseVersion=new ThSVersion.BaseVersion(StringUtils.convertByteArrayToString(str),others);
+					sVersion.setBaseVersion(baseVersion);
+				}
+				break;
+			case 0x02:
+				List<ThSVersion.ColorVersion> colorVersionList=collectorColorVersion(retData,chuteNumber);
+				sVersion.setColorVersions(colorVersionList);
+				break;
+			case 0x03:
+				List<ThSVersion.CameraVersion> cameraVersionList=collectorCameraVersion(retData,chuteNumber);
+				sVersion.setCameraVersions(cameraVersionList);
+				break;
+		}
+
+		return sVersion;
+	}
+
+
+	/**
+	 * 解析灯光返回数据
+	 * @param retData
+	 * @return
+	 */
+	public static ThLightRet parseThLightRet(ThPackage retData){
+		byte[] contents=retData.getContents();
+		if(contents!=null){
+			int realLength=retData.getLength()-PACKET_HEADER_SIZE;
+			byte[] buffer=new byte[realLength];
+			System.arraycopy(contents,0,buffer,0,realLength);
+			ThLightRet ret=new ThLightRet(buffer);
+			ThLogger.debug("ThLightRet",ret.toString());
+			return ret;
+		}
+		return null;
+	}
+
+	/**
+	 * 解析相机增益返回数据
+	 * @param retData
+	 * @return
+	 */
+	public static ThCameraPlusRet parseThCameraPlusRet(ThPackage retData){
+		byte[] contents=retData.getContents();
+		if(contents!=null){
+			int realLength=retData.getLength()-PACKET_HEADER_SIZE;
+			byte[] buffer=new byte[realLength];
+			System.arraycopy(contents,0,buffer,0,realLength);
+			ThCameraPlusRet ret=new ThCameraPlusRet(buffer);
+			ThLogger.debug("ThCameraPlusRet",ret.toString());
+			return ret;
+		}
+		return null;
+	}
+
+	/**
+	 * 解析阀频率
+	 * @param retData
+	 * @return
+	 */
+	public static ThValveRateRet parseThValveRateRet(ThPackage retData){
+		byte[] contents=retData.getContents();
+		if(contents!=null){
+			int valveNum=retData.getData1()[0];
+			boolean onlyFrontView=retData.getData1()[1]==1;
+
+			ThValveRateRet valveRateRet=new ThValveRateRet(valveNum,onlyFrontView,contents);
+
+			return valveRateRet;
+		}
+
+		return null;
+	}
+
+	/**
+	 * 搜集软件版本中色选板版本数据
+	 * @param retData
+	 * @param chuteNumber
+	 * @return
+	 */
+
+	public static  List<ThSVersion.ColorVersion> collectorColorVersion(ThPackage retData,int chuteNumber){
+		int COLOR_SIZE=7;
+		List<ThSVersion.ColorVersion> colorVersionList=new ArrayList<>();
+		int len=retData.getLength()-PACKET_HEADER_SIZE;
+		if(len%COLOR_SIZE!=0){
+			throw  new IllegalStateException("len"+len+"%"+COLOR_SIZE+"!=0");
+		}
+		byte[] ch0=new byte[COLOR_SIZE];
+		int getSize=len/COLOR_SIZE;
+		int diff=getSize-1;
+		System.arraycopy(retData.getContents(),0,ch0,0,ch0.length);
+		/**
+		 * 默认初始化第一项
+		 */
+		for (int i=0;i<chuteNumber;i++){
+			ch0[0]=(byte) i;
+			ThSVersion.ColorVersion colorVersion=new ThSVersion.ColorVersion(ch0);
+			colorVersionList.add(colorVersion);
+		}
+
+		for (int m=0;m<diff;m++){
+			byte[] ch1=new byte[COLOR_SIZE];
+			System.arraycopy(retData.getContents(),COLOR_SIZE*(m+1),ch1,0,ch1.length);
+			ThSVersion.ColorVersion colorVersion=new ThSVersion.ColorVersion(ch1);
+			colorVersionList.set(ch1[0],colorVersion);
+		}
+
+		return colorVersionList;
+	}
+
+
+	/**
+	 * 搜集软件版本中相机版本数据
+	 * @param retData
+	 * @param chuteNumber
+	 * @return
+	 */
+	public static  List<ThSVersion.CameraVersion> collectorCameraVersion(ThPackage retData,int chuteNumber){
+		int CAMERA_SIZE=9;
+		List<ThSVersion.CameraVersion> cameraVersionList=new ArrayList<>();
+		int len=retData.getLength()-PACKET_HEADER_SIZE;
+		if(len%CAMERA_SIZE!=0){
+			throw  new IllegalStateException("len"+len+"%"+CAMERA_SIZE+"!=0");
+		}
+		byte[] ch0=new byte[CAMERA_SIZE];
+		int getSize=len/CAMERA_SIZE;
+		int diff=getSize-1;
+		System.arraycopy(retData.getContents(),0,ch0,0,ch0.length);
+
+		/**
+		 * 默认初始化第一项
+		 */
+		for (int i=0;i<chuteNumber;i++){
+			ch0[0]=(byte) i;
+			ThSVersion.CameraVersion cameraVersion=new ThSVersion.CameraVersion(ch0,retData.getData1()[1]);
+			cameraVersionList.add(cameraVersion);
+		}
+
+		for (int m=0;m<diff;m++){
+			byte[] ch1=new byte[CAMERA_SIZE];
+			System.arraycopy(retData.getContents(),CAMERA_SIZE*(m+1),ch1,0,ch1.length);
+			ThSVersion.CameraVersion cameraVersion=new ThSVersion.CameraVersion(ch1,retData.getData1()[1]);
+			cameraVersionList.set(ch1[0],cameraVersion);
+		}
+
+		return cameraVersionList;
+	}
 
 	public static int getHashId(byte view,byte type,byte subType,byte extType)
 	{

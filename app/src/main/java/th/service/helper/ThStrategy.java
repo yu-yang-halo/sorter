@@ -26,7 +26,7 @@ public class ThStrategy {
 
     static {
         /**
-         * 配置页面消息接收权限
+         *****************   配置页面消息接收权限 ***************
          */
         strategyTables.put(ConstantValues.VIEW_LOGIN,Arrays.asList(ThCommand.LOGIN_CMD,
                 ThCommand.BROADCAST_DEV_CMD,(byte)0x51,(byte)0x53,(byte)0xc1,(byte)0xc2));
@@ -35,9 +35,14 @@ public class ThStrategy {
         strategyTables.put(ConstantValues.VIEW_HOME,Arrays.asList(ThCommand.LOGIN_CMD,ThCommand.CONTROL_CMD,
                 ThCommand.MODE_CMD));
         strategyTables.put(ConstantValues.VIEW_SENSE,Arrays.asList(ThCommand.SENSE_CMD,
-                ThCommand.SVM_CMD,ThCommand.HSV_CMD));
+                ThCommand.SVM_CMD,ThCommand.HSV_CMD,ThCommand.WAVE_CMD));
         strategyTables.put(ConstantValues.VIEW_MODE_LIST,Arrays.asList(ThCommand.MODE_CMD));
         strategyTables.put(ConstantValues.VIEW_FEEDER,Arrays.asList(ThCommand.FEEDER_CMD));
+        strategyTables.put(ConstantValues.VIEW_LAN,Arrays.asList((byte)0xc1,(byte)0xc2));
+        strategyTables.put(ConstantValues.VIEW_REGISTER,Arrays.asList((byte)0x56));
+        strategyTables.put(ConstantValues.VIEW_CAMERAADJUST,Arrays.asList(ThCommand.WAVE_CMD));
+        strategyTables.put(ConstantValues.VIEW_VERSION,Arrays.asList(ThCommand.VERSION_CMD));
+        strategyTables.put(ConstantValues.VIEW_BACKGROUND,Arrays.asList(ThCommand.LIGHT_CMD));
 
 
 

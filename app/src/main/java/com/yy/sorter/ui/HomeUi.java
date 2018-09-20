@@ -133,27 +133,6 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     }
 
 
-    @Override
-    public void initViewContent() {
-
-        setLanguage();
-        machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
-
-        if(machineData == null)
-            return;
-
-        nameTxt.setText(machineData.getModeName()
-                +"["+machineData.getSortModeBig()
-                +"-"+machineData.getSortModeSmall()
-                +"]");
-
-        initFeederStatus(machineData.getFeederState());
-        initValveStatus(machineData.getValveState());
-
-        initSystemButton(machineData.getStartState(),0);
-        initCleanButton(machineData.getCleanState());
-    }
-
 
     private void refreshDeviceInfo() {
         ThDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
@@ -171,6 +150,24 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     @Override
     public void onViewStart() {
         super.onViewStart();
+
+        setLanguage();
+        machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
+
+        if(machineData == null)
+            return;
+
+        nameTxt.setText(machineData.getModeName()
+                +"["+machineData.getSortModeBig()
+                +"-"+machineData.getSortModeSmall()
+                +"]");
+
+        initFeederStatus(machineData.getFeederState());
+        initValveStatus(machineData.getValveState());
+
+        initSystemButton(machineData.getStartState(),0);
+        initCleanButton(machineData.getCleanState());
+
         ThDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
         MachineData machineData = device.getMachineData();
         int screenVersion =  ConvertUtils.getScreenProtocolVersion(machineData);

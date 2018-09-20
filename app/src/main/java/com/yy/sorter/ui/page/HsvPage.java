@@ -22,9 +22,12 @@ import com.yy.sorter.view.HsvView;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.ThHsvInfo;
+import th.service.data.ThHsvWave;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -37,11 +40,11 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
     private int m_Channel;
     private KeyboardDigitalEdit et_Chute,vEdit1,vEdit2,sEdit1,sEdit2,hEdit1,hEdit2;
     private byte m_bFlag_PicMove,m_bWave_Color,m_used;
-    Button enableButton;
-    TextView lb_hsv_h,lb_hsv_s,lb_hsv_v,
+    private Button enableButton,frontBtn,rearBtn;
+    private TextView lb_hsv_h,lb_hsv_s,lb_hsv_v,
             lb_start,lb_end,tv_chute;
     private int senseIndex = 0;
-    private int currentView = 0;
+    private Timer timer;
     public HsvPage(Context ctx) {
         super(ctx);
     }
@@ -65,6 +68,8 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
 
 
             enableButton= (Button) view.findViewById(R.id.enableButton);
+            frontBtn = (Button) view.findViewById(R.id.frontBtn);
+            rearBtn = (Button) view.findViewById(R.id.rearBtn);
 
 
 
@@ -97,10 +102,12 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
 
             directionView.setLvMuiltClickCallBack(this);
 
-            imageMoveFlagCK.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            imageMoveFlagCK.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    m_bFlag_PicMove=isChecked?(byte) 1:(byte) 0;
+                public void onClick(View v) {
+                    AbstractDataServiceFactory.getInstance().hsvSwitch((byte) 2,m_bFlag_PicMove);
+                    m_bFlag_PicMove =(m_bFlag_PicMove==(byte) 1?(byte)0:(byte)1);
+
                     hsvView.setM_bFlag_PicMove(m_bFlag_PicMove);
                     hsvView.invalidate();
                 }
@@ -111,6 +118,7 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
                 public void onSwitchSense(int index) {
                     senseIndex = index;
                     updateHsvPage();
+                    AbstractDataServiceFactory.getInstance().hsvSwitch((byte) 1,(byte) senseIndex);
                 }
             });
 
@@ -123,19 +131,95 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
                 }
             });
 
+            frontBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(currentView == 0)
+                    {
+                        return;
+                    }
+                    AbstractDataServiceFactory.getInstance().getCurrentDevice().setCurrentView((byte) 0);
+                    initButtonStyle();
+                    reqHsvInfo();
+                }
+            });
+            rearBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(currentView == 1)
+                    {
+                        return;
+                    }
+                    AbstractDataServiceFactory.getInstance().getCurrentDevice().setCurrentView((byte) 1);
+                    initButtonStyle();
+                    reqHsvInfo();
+                }
+            });
+
             hsvViewLayoutInit();
         }
         return view;
     }
 
+    private void initButtonStyle()
+    {
+        currentView = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentView();
+        if(currentView == 0)
+        {
+            frontBtn.setSelected(true);
+            rearBtn.setSelected(false);
+        }else
+        {
+            frontBtn.setSelected(false);
+            rearBtn.setSelected(true);
+        }
+    }
+
+    private void cancelTimer(){
+        if(timer!=null){
+            timer.cancel();
+        }
+
+    }
+    private void startTimer(){
+        if(timer!=null){
+            timer.cancel();
+        }
+        timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+                AbstractDataServiceFactory.getInstance().requestWave((byte)ThCommand.WAVE_TYPE_HSV,
+                        new byte[]{0,0,currentView,group});
+
+            }
+        },200,2000);
+    }
+
+
     @Override
     public void onViewStart() {
         super.onViewStart();
+        initButtonStyle();
         reqHsvInfo();
+        startTimer();
     }
+
+    @Override
+    public void onViewStop() {
+        super.onViewStop();
+        cancelTimer();
+        if(hsvView!=null){
+            hsvView.setThHSVWave(null);
+        }
+    }
+
     private void reqHsvInfo()
     {
         byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+        currentView = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentView();
         AbstractDataServiceFactory.getInstance().reqHsvInfo(group, (byte) currentView);
     }
 
@@ -204,6 +288,17 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
                 updateHsvPage();
 
             }
+        }else if(packet.getType() == ThCommand.WAVE_CMD)
+        {
+            if(packet.getExtendType() == ThCommand.WAVE_TYPE_HSV)
+            {
+                /**
+                 *   HSV波形
+                 */
+                ThHsvWave thHSVWave=ThPackageHelper.parseHSVWaveData(packet);
+                hsvView.setThHSVWave(thHSVWave);
+                hsvView.invalidate();
+            }
         }
     }
 
@@ -232,10 +327,15 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
             sEdit2.setText(String.valueOf(s2));
             sEdit1.setValue(s2-1,0,3);
             sEdit2.setValue(255,s1+1,4);
+        }else
+        {
+            hEdit1.setText(String.valueOf(0));
+            hEdit2.setText(String.valueOf(0));
 
-            initUsed(m_used);
-
+            sEdit1.setText(String.valueOf(0));
+            sEdit2.setText(String.valueOf(0));
         }
+        initUsed(m_used);
     }
 
     @Override

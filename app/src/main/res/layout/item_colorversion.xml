@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="10dp">
+        <TextView
+            android:id="@+id/tv_chute"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:textColor="@color/fontColor"
+            android:text="1"/>
+        <TextView
+            android:id="@+id/tv_arm_adapter"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/fontColor"
+            android:text=""/>
+        <TextView
+            android:id="@+id/tv_fpga_adapter"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/fontColor"
+            android:text=""/>
+        <TextView
+            android:id="@+id/tv_hardware_adapter"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/fontColor"
+            android:text=""/>
+
+    </LinearLayout>
+</LinearLayout>

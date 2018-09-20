@@ -14,6 +14,7 @@ import com.yy.sorter.activity.R;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
+import com.yy.sorter.view.AlwaysClickButton;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 
 import java.util.List;
@@ -56,8 +57,8 @@ public class RgbIrPage extends PageBaseUi {
     }
     private void reqSenseInfo()
     {
-        byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
-        AbstractDataServiceFactory.getInstance().requestSenseInfo(group,(byte) 0);//0-rgb 1-ir
+        currentGroup = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+        AbstractDataServiceFactory.getInstance().requestSenseInfo(currentGroup,(byte) 0);//0-rgb 1-ir
     }
 
 
@@ -123,7 +124,8 @@ public class RgbIrPage extends PageBaseUi {
 
 
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder> implements DigitalDialog.Builder.LVCallback
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
+            implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack
     {
         private List<ThSense> thSenseList;
         public MyAdapter()
@@ -181,7 +183,18 @@ public class RgbIrPage extends PageBaseUi {
 
                     }
                 });
-                holder.ckSense.setText(senseItem.getName());
+                holder.textView.setText(senseItem.getName());
+
+                holder.addBtn.setValve(position,this);
+                holder.minusBtn.setValve(position+100,this);
+
+                if(senseItem.getSubType() == 6)
+                {
+                    holder.ckSense.setVisibility(View.GONE);
+                }else
+                {
+                    holder.ckSense.setVisibility(View.VISIBLE);
+                }
 
             }else
             {
@@ -216,17 +229,76 @@ public class RgbIrPage extends PageBaseUi {
 
         }
 
+        @Override
+        public void onMuiltClick(int par, int isSend) {
+
+            int pos = 0;
+            boolean isAdd = true;
+            int value,max,min;
+
+            if(par >= 100)
+            {
+                isAdd = false;
+                pos = par-100;
+            }else {
+                isAdd = true;
+                pos = par;
+            }
+
+            ThSense senseItem = thSenseList.get(pos);
+            value = ConvertUtils.bytes2ToInt(senseItem.getSense());
+            max = ConvertUtils.bytes2ToInt(senseItem.getSenseMax());
+            min = ConvertUtils.bytes2ToInt(senseItem.getSenseMin());
+
+            if(!isAdd)
+            {
+                value--;
+            }else {
+                value++;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
+
+            senseItem.setSense(ConvertUtils.intTo2Bytes(value));
+
+            if(isSend == 1)
+            {
+                byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+
+                AbstractDataServiceFactory.getInstance().setSenseValue(group,senseItem.getView(),
+                        senseItem.getType(),senseItem.getSubType(),senseItem.getExtType(),value);
+            }else
+            {
+
+
+
+            }
+
+        }
+
         class MyItemHolder extends RecyclerView.ViewHolder
         {
 
             TextView tv_space;
             CheckBox ckSense;
+            TextView textView;
             KeyboardDigitalEdit editText;
+            AlwaysClickButton addBtn,minusBtn;
             public MyItemHolder(View itemView) {
                 super(itemView);
                 tv_space = (TextView) itemView.findViewById(R.id.tv_space);
                 ckSense = (CheckBox) itemView.findViewById(R.id.ckSense);
                 editText = (KeyboardDigitalEdit) itemView.findViewById(R.id.editText);
+                addBtn = (AlwaysClickButton) itemView.findViewById(R.id.addBtn);
+                minusBtn = (AlwaysClickButton) itemView.findViewById(R.id.minusBtn);
+                textView = (TextView) itemView.findViewById(R.id.textView);
+
             }
         }
 

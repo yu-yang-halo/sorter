@@ -1,0 +1,73 @@
+﻿1#中文
+2#English
+3#Language
+4#Local Login
+5#Remote Login
+6#Alert
+7#Ok
+8#Cancel
+9#Please check whether storage is available.
+10#Discover new version
+11#Download completion
+12#The latest version
+13#Local login...
+14#Local device could not be found
+15#A new version of the language package is found. Let's update it.
+16#The device number can not be empty.
+17#Please enter the correct format of the device number.
+18#The authorization code can not be empty.
+19#Remote login...
+20#You are not registered, please register first.
+21#Remote login
+22#The user name or password can not be empty.
+23#password is inconsistent.
+24#Username
+25#Password
+26#Confirm the password
+27#Register
+28#Register Success
+29#Users have registered
+30#Incorrect username or password
+31#Device list
+32#Home
+33#System closure
+34#System opening
+35#Handover...
+36#Clear ash
+37#In ash...
+38#Sensitivity
+39#Feed quantity
+40#More
+43#Mode list
+44#One
+45#Two
+46#Three
+47#Four
+48#Start up...
+1000#The network is unstable or the device is offline.
+1001#The screen has been locked.
+1002#If the protocol does not match, check whether the version is consistent.
+1003#Press again and exit.
+1004#bad configuration file
+1005#Control board communication abnormal, unable to start.
+1006#Abnormal air pressure, unable to start.
+1007#The device is offline.
+1008#The network is unstable...
+1009#Connection success
+1010#Please ensure that the cell phone and device are in the same LAN.
+1011#The network signal is unstable or the device is offline.
+1012#Sorry, the device is unstable, quit the current device.
+1013#The connection has been disconnected and needs to be re registered.
+1014#Connection timeout, please try again.
+1015#The network is unstable. Please login again.
+1016#Please check if the mobile network is available.
+1017#Press again and exit.
+1018#New
+1019#Find new language pack, please update it in time.
+1020#Loading language success
+1021#Loading language fail
+1022#The mobile protocol version is out of date and some functions may not be available. The upgrade version is under development. Please wait patiently.
+1023#You haven't registered yet.
+1024#User data error
+1025#Device offline
+1026#Authorization code error

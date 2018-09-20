@@ -150,13 +150,13 @@ public class LanAdapter extends BaseAdapter {
             switchLan(position);
             return;
         }
-        //41#确定
-        //42#取消
+        //7#确定
+        //8#取消
         if(lanList.get(position).getLastVersion()!=lanList.get(position).getVersion()){
             new AlertDialog.Builder(ctx)
                     .setTitle(FileManager.getInstance().getString(6))//6#提示
                     .setMessage(lanList.get(position).getName()+" "+FileManager.getInstance().getString(1019))//1019#发现新的语言包,请及时更新
-                    .setPositiveButton(FileManager.getInstance().getString(41), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(FileManager.getInstance().getString(7), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 

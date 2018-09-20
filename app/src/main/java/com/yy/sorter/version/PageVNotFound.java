@@ -23,7 +23,7 @@ public class PageVNotFound extends BasePageV {
     protected void initPages() {
         super.initPages();
 
-       // basePages.put(ConstantValues.VIEW_HOME, NotFoundUi.class);//主界面
+        basePages.put(ConstantValues.VIEW_HOME, NotFoundUi.class);//主界面
 
     }
 }

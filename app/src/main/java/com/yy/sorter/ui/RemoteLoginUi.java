@@ -55,6 +55,14 @@ public class RemoteLoginUi extends BaseUi {
         return view;
     }
 
+    private void  initDeviceNumber(){
+
+        String deviceNumber=TextCacheUtils.getValueString(TextCacheUtils.KEY_DEVICE_NUMBER,null);
+        if(deviceNumber!=null){
+            deviceNumberEdit.setText(deviceNumber);
+        }
+    }
+
     @Override
     public int getID() {
         return ConstantValues.VIEW_LOGIN_REMOTE;
@@ -63,9 +71,13 @@ public class RemoteLoginUi extends BaseUi {
     @Override
     public void onViewStart() {
         super.onViewStart();
-        initAutoCompleteDeviceNumber(deviceNumberEdit);
-    }
+        AbstractDataServiceFactory.getInstance().emptyDeviceSets();
+        AbstractDataServiceFactory.getInstance().reSetReconnectFlag();
+        AbstractDataServiceFactory.getInstance().closeConnect();
 
+        initAutoCompleteDeviceNumber(deviceNumberEdit);
+        initDeviceNumber();
+    }
 
     private void setListenser(){
         remoteLogin.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +86,7 @@ public class RemoteLoginUi extends BaseUi {
                 if(hud!=null){
                     hud.dismiss();
                 }
+
                 final String deviceNumber=deviceNumberEdit.getText().toString();
                 final String vcodeStr=vcodeEdit.getText().toString();
                 final int vcode= ConvertUtils.toInt(vcodeStr);
@@ -91,26 +104,10 @@ public class RemoteLoginUi extends BaseUi {
                     cacheDeviceNumber(deviceNumber);
                     cacheVCode(vcode);
 
-                    if(!AuthUtils.isEngineerVersion()){
-                        StringUtils.cacheLastThreeHistory(ctx,deviceNumber,2);
-                        hud= KProgressHUD.create(ctx).setLabel( FileManager.getInstance().getString(19)).show(); //19#远程登录中...
-                        AbstractDataServiceFactory.getInstance().requestDeviceList(deviceNumber,null,null,vcode);
-
-                        return;
-                    }
-                    String[] arrs=AuthUtils.getLocalCertificationFileContents();
-                    if(arrs==null || arrs.length!=3 ){
-                        ThToast.showToast(ctx, FileManager.getInstance().getString(20)); //20#您还没有注册，请先注册
-                        return;
-                    }
-                    String md5Serial=arrs[0];
-                    String username =arrs[1];
-                    String password =arrs[2];
-
                     StringUtils.cacheLastThreeHistory(ctx,deviceNumber,2);
-                    hud=KProgressHUD.create(ctx).setLabel( FileManager.getInstance().getString(19)).show(); //19#远程登录中...
-                    AbstractDataServiceFactory.getInstance().requestDeviceList(deviceNumber,username,password,vcode);
-                    cacheDeviceNumber(deviceNumber);
+                    hud= KProgressHUD.create(ctx).setLabel( FileManager.getInstance().getString(19)).show(); //19#远程登录中...
+                    AbstractDataServiceFactory.getInstance().requestDeviceList(deviceNumber,null,null,vcode);
+
 
 
                 }

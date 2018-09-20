@@ -246,6 +246,9 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
             }
         }
 
+
+        feederEditText.setText(String.valueOf(ConvertUtils.unsignByteToInt(thFeeder.getVibdata()[0])));
+
         return itemList;
 
     }

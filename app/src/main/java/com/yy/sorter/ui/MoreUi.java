@@ -1,14 +1,17 @@
 package com.yy.sorter.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
+import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
@@ -52,7 +55,7 @@ public class MoreUi extends BaseUi {
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
     {
 
-        private String[] strList = new String[]{"版本信息","光学校准","信号设置"};
+        private String[] strList = new String[]{"版本信息","相机校准","灯光调节","喷阀指示"};
         public MyAdapter()
         {
 
@@ -70,8 +73,29 @@ public class MoreUi extends BaseUi {
         }
 
         @Override
-        public void onBindViewHolder(MyAdapter.MyItemHolder holder, int position) {
+        public void onBindViewHolder(MyAdapter.MyItemHolder holder, final int position) {
             holder.tv_modeName.setText(strList[position]);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (position)
+                    {
+                        case 0:
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VERSION,"版本信息");
+                            break;
+                        case 1:
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_CAMERAADJUST,"相机校准");
+                            break;
+                        case 2:
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_BACKGROUND,"背景灯光");
+                            break;
+                        case 3:
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE,"喷阀指示");
+                            break;
+                    }
+
+                }
+            });
         }
 
         @Override
@@ -81,11 +105,13 @@ public class MoreUi extends BaseUi {
 
         class MyItemHolder extends RecyclerView.ViewHolder
         {
-
+            View itemView;
             TextView tv_modeName;
-            public MyItemHolder(View itemView) {
+            public MyItemHolder(final View itemView) {
                 super(itemView);
                 tv_modeName = (TextView) itemView.findViewById(R.id.tv_modeName);
+                this.itemView = itemView;
+
             }
         }
     }
