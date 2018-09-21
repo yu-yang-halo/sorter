@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.yy.sorter.activity.R;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
+import com.yy.sorter.utils.TextCacheUtils;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import javax.crypto.Mac;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
+import th.service.data.ThDevice;
 import th.service.data.ThMode;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
@@ -87,6 +89,7 @@ public class ModeListUi extends BaseUi {
                         }
 
                     }
+                    refreshDeviceInfo();
 
                 }else
                 {
@@ -97,6 +100,11 @@ public class ModeListUi extends BaseUi {
 
             }
         }
+    }
+    private void refreshDeviceInfo(){
+        int lanCountryId= TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,ConstantValues.LAN_COUNTRY_EN);
+
+        AbstractDataServiceFactory.getInstance().login(null,(byte)lanCountryId);
     }
 
     @Override

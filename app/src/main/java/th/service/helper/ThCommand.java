@@ -118,22 +118,17 @@ public class ThCommand {
      *
 	 */
 	public static final byte MODE_CMD = 0x04;
-
-
-	/**
-	 * 给料量
-	 */
 	public static final byte FEEDER_CMD = 0x05;
 	public static final byte SENSE_CMD = 0x07;
 	public static final byte SVM_CMD = 0x08;
 	public static final byte HSV_CMD = 0x09;
-
 	public static final byte WAVE_CMD = 0x0b;
 	public static final byte VERSION_CMD = 0x0c;
 	public static final byte PAGE_SWITCH_CMD = 0x0d;
 	public static final byte VALVE_RATE_CMD = 0x0e;
 	public static final byte LIGHT_CMD = 0x0f;
-	//public static final byte CAMERA_PLUS_CMD = 0x0e;
+	public static final byte CAMERA_GAIN_CMD = 0x10;
+	public static final byte SHAPE_CMD = 0x11;
 
 
 
@@ -154,6 +149,8 @@ public class ThCommand {
 	 * 波形类型定义
 	 */
 	public static final int WAVE_TYPE_BACKGROUN_LIGHT = 0x03;
+	public static final int WAVE_TYPE_CAMERA_GAIN = 0x04;
+	//public static final int WAVE_TYPE_CAMERA_GAIN_DIGIT = 0x05;
 	public static final int WAVE_TYPE_CAMERA_ORIGIN = 0x08;
 	public static final int WAVE_TYPE_CAMERA_TEST = 0x0a;
 	public static final int WAVE_TYPE_CAMERA_ADJUST = 0x09;

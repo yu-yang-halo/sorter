@@ -55,7 +55,7 @@ public class MoreUi extends BaseUi {
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
     {
 
-        private String[] strList = new String[]{"版本信息","相机校准","灯光调节","喷阀指示"};
+        private String[] strList = new String[]{"版本信息","相机校准","信号调节","喷阀指示"};
         public MyAdapter()
         {
 
@@ -87,10 +87,10 @@ public class MoreUi extends BaseUi {
                             MiddleManger.getInstance().changeUI(ConstantValues.VIEW_CAMERAADJUST,"相机校准");
                             break;
                         case 2:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_BACKGROUND,"背景灯光");
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_BACKGROUND,"信号调节");
                             break;
                         case 3:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE,"喷阀指示");
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE,"喷阀指示");
                             break;
                     }
 

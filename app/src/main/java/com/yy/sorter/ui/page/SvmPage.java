@@ -130,7 +130,6 @@ public class SvmPage extends PageBaseUi {
             return holder;
         }
 
-
         @Override
         public void onBindViewHolder(MyItemHolder holder, final int position) {
             ThSvmInfo thSvmInfo = thSvmInfoList.get(position);
@@ -153,15 +152,19 @@ public class SvmPage extends PageBaseUi {
             if(thSvmInfo.getBlowSample() == 0)
             {
                 holder.blowSampleBtn.setText("剔除负样本");
+                holder.blowSampleBtn.setSelected(false);
             }else {
                 holder.blowSampleBtn.setText("剔除正样本");
+                holder.blowSampleBtn.setSelected(true);
             }
 
             if(thSvmInfo.getUsed() == 0)
             {
                 holder.usedBtn.setText("禁用");
+                holder.usedBtn.setSelected(false);
             }else {
                 holder.usedBtn.setText("使用");
+                holder.usedBtn.setSelected(true);
             }
 
             holder.blowSampleBtn.setOnClickListener(new View.OnClickListener() {

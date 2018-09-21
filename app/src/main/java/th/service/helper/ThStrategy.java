@@ -42,7 +42,9 @@ public class ThStrategy {
         strategyTables.put(ConstantValues.VIEW_REGISTER,Arrays.asList((byte)0x56));
         strategyTables.put(ConstantValues.VIEW_CAMERAADJUST,Arrays.asList(ThCommand.WAVE_CMD));
         strategyTables.put(ConstantValues.VIEW_VERSION,Arrays.asList(ThCommand.VERSION_CMD));
-        strategyTables.put(ConstantValues.VIEW_BACKGROUND,Arrays.asList(ThCommand.LIGHT_CMD));
+        strategyTables.put(ConstantValues.VIEW_BACKGROUND,Arrays.asList(ThCommand.LIGHT_CMD,ThCommand.WAVE_CMD));
+        strategyTables.put(ConstantValues.VIEW_VALVE_RATE,Arrays.asList(ThCommand.VALVE_RATE_CMD));
+
 
 
 

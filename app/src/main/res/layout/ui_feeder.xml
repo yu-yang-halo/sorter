@@ -28,6 +28,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_above="@+id/layoutBottom"
             android:id="@+id/recyclerView"
+            android:background="@color/background"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -39,13 +40,13 @@
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:background="@color/whiteColor">
 
             <com.yy.sorter.view.AlwaysClickButton
                 android:id="@+id/addBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/editText"
                 android:background="@mipmap/plus"
@@ -55,8 +56,8 @@
 
             <com.yy.sorter.view.AlwaysClickButton
                 android:id="@+id/minusBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:background="@mipmap/minus"
                 android:layout_toRightOf="@+id/editText"

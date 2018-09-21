@@ -11,6 +11,7 @@ import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.ui.page.PageBaseUi;
 import com.yy.sorter.utils.StringUtils;
 import com.yy.sorter.version.PageVersionManager;
+import com.yy.sorter.view.PageSwitchView;
 import com.yy.sorter.view.ThAutoLayout;
 import com.yy.sorter.view.ThGroupView;
 import com.yy.sorter.view.ThSegmentView;
@@ -26,6 +27,7 @@ public class SenseUi extends BaseUi {
     private ThSegmentView segmentView;
     private ThAutoLayout groupLayout;
     private RelativeLayout container;
+    private PageSwitchView pageSwitchView;
 
     private PageBaseUi rgbIrPage,svmPage,hsvPage;
     private PageBaseUi currentPage;
@@ -43,6 +45,7 @@ public class SenseUi extends BaseUi {
             segmentView = (ThSegmentView) view.findViewById(R.id.segmentView);
             groupLayout = (ThAutoLayout) view.findViewById(R.id.groupLayout);
             container = (RelativeLayout) view.findViewById(R.id.container);
+            pageSwitchView = (PageSwitchView) view.findViewById(R.id.pageSwitchView);
 
             segmentView.setOnSelectedListenser(new ThSegmentView.OnSelectedListenser() {
                 @Override
@@ -59,8 +62,22 @@ public class SenseUi extends BaseUi {
                     {
                        currentPage.onGroupChanged();
                     }
+                    pageSwitchView.setmCurrentIndex(pos);
                 }
             });
+
+            pageSwitchView.setPageSwitchListenser(new PageSwitchView.PageSwitchListenser() {
+                @Override
+                public void onPageSwitch(int pageIndex, int flag) {
+                    AbstractDataServiceFactory.getInstance().getCurrentDevice().setCurrentGroup((byte) pageIndex);
+                    if(currentPage != null)
+                    {
+                        currentPage.onGroupChanged();
+                    }
+                    groupLayout.setSelectPos(pageIndex);
+                }
+            });
+
         }
         return view;
     }
@@ -165,7 +182,12 @@ public class SenseUi extends BaseUi {
 
         groupLayout.setContents(itemList,currentGroup,0);
 
+        pageSwitchView.setmNumbers(machineData.getGroupNumbers());
+        pageSwitchView.setmCurrentIndex(currentGroup);
+
         loadChildPage();
+
+
 
     }
 

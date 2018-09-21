@@ -16,6 +16,7 @@ import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.manager.TopManager;
 import com.yy.sorter.receiver.NetworkChangeListenser;
 import com.yy.sorter.receiver.NetworkReceiver;
+import com.yy.sorter.service.RestartAppUtils;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.TextCacheUtils;
 
@@ -53,24 +54,21 @@ public class ThApplication extends Application {
         TrafficManager.getInstance().setCtx(this);
         languageInit();
 
-//        if(BuildConfig.DEBUG){
-//
-//            Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-//                @Override
-//                public void uncaughtException(Thread t, final Throwable e) {
-//                    StringBuilder sb = new StringBuilder();
-//                    sb.append("BUG 收集日志 " + e + "\n");
-//                    for (StackTraceElement element : e.getStackTrace()) {
-//                        sb.append(element.toString() + "\n");
-//                    }
-//                    ThLogger.addErrorLog(sb.toString());
-//                    ThLogger.outputErrorLog();
-//
-//
-//                    RestartAppUtils.restartAPP(getApplicationContext());
-//                }
-//            });
-//        }
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, final Throwable e) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("BUG 收集日志 " + e + "\n");
+                for (StackTraceElement element : e.getStackTrace()) {
+                    sb.append(element.toString() + "\n");
+                }
+                ThLogger.addErrorLog(sb.toString());
+                ThLogger.outputErrorLog();
+
+
+                RestartAppUtils.restartAPP(getApplicationContext());
+            }
+        });
     }
 
     public void languageInit(){

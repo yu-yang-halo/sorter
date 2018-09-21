@@ -24,12 +24,18 @@
 
     </com.yy.sorter.view.ThAutoLayout>
 
-    <RelativeLayout
-        android:id="@+id/container"
+    <com.yy.sorter.view.PageSwitchView
+        android:id="@+id/pageSwitchView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+    </com.yy.sorter.view.PageSwitchView>
 
 
 

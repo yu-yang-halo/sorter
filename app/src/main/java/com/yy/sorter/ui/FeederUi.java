@@ -1,14 +1,11 @@
 package com.yy.sorter.ui;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,10 +16,9 @@ import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
 import com.yy.sorter.utils.StringUtils;
+import com.yy.sorter.view.AlwaysClickButton;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 import com.yy.sorter.view.PageSwitchView;
-import com.yy.sorter.view.ThAutoLayout;
-import com.yy.sorter.view.ThGroupView;
 import com.yy.sorter.view.ThSegmentView;
 
 import java.util.ArrayList;
@@ -30,12 +26,11 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.ThFeeder;
-import th.service.data.ThMode;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
-public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback{
+public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack{
     private ThSegmentView segmentView;
     private RelativeLayout layoutBottom;
     private RecyclerView recyclerView;
@@ -44,6 +39,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
     private ThFeeder thFeeder;
     private KeyboardDigitalEdit feederEditText;
     private PageSwitchView pageSwitchView;
+    private AlwaysClickButton addBtn,minusBtn;
     public FeederUi(Context ctx) {
         super(ctx);
     }
@@ -59,8 +55,14 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
             feederEditText = (KeyboardDigitalEdit) view.findViewById(R.id.editText);
             pageSwitchView = (PageSwitchView) view.findViewById(R.id.pageSwitchView);
 
+            addBtn = (AlwaysClickButton) view.findViewById(R.id.addBtn);
+            minusBtn = (AlwaysClickButton) view.findViewById(R.id.minusBtn);
+
             feederEditText.setLVCallback(this);
             feederEditText.setValue(99,1,100);
+
+            addBtn.setValve(1,this);
+            minusBtn.setValve(0,this);
 
 
             List<ThSegmentView.TSegmentItem> items=new ArrayList<>();
@@ -78,6 +80,8 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                     tabSelectPos = pos;
                     initLayout();
                     AbstractDataServiceFactory.getInstance().requestFeederInfo();
+                    myAdapter.setItemList(null);
+                    myAdapter.notifyDataSetChanged();
                 }
             });
 
@@ -95,7 +99,10 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                         segmentView.setSelectPos(pageIndex);
                         tabSelectPos = pageIndex;
                         initLayout();
+
                         AbstractDataServiceFactory.getInstance().requestFeederInfo();
+                        myAdapter.setItemList(null);
+                        myAdapter.notifyDataSetChanged();
                     }
 
                 }
@@ -271,6 +278,59 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
         }
     }
 
+    int tmp = 0;
+    @Override
+    public void onMuiltClick(int par, int isSend) {
+        if(isSend == 1)
+        {
+            tmp++;
+            for(int i=0;i<10;i++)
+            {
+                if(par == 0)
+                {
+                    int value = ConvertUtils.unsignByteToInt(thFeeder.getVibdata()[i])-1;
+                    if(value<0)
+                    {
+                        value = 0;
+                    }
+                    if(value>99)
+                    {
+                        value = 99;
+                    }
+                    thFeeder.getVibdata()[i] = (byte) value;
+
+                }else
+                {
+                    int value = ConvertUtils.unsignByteToInt(thFeeder.getVibdata()[i])+1;
+                    if(value<0)
+                    {
+                        value = 0;
+                    }
+                    if(value>99)
+                    {
+                        value = 99;
+                    }
+                    thFeeder.getVibdata()[i] = (byte) value;
+
+                }
+
+            }
+
+            refreshRecycleViewData();
+
+        }else
+        {
+            if(par==1)
+            {
+                AbstractDataServiceFactory.getInstance().setFeederValue((byte) 1,(byte) 0,(byte) tmp);
+            }else
+            {
+                AbstractDataServiceFactory.getInstance().setFeederValue((byte) 2,(byte) 0,(byte) tmp);
+            }
+            tmp = 0;
+        }
+    }
+
 
     class Item
     {
@@ -315,7 +375,6 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                     holder.tv_title.setText("通道"+(position+1));
                 }
 
-                holder.tv_title.setText(""+item.index);
                 holder.btnSwitch.setCheckedImmediatelyNoEvent((item.status==1));
                 holder.editText.setText(String.valueOf(ConvertUtils.unsignByteToInt(item.value)));
                 holder.editText.setLVCallback(this);

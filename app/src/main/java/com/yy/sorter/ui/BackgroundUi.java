@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.yy.sorter.utils.ScreenHelper;
 import com.yy.sorter.utils.StringUtils;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 import com.yy.sorter.view.PageSwitchView;
+import com.yy.sorter.view.ThSegmentView;
 import com.yy.sorter.view.ThWaveView;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import java.util.TimerTask;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
+import th.service.data.ThCameraPlusRet;
 import th.service.data.ThLightRet;
 import th.service.data.ThWaveData;
 import th.service.helper.ThCommand;
@@ -35,15 +38,12 @@ import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
 public class BackgroundUi extends BaseUi implements View.OnClickListener,DigitalDialog.Builder.LVCallback {
-    private final byte FRONT = 0;
-    private final byte REAR = 1;
     private final byte TYPE_RED = 1;
     private final byte TYPE_GREEN = 2;
     private final byte TYPE_BLUE = 3;
     private final byte TYPE_MAINLIGHT = 4;
     private final byte TYPE_IR = 5;
 
-    private final int LIGHT = 3;
     private int m_iView=0; //0 前视 1 后视
     private int m_irType = 0;//0 单/双红外 2 分时
     private int m_isUseDigitalGain = 0; //1 开启数字增益 0 关闭数字增益
@@ -77,7 +77,7 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
     private TextView tv_backgroundLight;
     private TextView tvLayer=null;
     private ThLightRet ret;
-    private int index = 0;
+
 
     private KeyboardDigitalEdit et_chute;
     private int m_Channel=0;
@@ -95,6 +95,16 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
     private TextView tv_front_light_ir;
     private TextView tv_rear_light_ir;
     private LinearLayout layout_ir_light_1,layout_ir_light_2;
+    private ThSegmentView segmentView;
+    private int segmentIndex = 0;
+
+    private Button btn_digitalGain;
+    private CheckBox ck_adjustAll;
+    private ThCameraPlusRet cameraRet;
+    private final int GAIN_DIGITAL = 1;
+    private final int GAIN_ANOLOG= 2;
+
+
     public BackgroundUi(Context ctx) {
         super(ctx);
     }
@@ -103,12 +113,37 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
     protected View onInitView() {
         if(view==null) {
             view = LayoutInflater.from(ctx).inflate(R.layout.ui_background, null);
-
             initView();
+            initSegmentView();
 
         }
         return view;
     }
+
+    private void initSegmentView()
+    {
+        segmentView = (ThSegmentView) view.findViewById(R.id.segmentView);
+        segmentView.setOnSelectedListenser(new ThSegmentView.OnSelectedListenser() {
+            @Override
+            public void onSelected(int pos, ThSegmentView.TSegmentItem tSegmentItem) {
+                segmentIndex = pos;
+                pageSwitchView.setmCurrentIndex(segmentIndex);
+                updateUI();
+                updateDataRequest();
+            }
+        });
+
+        List<ThSegmentView.TSegmentItem> itemList = new ArrayList<>();
+
+        ThSegmentView.TSegmentItem item0 = new ThSegmentView.TSegmentItem("背景灯光",0);
+        ThSegmentView.TSegmentItem item1 = new ThSegmentView.TSegmentItem("相机增益",0);
+
+        itemList.add(item0);
+        itemList.add(item1);
+
+        segmentView.setContents(itemList);
+    }
+
 
     @Override
     public int getID() {
@@ -121,7 +156,7 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
             if (packet.getExtendType() == 0x01) {
                 ret = ThPackageHelper.parseThLightRet(packet);
                 initLight(ret);
-                updateLedEditLimit();
+                updateLedEditLimit(0);
             }
             else if (packet.getExtendType() == 0x02)
             {
@@ -136,7 +171,49 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
             thwaveView.setThWaveRet(thWaveRet);
             thwaveView.invalidate();
 
+        }else if(packet.getType() == ThCommand.CAMERA_GAIN_CMD) {
+            if (packet.getExtendType() == 0x01 ||
+                    packet.getExtendType() == 0x03)
+            {
+
+                int chute = packet.getData1()[1];
+                if (chute == m_Channel)
+                {
+                    m_isUseDigitalGain = packet.getData1()[2];
+                    if (packet.getData1()[2] == 0)
+                    {
+                        btn_digitalGain.setVisibility(View.GONE);
+                        updateLedEditLimit(GAIN_ANOLOG);
+                    }
+                    else
+                    {
+                        btn_digitalGain.setVisibility(View.VISIBLE);
+                        if (packet.getData1()[3]==0)
+                        {
+                            btn_digitalGain.setSelected(false);
+                            btn_digitalGain.setText(FileManager.getInstance().getString(98)); //98#模拟增益
+                            updateLedEditLimit(GAIN_ANOLOG);
+                            grainType = 0;
+                        }
+                        else
+                        {
+                            btn_digitalGain.setSelected(true);
+                            btn_digitalGain.setText(FileManager.getInstance().getString(99)); //99#数字增益
+                            updateLedEditLimit(GAIN_DIGITAL);
+                            grainType = 1;
+                        }
+                    }
+                    cameraRet = ThPackageHelper.parseThCameraPlusRet(packet);
+                    initCameraGain(cameraRet);
+
+
+
+                }
+
+            }
         }
+
+
     }
 
     @Override
@@ -148,8 +225,21 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
     private void updateDataRequest()
     {
         byte layer= AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentLayer();
-
-        AbstractDataServiceFactory.getInstance().requestLightInfo(layer);
+        if (segmentIndex == 0) //请求灯光
+        {
+            AbstractDataServiceFactory.getInstance().requestLightInfo(layer);
+        }
+        else //相机增益
+        {
+            if (0 == m_isUseDigitalGain)//没有使用数字增益
+            {
+                AbstractDataServiceFactory.getInstance().requestCameraGain(layer,(byte)m_Channel);
+            }
+            else
+            {
+                AbstractDataServiceFactory.getInstance().switchCameraGain(layer,(byte)m_Channel,(byte) grainType);
+            }
+        }
 
     }
 
@@ -171,11 +261,25 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
     private void getWave()
     {
 
-       byte[] params=new byte[]{(byte)0,currentLayer,currentView, (byte) m_Channel,ThCommand.WAVE_TYPE_BACKGROUN_LIGHT};
 
-       AbstractDataServiceFactory.getInstance().requestWave(
-               (byte) ThCommand.WAVE_TYPE_BACKGROUN_LIGHT,
-               params);
+        if (segmentIndex == 0)  //灯光
+        {
+            byte[] params=new byte[]{(byte)0,currentLayer,currentView, (byte) m_Channel,ThCommand.WAVE_TYPE_BACKGROUN_LIGHT};
+
+            AbstractDataServiceFactory.getInstance().requestWave(
+                    (byte) ThCommand.WAVE_TYPE_BACKGROUN_LIGHT,
+                    params);
+
+
+        }
+        else // 相机增益
+        {
+            byte[] params=new byte[]{(byte)0,currentLayer,currentView, (byte) m_Channel,ThCommand.WAVE_TYPE_CAMERA_GAIN};
+            AbstractDataServiceFactory.getInstance().requestWave(
+                    (byte) ThCommand.WAVE_TYPE_CAMERA_GAIN,
+                    params);
+
+        }
 
 
     }
@@ -324,6 +428,9 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
 
         btn_frontLed = (Button)view.findViewById(R.id.button_front_led);
         btn_rearLed = (Button)view.findViewById(R.id.button_rear_led);
+        btn_digitalGain = (Button)view.findViewById(R.id.button_digital_gain);
+        ck_adjustAll = (CheckBox)view.findViewById(R.id.ck_adjust_all);
+
 
         et_frontLight = (KeyboardDigitalEdit)view.findViewById(R.id.et_front_light);
         et_rearLight = (KeyboardDigitalEdit)view.findViewById(R.id.et_rear_light);
@@ -413,6 +520,8 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
                 if(flag == PageSwitchView.FLAG_OK)
                 {
 
+                    segmentIndex = pageIndex;
+                    segmentView.setSelectPos(pageIndex);
                     updateUI();
                     updateDataRequest();
 
@@ -432,7 +541,17 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
     public void onConfirmClick(int value,int par)
     {
         currentLayer=AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentLayer();
+        byte isAll = 0;
+        if (ck_adjustAll.isChecked())
+            isAll = 1;
+        else
+            isAll = 0;
 
+        byte grainType = 0;
+        if (btn_digitalGain.isSelected())
+            grainType = 1;
+        else
+            grainType = 0;
 
         switch (par)
         {
@@ -446,38 +565,78 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
                 et_frontLedR.setText(Integer.toString(value));
                 m_iView = 0;
                 updateView();
-                AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)0,(byte)1,(byte)value);
+
+                if(segmentIndex == 0)
+                {
+                    AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)0,TYPE_RED,(byte)value);
+                }else
+                {
+                    AbstractDataServiceFactory.getInstance().setCameraGain(currentLayer,(byte)0,(byte) m_Channel,isAll,TYPE_RED,grainType,value);
+                }
+
                 break;
             case 3://后视Red
                 et_rearLedR.setText(Integer.toString(value));
                 m_iView = 1;
                 updateView();
-                AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)1,(byte)1,(byte)value);
+                if(segmentIndex == 0)
+                {
+                    AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)1,TYPE_RED,(byte)value);
+                }else
+                {
+                    AbstractDataServiceFactory.getInstance().setCameraGain(currentLayer,(byte)1,(byte) m_Channel,isAll,TYPE_RED,grainType,value);
+                }
+
                 break;
             case 4: //前视GREEN
                 et_frontLedG.setText(Integer.toString(value));
 
                 m_iView = 0;
                 updateView();
-                AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)0,(byte)2,(byte)value);
+                if(segmentIndex == 0)
+                {
+                    AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)0,TYPE_GREEN,(byte)value);
+                }else
+                {
+                    AbstractDataServiceFactory.getInstance().setCameraGain(currentLayer,(byte)0,(byte) m_Channel,isAll,TYPE_GREEN,grainType,value);
+                }
+
                 break;
             case 5://后视GREEN
                 et_rearLedG.setText(Integer.toString(value));
                 m_iView = 1;
                 updateView();
-                AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)1,(byte)2,(byte)value);
+                if(segmentIndex == 0)
+                {
+                    AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)1,TYPE_GREEN,(byte)value);
+                }else
+                {
+                    AbstractDataServiceFactory.getInstance().setCameraGain(currentLayer,(byte)1,(byte) m_Channel,isAll,TYPE_GREEN,grainType,value);
+                }
                 break;
             case 6: //前视BLUE
                 et_frontLedB.setText(Integer.toString(value));
                 m_iView = 0;
                 updateView();
-                AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)0,(byte)3,(byte)value);
+                if(segmentIndex == 0)
+                {
+                    AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)0,TYPE_BLUE,(byte)value);
+                }else
+                {
+                    AbstractDataServiceFactory.getInstance().setCameraGain(currentLayer,(byte)0,(byte) m_Channel,isAll,TYPE_BLUE,grainType,value);
+                }
                 break;
             case 7://后视BLUE
                 et_rearLedB.setText(Integer.toString(value));
                 m_iView = 1;
                 updateView();
-                AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)1,(byte)3,(byte)value);
+                if(segmentIndex == 0)
+                {
+                    AbstractDataServiceFactory.getInstance().setLightData(currentLayer,(byte)1,TYPE_BLUE,(byte)value);
+                }else
+                {
+                    AbstractDataServiceFactory.getInstance().setCameraGain(currentLayer,(byte)1,(byte) m_Channel,isAll,TYPE_BLUE,grainType,value);
+                }
                 break;
             case 8://
                 et_frontLedIR1.setText(Integer.toString(value));
@@ -523,32 +682,70 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
 
     }
 
+
+    private void initCameraGain(ThCameraPlusRet ret)
+    {
+        et_frontLedR.setText(Integer.toString(ConvertUtils.bytes2ToInt(ret.getFstRed())));
+        et_rearLedR.setText(Integer.toString(ConvertUtils.bytes2ToInt(ret.getSndRed())));
+
+        et_frontLedG.setText(Integer.toString(ConvertUtils.bytes2ToInt(ret.getFstGreen())));
+        et_rearLedG.setText(Integer.toString(ConvertUtils.bytes2ToInt(ret.getSndGreen())));
+
+        et_frontLedB.setText(Integer.toString(ConvertUtils.bytes2ToInt(ret.getFstBlue())));
+        et_rearLedB.setText(Integer.toString(ConvertUtils.bytes2ToInt(ret.getSndBlue())));
+
+        byte ir1[] = ret.getFstSndIr1s();
+
+        et_frontLedIR1.setText(Integer.toString( ConvertUtils.unsignByteToInt(ir1[0])));
+        et_rearLedIR1.setText(Integer.toString( ConvertUtils.unsignByteToInt(ir1[1])));
+
+        byte ir2[] = ret.getFstSndIr2s();
+        et_frontLedIR2.setText(Integer.toString( ConvertUtils.unsignByteToInt(ir2[0])));
+        et_rearLedIR2.setText(Integer.toString( ConvertUtils.unsignByteToInt(ir2[1])));
+
+    }
+
     private void updateUI()
     {
-        MachineData machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
+        if(segmentIndex == 0)
+        {
+            layout_light.setVisibility(View.VISIBLE);
 
-        layout_light.setVisibility(View.VISIBLE);
+            tv_backgroundLight.setVisibility(View.VISIBLE);
+            layoutIR.setVisibility(View.GONE);
 
-        tv_backgroundLight.setVisibility(View.VISIBLE);
-        layoutIR.setVisibility(View.GONE);
-
-        tv_ir1.setVisibility(View.GONE);
-        tv_ir2.setVisibility(View.GONE);
-        et_frontLedIR1.setVisibility(View.GONE);
-        et_frontLedIR2.setVisibility(View.GONE);
-        et_rearLedIR1.setVisibility(View.GONE);
-        et_rearLedIR2.setVisibility(View.GONE);
+            tv_ir1.setVisibility(View.GONE);
+            tv_ir2.setVisibility(View.GONE);
+            et_frontLedIR1.setVisibility(View.GONE);
+            et_frontLedIR2.setVisibility(View.GONE);
+            et_rearLedIR1.setVisibility(View.GONE);
+            et_rearLedIR2.setVisibility(View.GONE);
 
 
 
-        btn_irFrontLight.setVisibility(View.VISIBLE);
-        btn_irRearLight.setVisibility(View.VISIBLE);
+            btn_irFrontLight.setVisibility(View.VISIBLE);
+            btn_irRearLight.setVisibility(View.VISIBLE);
 
-        tv_front_light_ir.setVisibility(View.VISIBLE);
-        et_front_light_ir.setVisibility(View.VISIBLE);
+            tv_front_light_ir.setVisibility(View.VISIBLE);
+            et_front_light_ir.setVisibility(View.VISIBLE);
 
-        tv_rear_light_ir.setVisibility(View.VISIBLE);
-        et_rear_light_ir.setVisibility(View.VISIBLE);
+            tv_rear_light_ir.setVisibility(View.VISIBLE);
+            et_rear_light_ir.setVisibility(View.VISIBLE);
+        }else
+        {
+
+            btn_digitalGain.setVisibility(View.GONE);
+            tv_backgroundLight.setVisibility(View.GONE);
+            layoutIR.setVisibility(View.GONE);
+
+            layout_light.setVisibility(View.GONE);
+
+            ck_adjustAll.setVisibility(View.VISIBLE);
+        }
+
+
+
+
 
 
 
@@ -557,10 +754,7 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
     @Override
     public void onClick(View view)
     {
-        byte layer=AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentLayer();
-
         int data=0;
-        int chute= Integer.parseInt(et_chute.getText().toString())-1;
         switch (view.getId())
         {
             case R.id.button_ir_front_light: //红外前主灯
@@ -643,21 +837,72 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
 
 
 
-    private void updateLedEditLimit()
+    private void updateLedEditLimit(int type)
     {
-        et_frontLedR.setMax(255);
-        et_frontLedR.setMin(0);
-        et_frontLedG.setMax(255);
-        et_frontLedG.setMin(0);
-        et_frontLedB.setMax(255);
-        et_frontLedB.setMin(0);
+        if (type == GAIN_DIGITAL)
+        {
+            et_frontLedR.setMax(255);
+            et_frontLedR.setMin(1);
+            et_frontLedG.setMax(255);
+            et_frontLedG.setMin(1);
+            et_frontLedB.setMax(255);
+            et_frontLedB.setMin(1);
+            et_frontLedIR1.setMax(4);
+            et_frontLedIR1.setMin(0);
+            et_frontLedIR2.setMax(4);
+            et_frontLedIR2.setMin(0);
 
-        et_rearLedR.setMax(255);
-        et_rearLedR.setMin(0);
-        et_rearLedG.setMax(255);
-        et_rearLedG.setMin(0);
-        et_rearLedB.setMax(255);
-        et_rearLedB.setMin(0);
+            et_rearLedR.setMax(255);
+            et_rearLedR.setMin(1);
+            et_rearLedG.setMax(255);
+            et_rearLedG.setMin(1);
+            et_rearLedB.setMax(255);
+            et_rearLedB.setMin(1);
+            et_rearLedIR1.setMax(4);
+            et_rearLedIR1.setMin(0);
+            et_rearLedIR2.setMax(4);
+            et_rearLedIR2.setMin(0);
+        }
+        else if (type == GAIN_ANOLOG)
+        {
+            et_frontLedR.setMax(1023);
+            et_frontLedR.setMin(0);
+            et_frontLedG.setMax(1023);
+            et_frontLedG.setMin(0);
+            et_frontLedB.setMax(1023);
+            et_frontLedB.setMin(0);
+            et_frontLedIR1.setMax(31);
+            et_frontLedIR1.setMin(0);
+            et_frontLedIR2.setMax(31);
+            et_frontLedIR2.setMin(0);
+
+            et_rearLedR.setMax(1023);
+            et_rearLedR.setMin(0);
+            et_rearLedG.setMax(1023);
+            et_rearLedG.setMin(0);
+            et_rearLedB.setMax(1023);
+            et_rearLedB.setMin(0);
+            et_rearLedIR1.setMax(31);
+            et_rearLedIR1.setMin(0);
+            et_rearLedIR2.setMax(31);
+            et_rearLedIR2.setMin(0);
+        }
+        else
+        {
+            et_frontLedR.setMax(255);
+            et_frontLedR.setMin(0);
+            et_frontLedG.setMax(255);
+            et_frontLedG.setMin(0);
+            et_frontLedB.setMax(255);
+            et_frontLedB.setMin(0);
+
+            et_rearLedR.setMax(255);
+            et_rearLedR.setMin(0);
+            et_rearLedG.setMax(255);
+            et_rearLedG.setMin(0);
+            et_rearLedB.setMax(255);
+            et_rearLedB.setMin(0);
+        }
 
     }
 
@@ -701,7 +946,7 @@ public class BackgroundUi extends BaseUi implements View.OnClickListener,Digital
 
     private void setLight(byte view,byte type,byte data)
     { //1/2/3/4/5 :r/g/b/mainLight/ir
-        if (view == FRONT)
+        if (view == 0)
         {
             switch (type)
             {

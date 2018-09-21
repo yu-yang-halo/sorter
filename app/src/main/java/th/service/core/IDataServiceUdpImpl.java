@@ -1,6 +1,7 @@
 package th.service.core;
 
 import th.service.helper.PacketExt;
+import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.repeat.RepeatManager;
 
@@ -30,19 +31,21 @@ public class IDataServiceUdpImpl extends AbstractIDataService {
 	@Override
 	public void sendPacketData(ThPackage thPackage, String ip) {
 		thPackage.setSenderIP(ip);
-		if(thPackage.getType()==0x02
-				|| (thPackage.getType()==0x01&&thPackage.getExtendType()==0x02)
-				||thPackage.getType()==0x06){
+		if(thPackage.getType()==ThCommand.BROADCAST_DEV_CMD
+				|| (thPackage.getType()== ThCommand.LOGIN_CMD&&thPackage.getExtendType()==0x02)
+				|| thPackage.getType()==ThCommand.UDP_HEART_CMD
+				|| thPackage.getType()==ThCommand.WAVE_CMD
+				|| thPackage.getType()==ThCommand.VALVE_RATE_CMD){
 
 			/**
 			 * -----忽略------
-			 *
-			 * 心跳              [无需重发]
-			 * 登出              [重发无意义]
 			 * 广播列表           [重发无意义]
+			 * 登出              [重发无意义]
+			 * 心跳              [无需重发]
+			 *
+			 *
 			 * 波形 喷发频率       [重发无意义 定时再发送即可]
-			 * 大米机器相机校准
-			 * 光学校准进入退出    [重发问题,会导致反复发送 ]
+			 *
 			 */
 			thPackage.setPacketNumber((byte) 0);//不处理的包号
 		}else{

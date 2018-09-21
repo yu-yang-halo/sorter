@@ -28,7 +28,8 @@ public class AlwaysClickButton extends AppCompatImageButton{
 
     int mPar = 0;
     private Context mContext;
-    LVMuiltClickCallBack m_CallBack=null;
+    private LVMuiltClickCallBack m_CallBack=null;
+    private Object bindObject;
 
     private final MyHandler myHandler = new MyHandler();
     private class MyHandler extends Handler {
@@ -66,7 +67,6 @@ public class AlwaysClickButton extends AppCompatImageButton{
         mPar = par;
         m_CallBack = callback;
     }
-
 
     public AlwaysClickButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

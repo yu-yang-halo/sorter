@@ -102,7 +102,7 @@ public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallb
 
     @Override
     public int getID() {
-        return ConstantValues.VIEW_VALVE;
+        return ConstantValues.VIEW_VALVE_RATE;
     }
 
     @Override

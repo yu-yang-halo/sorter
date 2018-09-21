@@ -26,7 +26,6 @@
                     android:paddingLeft="10dp"
                     android:gravity="center|left"
                     android:textSize="@dimen/statusFontSize"
-                    android:visibility="gone"
                     android:layout_marginBottom="1dp"
                     android:text="层"/>
                 <LinearLayout
@@ -45,7 +44,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp"
                     android:background="@color/background">
@@ -72,6 +71,30 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false" />
 
+
+                    <Button
+                        android:id="@+id/button_digital_gain"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/th_button_selector"
+                        android:text="数字增益"
+                        android:layout_centerVertical="true"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/selector_btn_click_text_color"
+                        android:visibility="visible" />
+
+                    <CheckBox
+                        android:id="@+id/ck_adjust_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textColor="@color/fontColor"
+                        android:text="整体调整"
+                        android:layout_centerVertical="true"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_alignParentEnd="true"
+                        android:paddingRight="0dp" />
+
                 </RelativeLayout>
 
                 <LinearLayout
@@ -80,14 +103,7 @@
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
                     android:background="@color/background">
-                    <TextView
-                        android:id="@+id/tv_background_light"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="背景灯"
-                        android:textSize="20sp"
-                        android:textColor="@color/buttonNormal"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="35dp">
@@ -153,16 +169,17 @@
                         android:layout_height="45dp"
                         android:paddingLeft="2dp"
                         >
+
                         <Button
                             android:id="@+id/button_front_led"
                             android:layout_width="80dp"
                             android:layout_height="40dp"
-                            android:textAllCaps="false"
-                            android:gravity="center"
-                            android:background="@drawable/th_button_selector"
-                            android:textColor="@drawable/selector_btn_click_text_color"
                             android:layout_marginRight="10dp"
-                            android:text="前视"/>
+                            android:background="@drawable/th_button_selector"
+                            android:gravity="center"
+                            android:text="背景灯"
+                            android:textAllCaps="false"
+                            android:textColor="@drawable/selector_btn_click_text_color" />
                         <com.yy.sorter.view.KeyboardDigitalEdit
                             android:id="@+id/et_front_led_r"
                             android:layout_width="0dp"
@@ -240,16 +257,17 @@
                         android:layout_height="45dp"
                         android:paddingLeft="2dp"
                         >
+
                         <Button
                             android:id="@+id/button_rear_led"
                             android:layout_width="80dp"
                             android:layout_height="40dp"
-                            android:gravity="center"
                             android:layout_marginRight="10dp"
                             android:background="@drawable/th_button_selector"
-                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:gravity="center"
+                            android:text="增益"
                             android:textAllCaps="false"
-                            android:text="后视"/>
+                            android:textColor="@drawable/selector_btn_click_text_color" />
                         <com.yy.sorter.view.KeyboardDigitalEdit
                             android:id="@+id/et_rear_led_r"
                             android:layout_width="0dp"
@@ -323,85 +341,41 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/layout_light"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:orientation="vertical"
+                    android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/background">
+                    android:background="@color/background"
+                    android:gravity="center">
+
                     <TextView
-                        android:id="@+id/tv_light"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="灯光"
-                        android:textSize="20sp"
-                        android:textColor="@color/buttonNormal"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingRight="20dp"
-                        android:paddingLeft="20dp">
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/tv_front_light"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                        android:id="@+id/tv_front_light"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:text="主灯"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/textColor" />
 
-                                android:textColor="@color/fontColor"
-                                android:layout_marginRight="10dp"
-                                android:gravity="center"
-                                android:text="前视"/>
-                            <com.yy.sorter.view.KeyboardDigitalEdit
-                                android:id="@+id/et_front_light"
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="1"
-
-                                android:inputType="number"
-                                android:ems="3"
-                                android:textColor="@color/fontColor"
-                                android:textAlignment="center"
-                                android:focusable="false"
-                                android:focusableInTouchMode="false"
-                                android:text="0"
-                                android:background="@drawable/selector_edit_bk"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/tv_rear_light"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="@color/fontColor"
-                                android:layout_marginRight="10dp"
-                                android:gravity="center"
-                                android:text="后视"/>
-                            <com.yy.sorter.view.KeyboardDigitalEdit
-                                android:id="@+id/et_rear_light"
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="1"
-                                android:inputType="number"
-                                android:ems="3"
-                                android:textColor="@color/fontColor"
-                                android:textAlignment="center"
-                                android:focusable="false"
-                                android:focusableInTouchMode="false"
-                                android:text="0"
-                                android:background="@drawable/selector_edit_bk"/>
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
+                    <com.yy.sorter.view.KeyboardDigitalEdit
+                        android:id="@+id/et_front_light"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_edit_bk"
+                        android:ems="3"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/fontColor" />
+                </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/layout_ir"
                     android:layout_width="match_parent"

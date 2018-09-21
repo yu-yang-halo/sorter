@@ -173,6 +173,15 @@ public class ThWaveView extends View {
                     showVerticalLines(canvas,thWaveData.getData1_5());
 
                     break;
+                case ThCommand.WAVE_TYPE_BACKGROUN_LIGHT:
+                case ThCommand.WAVE_TYPE_CAMERA_GAIN:
+                    drawScrollLine(canvas,thWaveData.getrBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_RED));
+                    drawScrollLine(canvas,thWaveData.getgBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_GREEN));
+                    drawScrollLine(canvas,thWaveData.getbBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_BLUE));
+
+                    drawScrollLine(canvas,thWaveData.getIr1Bytes(),IRCOLORS[0]);
+                    drawScrollLine(canvas,thWaveData.getIr2Bytes(),IRCOLORS[1]);
+                    break;
 
             }
 

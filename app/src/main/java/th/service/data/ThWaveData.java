@@ -192,6 +192,33 @@ public class ThWaveData {
                     System.arraycopy(waveData,0,rBytes,0,512);
                 }
                 break;
+            case ThCommand.WAVE_TYPE_BACKGROUN_LIGHT:
+            case ThCommand.WAVE_TYPE_CAMERA_GAIN:
+                rBytes=new byte[256];
+                gBytes=new byte[256];
+                bBytes=new byte[256];
+
+                if(waveData.length>=256*3){
+                    System.arraycopy(waveData,0,rBytes,0,256);
+                    System.arraycopy(waveData,256,gBytes,0,256);
+                    System.arraycopy(waveData,256*2,bBytes,0,256);
+                }
+
+                if(data1_0==1){
+                    ir1Bytes=new byte[256];
+                    if(waveData.length>=256*4){
+                        System.arraycopy(waveData,256*3,ir1Bytes,0,256);
+                    }
+
+                }else if (data1_0==2){
+                    ir1Bytes=new byte[256];
+                    ir2Bytes=new byte[256];
+                    if(waveData.length>=256*5){
+                        System.arraycopy(waveData,256*3,ir1Bytes,0,256);
+                        System.arraycopy(waveData,256*4,ir2Bytes,0,256);
+                    }
+                }
+                break;
         }
 
 

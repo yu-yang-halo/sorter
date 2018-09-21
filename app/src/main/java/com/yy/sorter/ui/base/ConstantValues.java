@@ -22,7 +22,7 @@ public class ConstantValues {
     public static final int VIEW_CAMERAADJUST=12; //相机校准
     public static final int VIEW_VERSION=13;  //版本信息
     public static final int VIEW_BACKGROUND=14;//背景灯光
-    public static final int VIEW_VALVE=15;//阀指示
+    public static final int VIEW_VALVE_RATE=15;//阀指示
 
 
 

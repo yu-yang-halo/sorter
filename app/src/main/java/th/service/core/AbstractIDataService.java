@@ -243,6 +243,40 @@ public abstract class AbstractIDataService implements IDataService{
         ThPackage packet= new ThPackage(ThCommand.LIGHT_CMD,(byte)0x02, data1,(byte)0, (byte)0, (byte)0,null);
         sendPacketData(packet);
     }
+    public void requestCameraGain(byte layer, byte channel)
+    {
+        byte[] data1=new byte[]{layer,channel};
+        ThPackage packet= new ThPackage(ThCommand.CAMERA_GAIN_CMD,(byte)0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void setCameraGain(byte layer,byte view,byte channel,byte adjustType,byte setType,byte ad,int value)
+    {
+        byte[] arr = ConvertUtils.intTo2Bytes(value);
+        byte[] data1=new byte[]{layer,view,channel,adjustType,setType,ad,arr[0],arr[1]};
+        ThPackage packet= new ThPackage(ThCommand.CAMERA_GAIN_CMD,(byte)0x02, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void switchCameraGain(byte layer, byte channel, byte ad)
+    {
+        byte[] data1=new byte[]{layer,channel,ad};
+        ThPackage packet= new ThPackage(ThCommand.CAMERA_GAIN_CMD,(byte)0x03, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
+    public void requestShapeInfo(byte group)
+    {
+        byte[] data1=new byte[]{group};
+        ThPackage packet= new ThPackage(ThCommand.SHAPE_CMD,(byte)0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+    public void setShapeInfo(byte group,byte setType,byte whatShape,byte whatAlgorithm,byte whatIndex,int value)
+    {
+        byte[] arr = ConvertUtils.intTo2Bytes(value);
+        byte[] data1=new byte[]{group,setType,whatShape,whatAlgorithm,whatIndex,arr[0],arr[1]};
+        ThPackage packet= new ThPackage(ThCommand.SHAPE_CMD,(byte)0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
+
 
     public void requestValveRate(byte layer,byte chute)
     {

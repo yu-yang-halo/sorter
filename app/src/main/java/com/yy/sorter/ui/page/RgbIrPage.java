@@ -161,6 +161,19 @@ public class RgbIrPage extends PageBaseUi {
         }
 
         @Override
+        public void onBindViewHolder(MyItemHolder holder, int position, List<Object> payloads) {
+            super.onBindViewHolder(holder, position, payloads);
+            if(payloads.isEmpty())
+            {
+                onBindViewHolder(holder,position);
+            }else
+            {
+                ThSense senseItem = thSenseList.get(position);
+                holder.editText.setText(String.valueOf(ConvertUtils.bytes2ToInt(senseItem.getSense())));
+            }
+        }
+
+        @Override
         public void onBindViewHolder(MyItemHolder holder, final int position) {
             ThSense senseItem = thSenseList.get(position);
             if(holder.getItemViewType() == ConstantValues.VIEW_TYPE_ITEM)
@@ -187,6 +200,7 @@ public class RgbIrPage extends PageBaseUi {
 
                 holder.addBtn.setValve(position,this);
                 holder.minusBtn.setValve(position+100,this);
+
 
                 if(senseItem.getSubType() == 6)
                 {
@@ -235,7 +249,6 @@ public class RgbIrPage extends PageBaseUi {
             int pos = 0;
             boolean isAdd = true;
             int value,max,min;
-
             if(par >= 100)
             {
                 isAdd = false;
@@ -244,39 +257,38 @@ public class RgbIrPage extends PageBaseUi {
                 isAdd = true;
                 pos = par;
             }
-
             ThSense senseItem = thSenseList.get(pos);
             value = ConvertUtils.bytes2ToInt(senseItem.getSense());
             max = ConvertUtils.bytes2ToInt(senseItem.getSenseMax());
             min = ConvertUtils.bytes2ToInt(senseItem.getSenseMin());
 
-            if(!isAdd)
-            {
-                value--;
-            }else {
-                value++;
-            }
-            if(value<min)
-            {
-                value = min;
-            }
-            if(value>max)
-            {
-                value = max;
-            }
-
-            senseItem.setSense(ConvertUtils.intTo2Bytes(value));
-
             if(isSend == 1)
             {
-                byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+                if(isAdd)
+                {
+                    value=value+1;
+                }else
+                {
+                    value=value-1;
+                }
+                if(value<min)
+                {
+                    value = min;
+                }
+                if(value>max)
+                {
+                    value = max;
+                }
+                senseItem.setSense(ConvertUtils.intTo2Bytes(value));
+                thSenseList.get(pos).setSense(ConvertUtils.intTo2Bytes(value));
 
-                AbstractDataServiceFactory.getInstance().setSenseValue(group,senseItem.getView(),
-                        senseItem.getType(),senseItem.getSubType(),senseItem.getExtType(),value);
+                notifyItemChanged(pos,"update");
+
             }else
             {
-
-
+                byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+                AbstractDataServiceFactory.getInstance().setSenseValue(group,senseItem.getView(),
+                        senseItem.getType(),senseItem.getSubType(),senseItem.getExtType(),value);
 
             }
 

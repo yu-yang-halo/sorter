@@ -1,5 +1,6 @@
 package th.service.core;
 
+import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 
 /**
@@ -57,7 +58,17 @@ public interface IDataService {
 	public void requestLightInfo(byte layer);
 	public void setLightData(byte layer,byte view,byte setType,byte value);
 
+	public void requestCameraGain(byte layer, byte channel);
+	public void switchCameraGain(byte layer, byte channel, byte ad);
+	public void setCameraGain(byte layer,byte view,byte channel,byte adjustType,byte setType,byte ad,int value);
+
 	public void requestValveRate(byte layer,byte chute);
+
+	public void requestShapeInfo(byte group);
+	public void setShapeInfo(byte group,byte setType,byte whatShape,byte whatAlgorithm,byte whatIndex,int value);
+
+
+
 
 
 	/**

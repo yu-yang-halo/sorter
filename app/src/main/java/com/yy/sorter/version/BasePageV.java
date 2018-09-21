@@ -115,7 +115,7 @@ public abstract class BasePageV {
         basePages.put(ConstantValues.VIEW_CAMERAADJUST, CameraAdjustUi.class);//相机校准
         basePages.put(ConstantValues.VIEW_VERSION, VersionUi.class);//相机校准
         basePages.put(ConstantValues.VIEW_BACKGROUND, BackgroundUi.class);//背景灯光
-        basePages.put(ConstantValues.VIEW_VALVE, ValveRateUi.class);//背景灯光
+        basePages.put(ConstantValues.VIEW_VALVE_RATE, ValveRateUi.class);//背景灯光
 
 
         /**
