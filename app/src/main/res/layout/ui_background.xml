@@ -34,9 +34,7 @@
                     android:background="@color/background"
                     >
                     <com.yy.sorter.view.ThWaveView
-
                         android:id="@+id/thwaveView"
-                        android:layout_below="@+id/linearLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#ffffff"/>
@@ -170,33 +168,16 @@
                         android:paddingLeft="2dp"
                         >
 
-                        <Button
-                            android:id="@+id/button_front_led"
+                        <TextView
+                            android:id="@+id/text_bg_led"
                             android:layout_width="80dp"
                             android:layout_height="40dp"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/th_button_selector"
                             android:gravity="center"
                             android:text="背景灯"
-                            android:textAllCaps="false"
-                            android:textColor="@drawable/selector_btn_click_text_color" />
+                            android:textAllCaps="false" />
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_front_led_r"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-
-                            android:layout_marginRight="3dp"
-                            android:inputType="number"
-                            android:ems="10"
-                            android:textColor="@color/fontColor"
-                            android:textAlignment="center"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:text="0"
-                            android:background="@drawable/selector_edit_bk"/>
-                        <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_front_led_g"
+                            android:id="@+id/et_bg_led_r"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -210,7 +191,7 @@
                             android:text="0"
                             android:background="@drawable/selector_edit_bk"/>
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_front_led_b"
+                            android:id="@+id/et_bg_led_g"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -224,7 +205,7 @@
                             android:text="0"
                             android:background="@drawable/selector_edit_bk"/>
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_front_led_ir1"
+                            android:id="@+id/et_bg_led_b"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -238,7 +219,21 @@
                             android:text="0"
                             android:background="@drawable/selector_edit_bk"/>
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_front_led_ir2"
+                            android:id="@+id/et_bg_led_ir1"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="3dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:textColor="@color/fontColor"
+                            android:textAlignment="center"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:text="0"
+                            android:background="@drawable/selector_edit_bk"/>
+                        <com.yy.sorter.view.KeyboardDigitalEdit
+                            android:id="@+id/et_bg_led_ir2"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -258,18 +253,16 @@
                         android:paddingLeft="2dp"
                         >
 
-                        <Button
-                            android:id="@+id/button_rear_led"
+                        <TextView
+                            android:id="@+id/text_gain_led"
                             android:layout_width="80dp"
                             android:layout_height="40dp"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/th_button_selector"
                             android:gravity="center"
                             android:text="增益"
-                            android:textAllCaps="false"
-                            android:textColor="@drawable/selector_btn_click_text_color" />
+                            android:textAllCaps="false" />
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_rear_led_r"
+                            android:id="@+id/et_gain_led_r"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -283,7 +276,7 @@
                             android:text="0"
                             android:background="@drawable/selector_edit_bk"/>
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_rear_led_g"
+                            android:id="@+id/et_gain_led_g"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -297,7 +290,7 @@
                             android:text="0"
                             android:background="@drawable/selector_edit_bk"/>
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_rear_led_b"
+                            android:id="@+id/et_gain_led_b"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -311,7 +304,7 @@
                             android:text="0"
                             android:background="@drawable/selector_edit_bk"/>
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_rear_led_ir1"
+                            android:id="@+id/et_gain_led_ir1"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -325,7 +318,7 @@
                             android:text="0"
                             android:background="@drawable/selector_edit_bk"/>
                         <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_rear_led_ir2"
+                            android:id="@+id/et_gain_led_ir2"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -346,27 +339,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/background"
-                    android:gravity="center">
+                    android:background="@color/background">
 
                     <TextView
-                        android:id="@+id/tv_front_light"
-                        android:layout_width="120dp"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center|left"
-                        android:text="主灯"
-                        android:paddingLeft="10dp"
-                        android:textColor="@color/textColor" />
-
-                    <com.yy.sorter.view.KeyboardDigitalEdit
-                        android:id="@+id/et_front_light"
+                        android:id="@+id/tv_main_light"
                         android:layout_width="80dp"
                         android:layout_height="40dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:text="主灯"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="10dp" />
+
+                    <com.yy.sorter.view.KeyboardDigitalEdit
+                        android:id="@+id/et_main_light"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="92dp"
                         android:background="@drawable/selector_edit_bk"
                         android:ems="3"
                         android:focusable="false"
@@ -376,119 +367,6 @@
                         android:textAlignment="center"
                         android:textColor="@color/fontColor" />
                 </RelativeLayout>
-                <LinearLayout
-                    android:id="@+id/layout_ir"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:visibility="gone"
-                    android:background="@color/background">
-                    <TextView
-                        android:id="@+id/tv_title_ir"
-                        android:layout_width="match_parent"
-                        android:text="红外"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:textSize="20sp"
-                        android:textColor="@color/buttonNormal"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/layout_ir_light_1"
-                        android:paddingRight="10dp"
-                        >
-                        <Button
-                            android:id="@+id/button_ir_front_light"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/th_button_selector"
-                            android:textColor="@drawable/selector_btn_click_text_color"
-                            android:layout_marginRight="10dp"
-                            android:textAllCaps="false"
-                            android:text="红外前主灯关"/>
-
-                        <Button
-                            android:id="@+id/button_ir_rear_light"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:textColor="@drawable/selector_btn_click_text_color"
-                            android:background="@drawable/th_button_selector"
-                            android:textAllCaps="false"
-                            android:text="红外后主灯关"/>
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:paddingTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:gravity="center_vertical"
-                        android:paddingRight="10dp"
-                        android:id="@+id/layout_ir_light_2"
-                        >
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/tv_front_light_ir"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:textColor="@color/fontColor"
-                                android:layout_marginRight="10dp"
-                                android:gravity="center"
-                                android:text="红外前主灯"/>
-                            <com.yy.sorter.view.KeyboardDigitalEdit
-                                android:id="@+id/et_front_light_ir"
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="1"
-                                android:inputType="number"
-                                android:ems="3"
-                                android:textColor="@color/fontColor"
-                                android:textAlignment="center"
-                                android:focusable="false"
-                                android:focusableInTouchMode="false"
-                                android:text="0"
-                                android:background="@drawable/selector_edit_bk"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/tv_rear_light_ir"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:textColor="@color/fontColor"
-                                android:layout_marginRight="10dp"
-                                android:gravity="center"
-                                android:text="红外后主灯"/>
-                            <com.yy.sorter.view.KeyboardDigitalEdit
-                                android:id="@+id/et_rear_light_ir"
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="1"
-                                android:inputType="number"
-                                android:ems="3"
-                                android:textColor="@color/fontColor"
-                                android:textAlignment="center"
-                                android:focusable="false"
-                                android:focusableInTouchMode="false"
-                                android:text="0"
-                                android:background="@drawable/selector_edit_bk"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>

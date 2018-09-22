@@ -30,6 +30,7 @@ import th.service.data.ThLightRet;
 import th.service.data.ThMode;
 import th.service.data.ThSVersion;
 import th.service.data.ThSense;
+import th.service.data.ThShapeItem;
 import th.service.data.ThSvmInfo;
 import th.service.data.ThValveRateRet;
 import th.service.data.ThWaveData;
@@ -450,6 +451,47 @@ public class ThPackageHelper {
 		}
 
 		return null;
+	}
+	/**
+	 *  解析形选
+	 */
+	public static List<ThShapeItem> parseThShapeItemList(ThPackage retData)
+	{
+		byte[] contents=retData.getContents();
+		List<ThShapeItem> thShapeItemList = new ArrayList<>();
+		if(contents!=null)
+		{
+			int size = retData.getData1()[1];
+			if(size <= 0)
+			{
+				return thShapeItemList;
+			}
+
+			int pos = 0;
+			for(int i=0;i<size;i++)
+			{
+				if(pos+54<contents.length)
+				{
+				    int thShapeItemSize = contents[pos+54]*ThShapeItem.MiniItem.SIZE + ThShapeItem.MIN_SIZE;
+
+					if(thShapeItemSize + pos > contents.length)
+					{
+						break;
+					}
+					byte[] buffer = new byte[thShapeItemSize];
+
+
+					System.arraycopy(contents,pos,buffer,0,buffer.length);
+
+					ThShapeItem thShapeItem = new ThShapeItem(buffer);
+					thShapeItemList.add(thShapeItem);
+
+					pos+=thShapeItemSize;
+				}
+			}
+		}
+
+		return thShapeItemList;
 	}
 
 	/**
