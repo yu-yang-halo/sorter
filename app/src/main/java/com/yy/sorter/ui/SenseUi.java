@@ -29,7 +29,7 @@ public class SenseUi extends BaseUi {
     private RelativeLayout container;
     private PageSwitchView pageSwitchView;
 
-    private PageBaseUi rgbIrPage,svmPage,hsvPage;
+    private PageBaseUi rgbIrPage,svmPage,hsvPage,shapePage;
     private PageBaseUi currentPage;
 
 
@@ -96,6 +96,9 @@ public class SenseUi extends BaseUi {
             }else if(tag == 2)
             {
                 loadPageToContainer(hsvPage,ConstantValues.VIEW_PAGE_HSV,tag);
+            }else if(tag == 3)
+            {
+                loadPageToContainer(shapePage,ConstantValues.VIEW_PAGE_SHAPE,tag);
             }
         }
 
@@ -130,6 +133,9 @@ public class SenseUi extends BaseUi {
                 break;
             case 2:
                 hsvPage = page;
+                break;
+            case 3:
+                shapePage = page;
                 break;
         }
         if(currentPage != null)
@@ -169,11 +175,11 @@ public class SenseUi extends BaseUi {
             ThSegmentView.TSegmentItem item3 = new ThSegmentView.TSegmentItem("形选",3);
             items.add(item3);
         }
-        if(machineData.getUseIR() == 0x01)
-        {
-            ThSegmentView.TSegmentItem item4 = new ThSegmentView.TSegmentItem("红外",4);
-            items.add(item4);
-        }
+//        if(machineData.getUseIR() == 0x01)
+//        {
+//            ThSegmentView.TSegmentItem item4 = new ThSegmentView.TSegmentItem("红外",4);
+//            items.add(item4);
+//        }
 
         segmentView.setContents(items);
 

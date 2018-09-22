@@ -18,6 +18,7 @@ import com.yy.sorter.ui.VersionUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.ui.page.HsvPage;
 import com.yy.sorter.ui.page.RgbIrPage;
+import com.yy.sorter.ui.page.ShapePage;
 import com.yy.sorter.ui.page.SvmPage;
 
 import java.util.HashMap;
@@ -124,6 +125,7 @@ public abstract class BasePageV {
         basePages.put(ConstantValues.VIEW_PAGE_RGB_IR, RgbIrPage.class);//色选
         basePages.put(ConstantValues.VIEW_PAGE_SVM, SvmPage.class);//SVM
         basePages.put(ConstantValues.VIEW_PAGE_HSV, HsvPage.class);//hsv
+        basePages.put(ConstantValues.VIEW_PAGE_SHAPE, ShapePage.class);//shape
 
     }
 

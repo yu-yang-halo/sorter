@@ -60,7 +60,7 @@ public class DigitalDialog extends Dialog {
         private Button btn_zero;
         private AlwaysClickButton btn_add;
         private AlwaysClickButton btn_reduce;
-        private ImageButton btn_clear;
+        private Button btn_clear;
         private ImageButton btn_cancel;
         private boolean bFirstDigitClicked=true;
         private int Max = 99;
@@ -209,7 +209,7 @@ public class DigitalDialog extends Dialog {
             btn_add = (AlwaysClickButton)layout.findViewById(R.id.add);
             btn_reduce = (AlwaysClickButton)layout.findViewById(R.id.reduce);
             edit_value = (TextView) layout.findViewById(R.id.value_digital);
-            btn_clear = (ImageButton)layout.findViewById(R.id.clear);
+            btn_clear = (Button)layout.findViewById(R.id.clear);
             btnBack = (ImageButton)layout.findViewById(R.id.back);
 
             tv_Max=(TextView)layout.findViewById(R.id.tv_max);
@@ -221,9 +221,10 @@ public class DigitalDialog extends Dialog {
             btn_add.setValve(0,this);
             btn_reduce.setValve(1,this);
 
-            tvMaxTitle.setText(FileManager.getInstance().getString(146)); // 146#最大
-            tvMinTitle.setText(FileManager.getInstance().getString(147)); //147#最小
-            btnConfig.setText(FileManager.getInstance().getString(130));//130#确定
+
+            tvMaxTitle.setText(FileManager.getInstance().getString(85)); // 85#最大
+            tvMinTitle.setText(FileManager.getInstance().getString(86)); // 86#最小
+            btnConfig.setText(FileManager.getInstance().getString(7));//7#确定
             SetListener();
 
             btnBack.setOnClickListener(new View.OnClickListener() {
@@ -268,11 +269,13 @@ public class DigitalDialog extends Dialog {
                     }
                     else if (m_value>Max)
                     {
-                        Toast.makeText(context, FileManager.getInstance().getString(211),Toast.LENGTH_SHORT).show(); //211#输入值大于最大值
+
+
+                        Toast.makeText(context, FileManager.getInstance().getString(1027),Toast.LENGTH_SHORT).show(); //1027#输入值大于最大值
                     }
                     else
                     {
-                        Toast.makeText(context, FileManager.getInstance().getString(210),Toast.LENGTH_SHORT).show();//210#输入值小于最小值
+                        Toast.makeText(context, FileManager.getInstance().getString(1027),Toast.LENGTH_SHORT).show();// 1027#输入值小于最小值
                     }
                 }
             });

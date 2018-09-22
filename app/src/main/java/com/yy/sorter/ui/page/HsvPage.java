@@ -218,9 +218,9 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
 
     private void reqHsvInfo()
     {
-        byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+        currentGroup = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
         currentView = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentView();
-        AbstractDataServiceFactory.getInstance().reqHsvInfo(group, (byte) currentView);
+        AbstractDataServiceFactory.getInstance().reqHsvInfo(currentGroup, currentView);
     }
 
     @Override

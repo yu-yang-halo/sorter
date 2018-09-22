@@ -17,7 +17,7 @@ public class ThShapeItem {
     private byte   count;//MiniItem 的数量
     private List<MiniItem> miniItemList;
 
-
+    public ThShapeItem(){};
     public ThShapeItem(byte[] contents)
     {
         if(contents.length >= 55)
@@ -117,7 +117,7 @@ public class ThShapeItem {
         private byte[] value;
         private byte[] max;
         private byte[] min;
-
+        public MiniItem(){};
         public MiniItem(byte[] contents)
         {
             value = new byte[2];

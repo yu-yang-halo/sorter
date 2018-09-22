@@ -40,7 +40,7 @@ public class ConstantValues {
     public static final int VIEW_PAGE_RGB_IR = 0x100;
     public static final int VIEW_PAGE_SVM = 0x101;
     public static final int VIEW_PAGE_HSV=0x102;
-    public static final int VIEW_PAGE_SHAPE=0x102;
+    public static final int VIEW_PAGE_SHAPE=0x103;
 
 
 
