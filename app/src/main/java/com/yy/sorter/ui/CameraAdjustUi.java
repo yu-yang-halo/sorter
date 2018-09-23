@@ -16,6 +16,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
+import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.manager.TopManager;
 import com.yy.sorter.ui.base.BaseUi;
@@ -48,7 +49,7 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
     private PageSwitchView pageSwitchView;
     private KeyboardDigitalEdit et_chute;
     private SeekBar seekBar;
-    private TextView tv_layer;
+    private TextView tv_layer,tv_chute;
     private ThWaveView thWaveView;
     private LinearLayout seekLayout,bottomLayout;
     private RelativeLayout layout_spot;
@@ -72,6 +73,7 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
         if(view==null) {
             view = LayoutInflater.from(ctx).inflate(R.layout.ui_camera_adjust, null);
             tv_layer= (TextView) view.findViewById(R.id.tv_layer);
+            tv_chute = (TextView) view.findViewById(R.id.tv_chute);
 
             thWaveView= (ThWaveView) view.findViewById(R.id.thwaveView);
             radio_group= (RadioGroup) view.findViewById(R.id.radio_group);
@@ -199,7 +201,10 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
             sb.append(StringUtils.getLayerStr(currentLayer));
             sb.append(" >> ");
         }
-        sb.append(currentView== 0? "前视": "后视");
+        //75#前视
+        //76#后视
+        sb.append(currentView== 0? FileManager.getInstance().getString(75):
+                FileManager.getInstance().getString(76));
 
         tv_layer.setText(sb);
 
@@ -277,6 +282,22 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
         AbstractDataServiceFactory.getInstance().requestWave(waveType,params);
 
     }
+
+    private void setLanguage()
+    {
+        tv_chute.setText(FileManager.getInstance().getString(79));//79#料槽
+
+        radio1.setText(FileManager.getInstance().getString(116));//116#相机调整
+        radio2.setText(FileManager.getInstance().getString(117));//117#详细数据
+        radio3.setText(FileManager.getInstance().getString(118));//118#压缩数据
+
+        btnTest.setText(FileManager.getInstance().getString(119));//119#测试数据
+        btnOrigin.setText(FileManager.getInstance().getString(120));//120#原始数据
+        btnCalibration.setText(FileManager.getInstance().getString(121));//121#校正数据
+
+
+    }
+
     @Override
     public void onViewStart() {
         super.onViewStart();

@@ -1,5 +1,6 @@
 package th.service.data;
 
+import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.StringUtils;
 
@@ -45,7 +46,7 @@ public class ThSense {
         thSense.setSense(ConvertUtils.intTo2Bytes(value));
         thSense.setSenseMax(ConvertUtils.intTo2Bytes(19));
         thSense.setSenseMin(ConvertUtils.intTo2Bytes(0));
-        thSense.setName("反选");
+        thSense.setName(FileManager.getInstance().getString(99));//99#反选
 
         return thSense;
     }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.yy.sorter.activity.R;
+import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
@@ -67,8 +68,10 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
 
             List<ThSegmentView.TSegmentItem> items=new ArrayList<>();
 
-            ThSegmentView.TSegmentItem item0 = new ThSegmentView.TSegmentItem("分组调整",0);
-            ThSegmentView.TSegmentItem item1 = new ThSegmentView.TSegmentItem("单通道调整",1);
+            //111#分组调整
+            //112#分料槽调整
+            ThSegmentView.TSegmentItem item0 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(111),0);
+            ThSegmentView.TSegmentItem item1 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(112),1);
 
             items.add(item0);
             items.add(item1);
@@ -372,7 +375,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                     holder.tv_title.setText(StringUtils.getGroupStr(position+1));
                 }else
                 {
-                    holder.tv_title.setText("通道"+(position+1));
+                    holder.tv_title.setText(FileManager.getInstance().getString(79)+(position+1));//79#料槽
                 }
 
                 holder.btnSwitch.setCheckedImmediatelyNoEvent((item.status==1));

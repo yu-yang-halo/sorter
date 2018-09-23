@@ -71,3 +71,5 @@
 1024#User data error
 1025#Device offline
 1026#Authorization code error
+1027#The input value is greater than the maximum value.
+1028#The input value is less than the minimum value.

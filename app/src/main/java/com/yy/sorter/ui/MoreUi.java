@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
+import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
@@ -54,8 +55,11 @@ public class MoreUi extends BaseUi {
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
     {
-
-        private String[] strList = new String[]{"版本信息","相机校准","信号调节","喷阀指示"};
+        private String[] strList = new String[]{
+                FileManager.getInstance().getString(62),
+                FileManager.getInstance().getString(113),
+                FileManager.getInstance().getString(114),
+                FileManager.getInstance().getString(115)};
         public MyAdapter()
         {
 
@@ -78,19 +82,26 @@ public class MoreUi extends BaseUi {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    String titleName = "";
+                    if(position>=0 && position<=3)
+                    {
+                        titleName = strList[position];
+                    }
+
                     switch (position)
                     {
                         case 0:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VERSION,"版本信息");
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VERSION,titleName);
                             break;
                         case 1:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_CAMERAADJUST,"相机校准");
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_CAMERAADJUST,titleName);
                             break;
                         case 2:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_BACKGROUND,"信号调节");
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_BACKGROUND,titleName);
                             break;
                         case 3:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE,"喷阀指示");
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE,titleName);
                             break;
                     }
 

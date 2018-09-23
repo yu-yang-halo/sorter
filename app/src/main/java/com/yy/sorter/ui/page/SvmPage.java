@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
+import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
@@ -135,9 +136,9 @@ public class SvmPage extends PageBaseUi {
             ThSvmInfo thSvmInfo = thSvmInfoList.get(position);
             if(thSvmInfo.getView() == 0)
             {
-                holder.tv_front.setText("前视");
+                holder.tv_front.setText(FileManager.getInstance().getString(75));//75#前视
             }else{
-                holder.tv_front.setText("后视");
+                holder.tv_front.setText(FileManager.getInstance().getString(76));//76#后视
             }
             holder.sensor_Edit.setValue(100,0,position*2);
             holder.spotDiff_Edit.setValue(ConvertUtils.bytes2ToInt(thSvmInfo.getSpotDiffMax()),1,position*2+1);
@@ -148,24 +149,27 @@ public class SvmPage extends PageBaseUi {
             holder.sensor_Edit.setText(String.valueOf(ConvertUtils.unsignByteToInt(thSvmInfo.getSpotSensor())));
             holder.spotDiff_Edit.setText(String.valueOf(ConvertUtils.bytes2ToInt(thSvmInfo.getSpotDiff())));
 
-
             if(thSvmInfo.getBlowSample() == 0)
             {
-                holder.blowSampleBtn.setText("剔除负样本");
+                holder.blowSampleBtn.setText(FileManager.getInstance().getString(100));//100#剔除负样本
                 holder.blowSampleBtn.setSelected(false);
             }else {
-                holder.blowSampleBtn.setText("剔除正样本");
+                holder.blowSampleBtn.setText(FileManager.getInstance().getString(101));//101#剔除正样本
                 holder.blowSampleBtn.setSelected(true);
             }
 
+
             if(thSvmInfo.getUsed() == 0)
             {
-                holder.usedBtn.setText("禁用");
+                holder.usedBtn.setText(FileManager.getInstance().getString(102));//102#禁用
                 holder.usedBtn.setSelected(false);
             }else {
-                holder.usedBtn.setText("使用");
+                holder.usedBtn.setText(FileManager.getInstance().getString(103));//103#使用
                 holder.usedBtn.setSelected(true);
             }
+            
+            holder.tv_sense.setText(FileManager.getInstance().getString(104));//104#灵敏度
+            holder.tv_defect_ratio.setText(FileManager.getInstance().getString(105));//105#杂质比
 
             holder.blowSampleBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

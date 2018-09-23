@@ -242,7 +242,7 @@ public class ThPackageHelper {
 		ThSense item0=ThSense.createThSense((byte) 0);
 		item0.setView((byte) 0);
 		item0.setViewType(ConstantValues.VIEW_TYPE_FRONT);
-		item0.setName("前视");
+		item0.setName(FileManager.getInstance().getString(75));//75#前视
 		thSenseList.add(item0);
 
 		for(int i=0;i<count;i++){
@@ -262,7 +262,7 @@ public class ThPackageHelper {
 					ThSense item1=ThSense.createThSense((byte) 0);
 					item1.setView((byte) 1);
 					item1.setViewType(ConstantValues.VIEW_TYPE_REAR);
-					item1.setName("后视");
+					item1.setName(FileManager.getInstance().getString(76));//76#后视
 					thSenseList.add(item1);
 				}
 

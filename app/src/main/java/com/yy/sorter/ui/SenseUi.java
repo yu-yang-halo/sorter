@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.yy.sorter.activity.R;
+import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.ui.page.PageBaseUi;
@@ -157,27 +158,27 @@ public class SenseUi extends BaseUi {
 
         if(machineData.getUserColor() == 0x01)
         {
-            ThSegmentView.TSegmentItem item0 = new ThSegmentView.TSegmentItem("色选",0);
+            ThSegmentView.TSegmentItem item0 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(94),0);// 94#色选
             items.add(item0);
         }
         if(machineData.getUseSvm() == 0x01)
         {
-            ThSegmentView.TSegmentItem item1 = new ThSegmentView.TSegmentItem("智能分选",1);
+            ThSegmentView.TSegmentItem item1 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(95),1);// 95#智能分选
             items.add(item1);
         }
         if(machineData.getUseHsv() == 0x01)
         {
-            ThSegmentView.TSegmentItem item2 = new ThSegmentView.TSegmentItem("色度分选",2);
+            ThSegmentView.TSegmentItem item2 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(96),2);// 96#色度分选
             items.add(item2);
         }
         if(machineData.getUseShape() == 0x01)
         {
-            ThSegmentView.TSegmentItem item3 = new ThSegmentView.TSegmentItem("形选",3);
+            ThSegmentView.TSegmentItem item3 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(97),3);//   97#形选
             items.add(item3);
         }
 //        if(machineData.getUseIR() == 0x01)
 //        {
-//            ThSegmentView.TSegmentItem item4 = new ThSegmentView.TSegmentItem("红外",4);
+//            ThSegmentView.TSegmentItem item4 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(98),4);//98#红外
 //            items.add(item4);
 //        }
 

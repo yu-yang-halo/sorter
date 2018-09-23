@@ -40,7 +40,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     private static final String TAG = "HomeUi";
     private PullRefreshLayout layout;
     private TextView nameTxt;
-    private TextView tv_feeder,tv_valve;
+    private TextView tv_feeder,tv_valve,tv_title_scheme;
     private SwitchButton btn_switch_feeder,btn_switch_valve;
     private Button btn_clean,btn_system,btn_save;
     private boolean systemBegin,cleanBegin;
@@ -61,6 +61,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             layout = (PullRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
             modeLayout = (RelativeLayout)view.findViewById(R.id.modeLayout);
             nameTxt = (TextView) view.findViewById(R.id.nameTxt);
+            tv_title_scheme = (TextView) view.findViewById(R.id.tv_title_scheme);
             tv_valve = (TextView) view.findViewById(R.id.tv_valve);
             tv_feeder = (TextView) view.findViewById(R.id.tv_feeder);
             btn_switch_valve = (SwitchButton) view.findViewById(R.id.btn_switch_valve);
@@ -327,7 +328,10 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     }
 
     private void setLanguage() {
-
+        btn_save.setText(FileManager.getInstance().getString(90));//90#保存
+        tv_feeder.setText(FileManager.getInstance().getString(91));//91#给料器
+        tv_valve.setText(FileManager.getInstance().getString(92));//92#喷阀
+        tv_title_scheme.setText(FileManager.getInstance().getString(93));//93#当前方案
     }
 
     @Override
@@ -386,9 +390,9 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             {
                 if(packet.getData1()[0] == 1)
                 {
-                    showToast("保存成功");
+                    showToast(FileManager.getInstance().getString(1029));// 1029#保存成功
                 }else {
-                    showToast("保存失败");
+                    showToast(FileManager.getInstance().getString(1030));//1030#保存失败
                 }
             }
 

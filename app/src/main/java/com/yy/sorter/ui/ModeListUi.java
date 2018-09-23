@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.baoyz.widget.PullRefreshLayout;
 import com.yy.sorter.activity.R;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
@@ -32,6 +34,7 @@ public class ModeListUi extends BaseUi {
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
     private List<ThMode> thModeList;
+    private PullRefreshLayout swipeRefreshLayout;
     public ModeListUi(Context ctx) {
         super(ctx);
     }
@@ -42,10 +45,18 @@ public class ModeListUi extends BaseUi {
         {
             view= LayoutInflater.from(ctx).inflate(R.layout.ui_mode_list,null);
             recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+            swipeRefreshLayout = (PullRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
             recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
 
             myAdapter = new MyAdapter();
             recyclerView.setAdapter(myAdapter);
+
+            swipeRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    reqModeList();
+                }
+            });
         }
         return view;
     }
@@ -53,6 +64,11 @@ public class ModeListUi extends BaseUi {
     @Override
     public void onViewStart() {
         super.onViewStart();
+        reqModeList();
+    }
+
+    private void reqModeList()
+    {
         machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
 
         AbstractDataServiceFactory.getInstance().requestModeList(machineData.getSortModeBig());
@@ -68,6 +84,8 @@ public class ModeListUi extends BaseUi {
 
                 myAdapter.setThModeList(thModeList);
                 myAdapter.notifyDataSetChanged();
+
+                swipeRefreshLayout.setRefreshing(false);
             }else if(packet.getExtendType() == 0x02)
             {
                 byte currentSmallIndex = packet.getData1()[0];

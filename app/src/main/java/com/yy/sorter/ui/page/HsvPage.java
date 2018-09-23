@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
+import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
@@ -198,10 +199,27 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
         },200,2000);
     }
 
+    private void setLanguage()
+    {
+        frontBtn.setText(FileManager.getInstance().getString(75));//75#前视
+        rearBtn.setText(FileManager.getInstance().getString(76));//76#后视
+        imageMoveFlagCK.setText(FileManager.getInstance().getString(106));//106#图像平移
+
+        lb_hsv_s.setText(FileManager.getInstance().getString(109));//109#纯度
+        lb_hsv_h.setText(FileManager.getInstance().getString(110));//110#颜色
+
+        lb_start.setText(FileManager.getInstance().getString(107));//107#起点
+        lb_end.setText(FileManager.getInstance().getString(108));//108#终点
+
+        tv_chute.setText(FileManager.getInstance().getString(79));//79#料槽
+
+
+    }
 
     @Override
     public void onViewStart() {
         super.onViewStart();
+        setLanguage();
         initButtonStyle();
         reqHsvInfo();
         startTimer();
@@ -476,10 +494,11 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
     }
     private void initUsed(byte mUsed){
         if(mUsed==0x01){
-            enableButton.setText("使用");   // 35#使用
+            enableButton.setText(FileManager.getInstance().getString(103));   // 103#使用
+
             enableButton.setSelected(true);
         }else{
-            enableButton.setText("禁用"); //36#禁用
+            enableButton.setText(FileManager.getInstance().getString(102)); //102#禁用
             enableButton.setSelected(false);
         }
     }

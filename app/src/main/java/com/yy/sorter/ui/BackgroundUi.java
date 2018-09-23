@@ -63,13 +63,13 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
     private KeyboardDigitalEdit et_chute;
 
     private ThWaveView thwaveView;
-    private TextView tvLayer=null;
+    private TextView tvLayer;
     private ThLightRet ret;
 
 
     private int m_Channel=0;
     private Timer timer=null;
-    private TextView tvChute,tv_main_light,tv_ir1,tv_ir2;
+    private TextView tvChute,tv_main_light,tv_ir1,tv_ir2,text_gain_led,text_bg_led;
     private PageSwitchView pageSwitchView;
 
     private Button btn_digitalGain;
@@ -90,6 +90,8 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             tv_main_light = (TextView)view.findViewById(R.id.tv_main_light);
             tv_ir1 = (TextView) view.findViewById(R.id.tv_ir1);
             tv_ir2 = (TextView) view.findViewById(R.id.tv_ir2);
+            text_gain_led = (TextView) view.findViewById(R.id.text_gain_led);
+            text_bg_led = (TextView) view.findViewById(R.id.text_bg_led);
 
 
             thwaveView= (ThWaveView) view.findViewById(R.id.thwaveView);
@@ -358,7 +360,10 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             sb.append(StringUtils.getLayerStr(currentLayer));
             sb.append(" >> ");
         }
-        sb.append(currentView== 0? "前视": "后视");
+        //75#前视
+        //76#后视
+        sb.append(currentView== 0? FileManager.getInstance().getString(75):
+                FileManager.getInstance().getString(76));
 
         tvLayer.setText(sb);
 
@@ -367,6 +372,11 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
     private void setLanguage()
     {
         tvChute.setText(FileManager.getInstance().getString(79)); //79#料槽
+        ck_adjustAll.setText(FileManager.getInstance().getString(122));//122#整体调整
+        tv_main_light.setText(FileManager.getInstance().getString(123));//123#主灯
+        text_gain_led.setText(FileManager.getInstance().getString(124));//124#相机增益
+        text_bg_led.setText(FileManager.getInstance().getString(80));//80#背景灯
+
     }
 
     @Override

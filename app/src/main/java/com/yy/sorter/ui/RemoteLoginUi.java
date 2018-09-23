@@ -55,6 +55,13 @@ public class RemoteLoginUi extends BaseUi {
         return view;
     }
 
+    private void setLanguage()
+    {
+        remoteLogin.setText(FileManager.getInstance().getString(87));//87#登录
+        deviceNumberEdit.setHint(FileManager.getInstance().getString(88));//88#设备编号
+        vcodeEdit.setHint(FileManager.getInstance().getString(89));//89#登录口令
+    }
+
     private void  initDeviceNumber(){
 
         String deviceNumber=TextCacheUtils.getValueString(TextCacheUtils.KEY_DEVICE_NUMBER,null);
@@ -77,6 +84,8 @@ public class RemoteLoginUi extends BaseUi {
 
         initAutoCompleteDeviceNumber(deviceNumberEdit);
         initDeviceNumber();
+
+        setLanguage();
     }
 
     private void setListenser(){
