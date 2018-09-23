@@ -36,7 +36,6 @@
 
         </activity>
 
-        <meta-data android:value="${BUG_HD_TH_VALUE}" android:name="BUG_HD_SDK_GENERAL_KEY" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

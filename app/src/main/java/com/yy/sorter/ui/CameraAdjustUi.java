@@ -301,6 +301,7 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
     @Override
     public void onViewStart() {
         super.onViewStart();
+        setLanguage();
         waveButtonInit(0);
         thWaveView.clear();
         MachineData machineData=AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
