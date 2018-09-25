@@ -27,6 +27,7 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.ThFeeder;
+import th.service.data.ThSense;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -178,6 +179,10 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                     case 0://单个通道
                     {
                         byte chuteIndex = packet.getData1()[1];
+                        if(chuteIndex<0 || chuteIndex > 9)
+                        {
+                            return;
+                        }
                         thFeeder.getVibdata()[chuteIndex] = packet.getData1()[2];
                         refreshRecycleViewData();
                     }
@@ -189,6 +194,10 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                     case 3:
                     {
                         byte groupIndex = packet.getData1()[1];
+                        if(groupIndex<0 || groupIndex >3)
+                        {
+                            return;
+                        }
                         thFeeder.getGroupData()[groupIndex] = packet.getData1()[2];
                         refreshRecycleViewData();
                     }
@@ -202,6 +211,10 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                     case 0://单个通道
                     {
                         byte chuteIndex = packet.getData1()[1];
+                        if(chuteIndex<0 || chuteIndex > 9)
+                        {
+                            return;
+                        }
                         thFeeder.getVibOpen()[chuteIndex] = packet.getData1()[2];
                         refreshRecycleViewData();
                     }
@@ -209,6 +222,10 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                     case 3://组
                     {
                         byte groupIndex = packet.getData1()[1];
+                        if(groupIndex<0 || groupIndex >3)
+                        {
+                            return;
+                        }
                         thFeeder.getGroupOpen()[groupIndex] = packet.getData1()[2];
                         refreshRecycleViewData();
                     }
@@ -343,7 +360,8 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
         public byte status;
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder> implements DigitalDialog.Builder.LVCallback
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
+            implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack
     {
         private List<Item> itemList;
         public MyAdapter()
@@ -363,6 +381,20 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
         }
 
         @Override
+        public void onBindViewHolder(MyItemHolder holder, int position, List<Object> payloads) {
+            super.onBindViewHolder(holder, position, payloads);
+            if(payloads.isEmpty())
+            {
+                onBindViewHolder(holder,position);
+            }else
+            {
+                Item item = itemList.get(position);
+                holder.editText.setText(String.valueOf(ConvertUtils.unsignByteToInt(item.value)));
+            }
+
+        }
+
+        @Override
         public void onBindViewHolder(MyItemHolder holder, final int position) {
 
 
@@ -373,15 +405,23 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                 if(item.type == 0)
                 {
                     holder.tv_title.setText(StringUtils.getGroupStr(position+1));
+                    holder.addBtn.setVisibility(View.VISIBLE);
+                    holder.minusBtn.setVisibility(View.VISIBLE);
                 }else
                 {
                     holder.tv_title.setText(FileManager.getInstance().getString(79)+(position+1));//79#料槽
+
+                    holder.addBtn.setVisibility(View.GONE);
+                    holder.minusBtn.setVisibility(View.GONE);
                 }
 
                 holder.btnSwitch.setCheckedImmediatelyNoEvent((item.status==1));
                 holder.editText.setText(String.valueOf(ConvertUtils.unsignByteToInt(item.value)));
                 holder.editText.setLVCallback(this);
                 holder.editText.setValue(99,1,position);
+
+                holder.addBtn.setValve(position,this);
+                holder.minusBtn.setValve(position+100,this);
 
                 holder.btnSwitch.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -433,17 +473,73 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
             }
         }
 
+        @Override
+        public void onMuiltClick(int par, int isSend) {
+            int pos = 0;
+            boolean isAdd = true;
+            int value,max,min;
+            if(par >= 100)
+            {
+                isAdd = false;
+                pos = par-100;
+            }else {
+                isAdd = true;
+                pos = par;
+            }
+            Item item = itemList.get(pos);
+            value = ConvertUtils.unsignByteToInt(item.value);
+            max = 99;
+            min = 1;
+
+            if(isSend == 1)
+            {
+                if(isAdd)
+                {
+                    value=value+1;
+                }else
+                {
+                    value=value-1;
+                }
+                if(value<min)
+                {
+                    value = min;
+                }
+                if(value>max)
+                {
+                    value = max;
+                }
+                item.value = (byte) value;
+                itemList.get(pos).value = (byte) value;
+
+                notifyItemChanged(pos,"update");
+
+            }else
+            {
+                if(itemList.get(pos).type == 0)//分组
+                {
+                    AbstractDataServiceFactory.getInstance().setFeederValue((byte) 3,(byte)pos,(byte)value);
+                }else
+                {
+                    AbstractDataServiceFactory.getInstance().setFeederValue((byte) 0,(byte)pos,(byte)value);
+                }
+            }
+
+        }
+
         class MyItemHolder extends RecyclerView.ViewHolder
         {
 
             TextView tv_title;
             SwitchButton btnSwitch;
             KeyboardDigitalEdit editText;
+            AlwaysClickButton addBtn,minusBtn;
             public MyItemHolder(View itemView) {
                 super(itemView);
                 tv_title = (TextView) itemView.findViewById(R.id.tv_title);
                 btnSwitch = (SwitchButton) itemView.findViewById(R.id.btnSwitch);
                 editText = (KeyboardDigitalEdit) itemView.findViewById(R.id.editText);
+                addBtn = (AlwaysClickButton) itemView.findViewById(R.id.addBtn);
+                minusBtn = (AlwaysClickButton) itemView.findViewById(R.id.minusBtn);
             }
         }
     }

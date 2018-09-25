@@ -35,7 +35,7 @@ public class ThStrategy {
         strategyTables.put(ConstantValues.VIEW_HOME,Arrays.asList(ThCommand.LOGIN_CMD,ThCommand.CONTROL_CMD,
                 ThCommand.MODE_CMD));
         strategyTables.put(ConstantValues.VIEW_SENSE,Arrays.asList(ThCommand.SENSE_CMD,
-                ThCommand.SVM_CMD,ThCommand.HSV_CMD,ThCommand.WAVE_CMD));
+                ThCommand.SVM_CMD,ThCommand.HSV_CMD,ThCommand.SHAPE_CMD,ThCommand.WAVE_CMD));
         strategyTables.put(ConstantValues.VIEW_MODE_LIST,Arrays.asList(ThCommand.MODE_CMD));
         strategyTables.put(ConstantValues.VIEW_FEEDER,Arrays.asList(ThCommand.FEEDER_CMD));
         strategyTables.put(ConstantValues.VIEW_LAN,Arrays.asList((byte)0xc1,(byte)0xc2));

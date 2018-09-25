@@ -273,7 +273,7 @@ public abstract class AbstractIDataService implements IDataService{
     {
         byte[] arr = ConvertUtils.intTo2Bytes(value);
         byte[] data1=new byte[]{group,setType,whatShape,whatAlgorithm,whatIndex,arr[0],arr[1]};
-        ThPackage packet= new ThPackage(ThCommand.SHAPE_CMD,(byte)0x01, data1,(byte)0, (byte)0, (byte)0,null);
+        ThPackage packet= new ThPackage(ThCommand.SHAPE_CMD,(byte)0x02, data1,(byte)0, (byte)0, (byte)0,null);
         sendPacketData(packet);
     }
 

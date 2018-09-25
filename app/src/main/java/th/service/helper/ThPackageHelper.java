@@ -466,13 +466,14 @@ public class ThPackageHelper {
 			{
 				return thShapeItemList;
 			}
-
 			int pos = 0;
-			for(int i=0;i<size;i++)
+
+			while (pos != contents.length)
 			{
 				if(pos+54<contents.length)
 				{
-				    int thShapeItemSize = contents[pos+54]*ThShapeItem.MiniItem.SIZE + ThShapeItem.MIN_SIZE;
+					int miniCount = contents[pos+54];
+					int thShapeItemSize = miniCount*ThShapeItem.MiniItem.SIZE + ThShapeItem.MIN_SIZE;
 
 					if(thShapeItemSize + pos > contents.length)
 					{
@@ -489,6 +490,28 @@ public class ThPackageHelper {
 					pos+=thShapeItemSize;
 				}
 			}
+			System.out.println("pos == "+pos+" size == "+size+" contents.length="+contents.length);
+//			for(int i=0;i<size;i++)
+//			{
+//				if(pos+54<contents.length)
+//				{
+//				    int thShapeItemSize = contents[pos+54]*ThShapeItem.MiniItem.SIZE + ThShapeItem.MIN_SIZE;
+//
+//					if(thShapeItemSize + pos > contents.length)
+//					{
+//						break;
+//					}
+//					byte[] buffer = new byte[thShapeItemSize];
+//
+//
+//					System.arraycopy(contents,pos,buffer,0,buffer.length);
+//
+//					ThShapeItem thShapeItem = new ThShapeItem(buffer);
+//					thShapeItemList.add(thShapeItem);
+//
+//					pos+=thShapeItemSize;
+//				}
+//			}
 		}
 
 		return thShapeItemList;

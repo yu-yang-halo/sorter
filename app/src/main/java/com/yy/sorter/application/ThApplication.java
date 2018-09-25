@@ -73,13 +73,13 @@ public class ThApplication extends Application {
 
     public void languageInit(){
         /**
-         * 初始化默认语言 英文
+         * 初始化默认语言 中文
          */
         String lanPacketName= TextCacheUtils.getValueString(TextCacheUtils.KEY_LAN_URL,null);
         if(lanPacketName==null){
-            TextCacheUtils.loadInt(TextCacheUtils.KEY_LAN_COUNTRY_ID, ConstantValues.LAN_COUNTRY_EN);
-            TextCacheUtils.loadString(TextCacheUtils.KEY_LAN_URL,"strings_us.txt");
-            lanPacketName=TextCacheUtils.getValueString(TextCacheUtils.KEY_LAN_URL,"strings_us.txt");
+            TextCacheUtils.loadInt(TextCacheUtils.KEY_LAN_COUNTRY_ID, ConstantValues.LAN_COUNTRY_CN);
+            TextCacheUtils.loadString(TextCacheUtils.KEY_LAN_URL,"strings_zh.txt");
+            lanPacketName=TextCacheUtils.getValueString(TextCacheUtils.KEY_LAN_URL,"strings_zh.txt");
         }
         FileManager.getInstance().setCtx(this);
         FileManager.getInstance().copyAssetsFileToLocal();
@@ -92,9 +92,9 @@ public class ThApplication extends Application {
                     public void run() {
                         if(!success){
                             showMessage(FileManager.getInstance().getString(151)); //151#语言切换失败,切换默认的英文语言
-                            FileManager.getInstance().readLocalFile("strings_us.txt",null);
-                            TextCacheUtils.loadInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,ConstantValues.LAN_COUNTRY_EN);
-                            TextCacheUtils.loadString(TextCacheUtils.KEY_LAN_URL,"strings_us.txt");
+                            FileManager.getInstance().readLocalFile("strings_zh.txt",null);
+                            TextCacheUtils.loadInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,ConstantValues.LAN_COUNTRY_CN);
+                            TextCacheUtils.loadString(TextCacheUtils.KEY_LAN_URL,"strings_zh.txt");
                         }
                     }
                 });

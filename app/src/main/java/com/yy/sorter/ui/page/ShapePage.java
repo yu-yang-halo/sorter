@@ -48,34 +48,34 @@ public class ShapePage extends PageBaseUi {
             recyclerView.setAdapter(myAdapter);
 
 
-            thShapeItemList = new ArrayList<>();
+//            thShapeItemList = new ArrayList<>();
+//
+//            for(int i=0;i<10;i++)
+//            {
+//                ThShapeItem thShapeItem = new ThShapeItem();
+//                thShapeItem.setShapeType((byte) (i%2));
+//                thShapeItem.setUsed((byte)(i%2));
+//                thShapeItem.setShapeId((byte) i);
+//                thShapeItem.setCount((byte) 5);
+//                thShapeItem.setName("Shape Item "+i);
+//                List<ThShapeItem.MiniItem> miniItems = new ArrayList<>();
+//                for(int j=0;j<5;j++)
+//                {
+//                    ThShapeItem.MiniItem item = new ThShapeItem.MiniItem();
+//                    item.setIndex((byte) j);
+//                    item.setName("Mini Item "+j);
+//                    item.setMin(ConvertUtils.intTo2Bytes(1));
+//                    item.setMax(ConvertUtils.intTo2Bytes(199));
+//                    item.setValue(ConvertUtils.intTo2Bytes(j*2+50));
+//                    miniItems.add(item);
+//                }
+//
+//                thShapeItem.setMiniItemList(miniItems);
+//
+//                thShapeItemList.add(thShapeItem);
+//            }
 
-            for(int i=0;i<10;i++)
-            {
-                ThShapeItem thShapeItem = new ThShapeItem();
-                thShapeItem.setShapeType((byte) (i%2));
-                thShapeItem.setUsed((byte)(i%2));
-                thShapeItem.setShapeId((byte) i);
-                thShapeItem.setCount((byte) 5);
-                thShapeItem.setName("Shape Item "+i);
-                List<ThShapeItem.MiniItem> miniItems = new ArrayList<>();
-                for(int j=0;j<5;j++)
-                {
-                    ThShapeItem.MiniItem item = new ThShapeItem.MiniItem();
-                    item.setIndex((byte) j);
-                    item.setName("Mini Item "+j);
-                    item.setMin(ConvertUtils.intTo2Bytes(1));
-                    item.setMax(ConvertUtils.intTo2Bytes(199));
-                    item.setValue(ConvertUtils.intTo2Bytes(j*2+50));
-                    miniItems.add(item);
-                }
-
-                thShapeItem.setMiniItemList(miniItems);
-
-                thShapeItemList.add(thShapeItem);
-            }
-
-            myAdapter.setThShapeItemList(thShapeItemList);
+//            myAdapter.setThShapeItemList(thShapeItemList);
 
         }
 
@@ -113,12 +113,71 @@ public class ShapePage extends PageBaseUi {
             if(packet.getExtendType() == 0x01)
             {
                thShapeItemList = ThPackageHelper.parseThShapeItemList(packet);
+               myAdapter.setThShapeItemList(thShapeItemList);
+               myAdapter.notifyDataSetChanged();
 
             }else if(packet.getExtendType()==0x02)
             {
 
+                updateShapeItem(packet);
+                //reqShapeInfo();
+
             }
         }
+    }
+    private void updateShapeItem(ThPackage packet)
+    {
+        if(thShapeItemList == null)
+        {
+            return;
+        }
+        byte type = packet.getData1()[1];//0 使能  1 值
+        byte shapeType = packet.getData1()[2];
+        byte shapeId = packet.getData1()[3];
+        byte index = packet.getData1()[4];
+        int  value = ConvertUtils.bytes2ToInt(packet.getData1()[5],packet.getData1()[6]);
+
+
+        for(ThShapeItem thShapeItem:thShapeItemList)
+        {
+            if(thShapeItem.getShapeType() == shapeType
+                    && thShapeItem.getShapeId() == shapeId)
+            {
+                if(type == 0)
+                {
+                   thShapeItem.setUsed((byte) value);
+                   if(value == 0)
+                   {
+                       continue;
+                   }
+                   for(ThShapeItem tmp:thShapeItemList)
+                   {
+                       if(thShapeItem.getShapeType() == tmp.getShapeType()
+                               && thShapeItem.getMutex() == tmp.getShapeId())
+                       {
+                           if(value == 1)
+                           {
+                               tmp.setUsed((byte) 0);
+                           }
+                           break;
+                       }
+                   }
+                }else
+                {
+                    for(ThShapeItem.MiniItem miniItem:thShapeItem.getMiniItemList())
+                    {
+                        if(miniItem.getIndex() == index)
+                        {
+                            miniItem.setValue(ConvertUtils.intTo2Bytes(value));
+                        }
+                    }
+                }
+            }
+        }
+
+        myAdapter.setThShapeItemList(thShapeItemList);
+        myAdapter.notifyDataSetChanged();
+
     }
 
     class ItemAdapter extends BaseAdapter implements DigitalDialog.Builder.LVCallback
@@ -263,7 +322,8 @@ public class ShapePage extends PageBaseUi {
                 ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
                 if(thShapeItem.getMiniItemList() != null)
                 {
-                    params.height = ConvertUtils.toPx(60)*(thShapeItem.getMiniItemList().size() + 1);
+                    params.height = ConvertUtils.toPx(50)*(thShapeItem.getMiniItemList().size())+
+                            ConvertUtils.toPx(40);
                 }else
                 {
                     params.height = 0;
@@ -289,6 +349,7 @@ public class ShapePage extends PageBaseUi {
 
                         AbstractDataServiceFactory.getInstance().setShapeInfo(group,(byte)0,
                                 thShapeItem.getShapeType(),thShapeItem.getShapeId(),(byte)0,0);
+
                     }
                 });
             }

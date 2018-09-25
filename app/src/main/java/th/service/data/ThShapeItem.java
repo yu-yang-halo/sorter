@@ -26,6 +26,7 @@ public class ThShapeItem {
             shapeId = contents[1];
             byte[] strArr = new byte[50];
             System.arraycopy(contents,2,strArr,0,strArr.length);
+            name = StringUtils.convertByteArrayToString(strArr);
             used = contents[52];
             mutex = contents[53];
             count = contents[54];

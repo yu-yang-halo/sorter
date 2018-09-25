@@ -80,7 +80,7 @@
                         android:layout_centerVertical="true"
                         android:textAllCaps="false"
                         android:textColor="@drawable/selector_btn_click_text_color"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <CheckBox
                         android:id="@+id/ck_adjust_all"
@@ -88,6 +88,7 @@
                         android:layout_height="40dp"
                         android:textColor="@color/fontColor"
                         android:text="整体调整"
+                        android:visibility="gone"
                         android:layout_centerVertical="true"
                         style="@style/CustomCheckBoxStyle"
                         android:layout_alignParentEnd="true"
@@ -251,6 +252,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:paddingLeft="2dp"
+                        android:visibility="gone"
                         >
 
                         <TextView

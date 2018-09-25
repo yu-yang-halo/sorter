@@ -40,7 +40,7 @@
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/whiteColor">
 
             <com.yy.sorter.view.AlwaysClickButton

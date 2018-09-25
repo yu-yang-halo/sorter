@@ -173,16 +173,16 @@ public class ThRateView extends View {
             thValveRateRet=new ThValveRateRet(64,false,contents);
 
             mPaint.setPathEffect(null);
-            drawScrollLine(canvas,thValveRateRet.getFrontDatas(),Color.parseColor("#f0FF0000"),Color.RED);
-            drawScrollLine(canvas,thValveRateRet.getBackDatas(),Color.parseColor("#f000FF00"),Color.GREEN);
+            drawScrollLine(canvas,thValveRateRet.getFrontDatas(),Color.BLUE,Color.BLUE);
+            drawScrollLine(canvas,thValveRateRet.getBackDatas(),Color.YELLOW,Color.YELLOW);
 
 
 
             return;
         }
         mPaint.setPathEffect(null);
-        drawScrollLine(canvas,thValveRateRet.getFrontDatas(),Color.parseColor("#f0FF0000"),Color.RED);
-        drawScrollLine(canvas,thValveRateRet.getBackDatas(),Color.parseColor("#f000FF00"),Color.GREEN);
+        drawScrollLine(canvas,thValveRateRet.getFrontDatas(),Color.BLUE,Color.BLUE);
+        drawScrollLine(canvas,thValveRateRet.getBackDatas(),Color.YELLOW,Color.YELLOW);
 
         thValveRateRet=null;
 

@@ -8,7 +8,7 @@ public class ThCommand {
 	 * 服务地址端口配置
 	 */
 
-	public static final int UDP_CORE_SERVER_PORT=1234; //udp核心服务端口
+	public static final int UDP_CORE_SERVER_PORT=13133; //udp核心服务端口
 	public static final String TCP_CORE_SERVER_IP="www.taiheservice.com";//核心服务器 www.taiheservice.com
 	public static final int TCP_CORE_SERVER_PORT=13133; //核心服务端口
 	public static final String TCP_FILE_SERVER_IP="www.taiheservice.com";//文件服务器 www.taiheservice.com

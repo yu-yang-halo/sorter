@@ -22,6 +22,27 @@
             android:textColor="@color/fontColor"
             android:textSize="18sp" />
 
+        <com.yy.sorter.view.AlwaysClickButton
+            android:id="@+id/addBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/editText"
+            android:background="@mipmap/plus"
+            android:layout_centerVertical="true"
+            android:textColor="@drawable/selector_btn_click_text_color"
+            android:textSize="20dp" />
+        <com.yy.sorter.view.AlwaysClickButton
+            android:id="@+id/minusBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/minus"
+            android:layout_toRightOf="@+id/editText"
+            android:textColor="@drawable/selector_btn_click_text_color"
+            android:layout_centerVertical="true"
+            android:textSize="20dp" />
+
         <com.yy.sorter.view.KeyboardDigitalEdit
             android:id="@+id/editText"
             android:layout_width="80dp"
