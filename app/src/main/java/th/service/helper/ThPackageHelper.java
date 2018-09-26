@@ -309,7 +309,6 @@ public class ThPackageHelper {
 			System.arraycopy(contents,i*ThSvmInfo.SIZE,buffer,0,ThSvmInfo.SIZE);
 
 			ThSvmInfo thSvmInfo = new ThSvmInfo(buffer);
-			thSvmInfo.setView((byte) i);
 			thSvmInfoList.add(thSvmInfo);
 		}
 
@@ -491,27 +490,6 @@ public class ThPackageHelper {
 				}
 			}
 			System.out.println("pos == "+pos+" size == "+size+" contents.length="+contents.length);
-//			for(int i=0;i<size;i++)
-//			{
-//				if(pos+54<contents.length)
-//				{
-//				    int thShapeItemSize = contents[pos+54]*ThShapeItem.MiniItem.SIZE + ThShapeItem.MIN_SIZE;
-//
-//					if(thShapeItemSize + pos > contents.length)
-//					{
-//						break;
-//					}
-//					byte[] buffer = new byte[thShapeItemSize];
-//
-//
-//					System.arraycopy(contents,pos,buffer,0,buffer.length);
-//
-//					ThShapeItem thShapeItem = new ThShapeItem(buffer);
-//					thShapeItemList.add(thShapeItem);
-//
-//					pos+=thShapeItemSize;
-//				}
-//			}
 		}
 
 		return thShapeItemList;

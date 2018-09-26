@@ -3,25 +3,27 @@ package th.service.data;
 import th.service.core.TrafficManager;
 
 public class ThSvmInfo {
-    public static final int SIZE = 7;
+    public static final int SIZE = 8;
+    private byte view;
     private byte used;
     private byte blowSample;
     private byte[] spotDiff;//杂质比
     private byte[] spotDiffMax;//杂质比上限
     private byte spotSensor; //灵敏度
-    private byte view;
+
 
     public ThSvmInfo(byte[] contents) {
         spotDiff = new byte[2];
         spotDiffMax = new byte[2];
         if(check(contents))
         {
-            used = contents[0];
-            blowSample = contents[1];
-            System.arraycopy(contents,2,spotDiff,0,spotDiff.length);
-            System.arraycopy(contents,2+2,spotDiffMax,0,spotDiffMax.length);
+            view = contents[0];
+            used = contents[1];
+            blowSample = contents[2];
+            System.arraycopy(contents,3,spotDiff,0,spotDiff.length);
+            System.arraycopy(contents,3+2,spotDiffMax,0,spotDiffMax.length);
 
-            spotSensor = contents[6];
+            spotSensor = contents[7];
         }
 
     }

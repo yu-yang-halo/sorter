@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.yy.sorter.utils.ConvertUtils;
 
+import th.service.core.AbstractDataServiceFactory;
 import th.service.data.ThWaveData;
 import th.service.helper.ThCommand;
 
@@ -33,8 +34,10 @@ public class ThWaveView extends View {
     private int fullLineColor=Color.parseColor("#70888888");
     private int dottedLineColor=Color.parseColor("#50888888");
     private int[] IRCOLORS=new int[]{Color.parseColor("#454545"),Color.parseColor("#b23aee")};
-    private static final int CAMERA_ADJUST_LINES[] = new int[]{15, 149, 255, 361, 495};
-    private static final int COMPRESS_DATA_LINES[] = new int[]{3+4, 87, 255, 423, 507-4};
+    private static final int CAMERA_ADJUST_LINES_PIXEL0[] = new int[]{31, 149, 255, 361, 480};
+    private static final int COMPRESS_DATA_LINES_PIXEL0[] = new int[]{7, 90, 255, 420, 503};
+    private static final int CAMERA_ADJUST_LINES_PIXEL1[] = new int[]{0, 149, 255, 361, 511};
+    private static final int COMPRESS_DATA_LINES_PIXEL1[] = new int[]{0, 85, 255, 427, 511};
     int viewWidth=0;
     int viewHeight=0;
     int yAxisHeight=0;
@@ -191,6 +194,20 @@ public class ThWaveView extends View {
     }
 
     private void showVerticalLines(Canvas canvas,byte dataType){
+        int[] CAMERA_ADJUST_LINES;
+        int[] COMPRESS_DATA_LINES;
+        byte pixelType = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData().getPixelType();
+
+        if(pixelType == 0)
+        {
+            CAMERA_ADJUST_LINES = CAMERA_ADJUST_LINES_PIXEL0;
+            COMPRESS_DATA_LINES = COMPRESS_DATA_LINES_PIXEL0;
+        }else
+        {
+            CAMERA_ADJUST_LINES = CAMERA_ADJUST_LINES_PIXEL1;
+            COMPRESS_DATA_LINES = COMPRESS_DATA_LINES_PIXEL1;
+        }
+
         if(dataType==2){
            for(int val:CAMERA_ADJUST_LINES){
                drawVerticalLine(canvas,val);

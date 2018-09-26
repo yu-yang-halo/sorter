@@ -21,6 +21,7 @@ public class MachineData {
 	private byte useHsv;                    //是否使用色度分选
 	private byte useSensor;          //使用料位传器
 	private byte userLevel;//用户权限 0:user 1:工程师 2:厂家
+	private byte pixelType;//像素类型
 
 
 	//方案参数
@@ -30,7 +31,7 @@ public class MachineData {
 
 
 
-	private final int FIX_SIZE=17;//固定大小部分
+	private final int FIX_SIZE=18;//固定大小部分
 	private final int OFFSET_BYTES = FIX_SIZE;
 	private final int STRING_SIZE=100;
 	private final int RESERVE_SIZE=100;
@@ -88,10 +89,11 @@ public class MachineData {
 			this.useHsv= contents[12];
 			this.useSensor= contents[13];
 			this.userLevel= contents[14];
+			this.pixelType= contents[15];
 
 
-			this.sortModeBig= contents[15];
-			this.sortModeSmall= contents[16];
+			this.sortModeBig= contents[16];
+			this.sortModeSmall= contents[17];
 
 
 		}
@@ -270,5 +272,17 @@ public class MachineData {
 
 	public void setProtocolVersionType(byte protocolVersionType) {
 		this.protocolVersionType = protocolVersionType;
+	}
+
+	public byte getPixelType() {
+		return pixelType;
+	}
+
+	public void setPixelType(byte pixelType) {
+		this.pixelType = pixelType;
+	}
+
+	public byte getUserLevel() {
+		return userLevel;
 	}
 }
