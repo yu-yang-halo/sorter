@@ -59,7 +59,7 @@ public class ThRateView extends View {
     Rect rect=new Rect();
     PathEffect effects = new DashPathEffect(new float[]{8,8,8,8},1);//设置虚线的间隔和点的长度
     Path path = new Path();
-    float scaleValue=5.0f/3.0f;
+    float scaleValue=1.0f;
     public ThRateView(Context context) {
         super(context);
     }
