@@ -384,18 +384,7 @@ public class TcpCoreManager extends IReceiveListenser{
 					int vcode= TextCacheUtils.getValueInt(TextCacheUtils.KEY_VCODE,-1);
 					ThLogger.addLog("重连 deviceNumber："+deviceNumber+" vcode:"+vcode);
 					sendError(ThCommand.NETWORK_TIMEOUT_RECONNECT);
-					if(!AuthUtils.isEngineerVersion()){
-						AbstractDataServiceFactory.getInstance().requestDeviceList(deviceNumber,null,null,vcode);
-					}else{
-						String[] arrs= AuthUtils.getLocalCertificationFileContents();
-						if(arrs!=null&&arrs.length>=3){
-							String username =arrs[1];
-							String password =arrs[2];
-							ThLogger.addLog("重连 deviceNumber："+deviceNumber+" vcode:"
-									+vcode+" username:"+username+" password:"+password);
-							AbstractDataServiceFactory.getInstance().requestDeviceList(deviceNumber,username,password,vcode);
-						}
-					}
+					AbstractDataServiceFactory.getInstance().requestDeviceList(deviceNumber,null,null,vcode);
 
 				}
 			});

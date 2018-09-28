@@ -66,8 +66,8 @@ public abstract class ConfirmPopup<V extends View> extends TopPopup<View> {
     public ConfirmPopup(Activity activity) {
 
         super(activity);
-        cancelText = FileManager.getInstance().getString(131); //131#取消
-        submitText = FileManager.getInstance().getString(130); //130#确定
+        cancelText = FileManager.getInstance().getString(8); //8#取消
+        submitText = FileManager.getInstance().getString(7); //7#确定
     }
 
 

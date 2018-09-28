@@ -6,7 +6,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 25
         versionCode 220
-        versionName "1.0.0"
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         /**
          *  一般机型的协议版本
@@ -26,12 +26,12 @@ android {
          * *********************************************************************************************************
          * *********************************************************************************************************
          */
-        engineer {
+        user {
             applicationId "com.yy.sorter.tyy"
             buildConfigField 'String', 'AUTH_PROVIDER', '"com.yy.sorter.tyy.fileprovider"'
             buildConfigField 'Integer', 'SOFT_VERSION_TYPE','0x01'//用户版
             buildConfigField 'String', 'LOGO', '"logo"'
-            buildConfigField 'String', 'VKEY', '"engineer"'//软件版本
+            buildConfigField 'String', 'VKEY', '"user"'//软件版本
             manifestPlaceholders = [AUTH_PROVIDER_VALUE: "com.yy.sorter.tyy.fileprovider",
                                     APP_ICON:"@drawable/ic_engineer",
                                     APP_NAME:"@string/app_name"]

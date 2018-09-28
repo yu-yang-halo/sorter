@@ -93,12 +93,12 @@ public class LanguageHelper {
                         byte[] bytes=new byte[4];
                         System.arraycopy(thPackage.getData1(),1,bytes,0,bytes.length);
                         int totalLength=ConvertUtils.bytesToInt(bytes);
-                        loadProgress= LoadProgress.getProgress(ctx,FileManager.getInstance().getString(248));//248#应用正在下载...
+                        loadProgress= LoadProgress.getProgress(ctx,FileManager.getInstance().getString(130));//130#应用正在下载...
                         loadProgress.setMax(totalLength);
                         loadProgress.setOnCancelListener(new DialogInterface.OnCancelListener() {
                             @Override
                             public void onCancel(DialogInterface dialog) {
-                                showToast(ctx,FileManager.getInstance().getString(247));//247#已取消
+                                showToast(ctx,FileManager.getInstance().getString(131));//131#已取消
                                 AbstractDataServiceFactory.getFileDownloadService().closeFileSocket();
                             }
                         });
@@ -112,7 +112,7 @@ public class LanguageHelper {
                 AbstractDataServiceFactory.getFileDownloadService().requestDownloadFile();
 
             }else{
-                showToast(ctx,FileManager.getInstance().getString(256));//256#没有找到文件
+                showToast(ctx,FileManager.getInstance().getString(132));//132#没有找到文件
             }
         }else if(thPackage.getType()==ThCommand.TCP_REQ_DOWNLOAD_FILE) {
             if (thPackage.getExtendType() == 0) {

@@ -114,9 +114,9 @@ public class AuthUtils {
      *  提供一种方便的函数
      *  直接判断软件版本属于工程师版还是普通用户版
      */
-    public static boolean isEngineerVersion(){
-        int buildVersion=ThCommand.BUILD_VERSION;
-        return getRealVersionType(buildVersion)==ThCommand.ENGINEER_VERSION_TYPE;
-    }
+//    public static boolean isEngineerVersion(){
+//        int buildVersion=ThCommand.BUILD_VERSION;
+//        return getRealVersionType(buildVersion)!=ThCommand.USER_VERSION_TYPE;
+//    }
 
 }

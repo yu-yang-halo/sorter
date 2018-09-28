@@ -78,15 +78,9 @@ public class LoginUi extends BaseUi {
             isNewText="";
         }
 
-        if(!AuthUtils.isEngineerVersion()){
-            appversionLabel.setText(String.format("v%s%s",
-                    StringUtils.getAppVersionName(ctx),isNewText));
-
-        }else{
-            appversionLabel.setText(
-                    String.format("v%s%s",
-                            StringUtils.getAppVersionName(ctx),isNewText));
-        }
+        appversionLabel.setText(
+                String.format("v%s%s",
+                        StringUtils.getAppVersionName(ctx),isNewText));
     }
 
 

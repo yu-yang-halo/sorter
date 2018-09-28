@@ -92,10 +92,6 @@ public abstract class AbstractIDataService implements IDataService{
          * loginType 针对大米机 用户和工程师版
          */
         byte loginType=(byte)1;
-        if(AuthUtils.isEngineerVersion()){
-            //工程师版
-            loginType=(byte)2;
-        }
         byte[] data1=new byte[]{lanCountryId,loginType};
         ThPackage packet= new ThPackage(ThCommand.LOGIN_CMD,ThCommand.EXTEND_LOGIN_CMD, data1,(byte)0, (byte)0, (byte)0,null);
 

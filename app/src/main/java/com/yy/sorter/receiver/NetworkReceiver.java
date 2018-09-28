@@ -26,11 +26,11 @@ public class NetworkReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
        boolean enable;
        if(IPUtils.isConnected(context)){
-           Toast.makeText(context, FileManager.getInstance().getString(223),Toast.LENGTH_SHORT).show(); //223#网络已连接
+           Toast.makeText(context, FileManager.getInstance().getString(128),Toast.LENGTH_SHORT).show(); //128#网络已连接
            enable=true;
            ThLogger.addLog("网络改变---网络已连接 ip:"+IPUtils.localIpAddress(context));
        }else {
-           Toast.makeText(context, FileManager.getInstance().getString(224),Toast.LENGTH_SHORT).show(); //224#没有网络
+           Toast.makeText(context, FileManager.getInstance().getString(129),Toast.LENGTH_SHORT).show(); //129#没有网络
            enable=false;
            ThLogger.addLog("网络改变---没有网络 ip:"+IPUtils.localIpAddress(context));
        }

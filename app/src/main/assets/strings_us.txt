@@ -48,7 +48,7 @@
 50#Mobile protocol version
 51#compatible
 52#Incompatible
-62#Version information
+62#Version Info
 63#Basic version
 64#Color board version
 65#Visible camera version
@@ -114,6 +114,12 @@
 125#Do you turn on the system?
 126#Do you turn off the system?
 127#Feeder
+128#Network is connected
+129#No network
+130#App is downloading...
+131#Cancelled
+132#No files found
+133#User access is not accessible at this page.
 1000#The network is unstable or the device is offline.
 1001#The screen has been locked.
 1002#If the protocol does not match, check whether the version is consistent.

@@ -165,7 +165,7 @@ public class LanAdapter extends BaseAdapter {
 
                     AbstractDataServiceFactory.getFileDownloadService().requestDownloadWhatFile((byte) ThCommand.BUILD_VERSION,ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE,lanList.get(position).getUrl());
                 }
-                }).setNegativeButton(FileManager.getInstance().getString(131), new DialogInterface.OnClickListener() {
+                }).setNegativeButton(FileManager.getInstance().getString(8), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 

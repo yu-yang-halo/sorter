@@ -17,10 +17,9 @@ public class ThCommand {
 
 
 	/**
-	 * 手机版本  1  用户版   2 工程师版
+	 * 手机版本  1  用户版
 	 */
 	public static final byte USER_VERSION_TYPE=0x01;
-	public static final byte ENGINEER_VERSION_TYPE=0x01;
 
 	/**
 	 * 在此修改构建版本 默认：普通用户版本

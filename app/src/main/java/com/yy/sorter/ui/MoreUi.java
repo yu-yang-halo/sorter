@@ -16,6 +16,8 @@ import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
+import th.service.core.AbstractDataServiceFactory;
+import th.service.data.MachineData;
 import th.service.helper.ThPackage;
 
 public class MoreUi extends BaseUi {
@@ -89,6 +91,20 @@ public class MoreUi extends BaseUi {
                         titleName = strList[position];
                     }
 
+                    MachineData machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
+
+                    if(machineData != null)
+                    {
+                        if(machineData.getUserLevel() == MachineData.LEVEL_USER)
+                        {
+                            if(position == 1 || position == 2)
+                            {
+                                showToast(FileManager.getInstance().getString(133));//133#该界面用户权限无法访问
+                                return;
+                            }
+                        }
+                    }
+
                     switch (position)
                     {
                         case 0:
@@ -104,6 +120,8 @@ public class MoreUi extends BaseUi {
                             MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE,titleName);
                             break;
                     }
+
+
 
                 }
             });

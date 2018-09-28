@@ -27,6 +27,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import th.service.core.AbstractDataServiceFactory;
+import th.service.data.MachineData;
 import th.service.data.ThHsvInfo;
 import th.service.data.ThHsvWave;
 import th.service.helper.ThCommand;
@@ -226,6 +227,17 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
     @Override
     public void onViewStart() {
         super.onViewStart();
+
+        MachineData machineData=AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
+
+        et_Chute.setValue(machineData.getChuteNumber(),1,0);
+        if(m_Channel>=machineData.getChuteNumber()){
+            m_Channel=0;
+            et_Chute.setText(String.valueOf(1));
+        }else{
+            et_Chute.setText(String.valueOf(m_Channel+1));
+        }
+
         setLanguage();
         initButtonStyle();
         reqHsvInfo();
@@ -443,6 +455,13 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
     boolean stopYN=false;
     @Override
     public void onMuiltClick(int par, int isSend) {
+
+        if(par >= 1000)
+        {
+            toChuteClick(par,isSend);
+            return;
+        }
+
 /**
  *  par 0:上  1：左 2：右 3：下
  *
@@ -526,11 +545,6 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
             stopYN=false;
         }
 
-
-        if(par >= 1000)
-        {
-            toChuteClick(par,isSend);
-        }
 
 
     }

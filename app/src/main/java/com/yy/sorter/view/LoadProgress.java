@@ -77,7 +77,7 @@ public final class LoadProgress {
         progressBar.setProgress(0);
         setProgress(0);
 
-        cancelDownloadBtn.setText(FileManager.getInstance().getString(131));//131#取消
+        cancelDownloadBtn.setText(FileManager.getInstance().getString(8));//8#取消
         cancelDownloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

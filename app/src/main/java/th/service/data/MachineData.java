@@ -5,6 +5,10 @@ import com.yy.sorter.utils.StringUtils;
 import th.service.core.TrafficManager;
 
 public class MachineData {
+	public static final int LEVEL_USER = 0;
+	public static final int LEVEL_ENGINNER = 1;
+	public static final int LEVEL_PRODUCTOR = 2;
+
 	private byte valveState;         //阀状态
 	private byte feederState;        //给料器
 	private byte startState;         //启动状态
