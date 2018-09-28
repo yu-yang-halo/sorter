@@ -42,6 +42,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
     private KeyboardDigitalEdit feederEditText;
     private PageSwitchView pageSwitchView;
     private AlwaysClickButton addBtn,minusBtn;
+    private TextView tv_all;
     public FeederUi(Context ctx) {
         super(ctx);
     }
@@ -59,6 +60,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
 
             addBtn = (AlwaysClickButton) view.findViewById(R.id.addBtn);
             minusBtn = (AlwaysClickButton) view.findViewById(R.id.minusBtn);
+            tv_all = (TextView) view.findViewById(R.id.tv_all);
 
             feederEditText.setLVCallback(this);
             feederEditText.setValue(99,1,100);
@@ -135,6 +137,8 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
     @Override
     public void onViewStart() {
         super.onViewStart();
+
+        tv_all.setText(FileManager.getInstance().getString(127));//127#供料量
 
         initLayout();
 
@@ -411,8 +415,8 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                 {
                     holder.tv_title.setText(FileManager.getInstance().getString(79)+(position+1));//79#料槽
 
-                    holder.addBtn.setVisibility(View.GONE);
-                    holder.minusBtn.setVisibility(View.GONE);
+                    holder.addBtn.setVisibility(View.VISIBLE);
+                    holder.minusBtn.setVisibility(View.VISIBLE);
                 }
 
                 holder.btnSwitch.setCheckedImmediatelyNoEvent((item.status==1));

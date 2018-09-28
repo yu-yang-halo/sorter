@@ -136,6 +136,41 @@
 
             </RelativeLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/background"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp"
+                >
+                <Button
+                    android:text="清灰"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textAllCaps="false"
+                    android:id="@+id/btn_clean"
+                    android:textColor="@drawable/selector_btn_click_text_color"
+                    android:background="@drawable/th_button_selector"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    />
+
+                <Button
+                    android:text="系统关"
+                    android:textColor="@drawable/selector_btn_click_text_color"
+                    android:background="@drawable/th_button_selector"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:textAllCaps="false"
+                    android:id="@+id/btn_system"
+                    android:layout_weight="1"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentStart="true" />
+            </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -150,7 +185,7 @@
                 <Button
                     android:text="保存参数到方案 "
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:textAllCaps="false"
                     android:id="@+id/btn_save"
                     android:textColor="@drawable/selector_btn_click_text_color"
@@ -159,52 +194,6 @@
                     />
 
 
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_below="@+id/r4"
-                android:layout_alignParentStart="true"
-                android:background="@color/background"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:gravity="center"
-                android:layout_marginTop="1dp">
-
-
-                <Button
-                    android:text="清灰"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:textAllCaps="false"
-                    android:id="@+id/btn_clean"
-                    android:textColor="@drawable/selector_btn_click_text_color"
-                    android:background="@drawable/th_button_selector"
-                    android:layout_centerVertical="true"
-                    />
-
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_below="@+id/r32"
-                android:background="@color/background"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="1dp"
-                >
-
-                <Button
-                    android:text="系统关"
-                    android:textColor="@drawable/selector_btn_click_text_color"
-                    android:background="@drawable/th_button_selector"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:textAllCaps="false"
-                    android:id="@+id/btn_system"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
 

@@ -82,6 +82,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center">
+            <com.yy.sorter.view.AlwaysClickButton
+                android:id="@+id/addBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/spotDiff_Edit"
+                android:background="@mipmap/plus"
+                android:layout_marginLeft="10dp"
+                android:textColor="@drawable/selector_btn_click_text_color" />
+
+            <com.yy.sorter.view.AlwaysClickButton
+                android:id="@+id/minusBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/spotDiff_Edit"
+                android:background="@mipmap/minus"
+                android:textColor="@drawable/selector_btn_click_text_color" />
             <com.yy.sorter.view.KeyboardDigitalEdit
                 android:id="@+id/spotDiff_Edit"
                 android:layout_width="70dp"
@@ -90,8 +109,11 @@
                 android:textColor="@color/fontColor"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:text="0"
                 android:gravity="center" />
+
         </RelativeLayout>
 
 
@@ -109,8 +131,30 @@
                 android:textColor="@color/fontColor"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:text="0"
                 android:gravity="center" />
+
+            <com.yy.sorter.view.AlwaysClickButton
+                android:id="@+id/addBtn2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/sensor_Edit"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/plus"
+                android:textColor="@drawable/selector_btn_click_text_color" />
+
+            <com.yy.sorter.view.AlwaysClickButton
+                android:id="@+id/minusBtn2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/sensor_Edit"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/minus"
+                android:textColor="@drawable/selector_btn_click_text_color" />
         </RelativeLayout>
 
     </LinearLayout>

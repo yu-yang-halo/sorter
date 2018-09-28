@@ -15,6 +15,7 @@ import com.yy.sorter.activity.R;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
+import com.yy.sorter.view.AlwaysClickButton;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 
 import java.lang.ref.WeakReference;
@@ -180,7 +181,7 @@ public class ShapePage extends PageBaseUi {
 
     }
 
-    class ItemAdapter extends BaseAdapter implements DigitalDialog.Builder.LVCallback
+    class ItemAdapter extends BaseAdapter implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack
     {
         private ThShapeItem thShapeItem;
         private WeakReference<ListView> listView;
@@ -225,6 +226,12 @@ public class ShapePage extends PageBaseUi {
                 holder = new ListViewHolder();
                 holder.tv_itemName= (TextView) convertView.findViewById(R.id.tv_itemName);
                 holder.edit_itemValue = (KeyboardDigitalEdit) convertView.findViewById(R.id.edit_itemValue);
+
+                holder.addBtn = (AlwaysClickButton) convertView.findViewById(R.id.addBtn);
+                holder.minusBtn = (AlwaysClickButton) convertView.findViewById(R.id.minusBtn);
+
+                holder.addBtn.setValve(position,this);
+                holder.minusBtn.setValve(position+100,this);
 
                 convertView.setTag(holder);
             }else
@@ -285,10 +292,72 @@ public class ShapePage extends PageBaseUi {
             this.listView = listView;
         }
 
+        @Override
+        public void onMuiltClick(int par, int isSend) {
+            int pos = 0;
+            boolean isAdd = true;
+            int value,max,min;
+            if(par >= 100)
+            {
+                isAdd = false;
+                pos = par-100;
+            }else {
+                isAdd = true;
+                pos = par;
+            }
+            ThShapeItem.MiniItem miniItem = (ThShapeItem.MiniItem) getItem(pos);
+
+            if(miniItem == null)
+            {
+                return;
+            }
+
+            value = ConvertUtils.bytes2ToInt(miniItem.getValue());
+            max = ConvertUtils.bytes2ToInt(miniItem.getMax());
+            min = ConvertUtils.bytes2ToInt(miniItem.getMin());
+
+            if(isSend == 1)
+            {
+                if(isAdd)
+                {
+                    value=value+1;
+                }else
+                {
+                    value=value-1;
+                }
+                if(value<min)
+                {
+                    value = min;
+                }
+                if(value>max)
+                {
+                    value = max;
+                }
+                miniItem.setValue(ConvertUtils.intTo2Bytes(value));
+
+                if(thShapeItem != null && thShapeItem.getMiniItemList() != null)
+                {
+                    thShapeItem.getMiniItemList().get(pos).setValue(ConvertUtils.intTo2Bytes(value));
+                }
+
+                updateItemView(pos,value);
+
+            }else
+            {
+                byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+                AbstractDataServiceFactory.getInstance().setShapeInfo(group,(byte)1,
+                        thShapeItem.getShapeType(),
+                        thShapeItem.getShapeId(),
+                        miniItem.getIndex(),value);
+
+            }
+        }
+
         class ListViewHolder
         {
             public TextView tv_itemName;
             public KeyboardDigitalEdit edit_itemValue;
+            public AlwaysClickButton addBtn,minusBtn;
         }
     }
 

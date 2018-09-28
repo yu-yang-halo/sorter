@@ -18,6 +18,7 @@ import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
 import com.yy.sorter.utils.ScreenHelper;
 import com.yy.sorter.utils.StringUtils;
+import com.yy.sorter.view.AlwaysClickButton;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 import com.yy.sorter.view.PageSwitchView;
 import com.yy.sorter.view.ThSegmentView;
@@ -37,7 +38,7 @@ import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
-public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
+public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack {
     private final byte TYPE_RED = 1;
     private final byte TYPE_GREEN = 2;
     private final byte TYPE_BLUE = 3;
@@ -76,7 +77,7 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
     private CheckBox ck_adjustAll;
     private final int GAIN_DIGITAL = 1;
     private final int GAIN_ANOLOG= 2;
-
+    private AlwaysClickButton addBtn,minusBtn;
 
     public BackgroundUi(Context ctx) {
         super(ctx);
@@ -119,7 +120,11 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             et_gain_led_ir1 = (KeyboardDigitalEdit)view.findViewById(R.id.et_gain_led_ir1);
             et_gain_led_ir2 = (KeyboardDigitalEdit)view.findViewById(R.id.et_gain_led_ir2);
 
+            addBtn = (AlwaysClickButton) view.findViewById(R.id.addBtn);
+            minusBtn  = (AlwaysClickButton) view.findViewById(R.id.minusBtn);
 
+            addBtn.setValve(0,this);
+            minusBtn.setValve(1,this);
 
 
 
@@ -449,6 +454,35 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
 
     }
 
+    @Override
+    public void onMuiltClick(int par, int isSend) {
+        int value,max,min;
+        max = et_chute.getMax();
+        min = et_chute.getMin();
+        value = m_Channel+1;
+        if(isSend == 1)
+        {
+            if(par == 0)
+            {
+                value++;
+            }else
+            {
+                value--;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
+
+        }
+        et_chute.setText(Integer.toString(value));
+        m_Channel = value -1;
+    }
+
 
     private void initLight()
     {
@@ -498,4 +532,6 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
         }
 
     }
+
+
 }

@@ -47,7 +47,7 @@ public class FileManager {
     private static final String INSTALL_APK="thcolorsort.apk";
     private static final String ZH_LAN="strings_zh.txt";
     private static final String US_LAN="strings_us.txt";
-    private static final String TH_APK_DIR="th_apk";
+    private static final String TH_APK_DIR="sorter_apk";
 
     private Handler mainHandler=new Handler(Looper.getMainLooper());
 

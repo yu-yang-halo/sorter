@@ -6,7 +6,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:background="#80c8c8c8">
 
         <CheckBox
             android:id="@+id/ckEnable"
@@ -37,5 +38,11 @@
         android:scrollbars="none">
 
     </ListView>
+    <LinearLayout
+        android:background="#1b82d2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -56,7 +56,7 @@ public class MainActivity extends Activity implements NetworkChangeListenser {
          * 每次重新启用应用下载配置文件
          */
 
-      //  AbstractDataServiceFactory.getFileDownloadService().requestDownloadWhatFile((byte) ThCommand.BUILD_VERSION,ThCommand.DOWNLOAD_FILE_TYPE_CONFIG,null);
+        AbstractDataServiceFactory.getFileDownloadService().requestDownloadWhatFile((byte) ThCommand.BUILD_VERSION,ThCommand.DOWNLOAD_FILE_TYPE_CONFIG,null);
 
 
 

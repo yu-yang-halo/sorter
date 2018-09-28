@@ -29,7 +29,7 @@ android {
         engineer {
             applicationId "com.yy.sorter.tyy"
             buildConfigField 'String', 'AUTH_PROVIDER', '"com.yy.sorter.tyy.fileprovider"'
-            buildConfigField 'Integer', 'SOFT_VERSION_TYPE','0x02'//工程师版
+            buildConfigField 'Integer', 'SOFT_VERSION_TYPE','0x01'//用户版
             buildConfigField 'String', 'LOGO', '"logo"'
             buildConfigField 'String', 'VKEY', '"engineer"'//软件版本
             manifestPlaceholders = [AUTH_PROVIDER_VALUE: "com.yy.sorter.tyy.fileprovider",

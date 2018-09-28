@@ -25,6 +25,7 @@ import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
 import com.yy.sorter.utils.ScreenHelper;
 import com.yy.sorter.utils.StringUtils;
+import com.yy.sorter.view.AlwaysClickButton;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 import com.yy.sorter.view.PageSwitchView;
 import com.yy.sorter.view.ThWaveView;
@@ -42,7 +43,8 @@ import th.service.helper.ThPackageHelper;
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 
-public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCallback,View.OnClickListener {
+public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCallback,
+        View.OnClickListener,AlwaysClickButton.LVMuiltClickCallBack {
     private Button btnOrigin, btnCalibration,btnTest;
     private RadioButton radio1,radio2,radio3;
     private RadioGroup radio_group;
@@ -59,6 +61,7 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
     private int orientation=ORIENTATION_PORTRAIT;
     private long lastTime=0;
     private int m_Channel;
+    private AlwaysClickButton addBtn,minusBtn;
     public CameraAdjustUi(Context ctx) {
         super(ctx);
         activity= (Activity) ctx;
@@ -91,6 +94,12 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
             seekLayout= (LinearLayout) view.findViewById(R.id.seekLayout);
             bottomLayout= (LinearLayout) view.findViewById(R.id.bottomLayout);
             layout_spot= (RelativeLayout) view.findViewById(R.id.layout_spot);
+
+            addBtn = (AlwaysClickButton) view.findViewById(R.id.addBtn);
+            minusBtn  = (AlwaysClickButton) view.findViewById(R.id.minusBtn);
+
+            addBtn.setValve(0,this);
+            minusBtn.setValve(1,this);
 
 
             pageSwitchView = (PageSwitchView) view.findViewById(R.id.pageSwitchView);
@@ -184,6 +193,8 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
 
         return view;
     }
+
+
     @Override
     public void onReloadLayerView() {
         super.onReloadLayerView();
@@ -424,5 +435,35 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
             et_chute.setText(Integer.toString(value));
             m_Channel = value-1;
         }
+    }
+
+    @Override
+    public void onMuiltClick(int par, int isSend) {
+        int value,max,min;
+        max = et_chute.getMax();
+        min = et_chute.getMin();
+        value = m_Channel+1;
+        if(isSend == 1)
+        {
+            if(par == 0)
+            {
+                value++;
+            }else
+            {
+                value--;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
+
+        }
+        et_chute.setText(Integer.toString(value));
+        m_Channel = value -1;
+
     }
 }

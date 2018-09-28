@@ -49,11 +49,29 @@
                         android:layout_marginStart="10dp"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
+                    <com.yy.sorter.view.AlwaysClickButton
+                        android:id="@+id/minusBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/tv_chute"
+                        android:background="@mipmap/minus"
+                        android:textColor="@drawable/selector_btn_click_text_color" />
+                    <com.yy.sorter.view.AlwaysClickButton
+                        android:id="@+id/addBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/et_chute"
+                        android:background="@mipmap/plus"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@drawable/selector_btn_click_text_color" />
 
                     <com.yy.sorter.view.KeyboardDigitalEdit
                         android:layout_width="60dp"
                         android:layout_height="40dp"
-                        android:layout_marginRight="10dp"
                         android:inputType="textPersonName"
                         android:text="1"
                         android:paddingLeft="5dp"
@@ -63,9 +81,9 @@
                         android:textAlignment="center"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
-                        android:layout_marginStart="26dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/tv_chute" />
+                        android:layout_toRightOf="@+id/minusBtn"
+                        android:layout_centerVertical="true" />
+
                 </RelativeLayout>
 
                 <com.yy.sorter.view.ThWaveView
@@ -112,7 +130,7 @@
                             android:paddingLeft="20dp">
 
                             <RadioButton
-                                android:text="相机调整"
+                                android:text="分段"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/radio1"
@@ -124,7 +142,7 @@
 
 
                             <RadioButton
-                                android:text="详细数据"
+                                android:text="全部"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/radio2"
@@ -134,7 +152,7 @@
                                 style="@style/CustomRadioButtonStyle"/>
 
                             <RadioButton
-                                android:text="压缩数据"
+                                android:text="压缩"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/radio3"
@@ -154,24 +172,25 @@
                         android:gravity="center_vertical"
                         android:background="@color/background">
                         <Button
+                            android:id="@+id/btnOrigin"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="原始数据"
+                            android:layout_marginRight="10dp"
+                            android:textAllCaps="false"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:background="@drawable/th_button_selector"/>
+                        <Button
                             android:id="@+id/btnTest"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:textAllCaps="false"
                             android:text="测试数据"
-                            android:layout_marginRight="10dp"
                             android:textColor="@drawable/selector_btn_click_text_color"
                             android:background="@drawable/th_button_selector"/>
-                        <Button
-                            android:id="@+id/btnOrigin"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:text="原始数据"
-                            android:textAllCaps="false"
-                            android:textColor="@drawable/selector_btn_click_text_color"
-                            android:background="@drawable/th_button_selector"/>
+
                         <Button
                             android:id="@+id/btnCalibration"
                             android:layout_width="0dp"

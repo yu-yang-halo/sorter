@@ -16,23 +16,45 @@
             android:layout_centerVertical="true"
             android:gravity="center|left"
             android:layout_marginLeft="20dp"
-            android:text="TextView" />
+            android:text="TextView"
+           />
 
+
+        <com.yy.sorter.view.AlwaysClickButton
+            android:id="@+id/minusBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/tv_itemName"
+            android:background="@mipmap/minus"
+            android:textColor="@drawable/selector_btn_click_text_color"
+            android:textSize="20dp" />
         <com.yy.sorter.view.KeyboardDigitalEdit
             android:id="@+id/edit_itemValue"
-            android:layout_width="80dp"
+            android:layout_width="60dp"
             android:layout_height="40dp"
-            android:layout_toRightOf="@+id/tv_itemName"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
             android:background="@drawable/selector_edit_bk"
             android:ems="10"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:gravity="center"
             android:inputType="number"
+            android:layout_toRightOf="@+id/minusBtn"
             android:text="0"
             android:textColor="@color/fontColor" />
+
+        <com.yy.sorter.view.AlwaysClickButton
+            android:id="@+id/addBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/edit_itemValue"
+            android:background="@mipmap/plus"
+            android:textColor="@drawable/selector_btn_click_text_color"
+            android:textSize="20dp" />
 
     </RelativeLayout>
 

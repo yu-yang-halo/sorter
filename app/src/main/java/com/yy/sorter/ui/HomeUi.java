@@ -1,6 +1,8 @@
 package com.yy.sorter.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -95,7 +97,43 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             btn_system.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AbstractDataServiceFactory.getInstance().controlDevice(ThCommand.EXTEND_CONTROL_CMD_START,true);
+
+                    String titleStr = FileManager.getInstance().getString(6);//6#提示
+                    String messageStr = "";
+                    String okStr = FileManager.getInstance().getString(7);//7#确定
+                    String cancelStr = FileManager.getInstance().getString(8);// 8#取消
+
+                    if(machineData != null)
+                    {
+                        if(machineData.getStartState() == 1)
+                        {
+                            messageStr = FileManager.getInstance().getString(126);//126#是否关闭系统
+                        }else
+                        {
+                            messageStr = FileManager.getInstance().getString(125);//125#是否开启系统
+                        }
+
+                        AlertDialog alertDialog = new AlertDialog.Builder(ctx)
+                                .setTitle(titleStr)
+                                .setMessage(messageStr)
+                                .setPositiveButton(okStr, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        AbstractDataServiceFactory.getInstance().controlDevice(ThCommand.EXTEND_CONTROL_CMD_START,true);
+                                    }
+                                }).setNegativeButton(cancelStr, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                }).create();
+
+                        alertDialog.show();
+
+
+                    }
+
+
+
                 }
             });
             btn_clean.setOnClickListener(new View.OnClickListener() {

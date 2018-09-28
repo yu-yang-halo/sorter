@@ -65,9 +65,30 @@
                         android:textColor="@color/fontColor"
                         android:background="@drawable/selector_edit_bk"
                         android:textAlignment="center"
-                        android:layout_toRightOf="@+id/tv_chute"
+                        android:layout_toRightOf="@+id/minusBtn"
                         android:focusable="false"
                         android:focusableInTouchMode="false" />
+
+                    <com.yy.sorter.view.AlwaysClickButton
+                        android:id="@+id/minusBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/tv_chute"
+                        android:background="@mipmap/minus"
+                        android:textColor="@drawable/selector_btn_click_text_color" />
+                    <com.yy.sorter.view.AlwaysClickButton
+                        android:id="@+id/addBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/et_chute1"
+                        android:background="@mipmap/plus"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@drawable/selector_btn_click_text_color" />
+
 
 
                     <Button

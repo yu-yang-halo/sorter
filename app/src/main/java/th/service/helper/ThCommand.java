@@ -12,7 +12,7 @@ public class ThCommand {
 	public static final String TCP_CORE_SERVER_IP="www.taiheservice.com";//核心服务器 www.taiheservice.com
 	public static final int TCP_CORE_SERVER_PORT=13133; //核心服务端口
 	public static final String TCP_FILE_SERVER_IP="www.taiheservice.com";//文件服务器 www.taiheservice.com
-	public static final int TCP_FILE_SERVER_PORT=10023;//文件服务端口
+	public static final int TCP_FILE_SERVER_PORT=13132;//文件服务端口
 	public static final boolean DEBUG= BuildConfig.DEBUG;//调试版本
 
 
@@ -20,7 +20,7 @@ public class ThCommand {
 	 * 手机版本  1  用户版   2 工程师版
 	 */
 	public static final byte USER_VERSION_TYPE=0x01;
-	public static final byte ENGINEER_VERSION_TYPE=0x02;
+	public static final byte ENGINEER_VERSION_TYPE=0x01;
 
 	/**
 	 * 在此修改构建版本 默认：普通用户版本

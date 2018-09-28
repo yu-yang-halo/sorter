@@ -111,6 +111,9 @@
 122#Whole adjust
 123#Main light
 124#Camera gain
+125#Do you turn on the system?
+126#Do you turn off the system?
+127#Feeder
 1000#The network is unstable or the device is offline.
 1001#The screen has been locked.
 1002#If the protocol does not match, check whether the version is consistent.

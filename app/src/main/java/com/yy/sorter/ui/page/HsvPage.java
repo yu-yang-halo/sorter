@@ -46,6 +46,7 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
             lb_start,lb_end,tv_chute;
     private int senseIndex = 0;
     private Timer timer;
+    private AlwaysClickButton addBtn,minusBtn;
     public HsvPage(Context ctx) {
         super(ctx);
     }
@@ -71,6 +72,12 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
             enableButton= (Button) view.findViewById(R.id.enableButton);
             frontBtn = (Button) view.findViewById(R.id.frontBtn);
             rearBtn = (Button) view.findViewById(R.id.rearBtn);
+
+            addBtn = (AlwaysClickButton) view.findViewById(R.id.addBtn);
+            minusBtn  = (AlwaysClickButton) view.findViewById(R.id.minusBtn);
+
+            addBtn.setValve(1000,this);
+            minusBtn.setValve(1001,this);
 
 
 
@@ -355,7 +362,34 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
         }
         initUsed(m_used);
     }
+    private void toChuteClick(int par,int isSend)
+    {
+        int value,max,min;
+        max = et_Chute.getMax();
+        min = et_Chute.getMin();
+        value = m_Channel+1;
+        if(isSend == 1)
+        {
+            if(par == 1000)
+            {
+                value++;
+            }else
+            {
+                value--;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
 
+        }
+        et_Chute.setText(Integer.toString(value));
+        m_Channel = value -1;
+    }
     @Override
     public void onConfirmClick(int value, int par) {
         byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
@@ -491,7 +525,16 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
             valueTempVertical=0;
             stopYN=false;
         }
+
+
+        if(par >= 1000)
+        {
+            toChuteClick(par,isSend);
+        }
+
+
     }
+
     private void initUsed(byte mUsed){
         if(mUsed==0x01){
             enableButton.setText(FileManager.getInstance().getString(103));   // 103#使用

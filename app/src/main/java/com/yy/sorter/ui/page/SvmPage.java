@@ -14,11 +14,13 @@ import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
+import com.yy.sorter.view.AlwaysClickButton;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
+import th.service.data.ThSense;
 import th.service.data.ThSvmInfo;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
@@ -117,7 +119,8 @@ public class SvmPage extends PageBaseUi {
         }
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder> implements DigitalDialog.Builder.LVCallback
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
+            implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack
     {
         private List<ThSvmInfo> thSvmInfoList;
         public MyAdapter()
@@ -129,6 +132,22 @@ public class SvmPage extends PageBaseUi {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_recycler_svm_item,parent,false);
             MyItemHolder holder = new MyItemHolder(view);
             return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(MyItemHolder holder, int position, List<Object> payloads) {
+            super.onBindViewHolder(holder, position, payloads);
+            if(payloads.isEmpty())
+            {
+                onBindViewHolder(holder,position);
+            }else
+            {
+                ThSvmInfo thSvmInfo = thSvmInfoList.get(position);
+                holder.sensor_Edit.setText(String.valueOf(ConvertUtils.unsignByteToInt(thSvmInfo.getSpotSensor())));
+                holder.spotDiff_Edit.setText(String.valueOf(ConvertUtils.bytes2ToInt(thSvmInfo.getSpotDiff())));
+
+            }
+
         }
 
         @Override
@@ -188,6 +207,12 @@ public class SvmPage extends PageBaseUi {
                 }
             });
 
+
+            holder.defect_addBtn.setValve(position,this);
+            holder.defect_minusBtn.setValve(position+100,this);
+
+            holder.sense_addBtn.setValve(position+200,this);
+            holder.sense_minusBtn.setValve(position+300,this);
         }
 
         @Override
@@ -218,11 +243,132 @@ public class SvmPage extends PageBaseUi {
 
         }
 
+        private void clickSpotDiff(int pos,int isSend,boolean isAdd)
+        {
+            if(thSvmInfoList == null || pos >= thSvmInfoList.size())
+            {
+                return;
+            }
+            int value,max,min;
+            ThSvmInfo thSvmInfo = thSvmInfoList.get(pos);
+            value = ConvertUtils.bytes2ToInt(thSvmInfo.getSpotDiff());
+            max = ConvertUtils.bytes2ToInt(thSvmInfo.getSpotDiffMax());
+            min = 1;
+
+            if(isSend == 1)
+            {
+                if(isAdd)
+                {
+                    value=value+1;
+                }else
+                {
+                    value=value-1;
+                }
+                if(value<min)
+                {
+                    value = min;
+                }
+                if(value>max)
+                {
+                    value = max;
+                }
+                thSvmInfo.setSpotDiff(ConvertUtils.intTo2Bytes(value));
+                thSvmInfoList.get(pos).setSpotDiff(ConvertUtils.intTo2Bytes(value));
+
+                notifyItemChanged(pos,"update");
+
+            }else
+            {
+                byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+                AbstractDataServiceFactory.getInstance().setSvmInfo(group,thSvmInfo.getView(), (byte) 2,value);
+            }
+        }
+        private void clickSense(int pos,int isSend,boolean isAdd)
+        {
+
+            if(thSvmInfoList == null || pos >= thSvmInfoList.size())
+            {
+                return;
+            }
+
+
+            int value,max,min;
+            ThSvmInfo thSvmInfo = thSvmInfoList.get(pos);
+            value = ConvertUtils.unsignByteToInt(thSvmInfo.getSpotSensor());
+            max = 100;
+            min = 0;
+
+            if(isSend == 1)
+            {
+                if(isAdd)
+                {
+                    value=value+1;
+                }else
+                {
+                    value=value-1;
+                }
+                if(value<min)
+                {
+                    value = min;
+                }
+                if(value>max)
+                {
+                    value = max;
+                }
+                thSvmInfo.setSpotSensor((byte) value);
+                thSvmInfoList.get(pos).setSpotSensor((byte) value);
+
+                notifyItemChanged(pos,"update");
+
+            }else
+            {
+                byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
+                AbstractDataServiceFactory.getInstance().setSvmInfo(group,thSvmInfo.getView(), (byte) 3,value);
+            }
+        }
+
+
+        @Override
+        public void onMuiltClick(int par, int isSend) {
+            int pos = 0;
+            boolean isAdd = true;
+
+            if(par < 200)
+            {
+
+                if(par >= 100)
+                {
+                    isAdd = false;
+                    pos = par-100;
+                }else {
+                    isAdd = true;
+                    pos = par;
+                }
+
+                clickSpotDiff(pos,isSend,isAdd);
+
+            }else
+            {
+                if(par >= 300)
+                {
+                    isAdd = false;
+                    pos = par-300;
+                }else {
+                    isAdd = true;
+                    pos = par-200;
+                }
+
+                clickSense(pos,isSend,isAdd);
+            }
+
+        }
+
         class MyItemHolder extends RecyclerView.ViewHolder
         {
             TextView tv_front,tv_defect_ratio,tv_sense;
             Button blowSampleBtn,usedBtn;
             KeyboardDigitalEdit spotDiff_Edit,sensor_Edit;
+            AlwaysClickButton defect_minusBtn,defect_addBtn,sense_minusBtn,sense_addBtn;
 
             public MyItemHolder(View itemView) {
                 super(itemView);
@@ -234,6 +380,14 @@ public class SvmPage extends PageBaseUi {
                 usedBtn = (Button) itemView.findViewById(R.id.usedBtn);
                 spotDiff_Edit = (KeyboardDigitalEdit) itemView.findViewById(R.id.spotDiff_Edit);
                 sensor_Edit = (KeyboardDigitalEdit) itemView.findViewById(R.id.sensor_Edit);
+
+                defect_addBtn = (AlwaysClickButton) itemView.findViewById(R.id.addBtn);
+                defect_minusBtn = (AlwaysClickButton) itemView.findViewById(R.id.minusBtn);
+
+                sense_addBtn = (AlwaysClickButton) itemView.findViewById(R.id.addBtn2);
+                sense_minusBtn = (AlwaysClickButton) itemView.findViewById(R.id.minusBtn2);
+
+
 
             }
         }
