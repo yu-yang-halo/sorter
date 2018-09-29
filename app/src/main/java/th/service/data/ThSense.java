@@ -35,6 +35,21 @@ public class ThSense {
     }
 
 
+    public static ThSense createThSenseNone(byte value)
+    {
+        ThSense thSense = new ThSense();
+
+        thSense.setType((byte) 100);
+        thSense.setSubType((byte) 101);
+        thSense.setExtType((byte)102);
+        thSense.setView((byte) value);
+        thSense.setSense(ConvertUtils.intTo2Bytes(value));
+        thSense.setSenseMax(ConvertUtils.intTo2Bytes(1000));
+        thSense.setSenseMin(ConvertUtils.intTo2Bytes(0));
+        thSense.setName("");
+
+        return thSense;
+    }
 
     public static ThSense createThSense(byte value)
     {

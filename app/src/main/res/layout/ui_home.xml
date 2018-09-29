@@ -138,11 +138,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:background="@color/background"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
                 >
                 <Button
                     android:text="清灰"
@@ -161,7 +162,7 @@
                     android:text="系统关"
                     android:textColor="@drawable/selector_btn_click_text_color"
                     android:background="@drawable/th_button_selector"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textAllCaps="false"
                     android:id="@+id/btn_system"
@@ -173,7 +174,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:layout_alignParentStart="true"
                 android:background="@color/background"
                 android:paddingRight="10dp"

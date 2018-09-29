@@ -413,7 +413,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
                     holder.minusBtn.setVisibility(View.VISIBLE);
                 }else
                 {
-                    holder.tv_title.setText(FileManager.getInstance().getString(79)+(position+1));//79#料槽
+                    holder.tv_title.setText(String.valueOf((position+1)));//79#料槽
 
                     holder.addBtn.setVisibility(View.VISIBLE);
                     holder.minusBtn.setVisibility(View.VISIBLE);

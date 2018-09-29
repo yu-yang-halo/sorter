@@ -62,7 +62,7 @@
                         android:layout_height="40dp"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="78dp"
+                        android:layout_marginStart="50dp"
                         android:background="@drawable/th_button_selector"
                         android:text="前视"
                         android:textAllCaps="false"
@@ -74,7 +74,7 @@
                         android:layout_height="40dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="78dp"
+                        android:layout_marginEnd="50dp"
                         android:background="@drawable/th_button_selector"
                         android:text="后视"
                         android:textAllCaps="false"
@@ -115,11 +115,13 @@
                         <CheckBox
                             android:id="@+id/checkBox2"
                             style="@style/CustomCheckBoxStyle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="40dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="5dp"
+                            android:paddingLeft="5dp"
                             android:text="图像平移" />
 
 

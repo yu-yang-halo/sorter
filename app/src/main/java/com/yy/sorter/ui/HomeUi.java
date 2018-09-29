@@ -45,8 +45,8 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     private TextView tv_feeder,tv_valve,tv_title_scheme;
     private SwitchButton btn_switch_feeder,btn_switch_valve;
     private Button btn_clean,btn_system,btn_save;
-    private boolean systemBegin,cleanBegin;
-    private Timer systemTimer,cleanTimer;
+    private boolean progressBegin;
+    private Timer progressTimer;
     private RelativeLayout modeLayout;
     public HomeUi(Context ctx) {
         super(ctx);
@@ -261,7 +261,11 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 if (hud != null) {
                     hud.dismiss();
                     hud = null;
-                    cleanBegin = false;
+                    progressBegin = false;
+                    if(progressTimer != null)
+                    {
+                        progressTimer.cancel();
+                    }
                 }
                 btn_clean.setSelected(false);
                 btn_clean.setText(FileManager.getInstance().getString(36)); //36#清灰
@@ -270,16 +274,16 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 if (hud == null) {
                     hud = KProgressHUD.create(ctx).setLabel(FileManager.getInstance().getString(37)).show();//37#清灰中
                     hud.setCancellable(false);
-                    cleanBegin = true;
+                    progressBegin = true;
 
-                    cleanTimer = new Timer();
-                    cleanTimer.schedule(new TimerTask() {
+                    progressTimer = new Timer();
+                    progressTimer.schedule(new TimerTask() {
                         @Override
                         public void run() {
                             mainUIHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (hud != null && cleanBegin) {
+                                    if (hud != null && progressBegin) {
                                         hud.dismiss();
                                         hud = null;
                                         refreshDeviceInfo();
@@ -306,7 +310,11 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             if (hud != null) {
                 hud.dismiss();
                 hud = null;
-                systemBegin = false;
+                progressBegin = false;
+                if(progressTimer != null)
+                {
+                    progressTimer.cancel();
+                }
             }
         }
         switch (systemStatus) {
@@ -322,18 +330,18 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 btn_system.setSelected(true);
                 btn_system.setText(FileManager.getInstance().getString(35)); //35#切换中...
                 if (hud == null) {
-                    hud = KProgressHUD.create(ctx).setLabel(FileManager.getInstance().getString(48)).show();//48#启动中...
+                    hud = KProgressHUD.create(ctx).setLabel(FileManager.getInstance().getString(35)).show();//35#切换中...
                     hud.setCancellable(false);
-                    systemBegin = true;
+                    progressBegin = true;
 
-                    systemTimer = new Timer();
-                    systemTimer.schedule(new TimerTask() {
+                    progressTimer = new Timer();
+                    progressTimer.schedule(new TimerTask() {
                         @Override
                         public void run() {
                             mainUIHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (hud != null && systemBegin) {
+                                    if (hud != null && progressBegin) {
                                         hud.dismiss();
                                         hud = null;
                                         refreshDeviceInfo();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="210dp"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -13,15 +13,16 @@
         android:text="前视"
         android:textSize="@dimen/statusFontSize"
         android:gravity="center|left"
+        android:background="#80f0f0f0"
         android:textColor="@color/fontColor"
-        android:layout_height="50dp" />
+        android:layout_height="40dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:paddingTop="5dp"
         android:background="@color/background">
         <Button
@@ -47,35 +48,18 @@
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/background">
 
         <TextView
             android:id="@+id/tv_defect_ratio"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="match_parent"
             android:text="杂质比"
             android:gravity="center"
-            android:textColor="@color/fontColor"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_sense"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="灵敏度"
-            android:gravity="center"
-            android:textColor="@color/fontColor"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/fstLayout"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/background">
+            android:textColor="@color/fontColor" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -115,6 +99,23 @@
                 android:gravity="center" />
 
         </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fstLayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/background">
+
+        <TextView
+            android:id="@+id/tv_sense"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:text="灵敏度"
+            android:gravity="center"
+            android:textColor="@color/fontColor" />
 
 
         <RelativeLayout

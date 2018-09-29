@@ -92,7 +92,7 @@
 103#Enable
 104#Sense
 105#Impurity ratio
-106#Image translation
+106#Translation
 107#Start
 108#End
 109#Purity
@@ -113,7 +113,7 @@
 124#Camera gain
 125#Do you turn on the system?
 126#Do you turn off the system?
-127#Feeder
+127#All
 128#Network is connected
 129#No network
 130#App is downloading...

@@ -11,12 +11,14 @@
 
         <TextView
             android:id="@+id/top_title"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text=""
             android:textColor="@color/whiteColor"
             android:textSize="@dimen/actionBar_fontSize"
             android:gravity="center"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
@@ -28,7 +30,7 @@
 
         <ImageView
             android:id="@+id/leftBtn"
-            android:layout_width="90dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
             android:src="@drawable/button_back_selector"
@@ -38,7 +40,7 @@
 
         <ImageView
             android:id="@+id/rightBtn"
-            android:layout_width="90dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_marginRight="15dp"
             android:scaleType="fitEnd"

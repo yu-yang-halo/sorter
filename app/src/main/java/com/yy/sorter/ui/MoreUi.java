@@ -16,6 +16,9 @@ import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.helper.ThPackage;
@@ -23,6 +26,7 @@ import th.service.helper.ThPackage;
 public class MoreUi extends BaseUi {
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
+    private List<ItemObj> objList;
     public MoreUi(Context ctx) {
         super(ctx);
     }
@@ -42,6 +46,15 @@ public class MoreUi extends BaseUi {
     }
 
     @Override
+    public void onViewStart() {
+        super.onViewStart();
+        objList = buildItemObjList();
+        myAdapter.setItemObjList(objList);
+        myAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
     public int getID() {
         return ConstantValues.VIEW_MORE;
     }
@@ -54,14 +67,48 @@ public class MoreUi extends BaseUi {
     public void receivePacketData(ThPackage packet) {
 
     }
+    public static List<ItemObj> buildItemObjList()
+    {
+        List<ItemObj> objList = new ArrayList<>();
+
+        ItemObj itemObj0 = new ItemObj(0,FileManager.getInstance().getString(62));
+        ItemObj itemObj1 = new ItemObj(1,FileManager.getInstance().getString(113));
+        ItemObj itemObj2 = new ItemObj(2,FileManager.getInstance().getString(114));
+        ItemObj itemObj3 = new ItemObj(3,FileManager.getInstance().getString(115));
+
+        objList.add(itemObj0);
+        MachineData machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
+
+        if(machineData != null)
+        {
+            if(machineData.getUserLevel() == MachineData.LEVEL_ENGINNER
+                    || machineData.getUserLevel() == MachineData.LEVEL_PRODUCTOR)
+            {
+                objList.add(itemObj1);
+                objList.add(itemObj2);
+            }
+        }
+
+        objList.add(itemObj3);
+
+        return objList;
+    }
+    public static class ItemObj
+    {
+        public  int itemId;
+        public  String itemName;
+
+        public ItemObj(int itemId, String itemName) {
+            this.itemId = itemId;
+            this.itemName = itemName;
+        }
+
+    }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
     {
-        private String[] strList = new String[]{
-                FileManager.getInstance().getString(62),
-                FileManager.getInstance().getString(113),
-                FileManager.getInstance().getString(114),
-                FileManager.getInstance().getString(115)};
+
+        private List<ItemObj> itemObjList;
         public MyAdapter()
         {
 
@@ -73,6 +120,10 @@ public class MoreUi extends BaseUi {
             return holder;
         }
 
+        public void setItemObjList(List<ItemObj> itemObjList) {
+            this.itemObjList = itemObjList;
+        }
+
         @Override
         public int getItemViewType(int position) {
             return super.getItemViewType(position);
@@ -80,44 +131,39 @@ public class MoreUi extends BaseUi {
 
         @Override
         public void onBindViewHolder(MyAdapter.MyItemHolder holder, final int position) {
-            holder.tv_modeName.setText(strList[position]);
+            if(itemObjList == null || position >= itemObjList.size())
+            {
+                return;
+            }
+            holder.tv_modeName.setText(itemObjList.get(position).itemName);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    String titleName = "";
-                    if(position>=0 && position<=3)
+                    if(itemObjList == null || position >= itemObjList.size())
                     {
-                        titleName = strList[position];
+                        return;
+                    }
+                    ItemObj itemObj = itemObjList.get(position);
+
+                    if(itemObj == null)
+                    {
+                        return;
                     }
 
-                    MachineData machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
-
-                    if(machineData != null)
-                    {
-                        if(machineData.getUserLevel() == MachineData.LEVEL_USER)
-                        {
-                            if(position == 1 || position == 2)
-                            {
-                                showToast(FileManager.getInstance().getString(133));//133#该界面用户权限无法访问
-                                return;
-                            }
-                        }
-                    }
-
-                    switch (position)
+                    switch (itemObj.itemId)
                     {
                         case 0:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VERSION,titleName);
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VERSION,itemObj.itemName);
                             break;
                         case 1:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_CAMERAADJUST,titleName);
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_CAMERAADJUST,itemObj.itemName);
                             break;
                         case 2:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_BACKGROUND,titleName);
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_BACKGROUND,itemObj.itemName);
                             break;
                         case 3:
-                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE,titleName);
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE,itemObj.itemName);
                             break;
                     }
 
@@ -129,7 +175,11 @@ public class MoreUi extends BaseUi {
 
         @Override
         public int getItemCount() {
-            return strList.length;
+            if(itemObjList == null)
+            {
+                return 0;
+            }
+            return itemObjList.size();
         }
 
         class MyItemHolder extends RecyclerView.ViewHolder
