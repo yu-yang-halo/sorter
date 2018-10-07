@@ -348,6 +348,10 @@ public abstract class BaseUi implements ThObserver{
                                 //1016#请检查手机网络是否可用
                                 toLoginUI(1016);
                                 break;
+                            case ThCommand.TCP_UNKNOW_NO_HOST:
+                                //1031#未知的主机
+                                toLoginUI(1031);
+                                break;
                         }
 
                     }

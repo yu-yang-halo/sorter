@@ -151,3 +151,4 @@
 1028#The input value is less than the minimum value.
 1029#Save success
 1030#Save failure
+1031#Unknown Host

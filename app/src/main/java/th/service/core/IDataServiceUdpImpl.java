@@ -27,7 +27,6 @@ public class IDataServiceUdpImpl extends AbstractIDataService {
 
 	}
 
-
 	@Override
 	public void sendPacketData(ThPackage thPackage, String ip) {
 		thPackage.setSenderIP(ip);

@@ -88,7 +88,6 @@ public class IDataServiceTcpImpl extends AbstractIDataService {
         tcpCoreManager.reSetReconnectFlag();
     }
 
-
     @Override
     public void sendPacketData(ThPackage thPackage, String ip) {
         tcpCoreManager.sendData(thPackage.myByteArrays());

@@ -2,17 +2,17 @@ package th.service.core;
 
 import android.os.Handler;
 import android.os.Looper;
-
-import com.yy.sorter.utils.AuthUtils;
 import com.yy.sorter.utils.TextCacheUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -58,6 +58,8 @@ public class TcpCoreManager extends IReceiveListenser{
 
 	private CircleBuffer cicleBuffer=new CircleBuffer();
 
+	private String ipAddress = null;
+
 	private TcpCoreManager() {
 		cicleBuffer.setiReceiveListenser(this);
 	}
@@ -79,7 +81,6 @@ public class TcpCoreManager extends IReceiveListenser{
 			readTimeoutCount.getAndSet(0);
 		}
 	}
-
 	public void closeConnect(){
 		if(created.get()){
 			ThLogger.addLog("关闭连接");
@@ -152,12 +153,14 @@ public class TcpCoreManager extends IReceiveListenser{
 							}
 							return;
 						}
+						ipAddress = IPUtils.getServerIp();
+
 						ThLogger.addLog("创建Socket连接");
 						startReceiveLooper();
 						cicleBuffer.reset();
 						sendSocket = new Socket();
 
-						SocketAddress socketAddress = new InetSocketAddress(TCP_SERVER,TCP_PORT);
+						SocketAddress socketAddress = new InetSocketAddress(ipAddress,TCP_PORT);
 
 						try {
 							sendSocket.connect(socketAddress, CONNECT_TIME_OUT);
@@ -172,7 +175,6 @@ public class TcpCoreManager extends IReceiveListenser{
 								ThLogger.addLog("关闭Socket连接 连接超时");
 								sendErrorCloseConnect(ThCommand.TCP_CONNECT_TIMEOUT);
 							}
-
 						}
 
 					}

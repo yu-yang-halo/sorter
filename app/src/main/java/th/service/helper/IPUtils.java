@@ -28,6 +28,7 @@ import java.net.UnknownHostException;
 
 public class IPUtils {
 	private static String TAG="IPUtils";
+	private static String serverIp = "47.90.127.2";
 	
 	public static String getBroadCastAddress(Context ctx){
 		WifiManager wifiManager= (WifiManager) ctx.getSystemService(Service.WIFI_SERVICE);
@@ -153,11 +154,20 @@ public class IPUtils {
 		}
 
 		if(avaliable){
-			System.out.println("可以上网...");
+			System.out.println("可以上网..."+serverIp);
 		}else{
-			System.out.println("不能上网...");
+			System.out.println("不能上网..."+serverIp);
 		}
 		return avaliable;
+	}
+
+	public static String getServerIp()
+	{
+		return serverIp;
+	}
+	public static void setServerIp(String ip)
+	{
+		serverIp = ip;
 	}
 
 	private static class DNSResolver implements Runnable {
@@ -172,6 +182,11 @@ public class IPUtils {
 			try {
 				InetAddress addr = InetAddress.getByName(domain);
 				set(addr);
+				InetAddress addr2 = InetAddress.getByName(ThCommand.TCP_CORE_SERVER_IP);
+				if(addr2 != null)
+				{
+					IPUtils.setServerIp(addr2.getHostAddress());
+				}
 			} catch (UnknownHostException e) {
 
 			}
@@ -186,51 +201,6 @@ public class IPUtils {
 		}
 	}
 
-
-
-	@Deprecated
-	private static boolean netAvaliable2(){
-		URL url;
-		try {
-			url = new URL("https://www.baidu.com/");
-			HttpURLConnection connection=(HttpURLConnection) url.openConnection();
-
-			if(200 == connection.getResponseCode()){
-				System.err.println("可以上网...");
-				return true;
-			}
-		} catch (Exception e) {
-
-		}
-		System.err.println("不能上网...");
-		return false;
-	}
-
-	@Deprecated
-	private static final boolean ping() {
-
-		String result = null;
-		try {
-			String ip = "www.taobao.com";// ping 的地址，可以换成任何一种可靠的外网
-			Process p = Runtime.getRuntime().exec("/system/bin/ping -c 3 -t 3 " + ip);// ping网址3次
-
-			int status = p.waitFor();
-			if (status == 0) {
-				result = "success";
-				return true;
-			} else {
-				result = "failed";
-			}
-		} catch (IOException e) {
-			    result=e.getMessage();
-		} catch (InterruptedException e) {
-			    result=e.getMessage();
-		} finally {
-			System.err.println("result = " + result);
-		}
-		return false;
-
-	}
 	
 	
 

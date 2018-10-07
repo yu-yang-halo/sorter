@@ -84,6 +84,7 @@ public class ThCommand {
 	public static final int  TCP_RECEIVE_TIMEOUT=2005;
 	public static final int  TCP_CONNECT_CLOSE_NOMESSAGE=2006;
 	public static final int  TCP_CONNECT_OFFLINE=2007;
+	public static final int  TCP_UNKNOW_NO_HOST=2010;
 
 
 	public static final int  NETWORK_TIMEOUT_RECONNECT=0x2000;

@@ -14,7 +14,6 @@ import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
-import com.yy.sorter.utils.AuthUtils;
 import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.StringUtils;
 import com.yy.sorter.utils.TextCacheUtils;
@@ -115,9 +114,8 @@ public class RemoteLoginUi extends BaseUi {
 
                     StringUtils.cacheLastThreeHistory(ctx,deviceNumber,2);
                     hud= KProgressHUD.create(ctx).setLabel( FileManager.getInstance().getString(19)).show(); //19#远程登录中...
+
                     AbstractDataServiceFactory.getInstance().requestDeviceList(deviceNumber,null,null,vcode);
-
-
 
                 }
 
