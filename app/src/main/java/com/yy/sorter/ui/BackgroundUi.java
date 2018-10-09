@@ -323,6 +323,8 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             et_gain_led_b.setEnabled(false);
             et_gain_led_ir1.setEnabled(false);
             et_gain_led_ir2.setEnabled(false);
+
+            et_main_light.setEnabled(false);
         }
         else
         {
@@ -337,6 +339,8 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             et_gain_led_b.setEnabled(true);
             et_gain_led_ir1.setEnabled(true);
             et_gain_led_ir2.setEnabled(true);
+
+            et_main_light.setEnabled(true);
         }
     }
 

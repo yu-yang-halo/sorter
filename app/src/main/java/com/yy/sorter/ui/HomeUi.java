@@ -306,15 +306,13 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             return;
         }
         machineData.setStartState((byte) systemStatus);
-        if (systemStatus != 2) {
-            if (hud != null) {
-                hud.dismiss();
-                hud = null;
-                progressBegin = false;
-                if(progressTimer != null)
-                {
-                    progressTimer.cancel();
-                }
+        if (hud != null && machineData.getCleanState() != 1) {
+            hud.dismiss();
+            hud = null;
+            progressBegin = false;
+            if(progressTimer != null)
+            {
+                progressTimer.cancel();
             }
         }
         switch (systemStatus) {

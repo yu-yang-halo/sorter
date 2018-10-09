@@ -268,11 +268,11 @@ public class ThSVersion {
 
         }
         private void log(){
-            ThLogger.debug("LOG", ConvertUtils.bytes2ToFloat(control)+":"+
-                    ConvertUtils.bytes2ToFloat(led)+":"+
-                    ConvertUtils.bytes2ToFloat(sensor)+":"+
-                    ConvertUtils.bytes2ToFloat(wheel)+":"+
-                    ConvertUtils.bytes2ToFloat(timeLed));
+            ThLogger.debug("LOG", ConvertUtils.bytes2ToFloatV2(control)+":"+
+                    ConvertUtils.bytes2ToFloatV2(led)+":"+
+                    ConvertUtils.bytes2ToFloatV2(sensor)+":"+
+                    ConvertUtils.bytes2ToFloatV2(wheel)+":"+
+                    ConvertUtils.bytes2ToFloatV2(timeLed));
         }
 
         public boolean check(byte[] contents){

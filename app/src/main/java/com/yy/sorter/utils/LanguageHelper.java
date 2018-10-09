@@ -152,7 +152,11 @@ public class LanguageHelper {
 
                             if(thConfig.getAndroid().get(BuildConfig.VKEY)!=null){
                                 String newVersion= thConfig.getAndroid().get(BuildConfig.VKEY).get("version");
-                                isLastestNew=StringUtils.getAppVersionName(ctx).equals(newVersion);
+                                int appHasCode = StringUtils.getAppVersionName(ctx).hashCode();
+                                int serverHasCode = newVersion.hashCode();
+
+                                isLastestNew = appHasCode>=serverHasCode;
+
                             }
 
                             if(iProgressListenser!=null){

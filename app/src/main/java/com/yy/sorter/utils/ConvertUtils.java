@@ -116,6 +116,17 @@ public class ConvertUtils {
 
         return intValue/100.0f;
     }
+
+    public static float bytes2ToFloatV2(byte[] value){
+        if(value == null || value.length < 2)
+        {
+            value = new byte[2];
+        }
+        String floatStr = String.format("%d.%02d",ConvertUtils.unsignByteToInt(value[0]),
+                ConvertUtils.unsignByteToInt(value[1]));
+        return Float.parseFloat(floatStr);
+    }
+
     public static int bytes2ToInt(byte b0,byte b1){
         int intValue=((b0&0xff)<<8)|(b1&0xFF);
         return intValue;

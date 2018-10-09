@@ -594,12 +594,13 @@ public class VersionUi extends BaseUi implements View.OnClickListener{
     private void initBaseVersion(ThSVersion.BaseVersion ts)
     {
         tvShowVer.setText(ts.getShowversion());
-        tvControlVer.setText(Float.toString(ConvertUtils.bytes2ToFloat(ts.getControl())) );
-        tvLedVer1 .setText(Float.toString(ConvertUtils.bytes2ToFloat(ts.getLed())));
-        tvLedVer2 .setText(Float.toString(ConvertUtils.bytes2ToFloat(ts.getLed())));
+        tvControlVer.setText(Float.toString(ConvertUtils.bytes2ToFloatV2(ts.getControl())) );
+        tvLedVer1 .setText(Float.toString(ConvertUtils.bytes2ToFloatV2(ts.getLed())));
+        tvLedVer2 .setText(Float.toString(ConvertUtils.bytes2ToFloatV2(ts.getLed())));
 
-        tvLedVer12 .setText(Float.toString(ConvertUtils.bytes2ToFloat(ts.getTimeLed())));
-        tvLedVer22 .setText(Float.toString(ConvertUtils.bytes2ToFloat(ts.getTimeLed())));
+        tvLedVer12 .setText(Float.toString(ConvertUtils.bytes2ToFloatV2(ts.getTimeLed())));
+        tvLedVer22 .setText(Float.toString(ConvertUtils.bytes2ToFloatV2(ts.getTimeLed())));
+        tvSensorVer.setText(Float.toString(ConvertUtils.bytes2ToFloatV2(ts.getSensor())));
 
     }
 

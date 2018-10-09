@@ -352,14 +352,6 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
     }
     private void OnSystemStatusChanged()
     {
-        MachineData machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
-        int SystemStart = machineData.getStartState();
-        if(SystemStart == 1) {
-            btnTest.setEnabled(false);
-
-        } else {
-            btnTest.setEnabled(true);
-        }
 
     }
 
