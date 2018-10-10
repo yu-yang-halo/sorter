@@ -389,10 +389,11 @@ public class ShapePage extends PageBaseUi {
                 itemAdapter.notifyDataSetChanged();
 
                 ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-                if(thShapeItem.getMiniItemList() != null)
+                if(thShapeItem.getMiniItemList() != null && thShapeItem.getMiniItemList().size()>0)
                 {
-                    params.height = ConvertUtils.toPx(50)*(thShapeItem.getMiniItemList().size())+
-                            ConvertUtils.toPx(40);
+                    params.height = ConvertUtils.toPx(50)*(thShapeItem.getMiniItemList().size())
+                            + ConvertUtils.toPx(51)
+                            +(thShapeItem.getMiniItemList().size()-1)* ConvertUtils.toPx(1);
                 }else
                 {
                     params.height = 0;

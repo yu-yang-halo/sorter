@@ -14,7 +14,7 @@
         android:textSize="@dimen/statusFontSize"
         android:gravity="center|left"
         android:textColor="@color/fontColor"
-        android:background="#50e2e2e2"
+        android:background="#f8f8f8"
         android:layout_height="match_parent" />
 
 

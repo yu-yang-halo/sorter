@@ -194,6 +194,18 @@ public class SenseUi extends BaseUi {
 
         loadChildPage();
 
+        if(items==null || items.size()<=0)
+        {
+            segmentView.setVisibility(View.GONE);
+            groupLayout.setVisibility(View.GONE);
+            pageSwitchView.setVisibility(View.GONE);
+        }else
+        {
+            segmentView.setVisibility(View.VISIBLE);
+            groupLayout.setVisibility(View.VISIBLE);
+            pageSwitchView.setVisibility(View.VISIBLE);
+        }
+
 
 
     }
