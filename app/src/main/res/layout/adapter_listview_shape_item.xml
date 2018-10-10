@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#ffffff"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="1dp">
 
         <CheckBox
             android:id="@+id/ckEnable"
@@ -41,9 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        android:divider="#80fefefe"
-        android:dividerHeight="1dp"
-        android:layout_marginBottom="5dp">
+        android:divider="#fefefe"
+        android:dividerHeight="1dp">
 
     </ListView>
 

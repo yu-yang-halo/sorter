@@ -30,6 +30,7 @@ import th.service.data.ThLightRet;
 import th.service.data.ThMode;
 import th.service.data.ThSVersion;
 import th.service.data.ThSense;
+import th.service.data.ThShape;
 import th.service.data.ThShapeItem;
 import th.service.data.ThSvmInfo;
 import th.service.data.ThValveRateRet;
@@ -451,45 +452,58 @@ public class ThPackageHelper {
 	/**
 	 *  解析形选
 	 */
-	public static List<ThShapeItem> parseThShapeItemList(ThPackage retData)
+	public static List<ThShape> parseThShapeList(ThPackage retData)
 	{
 		byte[] contents=retData.getContents();
-		List<ThShapeItem> thShapeItemList = new ArrayList<>();
-		if(contents!=null)
-		{
+		List<ThShape> thShapeList = new ArrayList<>();
+		if(contents!=null) {
 			int size = retData.getData1()[1];
-			if(size <= 0)
-			{
-				return thShapeItemList;
+			if (size <= 0) {
+				return thShapeList;
 			}
+
 			int pos = 0;
-
-			while (pos != contents.length)
+			for(int i=0;i<size;i++)
 			{
-				if(pos+54<contents.length)
-				{
-					int miniCount = contents[pos+54];
-					int thShapeItemSize = miniCount*ThShapeItem.MiniItem.SIZE + ThShapeItem.MIN_SIZE;
 
-					if(thShapeItemSize + pos > contents.length)
+				if(pos+1 >= contents.length)
+				{
+					break;
+				}
+
+				int shapeItemCount = ConvertUtils.unsignByteToInt(contents[pos + 1]);
+				int sum = 0;
+				for(int j=0;j<shapeItemCount;j++)
+				{
+					int miniCountIndex = pos+ThShape.MIN_SIZE + ThShapeItem.MIN_SIZE -1 +sum;
+					if(miniCountIndex >= contents.length)
 					{
 						break;
 					}
-					byte[] buffer = new byte[thShapeItemSize];
-
-
-					System.arraycopy(contents,pos,buffer,0,buffer.length);
-
-					ThShapeItem thShapeItem = new ThShapeItem(buffer);
-					thShapeItemList.add(thShapeItem);
-
-					pos+=thShapeItemSize;
+					int miniItemCount = ConvertUtils.unsignByteToInt(contents[miniCountIndex]);
+					sum += ThShapeItem.MIN_SIZE
+							+ miniItemCount* ThShapeItem.MiniItem.SIZE;
 				}
+				int shapeSize = sum + ThShape.MIN_SIZE;
+				byte[] buffer = new byte[shapeSize];
+
+				if(pos+shapeSize > contents.length)
+				{
+					break;
+				}
+				System.arraycopy(contents,pos,buffer,0,shapeSize);
+
+				ThShape thShape = new ThShape(buffer);
+
+				thShapeList.add(thShape);
+
+				pos += shapeSize;
 			}
-			System.out.println("pos == "+pos+" size == "+size+" contents.length="+contents.length);
+
+
 		}
 
-		return thShapeItemList;
+		return thShapeList;
 	}
 
 	/**

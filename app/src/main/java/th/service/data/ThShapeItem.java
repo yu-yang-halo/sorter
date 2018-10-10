@@ -46,7 +46,6 @@ public class ThShapeItem {
                 }
             }
 
-
         }else
         {
             TrafficManager.getInstance().showErrorMessage();

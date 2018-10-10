@@ -54,21 +54,21 @@ public class ThApplication extends Application {
         TrafficManager.getInstance().setCtx(this);
         languageInit();
 
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread t, final Throwable e) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("BUG 收集日志 " + e + "\n");
-                for (StackTraceElement element : e.getStackTrace()) {
-                    sb.append(element.toString() + "\n");
-                }
-                ThLogger.addErrorLog(sb.toString());
-                ThLogger.outputErrorLog();
-
-
-                RestartAppUtils.restartAPP(getApplicationContext());
-            }
-        });
+//        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+//            @Override
+//            public void uncaughtException(Thread t, final Throwable e) {
+//                StringBuilder sb = new StringBuilder();
+//                sb.append("BUG 收集日志 " + e + "\n");
+//                for (StackTraceElement element : e.getStackTrace()) {
+//                    sb.append(element.toString() + "\n");
+//                }
+//                ThLogger.addErrorLog(sb.toString());
+//                ThLogger.outputErrorLog();
+//
+//
+//                RestartAppUtils.restartAPP(getApplicationContext());
+//            }
+//        });
     }
 
     public void languageInit(){
