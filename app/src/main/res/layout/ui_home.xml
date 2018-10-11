@@ -138,7 +138,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:background="@color/background"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
@@ -148,7 +148,7 @@
                 <Button
                     android:text="清灰"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:textAllCaps="false"
                     android:id="@+id/btn_clean"
                     android:textColor="@drawable/selector_btn_click_text_color"
@@ -163,7 +163,7 @@
                     android:textColor="@drawable/selector_btn_click_text_color"
                     android:background="@drawable/th_button_selector"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:textAllCaps="false"
                     android:id="@+id/btn_system"
                     android:layout_weight="1"
@@ -174,7 +174,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_alignParentStart="true"
                 android:background="@color/background"
                 android:paddingRight="10dp"
@@ -186,7 +186,7 @@
                 <Button
                     android:text="保存参数到方案 "
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:textAllCaps="false"
                     android:id="@+id/btn_save"
                     android:textColor="@drawable/selector_btn_click_text_color"
@@ -196,6 +196,40 @@
 
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/workLayout"
+                android:layout_alignParentStart="true"
+                android:background="@color/background"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:visibility="gone"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="1dp">
+
+
+                <TextView
+                    android:id="@+id/lb_totalTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="" />
+                <TextView
+                    android:id="@+id/lb_todayTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColor"
+                    android:text="" />
+            </LinearLayout>
 
 
         </LinearLayout>

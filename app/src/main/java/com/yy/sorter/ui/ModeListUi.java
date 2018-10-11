@@ -7,29 +7,34 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.baoyz.widget.PullRefreshLayout;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.yy.sorter.activity.R;
+import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.TextCacheUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
-
-import javax.crypto.Mac;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThDevice;
 import th.service.data.ThMode;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
+interface ICallBack
+{
+    public void onDataBeginSend();
 
-public class ModeListUi extends BaseUi {
+}
+
+public class ModeListUi extends BaseUi implements ICallBack{
+    private KProgressHUD hud;
     private MachineData machineData;
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
@@ -49,6 +54,7 @@ public class ModeListUi extends BaseUi {
             recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
 
             myAdapter = new MyAdapter();
+            myAdapter.setICallback(new WeakReference<ICallBack>(this));
             recyclerView.setAdapter(myAdapter);
 
             swipeRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
@@ -92,7 +98,8 @@ public class ModeListUi extends BaseUi {
                 byte bigIndex = packet.getData1()[1];
                 if(packet.getData1()[2] == 0x01)
                 {
-                    showToast("读取方案成功");
+                    //138#读取方案成功
+                    showToast(FileManager.getInstance().getString(138,"读取方案成功"));
                     if(thModeList != null)
                     {
                         for(ThMode mode : thModeList)
@@ -111,7 +118,12 @@ public class ModeListUi extends BaseUi {
 
                 }else
                 {
-                    showToast("读取方案失败");
+                    //139#读取方案失败
+                    showToast(FileManager.getInstance().getString(139,"读取方案失败"));
+                }
+                if(hud != null)
+                {
+                    hud.dismiss();
                 }
 
                 myAdapter.notifyDataSetChanged();
@@ -130,13 +142,30 @@ public class ModeListUi extends BaseUi {
         return ConstantValues.VIEW_MODE_LIST;
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
+    @Override
+    public void onDataBeginSend() {
+        if(hud != null)
+        {
+            hud.dismiss();
+        }
+        //140#方案读取中...
+        hud = KProgressHUD.create(ctx)
+                .setLabel(FileManager.getInstance().getString(140,"方案读取中...")).show();
+    }
+
+    static class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
     {
         List<ThMode> thModeList;
+        private WeakReference<ICallBack> callBack;
         public MyAdapter()
         {
 
         }
+        public void setICallback(WeakReference<ICallBack> callBack)
+        {
+            this.callBack = callBack;
+        }
+
         public void setThModeList(List<ThMode> thModeList) {
             this.thModeList = thModeList;
         }
@@ -154,7 +183,7 @@ public class ModeListUi extends BaseUi {
         }
 
         @Override
-        public void onBindViewHolder(MyItemHolder holder, int position) {
+        public void onBindViewHolder(MyItemHolder holder, final int position) {
             final ThMode mode = thModeList.get(position);
             holder.tv_modeName.setText(mode.getModeName());
             if(mode.isCurrentMode())
@@ -170,7 +199,14 @@ public class ModeListUi extends BaseUi {
             holder.ckMode.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(v instanceof CheckBox)
+                    {
+                        CheckBox ckBox = (CheckBox) v;
+                        ckBox.setChecked(false);
+                    }
                     AbstractDataServiceFactory.getInstance().readMode(mode.getBigIndex(),mode.getSmallIndex());
+
+                    callBack.get().onDataBeginSend();
                 }
             });
         }

@@ -176,6 +176,7 @@ public class SenseUi extends BaseUi {
             ThSegmentView.TSegmentItem item3 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(97),3);//   97#形选
             items.add(item3);
         }
+
 //        if(machineData.getUseIR() == 0x01)
 //        {
 //            ThSegmentView.TSegmentItem item4 = new ThSegmentView.TSegmentItem(FileManager.getInstance().getString(98),4);//98#红外
@@ -206,6 +207,11 @@ public class SenseUi extends BaseUi {
             pageSwitchView.setVisibility(View.VISIBLE);
         }
 
+
+        if(machineData.getGroupNumbers()<=1)
+        {
+           groupLayout.setVisibility(View.GONE);
+        }
 
 
     }

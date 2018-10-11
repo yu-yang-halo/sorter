@@ -135,6 +135,19 @@ public class ConvertUtils {
         int intValue=((b0&0xff)<<16)|((b1&0xFF)<<8)|(b2&0xFF);
         return intValue;
     }
+    public static int bytes4ToInt(byte b0,byte b1,byte b2,byte b3){
+        int intValue=((b0&0xff)<<24)|((b1&0xff)<<16)|((b2&0xFF)<<8)|(b3&0xFF);
+        return intValue;
+    }
+    public static int bytes4ToInt(byte[] barr){
+        if(barr == null | barr.length != 4)
+        {
+            return 0;
+        }
+        int intValue=bytes4ToInt(barr[0],barr[1],barr[2],barr[3]);
+        return intValue;
+    }
+
     public static byte[] intTo2Bytes(int value){
         byte b0=(byte) (value>>8&0xFF);
         byte b1=(byte) (value&0xFF);

@@ -129,6 +129,7 @@ public class ThCommand {
 	public static final byte LIGHT_CMD = 0x0f;
 	public static final byte CAMERA_GAIN_CMD = 0x10;
 	public static final byte SHAPE_CMD = 0x11;
+	public static final byte WORKINFO_CMD = 0x12;
 
 
 

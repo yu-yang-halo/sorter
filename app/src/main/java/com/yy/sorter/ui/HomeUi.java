@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import java.util.TimerTask;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.ThDevice;
+import th.service.data.ThWorkInfo;
 import th.service.helper.ThCommand;
 import th.service.helper.ThLogger;
 import th.service.helper.ThPackage;
@@ -53,6 +55,9 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     }
 
     private MachineData machineData;
+    private ThWorkInfo thWorkInfo;
+    private TextView lb_todayTime,lb_totalTime;
+    private LinearLayout workLayout;
 
 
     @Override
@@ -72,6 +77,9 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             btn_system = (Button) view.findViewById(R.id.btn_system);
             btn_save = (Button) view.findViewById(R.id.btn_save);
 
+            lb_todayTime = (TextView) view.findViewById(R.id.lb_todayTime);
+            lb_totalTime = (TextView) view.findViewById(R.id.lb_totalTime);
+            workLayout = (LinearLayout) view.findViewById(R.id.workLayout);
 
             layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
                 @Override
@@ -184,6 +192,8 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 AbstractDataServiceFactory.getInstance().login(null, (byte) lanCountryId);
             }
         }
+
+        AbstractDataServiceFactory.getInstance().requestWorkInfo();
     }
 
     @Override
@@ -215,6 +225,8 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             //手机版本低于屏版本--提示手机程序要升级才可以正常使用所有功能
             showLongToast(FileManager.getInstance().getString(1022));//1022#手机协议版本过旧，部分功能可能无法使用，升级版本正在开发中，请耐心等待.
         }
+
+        AbstractDataServiceFactory.getInstance().requestWorkInfo();
 
     }
 
@@ -300,6 +312,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 break;
         }
     }
+
     private void initSystemButton(int systemStatus, int errorStatus) {
         if(machineData == null)
         {
@@ -364,6 +377,23 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
 
 
 
+    }
+
+    private void updateWorkInfo()
+    {
+        if(thWorkInfo == null)
+        {
+            workLayout.setVisibility(View.GONE);
+            return;
+        }
+//        134#总工作时间
+//        135#本次工作时间
+        lb_totalTime.setText(FileManager.getInstance().getString(134,"总工作时间")+
+                " : "+thWorkInfo.getTotalTime());
+        lb_todayTime.setText(FileManager.getInstance().getString(135,"本次工作时间")+
+                " : "+thWorkInfo.getTodayTime());
+        
+        workLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -440,6 +470,11 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 }
             }
 
+        }else if(packet.getType() == ThCommand.WORKINFO_CMD)
+        {
+            thWorkInfo = ThPackageHelper.parseThWorkInfo(packet);
+
+            updateWorkInfo();
         }
     }
 

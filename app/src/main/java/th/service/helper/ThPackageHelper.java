@@ -35,6 +35,7 @@ import th.service.data.ThShapeItem;
 import th.service.data.ThSvmInfo;
 import th.service.data.ThValveRateRet;
 import th.service.data.ThWaveData;
+import th.service.data.ThWorkInfo;
 
 /**
  * 注意包体的长度计算，同意TCP和UDP包体长度的计算
@@ -426,6 +427,19 @@ public class ThPackageHelper {
 			System.arraycopy(contents,0,buffer,0,realLength);
 			ThCameraPlusRet ret=new ThCameraPlusRet(buffer);
 			ThLogger.debug("ThCameraPlusRet",ret.toString());
+			return ret;
+		}
+		return null;
+	}
+	public static ThWorkInfo parseThWorkInfo(ThPackage retData)
+	{
+		byte[] contents=retData.getContents();
+		if(contents!=null){
+			int realLength=retData.getLength()-PACKET_HEADER_SIZE;
+			byte[] buffer=new byte[realLength];
+			System.arraycopy(contents,0,buffer,0,realLength);
+			ThWorkInfo ret=new ThWorkInfo(buffer);
+			ThLogger.debug("ThWorkInfo",ret.toString());
 			return ret;
 		}
 		return null;

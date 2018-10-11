@@ -281,4 +281,10 @@ public abstract class AbstractIDataService implements IDataService{
         sendPacketData(packet);
     }
 
+
+    @Override
+    public void requestWorkInfo() {
+        ThPackage packet= new ThPackage(ThCommand.WORKINFO_CMD,(byte)0x01, null,(byte)0, (byte)0, (byte)0,null);
+        sendPacketData(packet);
+    }
 }

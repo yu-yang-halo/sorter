@@ -68,6 +68,7 @@ public interface IDataService {
 	public void setShapeInfo(byte group,byte setType,byte whatShape,byte whatAlgorithm,byte whatIndex,int value);
 
 
+	public void requestWorkInfo();
 
 
 

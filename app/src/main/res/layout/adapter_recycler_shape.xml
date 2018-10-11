@@ -7,8 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#ffffff"
-        android:layout_marginTop="5dp">
+        android:background="#fcfcfc">
 
         <TextView
             android:id="@+id/tv_Shape"
@@ -21,19 +20,12 @@
             android:textSize="20sp"
             android:text="TextView" />
     </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#fefefe"></LinearLayout>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:divider="#f5f5f5"
-        android:dividerHeight="1dp"
-        android:layout_marginBottom="5dp">
+        android:scrollbars="none">
 
     </ListView>
 

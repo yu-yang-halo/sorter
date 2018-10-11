@@ -120,6 +120,13 @@
 131#Cancelled
 132#No files found
 133#User access is not accessible at this page.
+134#Total working time
+135#This working time
+136#hours
+137#minutes
+138#Read Mode Success
+139#Read Mode Fail
+140#Mode reading...
 1000#The network is unstable or the device is offline.
 1001#The screen has been locked.
 1002#If the protocol does not match, check whether the version is consistent.

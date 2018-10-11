@@ -436,7 +436,7 @@ public class ShapePage extends PageBaseUi {
                 holder.tv_ShapeName = (TextView) convertView.findViewById(R.id.tv_ShapeName);
                 itemAdapter2 = new ItemAdapterTwo();
                 holder.listView.setAdapter(itemAdapter2);
-                itemAdapter2.setListView(new WeakReference<ListView>(holder.listView));
+                itemAdapter2.setListView(new WeakReference<>(holder.listView));
 
                 convertView.setTag(holder);
             }else
@@ -467,9 +467,12 @@ public class ShapePage extends PageBaseUi {
 
             if(thShapeItem.getMiniItemList() != null && thShapeItem.getMiniItemList().size()>0)
             {
+                int dividerHeight = holder.listView.getDividerHeight();
                 params.height = ConvertUtils.toPx(50)*(thShapeItem.getMiniItemList().size())
-                        + ConvertUtils.toPx(42)
-                        +(thShapeItem.getMiniItemList().size()-1)* ConvertUtils.toPx(1);
+                        + ConvertUtils.toPx(40)
+                        + dividerHeight*(thShapeItem.getMiniItemList().size()-1);
+
+
             }else
             {
                 params.height = 0;
@@ -561,13 +564,12 @@ public class ShapePage extends PageBaseUi {
                     for(ThShapeItem item:thShape.getShapeItemList())
                     {
                         height+=ConvertUtils.toPx(50)*(item.getMiniItemList().size())
-                                + ConvertUtils.toPx(42)
-                                +(item.getMiniItemList().size()-1)* ConvertUtils.toPx(1);
+                                + ConvertUtils.toPx(40)
+                                + holder.listView.getDividerHeight()*(item.getMiniItemList().size()-1);
                     }
 
                     params.height = height
-                            + ConvertUtils.toPx(51)
-                            +(thShape.getShapeItemList().size()-1)* ConvertUtils.toPx(1);
+                            + ConvertUtils.toPx(40);
 
 
                 }else
