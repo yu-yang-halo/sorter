@@ -1,8 +1,8 @@
 ﻿1#中文
 2#English
 3#Language
-4#Local Login
-5#Remote Login
+4#OnSpot Control
+5#Remote Control
 6#Alert
 7#Ok
 8#Cancel
@@ -10,15 +10,15 @@
 10#Discover new version
 11#Download completion
 12#The latest version
-13#Local login...
+13#OnSpot login...
 14#Local device could not be found
 15#A new version of the language package is found. Let's update it.
 16#The device number can not be empty.
 17#Please enter the correct format of the device number.
 18#The authorization code can not be empty.
-19#Remote login...
+19#Remote Control...
 20#You are not registered, please register first.
-21#Remote login
+21#Remote Control
 22#The user name or password can not be empty.
 23#password is inconsistent.
 24#Username

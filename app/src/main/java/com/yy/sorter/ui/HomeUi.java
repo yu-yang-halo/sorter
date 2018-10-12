@@ -392,7 +392,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 " : "+thWorkInfo.getTotalTime());
         lb_todayTime.setText(FileManager.getInstance().getString(135,"本次工作时间")+
                 " : "+thWorkInfo.getTodayTime());
-        
+
         workLayout.setVisibility(View.VISIBLE);
     }
 
