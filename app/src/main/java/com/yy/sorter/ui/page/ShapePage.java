@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
+import th.service.data.ThRelate;
 import th.service.data.ThShape;
 import th.service.data.ThShapeItem;
 import th.service.helper.ThCommand;
@@ -157,6 +158,14 @@ public class ShapePage extends PageBaseUi {
         byte index = packet.getData1()[4];
         int  value = ConvertUtils.bytes2ToInt(packet.getData1()[5],packet.getData1()[6]);
 
+        //other need update
+        byte[] contents = packet.getContents();
+        List<ThRelate> thRelateList = null;
+        if(contents != null && contents.length>0)
+        {
+            thRelateList = ThPackageHelper.parseThRelateList(packet);
+        }
+
         for(ThShape thShape:thShapeList)
         {
             List<ThShapeItem> thShapeItemList = thShape.getShapeItemList();
@@ -192,13 +201,23 @@ public class ShapePage extends PageBaseUi {
                             {
                                 miniItem.setValue(ConvertUtils.intTo2Bytes(value));
                             }
+                            if(thRelateList != null && thRelateList.size()>0)
+                            {
+                                for(ThRelate thRelate:thRelateList)
+                                {
+                                    if(miniItem.getIndex() == thRelate.getIndex())
+                                    {
+                                        miniItem.setMax(thRelate.getMax());
+                                        miniItem.setMin(thRelate.getMin());
+                                        miniItem.setValue(thRelate.getValue());
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-
-
 
         myAdapter.setThShapeList(thShapeList);
         myAdapter.notifyDataSetChanged();

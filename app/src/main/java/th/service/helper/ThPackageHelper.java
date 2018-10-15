@@ -28,6 +28,7 @@ import th.service.data.ThHsvInfo;
 import th.service.data.ThHsvWave;
 import th.service.data.ThLightRet;
 import th.service.data.ThMode;
+import th.service.data.ThRelate;
 import th.service.data.ThSVersion;
 import th.service.data.ThSense;
 import th.service.data.ThShape;
@@ -462,6 +463,27 @@ public class ThPackageHelper {
 		}
 
 		return null;
+	}
+	public static List<ThRelate> parseThRelateList(ThPackage retData)
+	{
+		List<ThRelate> thRelateList=new ArrayList<>();
+		int totalSize = (retData.getLength()-PACKET_HEADER_SIZE);
+		if(totalSize % ThRelate.SIZE != 0)
+		{
+			ThLogger.debug("Error","协议格式有误");
+			return null;
+		}
+		int count=totalSize/ThRelate.SIZE;
+		byte[] buffer=new byte[ThRelate.SIZE];
+		byte[] contents=retData.getContents();
+		for(int i=0;i<count;i++)
+		{
+			System.arraycopy(contents,i*ThRelate.SIZE,buffer,0,ThRelate.SIZE);
+
+			ThRelate thRelate = new ThRelate(buffer);
+			thRelateList.add(thRelate);
+		}
+		return thRelateList;
 	}
 	/**
 	 *  解析形选
