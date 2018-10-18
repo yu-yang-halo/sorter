@@ -221,10 +221,11 @@
                     android:background="@color/background">
                     <TextView
                         android:id="@+id/text_bg_led"
-                        android:layout_width="100dp"
+                        android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="背景灯"
-                        android:gravity="center"/>
+                        android:paddingLeft="30dp"
+                        android:gravity="center|left"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
