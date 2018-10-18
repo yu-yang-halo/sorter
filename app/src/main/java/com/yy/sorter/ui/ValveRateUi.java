@@ -14,6 +14,7 @@ import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.DigitalDialog;
 import com.yy.sorter.utils.ScreenHelper;
 import com.yy.sorter.utils.StringUtils;
+import com.yy.sorter.view.AlwaysClickButton;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 import com.yy.sorter.view.PageSwitchView;
 import com.yy.sorter.view.ThAutoLayout;
@@ -31,7 +32,7 @@ import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
-public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallback{
+public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack{
     private ThRateView thrateView;
     private Timer timer;
     private KeyboardDigitalEdit et_Chute;
@@ -43,6 +44,7 @@ public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallb
     private TextView tv_chutenumbers;
     private ThAutoLayout autoLayout;
     private List<ThAutoLayout.Item> itemList;
+    private AlwaysClickButton addBtn,minusBtn;
     public ValveRateUi(Context ctx) {
         super(ctx);
     }
@@ -60,6 +62,13 @@ public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallb
 
             mfrontText= (TextView) view.findViewById(R.id.mfrontText);
             mbackText= (TextView) view.findViewById(R.id.mbackText);
+
+            addBtn = (AlwaysClickButton) view.findViewById(R.id.addBtn);
+            minusBtn  = (AlwaysClickButton) view.findViewById(R.id.minusBtn);
+
+            addBtn.setValve(0,this);
+            minusBtn.setValve(1,this);
+
 
             et_Chute.setLVCallback(this);
             pageSwitchView = (PageSwitchView) view.findViewById(R.id.pageSwitchView);
@@ -227,4 +236,33 @@ public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallb
         cancelReq();
     }
 
+    @Override
+    public void onMuiltClick(int par, int isSend) {
+        int value,max,min;
+        max = et_Chute.getMax();
+        min = et_Chute.getMin();
+        value = m_Channel+1;
+        if(isSend == 1)
+        {
+            if(par == 0)
+            {
+                value++;
+            }else
+            {
+                value--;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
+
+        }
+        et_Chute.setText(Integer.toString(value));
+        m_Channel = value -1;
+        pageSwitchView.setmCurrentIndex(m_Channel);
+    }
 }

@@ -39,10 +39,10 @@
 39#Feed quantity
 40#More
 43#Mode list
-44#One
-45#Two
-46#Three
-47#Four
+44#First
+45#Second
+46#Third
+47#Fourth
 48#Start up...
 49#Machine protocol version
 50#Mobile protocol version

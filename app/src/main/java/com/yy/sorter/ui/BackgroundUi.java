@@ -43,22 +43,13 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
     private final byte TYPE_GREEN = 2;
     private final byte TYPE_BLUE = 3;
     private final byte TYPE_MAINLIGHT = 4;
-    private final byte TYPE_IR = 5;
-    private int m_isUseDigitalGain = 0; //1 开启数字增益 0 关闭数字增益
-    private int grainType=0;
-
-
     private KeyboardDigitalEdit et_bg_led_r;
     private KeyboardDigitalEdit et_bg_led_g;
     private KeyboardDigitalEdit et_bg_led_b;
-    private KeyboardDigitalEdit et_bg_led_ir1;
-    private KeyboardDigitalEdit et_bg_led_ir2;
 
     private KeyboardDigitalEdit et_gain_led_r;
     private KeyboardDigitalEdit et_gain_led_g;
     private KeyboardDigitalEdit et_gain_led_b;
-    private KeyboardDigitalEdit et_gain_led_ir1;
-    private KeyboardDigitalEdit et_gain_led_ir2;
 
     private KeyboardDigitalEdit et_main_light;
     private KeyboardDigitalEdit et_chute;
@@ -70,14 +61,16 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
 
     private int m_Channel=0;
     private Timer timer=null;
-    private TextView tvChute,tv_main_light,tv_ir1,tv_ir2,text_gain_led,text_bg_led;
+    private TextView tvChute,tv_main_light,text_gain_led,text_bg_led;
     private PageSwitchView pageSwitchView;
 
     private Button btn_digitalGain;
     private CheckBox ck_adjustAll;
-    private final int GAIN_DIGITAL = 1;
-    private final int GAIN_ANOLOG= 2;
     private AlwaysClickButton addBtn,minusBtn;
+    private AlwaysClickButton addBtnR,minusBtnR;
+    private AlwaysClickButton addBtnG,minusBtnG;
+    private AlwaysClickButton addBtnB,minusBtnB;
+    private AlwaysClickButton addBtnM,minusBtnM;
 
     public BackgroundUi(Context ctx) {
         super(ctx);
@@ -89,8 +82,7 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             view = LayoutInflater.from(ctx).inflate(R.layout.ui_background, null);
             tvChute = (TextView)view.findViewById(R.id.tv_chute);
             tv_main_light = (TextView)view.findViewById(R.id.tv_main_light);
-            tv_ir1 = (TextView) view.findViewById(R.id.tv_ir1);
-            tv_ir2 = (TextView) view.findViewById(R.id.tv_ir2);
+
             text_gain_led = (TextView) view.findViewById(R.id.text_gain_led);
             text_bg_led = (TextView) view.findViewById(R.id.text_bg_led);
 
@@ -111,20 +103,37 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             et_bg_led_r = (KeyboardDigitalEdit)view.findViewById(R.id.et_bg_led_r);
             et_bg_led_g = (KeyboardDigitalEdit)view.findViewById(R.id.et_bg_led_g);
             et_bg_led_b = (KeyboardDigitalEdit)view.findViewById(R.id.et_bg_led_b);
-            et_bg_led_ir1 = (KeyboardDigitalEdit)view.findViewById(R.id.et_bg_led_ir1);
-            et_bg_led_ir2 = (KeyboardDigitalEdit)view.findViewById(R.id.et_bg_led_ir2);
 
             et_gain_led_r = (KeyboardDigitalEdit)view.findViewById(R.id.et_gain_led_r);
             et_gain_led_g = (KeyboardDigitalEdit)view.findViewById(R.id.et_gain_led_g);
             et_gain_led_b = (KeyboardDigitalEdit)view.findViewById(R.id.et_gain_led_b);
-            et_gain_led_ir1 = (KeyboardDigitalEdit)view.findViewById(R.id.et_gain_led_ir1);
-            et_gain_led_ir2 = (KeyboardDigitalEdit)view.findViewById(R.id.et_gain_led_ir2);
 
             addBtn = (AlwaysClickButton) view.findViewById(R.id.addBtn);
             minusBtn  = (AlwaysClickButton) view.findViewById(R.id.minusBtn);
+            addBtnR = (AlwaysClickButton) view.findViewById(R.id.addBtnR);
+            minusBtnR  = (AlwaysClickButton) view.findViewById(R.id.minusBtnR);
+            addBtnG = (AlwaysClickButton) view.findViewById(R.id.addBtnG);
+            minusBtnG  = (AlwaysClickButton) view.findViewById(R.id.minusBtnG);
+            addBtnB = (AlwaysClickButton) view.findViewById(R.id.addBtnB);
+            minusBtnB  = (AlwaysClickButton) view.findViewById(R.id.minusBtnB);
+            addBtnM = (AlwaysClickButton) view.findViewById(R.id.addBtnM);
+            minusBtnM  = (AlwaysClickButton) view.findViewById(R.id.minusBtnM);
 
             addBtn.setValve(0,this);
             minusBtn.setValve(1,this);
+
+            addBtnR.setValve(2,this);
+            minusBtnR.setValve(3,this);
+
+            addBtnG.setValve(4,this);
+            minusBtnG.setValve(5,this);
+
+            addBtnB.setValve(6,this);
+            minusBtnB.setValve(7,this);
+
+            addBtnM.setValve(8,this);
+            minusBtnM.setValve(9,this);
+
 
 
 
@@ -145,10 +154,6 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             et_gain_led_g.setLVCallback(this);
             et_gain_led_b.setValue(1023,0,6);
             et_gain_led_b.setLVCallback(this);
-            et_gain_led_ir1.setValue(31,0,7);
-            et_gain_led_ir1.setLVCallback(this);
-            et_gain_led_ir2.setValue(31,0,8);
-            et_gain_led_ir2.setLVCallback(this);
 
 
             et_chute.setValue(10,1,9);
@@ -171,12 +176,7 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             });
             pageSwitchView.setmNumbers(2);
 
-            tv_ir1.setVisibility(View.GONE);
-            tv_ir2.setVisibility(View.GONE);
-            et_bg_led_ir1.setVisibility(View.GONE);
-            et_bg_led_ir2.setVisibility(View.GONE);
-            et_gain_led_ir1.setVisibility(View.GONE);
-            et_gain_led_ir2.setVisibility(View.GONE);
+
 
         }
         return view;
@@ -315,14 +315,11 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             et_bg_led_r.setEnabled(false);
             et_bg_led_g.setEnabled(false);
             et_bg_led_b.setEnabled(false);
-            et_bg_led_ir1.setEnabled(false);
-            et_bg_led_ir2.setEnabled(false);
+
 
             et_gain_led_r.setEnabled(false);
             et_gain_led_g.setEnabled(false);
             et_gain_led_b.setEnabled(false);
-            et_gain_led_ir1.setEnabled(false);
-            et_gain_led_ir2.setEnabled(false);
 
             et_main_light.setEnabled(false);
         }
@@ -331,14 +328,12 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
             et_bg_led_r.setEnabled(true);
             et_bg_led_g.setEnabled(true);
             et_bg_led_b.setEnabled(true);
-            et_bg_led_ir1.setEnabled(true);
-            et_bg_led_ir2.setEnabled(true);
+
 
             et_gain_led_r.setEnabled(true);
             et_gain_led_g.setEnabled(true);
             et_gain_led_b.setEnabled(true);
-            et_gain_led_ir1.setEnabled(true);
-            et_gain_led_ir2.setEnabled(true);
+
 
             et_main_light.setEnabled(true);
         }
@@ -399,18 +394,6 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
     public void onConfirmClick(int value,int par)
     {
         currentLayer=AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentLayer();
-        byte isAll = 0;
-        if (ck_adjustAll.isChecked())
-            isAll = 1;
-        else
-            isAll = 0;
-
-        byte grainType = 0;
-        if (btn_digitalGain.isSelected())
-            grainType = 1;
-        else
-            grainType = 0;
-
         switch (par)
         {
             case 0: //主灯
@@ -438,28 +421,11 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
                 AbstractDataServiceFactory.getInstance().setLightData(currentLayer,currentView,(byte)3,(byte)value);
 
                 break;
-            case 4://增益 R
-
-                break;
-            case 5://增益 G
-
-                break;
-            case 6: //增益 B
-
-                break;
-            case 7://增益 IR 1
-
-                break;
-            case 8://增益 IR 2
-
-                break;
-
         }
 
     }
-
-    @Override
-    public void onMuiltClick(int par, int isSend) {
+    private void ChuteMuiltClick(int par, int isSend)
+    {
         int value,max,min;
         max = et_chute.getMax();
         min = et_chute.getMin();
@@ -486,6 +452,146 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
         et_chute.setText(Integer.toString(value));
         m_Channel = value -1;
     }
+
+    @Override
+    public void onMuiltClick(int par, int isSend) {
+       if(par == 0 || par == 1)
+       {
+           ChuteMuiltClick(par,isSend);
+       }else if(par == 2 || par == 3)
+       {
+           RMuiltClick(par,isSend);
+       }else if(par == 4 || par == 5)
+       {
+           GMuiltClick(par,isSend);
+       }else if(par == 6 || par == 7)
+       {
+           BMuiltClick(par,isSend);
+       }else if(par == 8 || par == 9)
+       {
+           MainLightMuiltClick(par,isSend);
+       }
+    }
+
+    private void RMuiltClick(int par, int isSend) {
+        int value,max,min;
+        max = et_bg_led_r.getMax();
+        min = et_bg_led_r.getMin();
+        value = ConvertUtils.toInt(et_bg_led_r.getText().toString());
+        if(isSend == 1)
+        {
+            if(par == 2)
+            {
+                value++;
+            }else
+            {
+                value--;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
+
+        }else
+        {
+            AbstractDataServiceFactory.getInstance().setLightData(currentLayer,currentView,(byte)1,(byte)value);
+        }
+        et_bg_led_r.setText(Integer.toString(value));
+
+    }
+    private void GMuiltClick(int par, int isSend) {
+        int value,max,min;
+        max = et_bg_led_g.getMax();
+        min = et_bg_led_g.getMin();
+        value = ConvertUtils.toInt(et_bg_led_g.getText().toString());
+        if(isSend == 1)
+        {
+            if(par == 4)
+            {
+                value++;
+            }else
+            {
+                value--;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
+
+        }else
+        {
+            AbstractDataServiceFactory.getInstance().setLightData(currentLayer,currentView,(byte)2,(byte)value);
+        }
+        et_bg_led_g.setText(Integer.toString(value));
+
+    }
+    private void BMuiltClick(int par, int isSend) {
+        int value,max,min;
+        max = et_bg_led_b.getMax();
+        min = et_bg_led_b.getMin();
+        value = ConvertUtils.toInt(et_bg_led_b.getText().toString());
+        if(isSend == 1)
+        {
+            if(par == 6)
+            {
+                value++;
+            }else
+            {
+                value--;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
+
+        }else
+        {
+            AbstractDataServiceFactory.getInstance().setLightData(currentLayer,currentView,(byte)3,(byte)value);
+        }
+        et_bg_led_b.setText(Integer.toString(value));
+    }
+    private void MainLightMuiltClick(int par, int isSend) {
+        int value,max,min;
+        max = et_main_light.getMax();
+        min = et_main_light.getMin();
+        value = ConvertUtils.toInt(et_main_light.getText().toString());
+        if(isSend == 1)
+        {
+            if(par == 8)
+            {
+                value++;
+            }else
+            {
+                value--;
+            }
+            if(value<min)
+            {
+                value = min;
+            }
+            if(value>max)
+            {
+                value = max;
+            }
+
+        }else
+        {
+            AbstractDataServiceFactory.getInstance().setLightData(currentLayer,currentView,(byte)4,(byte)value);
+        }
+        et_main_light.setText(Integer.toString(value));
+    }
+
 
 
     private void initLight()

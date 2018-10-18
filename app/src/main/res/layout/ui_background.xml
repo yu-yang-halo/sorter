@@ -42,16 +42,13 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
+                    android:layout_height="50dp"
                     android:background="@color/background">
                     <TextView
                         android:id="@+id/tv_chute"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:layout_marginRight="10dp"
                         android:textColor="@color/fontColor"
                         android:layout_alignParentLeft="true"
                         android:text="料槽"/>
@@ -60,6 +57,8 @@
                         android:layout_height="40dp"
                         android:inputType="textPersonName"
                         android:text="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
                         android:id="@+id/et_chute1"
                         android:textColor="@color/fontColor"
@@ -74,8 +73,6 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="10dp"
                         android:layout_toRightOf="@+id/tv_chute"
                         android:background="@mipmap/minus"
                         android:textColor="@drawable/selector_btn_click_text_color" />
@@ -86,9 +83,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/et_chute1"
                         android:background="@mipmap/plus"
-                        android:layout_marginLeft="10dp"
                         android:textColor="@drawable/selector_btn_click_text_color" />
-
 
 
                     <Button
@@ -124,150 +119,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@color/background">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp">
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="40dp"
-                            android:visibility="invisible"
-                            android:gravity="center"
-                            android:background="@drawable/th_button_selector"
-                            android:textColor="@drawable/selector_btn_click_text_color"
-                            android:layout_marginRight="10dp"
-                            android:text="前视"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:layout_marginRight="3dp"
-                            android:gravity="center"
-                            android:textColor="#f00"
-                            android:text="R"
-                            />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textColor="#0f0"
-                            android:layout_marginRight="3dp"
-                            android:text="G"
-                            />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:layout_marginRight="3dp"
-                            android:textColor="#00f"
-                            android:text="B"
-                            />
-                        <TextView
-                            android:id="@+id/tv_ir1"
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:layout_marginRight="3dp"
-                            android:textColor="#454545"
-                            android:text="IR1"
-                            />
 
-                        <TextView
-                            android:id="@+id/tv_ir2"
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textColor="#B23AEE"
-                            android:text="IR2"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:paddingLeft="2dp"
-                        >
-
-                        <TextView
-                            android:id="@+id/text_bg_led"
-                            android:layout_width="80dp"
-                            android:layout_height="40dp"
-                            android:layout_marginRight="10dp"
-                            android:gravity="center"
-                            android:text="背景灯"
-                            android:textAllCaps="false" />
-                        <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_bg_led_r"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_marginRight="3dp"
-                            android:inputType="number"
-                            android:ems="10"
-                            android:textColor="@color/fontColor"
-                            android:textAlignment="center"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:text="0"
-                            android:background="@drawable/selector_edit_bk"/>
-                        <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_bg_led_g"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_marginRight="3dp"
-                            android:inputType="number"
-                            android:ems="10"
-                            android:textColor="@color/fontColor"
-                            android:textAlignment="center"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:text="0"
-                            android:background="@drawable/selector_edit_bk"/>
-                        <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_bg_led_b"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_marginRight="3dp"
-                            android:inputType="number"
-                            android:ems="10"
-                            android:textColor="@color/fontColor"
-                            android:textAlignment="center"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:text="0"
-                            android:background="@drawable/selector_edit_bk"/>
-                        <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_bg_led_ir1"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_marginRight="3dp"
-                            android:inputType="number"
-                            android:ems="10"
-                            android:textColor="@color/fontColor"
-                            android:textAlignment="center"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:text="0"
-                            android:background="@drawable/selector_edit_bk"/>
-                        <com.yy.sorter.view.KeyboardDigitalEdit
-                            android:id="@+id/et_bg_led_ir2"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:inputType="number"
-                            android:ems="10"
-                            android:textColor="@color/fontColor"
-                            android:textAlignment="center"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:text="0"
-                            android:background="@drawable/selector_edit_bk"/>
-                    </LinearLayout>
                     <LinearLayout
                         android:id="@+id/layout_background_rear"
                         android:layout_width="match_parent"
@@ -357,38 +209,234 @@
 
                 </LinearLayout>
 
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/background">
+                    <TextView
+                        android:id="@+id/text_bg_led"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:text="背景灯"
+                        android:gravity="center"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+                        <TextView
+                            android:id="@+id/tRed"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:textColor="#f00"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="R"
+                            />
+
+                        <com.yy.sorter.view.AlwaysClickButton
+                            android:id="@+id/minusBtnR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/minus"
+                            android:layout_toRightOf="@+id/tRed"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:textSize="20dp" />
+                        <com.yy.sorter.view.KeyboardDigitalEdit
+                            android:id="@+id/et_bg_led_r"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/selector_edit_bk"
+                            android:ems="10"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:layout_toRightOf="@+id/minusBtnR"
+                            android:text="0"
+                            android:textColor="@color/fontColor" />
+
+                        <com.yy.sorter.view.AlwaysClickButton
+                            android:id="@+id/addBtnR"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/plus"
+                            android:layout_toRightOf="@+id/et_bg_led_r"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:textSize="20dp"
+                            android:layout_marginEnd="20dp"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+                        <TextView
+                            android:id="@+id/tGreen"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:textColor="#0f0"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="G"
+                            />
+
+                        <com.yy.sorter.view.AlwaysClickButton
+                            android:id="@+id/minusBtnG"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/minus"
+                            android:layout_toRightOf="@+id/tGreen"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:textSize="20dp" />
+                        <com.yy.sorter.view.KeyboardDigitalEdit
+                            android:id="@+id/et_bg_led_g"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/selector_edit_bk"
+                            android:ems="10"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:layout_toRightOf="@+id/minusBtnG"
+                            android:text="0"
+                            android:textColor="@color/fontColor" />
+
+                        <com.yy.sorter.view.AlwaysClickButton
+                            android:id="@+id/addBtnG"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/plus"
+                            android:layout_toRightOf="@+id/et_bg_led_g"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:textSize="20dp"
+                            android:layout_marginEnd="20dp"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+                        <TextView
+                            android:id="@+id/tBlue"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:textColor="#00f"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="G"
+                            />
+
+                        <com.yy.sorter.view.AlwaysClickButton
+                            android:id="@+id/minusBtnB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/minus"
+                            android:layout_toRightOf="@+id/tBlue"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:textSize="20dp" />
+                        <com.yy.sorter.view.KeyboardDigitalEdit
+                            android:id="@+id/et_bg_led_b"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/selector_edit_bk"
+                            android:ems="10"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:layout_toRightOf="@+id/minusBtnB"
+                            android:text="0"
+                            android:textColor="@color/fontColor" />
+
+                        <com.yy.sorter.view.AlwaysClickButton
+                            android:id="@+id/addBtnB"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/plus"
+                            android:layout_toRightOf="@+id/et_bg_led_b"
+                            android:textColor="@drawable/selector_btn_click_text_color"
+                            android:textSize="20dp"
+                            android:layout_marginEnd="20dp"/>
+
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+
                 <RelativeLayout
                     android:id="@+id/layout_light"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/background">
-
                     <TextView
                         android:id="@+id/tv_main_light"
-                        android:layout_width="80dp"
+                        android:layout_width="100dp"
                         android:layout_height="40dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
                         android:gravity="center"
                         android:text="主灯"
-                        android:layout_centerVertical="true"
-                        android:paddingLeft="10dp" />
+                        />
 
+                    <com.yy.sorter.view.AlwaysClickButton
+                        android:id="@+id/minusBtnM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/minus"
+                        android:layout_toRightOf="@+id/tv_main_light"
+                        android:textColor="@drawable/selector_btn_click_text_color"
+                        android:textSize="20dp" />
                     <com.yy.sorter.view.KeyboardDigitalEdit
                         android:id="@+id/et_main_light"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="40dp"
-                        android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="92dp"
                         android:background="@drawable/selector_edit_bk"
-                        android:ems="3"
+                        android:ems="10"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
+                        android:gravity="center"
                         android:inputType="number"
+                        android:layout_toRightOf="@+id/minusBtnM"
                         android:text="0"
-                        android:textAlignment="center"
                         android:textColor="@color/fontColor" />
+
+                    <com.yy.sorter.view.AlwaysClickButton
+                        android:id="@+id/addBtnM"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/plus"
+                        android:layout_toRightOf="@+id/et_main_light"
+                        android:textColor="@drawable/selector_btn_click_text_color"
+                        android:textSize="20dp"
+                        android:layout_marginEnd="20dp"/>
+
                 </RelativeLayout>
             </LinearLayout>
 
