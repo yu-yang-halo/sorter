@@ -54,12 +54,12 @@ public class ThWorkInfo {
         String strHour = FileManager.getInstance().getString(136,"小时");
         if(min<60)
         {
-            return min+ strMin;
+            return min + strMin;
         }else{
             int timeH = min/60;
             int timeM = min%60;
 
-            return timeH+strHour+timeM+strMin;
+            return timeH+strHour+" "+timeM+strMin;
         }
     }
 

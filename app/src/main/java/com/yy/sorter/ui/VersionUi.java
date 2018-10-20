@@ -241,6 +241,8 @@ public class VersionUi extends BaseUi implements View.OnClickListener{
                 compatibilityLabel.setText("（"+FileManager.getInstance().getString(52)+"）");//52#不兼容
                 compatibilityLabel.setTextColor(Color.parseColor("#ff0000"));
             }
+
+
         }else{
             machineProtocolLabel.setText("");
             phoneProtocolLabel.setText("");
@@ -294,6 +296,14 @@ public class VersionUi extends BaseUi implements View.OnClickListener{
         initStatusView();
         versionLayoutInit();
         showLinearLayout(0);
+
+        if(machineData.getUseSensor() <= 0)
+        {
+            linearlwcgq.setVisibility(View.GONE);
+        }else
+        {
+            linearlwcgq.setVisibility(View.VISIBLE);
+        }
     }
 
     private void versionLayoutInit(){

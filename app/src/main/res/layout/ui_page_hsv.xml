@@ -110,17 +110,17 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
 
                         <CheckBox
                             android:id="@+id/checkBox2"
                             style="@style/CustomCheckBoxStyle"
                             android:layout_width="match_parent"
-                            android:layout_marginLeft="40dp"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerVertical="true"
                             android:paddingLeft="5dp"
                             android:text="图像平移" />
 
@@ -133,7 +133,7 @@
                             android:gravity="center"
                             android:paddingRight="10dp"
                             android:text="料槽"
-                            android:visibility="invisible"
+                            android:visibility="gone"
                             android:textColor="@color/fontColor" />
 
                         <com.yy.sorter.view.KeyboardDigitalEdit
@@ -149,12 +149,14 @@
                             android:inputType="textPersonName"
                             android:paddingLeft="5dp"
                             android:text="1"
+                            android:visibility="gone"
                             android:textAlignment="center"
                             android:textColor="@color/fontColor" />
                         <com.yy.sorter.view.AlwaysClickButton
                             android:id="@+id/addBtn"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            android:visibility="gone"
                             android:layout_centerVertical="true"
                             android:layout_below="@+id/tv_chute"
                             android:layout_marginLeft="10dp"
@@ -168,6 +170,7 @@
                             android:layout_height="40dp"
                             android:layout_centerVertical="true"
                             android:layout_below="@+id/tv_chute"
+                            android:visibility="gone"
                             android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/et_chute"
                             android:background="@mipmap/minus"
