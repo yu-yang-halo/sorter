@@ -133,6 +133,7 @@
                             android:gravity="center"
                             android:paddingRight="10dp"
                             android:text="料槽"
+                            android:visibility="invisible"
                             android:textColor="@color/fontColor" />
 
                         <com.yy.sorter.view.KeyboardDigitalEdit

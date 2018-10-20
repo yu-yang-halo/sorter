@@ -22,7 +22,6 @@ import java.util.TimerTask;
 public class LaunchActivity  extends BaseActivity{
     private static final int LOGO_SHOW_TIME=3500;//ms
     private static final String DEFAULT_LOGO="logo";
-    ImageView logoView;
     Handler mHandler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -38,14 +37,7 @@ public class LaunchActivity  extends BaseActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-        logoView= (ImageView) findViewById(R.id.logoView);
 
-        String logoResourceParams= BuildConfig.LOGO;
-        if(logoResourceParams==null){
-            logoResourceParams=DEFAULT_LOGO;
-        }
-
-        logoView.setBackgroundResource(ResUtil.getMipmapId(this,logoResourceParams));
 
         if (!isTaskRoot()) {
             finish();

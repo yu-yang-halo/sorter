@@ -30,8 +30,8 @@
 30#Incorrect username or password
 31#Device list
 32#Home
-33#System closure
-34#System opening
+33#System Off
+34#System On
 35#Handover...
 36#Clear ash
 37#In ash...
@@ -80,9 +80,9 @@
 91#Feeder
 92#Valve
 93#Current Mode
-94#Color selection
-95#Intelligent sorting
-96#Chromaticity sorting
+94#Color
+95#Intelligent
+96#HSV
 97#Shape
 98#Infrared
 99#Reverse
@@ -100,8 +100,8 @@
 111#Group
 112#Chute
 113#Camera calibration
-114#Signal regulation
-115#Valve rate
+114#Light Setting
+115#Valve Frequency
 116#Camera adjustment
 117#Detailed data
 118#Compressed data

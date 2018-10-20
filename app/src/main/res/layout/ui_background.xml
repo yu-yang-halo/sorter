@@ -18,16 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/tv_layer"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:textColor="@color/buttonNormal"
-                    android:paddingLeft="10dp"
-                    android:gravity="center|left"
-                    android:textSize="@dimen/statusFontSize"
-                    android:layout_marginBottom="1dp"
-                    android:text="层"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/wave_height"
@@ -39,6 +30,16 @@
                         android:layout_height="match_parent"
                         android:background="#ffffff"/>
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_layer"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:textColor="@color/buttonNormal"
+                    android:paddingLeft="10dp"
+                    android:gravity="center|left"
+                    android:textSize="@dimen/statusFontSize"
+                    android:layout_marginBottom="1dp"
+                    android:text="层"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
