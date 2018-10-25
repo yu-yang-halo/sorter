@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <AutoCompleteTextView
+        android:id="@+id/txtEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/selector_edit_bk"
+        android:ems="10"
+        android:focusable="true"
+        android:hint="文本"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:textColor="@color/fontColor"
+        android:textColorHint="@color/hintColor" />
+
+    <Button
+        android:text="添加"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtBtn"
+        android:textColor="@color/whiteColor"
+        android:background="@drawable/button_selector"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+</LinearLayout>

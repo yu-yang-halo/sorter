@@ -271,6 +271,11 @@ public class StringUtils {
         }
         return new String(bytes,0, pos, Charset.forName("utf-8"));
     }
+    public static byte[] convertStringToByteArray(String str)
+    {
+        byte[]  arr = str.getBytes(Charset.forName("utf-8"));
+        return arr;
+    }
     private static Map<Integer,String> historyTables=new HashMap<>();
     static {
         historyTables.put(1,TextCacheUtils.KEY_USERNAME_HISTORY);

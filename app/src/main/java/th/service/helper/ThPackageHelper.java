@@ -242,16 +242,23 @@ public class ThPackageHelper {
 		ThLogger.debug("算法数","count="+count);
 		byte[] buffer=new byte[size];
 
-		ThSense item0=ThSense.createThSenseNone((byte) 0);
-		item0.setViewType(ConstantValues.VIEW_TYPE_FRONT);
-		item0.setName(FileManager.getInstance().getString(75));//75#前视
-		thSenseList.add(item0);
+
 
 		for(int i=0;i<count;i++){
 			System.arraycopy(contents,i*size,buffer,0,size);
 
 			ThSense thSense=new ThSense(buffer);
 			thSense.setViewType(ConstantValues.VIEW_TYPE_ITEM);
+
+
+			if(i == 0 && thSense.getView() == 0)
+			{
+				ThSense item0=ThSense.createThSenseNone((byte) 0);
+				item0.setViewType(ConstantValues.VIEW_TYPE_FRONT);
+				item0.setName(FileManager.getInstance().getString(75));//75#前视
+				thSenseList.add(item0);
+
+			}
 
 
 			if(thSenseList.size()>=1)
@@ -267,7 +274,13 @@ public class ThPackageHelper {
 					thSenseList.add(item1);
 				}
 
-			}
+			}else
+            {
+                ThSense item1=ThSense.createThSenseNone((byte) 1);
+                item1.setViewType(ConstantValues.VIEW_TYPE_REAR);
+                item1.setName(FileManager.getInstance().getString(76));//76#后视
+                thSenseList.add(item1);
+            }
 
 
 			thSenseList.add(thSense);

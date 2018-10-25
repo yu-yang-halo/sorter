@@ -130,6 +130,7 @@ public class ThCommand {
 	public static final byte CAMERA_GAIN_CMD = 0x10;
 	public static final byte SHAPE_CMD = 0x11;
 	public static final byte WORKINFO_CMD = 0x12;
+	public static final byte ADD_TEXT_CMD = 0x13;
 
 
 

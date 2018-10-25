@@ -35,6 +35,8 @@ public class ConstantValues {
     public static final int  VIEW_SHARE_QR=24; //分享APP二维码
     public static final int  VIEW_NOT_FOUND=404;//404页面无法找到
 
+    public static final int  VIEW_ADD_TEXT=25;
+
 
 
     public static final int VIEW_PAGE_RGB_IR = 0x100;

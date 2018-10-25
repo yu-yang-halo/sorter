@@ -69,6 +69,7 @@ public interface IDataService {
 
 
 	public void requestWorkInfo();
+	public void setText(byte[] text);
 
 
 

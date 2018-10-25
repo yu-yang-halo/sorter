@@ -287,4 +287,9 @@ public abstract class AbstractIDataService implements IDataService{
         ThPackage packet= new ThPackage(ThCommand.WORKINFO_CMD,(byte)0x01, null,(byte)0, (byte)0, (byte)0,null);
         sendPacketData(packet);
     }
+    public void setText(byte[] text)
+    {
+        ThPackage packet= new ThPackage(ThCommand.ADD_TEXT_CMD,(byte)0x01, null,(byte)0, (byte)0, (byte)0,text);
+        sendPacketData(packet);
+    }
 }

@@ -46,6 +46,7 @@ public class ThStrategy {
         strategyTables.put(ConstantValues.VIEW_VERSION,Arrays.asList(ThCommand.VERSION_CMD));
         strategyTables.put(ConstantValues.VIEW_BACKGROUND,Arrays.asList(ThCommand.LIGHT_CMD,ThCommand.WAVE_CMD));
         strategyTables.put(ConstantValues.VIEW_VALVE_RATE,Arrays.asList(ThCommand.VALVE_RATE_CMD));
+        strategyTables.put(ConstantValues.VIEW_ADD_TEXT,Arrays.asList(ThCommand.ADD_TEXT_CMD));
 
 
 

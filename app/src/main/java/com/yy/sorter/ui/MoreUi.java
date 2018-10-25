@@ -1,11 +1,9 @@
 package com.yy.sorter.ui;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -75,6 +73,7 @@ public class MoreUi extends BaseUi {
         ItemObj itemObj1 = new ItemObj(1,FileManager.getInstance().getString(113));
         ItemObj itemObj2 = new ItemObj(2,FileManager.getInstance().getString(114));
         ItemObj itemObj3 = new ItemObj(3,FileManager.getInstance().getString(115));
+        ItemObj itemObj4 = new ItemObj(4,FileManager.getInstance().getString(141,"添加文本"));//141#添加文本
 
         objList.add(itemObj0);
         MachineData machineData = AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData();
@@ -90,6 +89,7 @@ public class MoreUi extends BaseUi {
         }
 
         objList.add(itemObj3);
+        objList.add(itemObj4);
 
         return objList;
     }
@@ -164,6 +164,9 @@ public class MoreUi extends BaseUi {
                             break;
                         case 3:
                             MiddleManger.getInstance().changeUI(ConstantValues.VIEW_VALVE_RATE,itemObj.itemName);
+                            break;
+                        case 4:
+                            MiddleManger.getInstance().changeUI(ConstantValues.VIEW_ADD_TEXT,itemObj.itemName);
                             break;
                     }
 

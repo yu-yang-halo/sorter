@@ -1,6 +1,7 @@
 package com.yy.sorter.version;
 
 
+import com.yy.sorter.ui.AddTextUi;
 import com.yy.sorter.ui.BackgroundUi;
 import com.yy.sorter.ui.CameraAdjustUi;
 import com.yy.sorter.ui.DeviceListUi;
@@ -117,6 +118,7 @@ public abstract class BasePageV {
         basePages.put(ConstantValues.VIEW_VERSION, VersionUi.class);//相机校准
         basePages.put(ConstantValues.VIEW_BACKGROUND, BackgroundUi.class);//背景灯光
         basePages.put(ConstantValues.VIEW_VALVE_RATE, ValveRateUi.class);//背景灯光
+        basePages.put(ConstantValues.VIEW_ADD_TEXT, AddTextUi.class);//添加文本
 
 
         /**

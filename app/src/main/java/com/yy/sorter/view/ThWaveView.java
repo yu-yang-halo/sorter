@@ -34,7 +34,7 @@ public class ThWaveView extends View {
     private int fullLineColor=Color.parseColor("#70888888");
     private int dottedLineColor=Color.parseColor("#50888888");
     private int[] IRCOLORS=new int[]{Color.parseColor("#454545"),Color.parseColor("#b23aee")};
-    private static final int CAMERA_ADJUST_LINES_PIXEL0[] = new int[]{31, 149, 255, 361, 480};
+    private static final int CAMERA_ADJUST_LINES_PIXEL0[] = new int[]{22,149,256,361,489};
     private static final int COMPRESS_DATA_LINES_PIXEL0[] = new int[]{7, 90, 255, 420, 503};
     private static final int CAMERA_ADJUST_LINES_PIXEL1[] = new int[]{0, 149, 255, 361, 511};
     private static final int COMPRESS_DATA_LINES_PIXEL1[] = new int[]{0, 85, 255, 427, 511};
