@@ -183,7 +183,7 @@ public class ModeListUi extends BaseUi implements ICallBack{
         }
 
         @Override
-        public void onBindViewHolder(MyItemHolder holder, final int position) {
+        public void onBindViewHolder(final MyItemHolder holder, final int position) {
             final ThMode mode = thModeList.get(position);
             holder.tv_modeName.setText(mode.getModeName());
             if(mode.isCurrentMode())
@@ -199,6 +199,16 @@ public class ModeListUi extends BaseUi implements ICallBack{
             holder.ckMode.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(mode.isCurrentMode())
+                    {
+                        if(v instanceof CheckBox)
+                        {
+                            CheckBox ckBox = (CheckBox) v;
+                            ckBox.setChecked(!ckBox.isChecked());
+                        }
+
+                        return;
+                    }
                     if(v instanceof CheckBox)
                     {
                         CheckBox ckBox = (CheckBox) v;
@@ -209,7 +219,15 @@ public class ModeListUi extends BaseUi implements ICallBack{
                     callBack.get().onDataBeginSend();
                 }
             });
+            holder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    holder.ckMode.performClick();
+                }
+            });
         }
+
+
 
         @Override
         public int getItemCount() {
@@ -227,10 +245,12 @@ public class ModeListUi extends BaseUi implements ICallBack{
 
             TextView tv_modeName;
             CheckBox ckMode;
+            View     view;
             public MyItemHolder(View itemView) {
                 super(itemView);
                 tv_modeName = (TextView) itemView.findViewById(R.id.tv_modeName);
                 ckMode = (CheckBox) itemView.findViewById(R.id.ckMode);
+                view = itemView;
             }
         }
     }
