@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.ThRelate;
-import th.service.data.ThShape;
-import th.service.data.ThShapeItem;
+import th.service.data.YYRelate;
+import th.service.data.YYShape;
+import th.service.data.YYShapeItem;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -33,7 +33,7 @@ import th.service.helper.ThPackageHelper;
 public class ShapePage extends PageBaseUi {
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
-    private List<ThShape> thShapeList;
+    private List<YYShape> thShapeList;
 
     public ShapePage(Context ctx) {
         super(ctx);
@@ -52,29 +52,29 @@ public class ShapePage extends PageBaseUi {
 
 
             thShapeList = new ArrayList<>();
-
+//            TEST DATA
 //            for(int k=0;k<2;k++)
 //            {
-//                ThShape thShape = new ThShape();
+//                YYShape thShape = new YYShape();
 //                thShape.setShapeItemCount(3);
 //                thShape.setShapeName("形选"+k);
 //                thShape.setShapeType(k);
 //
-//                List<ThShapeItem> thShapeItemList = new ArrayList<>();
+//                List<YYShapeItem> thShapeItemList = new ArrayList<>();
 //
 //
 //                for(int i=0;i<2;i++)
 //                {
-//                    ThShapeItem thShapeItem = new ThShapeItem();
+//                    YYShapeItem thShapeItem = new YYShapeItem();
 //                    thShapeItem.setShapeType((byte) (k));
 //                    thShapeItem.setUsed((byte)(i%2));
 //                    thShapeItem.setShapeId((byte) i);
 //                    thShapeItem.setCount((byte) 5);
 //                    thShapeItem.setName("Shape Item "+i);
-//                    List<ThShapeItem.MiniItem> miniItems = new ArrayList<>();
+//                    List<YYShapeItem.MiniItem> miniItems = new ArrayList<>();
 //                    for(int j=0;j<2;j++)
 //                    {
-//                        ThShapeItem.MiniItem item = new ThShapeItem.MiniItem();
+//                        YYShapeItem.MiniItem item = new YYShapeItem.MiniItem();
 //                        item.setIndex((byte) j);
 //                        item.setName("Mini Item "+j);
 //                        item.setMin(ConvertUtils.intTo2Bytes(1));
@@ -160,16 +160,16 @@ public class ShapePage extends PageBaseUi {
 
         //other need update
         byte[] contents = packet.getContents();
-        List<ThRelate> thRelateList = null;
+        List<YYRelate> thRelateList = null;
         if(contents != null && contents.length>0)
         {
             thRelateList = ThPackageHelper.parseThRelateList(packet);
         }
 
-        for(ThShape thShape:thShapeList)
+        for(YYShape thShape:thShapeList)
         {
-            List<ThShapeItem> thShapeItemList = thShape.getShapeItemList();
-            for(ThShapeItem thShapeItem:thShapeItemList)
+            List<YYShapeItem> thShapeItemList = thShape.getShapeItemList();
+            for(YYShapeItem thShapeItem:thShapeItemList)
             {
                 if(thShapeItem.getShapeType() == shapeType
                         && thShapeItem.getShapeId() == shapeId)
@@ -181,7 +181,7 @@ public class ShapePage extends PageBaseUi {
                         {
                             continue;
                         }
-                        for(ThShapeItem tmp:thShapeItemList)
+                        for(YYShapeItem tmp:thShapeItemList)
                         {
                             if(thShapeItem.getShapeType() == tmp.getShapeType()
                                     && thShapeItem.getMutex() == tmp.getShapeId())
@@ -195,7 +195,7 @@ public class ShapePage extends PageBaseUi {
                         }
                     }else
                     {
-                        for(ThShapeItem.MiniItem miniItem:thShapeItem.getMiniItemList())
+                        for(YYShapeItem.MiniItem miniItem:thShapeItem.getMiniItemList())
                         {
                             if(miniItem.getIndex() == index)
                             {
@@ -203,7 +203,7 @@ public class ShapePage extends PageBaseUi {
                             }
                             if(thRelateList != null && thRelateList.size()>0)
                             {
-                                for(ThRelate thRelate:thRelateList)
+                                for(YYRelate thRelate:thRelateList)
                                 {
                                     if(miniItem.getIndex() == thRelate.getIndex())
                                     {
@@ -226,7 +226,7 @@ public class ShapePage extends PageBaseUi {
 
     static class ItemAdapterTwo extends BaseAdapter implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack
     {
-        private ThShapeItem thShapeItem;
+        private YYShapeItem thShapeItem;
         private WeakReference<ListView> listView;
         public ItemAdapterTwo()
         {
@@ -282,7 +282,7 @@ public class ShapePage extends PageBaseUi {
                 holder = (ListViewHolder) convertView.getTag();
             }
 
-            ThShapeItem.MiniItem miniItem = (ThShapeItem.MiniItem) getItem(position);
+            YYShapeItem.MiniItem miniItem = (YYShapeItem.MiniItem) getItem(position);
             if(miniItem != null)
             {
                 holder.edit_itemValue.setValue(ConvertUtils.bytes2ToInt(miniItem.getMax()),
@@ -296,11 +296,11 @@ public class ShapePage extends PageBaseUi {
             return convertView;
         }
 
-        public ThShapeItem getThShapeItem() {
+        public YYShapeItem getThShapeItem() {
             return thShapeItem;
         }
 
-        public void setThShapeItem(ThShapeItem thShapeItem) {
+        public void setThShapeItem(YYShapeItem thShapeItem) {
             this.thShapeItem = thShapeItem;
         }
 
@@ -317,7 +317,7 @@ public class ShapePage extends PageBaseUi {
 
         @Override
         public void onConfirmClick(int value, int par) {
-            ThShapeItem.MiniItem miniItem = (ThShapeItem.MiniItem) getItem(par);
+            YYShapeItem.MiniItem miniItem = (YYShapeItem.MiniItem) getItem(par);
             if(miniItem != null)
             {
                 byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
@@ -348,7 +348,7 @@ public class ShapePage extends PageBaseUi {
                 isAdd = true;
                 pos = par;
             }
-            ThShapeItem.MiniItem miniItem = (ThShapeItem.MiniItem) getItem(pos);
+            YYShapeItem.MiniItem miniItem = (YYShapeItem.MiniItem) getItem(pos);
 
             if(miniItem == null)
             {
@@ -408,10 +408,10 @@ public class ShapePage extends PageBaseUi {
 
     static class ItemAdapterOne extends BaseAdapter
     {
-        private ThShape thShape;
+        private YYShape thShape;
         private WeakReference<ListView> listView;
 
-        public void setThShape(ThShape thShape) {
+        public void setThShape(YYShape thShape) {
             this.thShape = thShape;
         }
 
@@ -467,7 +467,7 @@ public class ShapePage extends PageBaseUi {
 
 
 
-            ThShapeItem thShapeItem = (ThShapeItem) getItem(position);
+            YYShapeItem thShapeItem = (YYShapeItem) getItem(position);
             if(thShapeItem == null)
             {
                 return convertView;
@@ -513,7 +513,7 @@ public class ShapePage extends PageBaseUi {
                 @Override
                 public void onClick(View v) {
                     byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
-                    ThShapeItem thShapeItem = (ThShapeItem) getItem(position);
+                    YYShapeItem thShapeItem = (YYShapeItem) getItem(position);
 
                     AbstractDataServiceFactory.getInstance().setShapeInfo(group,(byte)0,
                             thShapeItem.getShapeType(),thShapeItem.getShapeId(),(byte)0,0);
@@ -542,7 +542,7 @@ public class ShapePage extends PageBaseUi {
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
     {
-        private List<ThShape> thShapeList;
+        private List<YYShape> thShapeList;
         public MyAdapter()
         {
 
@@ -562,7 +562,7 @@ public class ShapePage extends PageBaseUi {
 
             if(thShapeList != null)
             {
-                ThShape thShape = thShapeList.get(position);
+                YYShape thShape = thShapeList.get(position);
 
                 holder.tv_Shape.setText(thShape.getShapeName());
 
@@ -580,7 +580,7 @@ public class ShapePage extends PageBaseUi {
 
 
                     int height = 0;
-                    for(ThShapeItem item:thShape.getShapeItemList())
+                    for(YYShapeItem item:thShape.getShapeItemList())
                     {
                         height+=ConvertUtils.toPx(50)*(item.getMiniItemList().size())
                                 + ConvertUtils.toPx(40)
@@ -615,7 +615,7 @@ public class ShapePage extends PageBaseUi {
 
         }
 
-        public void setThShapeList(List<ThShape> thShapeList) {
+        public void setThShapeList(List<YYShape> thShapeList) {
             this.thShapeList = thShapeList;
         }
 

@@ -11,28 +11,28 @@ import com.yy.sorter.activity.R;
 import java.util.List;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThSVersion;
+import th.service.data.YYSVersion;
 
 
 /**
- * Created by Administrator on 2017/4/10.
+ * CameraVersionAdapter
  */
 
 public class CameraVersionAdapter extends BaseAdapter {
     private Context ctx;
-    private List<ThSVersion.CameraVersion> thCameraRet;
+    private List<YYSVersion.CameraVersion> thCameraRet;
 
 
-    public CameraVersionAdapter(Context ctx, List<ThSVersion.CameraVersion> thCameraRet){
+    public CameraVersionAdapter(Context ctx, List<YYSVersion.CameraVersion> thCameraRet){
         this.ctx=ctx;
         this.thCameraRet=thCameraRet;
     }
 
-    public void setRet(List<ThSVersion.CameraVersion> ret) {
+    public void setRet(List<YYSVersion.CameraVersion> ret) {
         this.thCameraRet = ret;
     }
 
-    public void setThValveRet(List<ThSVersion.CameraVersion> thCameraRet) {
+    public void setThValveRet(List<YYSVersion.CameraVersion> thCameraRet) {
         this.thCameraRet = thCameraRet;
     }
 
@@ -61,7 +61,7 @@ public class CameraVersionAdapter extends BaseAdapter {
             convertView=LayoutInflater.from(ctx).inflate(R.layout.item_cameraversion,null);
         }
 
-        ThSVersion.CameraVersion  cameraVersion=thCameraRet.get(position);
+        YYSVersion.CameraVersion  cameraVersion=thCameraRet.get(position);
 
 
 
@@ -73,7 +73,7 @@ public class CameraVersionAdapter extends BaseAdapter {
 
         numTxt.setText(Integer.toString(position+1));
 
-        ThSVersion.CameraVersion ver = thCameraRet.get(position);
+        YYSVersion.CameraVersion ver = thCameraRet.get(position);
         tvSoftFront.setText(String.valueOf(ver.getFront_software()[1]));
         tvSoftRear.setText(String.valueOf(ver.getRear_software()[1]));
         tvHardFront.setText(ver.getFrontHardwareStr());

@@ -1,7 +1,7 @@
 package th.service.core;
 
 /**
- * Created by Administrator on 2017/3/27.
+ * Created by YUYANG on 2018/11/6.
  * 工厂方法 生成通信实例
  */
 

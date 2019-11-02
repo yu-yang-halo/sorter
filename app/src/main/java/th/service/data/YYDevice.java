@@ -1,7 +1,7 @@
 package th.service.data;
 /**
- * 
- * @author Administrator
+ *
+ * Created by YUYANG on 2018/11/6.
  *  定义设备列表项中的数据信息：：：：
  *  设备局域网ip地址
  *  设备名称
@@ -10,15 +10,15 @@ package th.service.data;
  *  当前层
  *  当前视
  */
-public class ThDevice {
+public class YYDevice {
 	/**
 	 * 默认设备不为空
 	 */
 	private boolean deviceIsNull=false;
-    public ThDevice(){
+    public YYDevice(){
 		
 	}
-	public ThDevice(String localIp, String deviceName, String deviceSN) {
+	public YYDevice(String localIp, String deviceName, String deviceSN) {
 		super();
 		this.localIp = localIp;
 		this.deviceName = deviceName;
@@ -27,7 +27,7 @@ public class ThDevice {
 	
 	@Override
 	public String toString() {
-		return "ThDevice [localIp=" + localIp + ", deviceName=" + deviceName + ", deviceSN=" + deviceSN + "]";
+		return "YYDevice [localIp=" + localIp + ", deviceName=" + deviceName + ", deviceSN=" + deviceSN + "]";
 	}
 
 	public boolean isDeviceIsNull() {
@@ -67,7 +67,7 @@ public class ThDevice {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ThDevice other = (ThDevice) obj;
+		YYDevice other = (YYDevice) obj;
 		if (deviceSN == null) {
 			if (other.deviceSN != null)
 				return false;

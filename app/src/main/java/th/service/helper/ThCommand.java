@@ -2,6 +2,9 @@ package th.service.helper;
 
 import com.yy.sorter.activity.BuildConfig;
 
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
 public class ThCommand {
 
 	/**

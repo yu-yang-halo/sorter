@@ -23,13 +23,13 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThMode;
+import th.service.data.YYMode;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 interface ICallBack
 {
-    public void onDataBeginSend();
+    void onDataBeginSend();
 
 }
 
@@ -38,7 +38,7 @@ public class ModeListUi extends BaseUi implements ICallBack{
     private MachineData machineData;
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
-    private List<ThMode> thModeList;
+    private List<YYMode> thModeList;
     private PullRefreshLayout swipeRefreshLayout;
     public ModeListUi(Context ctx) {
         super(ctx);
@@ -102,7 +102,7 @@ public class ModeListUi extends BaseUi implements ICallBack{
                     showToast(FileManager.getInstance().getString(138,"读取方案成功"));
                     if(thModeList != null)
                     {
-                        for(ThMode mode : thModeList)
+                        for(YYMode mode : thModeList)
                         {
                             if(mode.getBigIndex() == bigIndex && mode.getSmallIndex() == currentSmallIndex)
                             {
@@ -155,7 +155,7 @@ public class ModeListUi extends BaseUi implements ICallBack{
 
     static class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
     {
-        List<ThMode> thModeList;
+        List<YYMode> thModeList;
         private WeakReference<ICallBack> callBack;
         public MyAdapter()
         {
@@ -166,7 +166,7 @@ public class ModeListUi extends BaseUi implements ICallBack{
             this.callBack = callBack;
         }
 
-        public void setThModeList(List<ThMode> thModeList) {
+        public void setThModeList(List<YYMode> thModeList) {
             this.thModeList = thModeList;
         }
 
@@ -184,7 +184,7 @@ public class ModeListUi extends BaseUi implements ICallBack{
 
         @Override
         public void onBindViewHolder(final MyItemHolder holder, final int position) {
-            final ThMode mode = thModeList.get(position);
+            final YYMode mode = thModeList.get(position);
             holder.tv_modeName.setText(mode.getModeName());
             if(mode.isCurrentMode())
             {

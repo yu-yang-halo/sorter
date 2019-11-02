@@ -19,7 +19,7 @@ import th.service.helper.ThCommand;
 
 
 /**
- * Created by Administrator on 2017/3/17.
+ * MainActivity
  */
 
 public class MainActivity extends Activity implements NetworkChangeListenser {

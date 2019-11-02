@@ -15,7 +15,7 @@ import com.yy.sorter.utils.ConvertUtils;
 import com.yy.sorter.utils.DigitalDialog;
 
 /**
- * 自定义Edit
+ * Created by YUYANG on 2018/11/6.
  */
 
 public class KeyboardDigitalEdit extends android.support.v7.widget.AppCompatEditText implements View.OnClickListener{

@@ -5,12 +5,12 @@ import android.os.Handler;
 import android.os.Looper;
 import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.utils.TextCacheUtils;
-import com.yy.sorter.utils.ThToast;
+import com.yy.sorter.utils.YYToast;
 
 import th.service.helper.ThLogger;
 
 /**
- * Created by Administrator on 2017/4/19.
+ * Created by YUYANG on 2018/11/6.
  * 流量管理 目前只关注TCP流量
  *
  */
@@ -41,10 +41,10 @@ public class TrafficManager {
     }
 
     public void showMessage(String message){
-        ThToast.showToast(ctx,message);
+        YYToast.showToast(ctx,message);
     }
     public void showErrorMessage(){
-        ThToast.showToast(ctx, FileManager.getInstance().getString(1002));//1002#协议不匹配请检查版本是否一致
+        YYToast.showToast(ctx, FileManager.getInstance().getString(1002));//1002#协议不匹配请检查版本是否一致
 }
 
     public void forceWrite() {

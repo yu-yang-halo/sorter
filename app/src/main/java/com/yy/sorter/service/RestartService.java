@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.yy.sorter.utils.TextCacheUtils;
 
 /**
- * Created by Administrator on 2017/12/6.
+ * RestartService
  * 自重启服务
  */
 

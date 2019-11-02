@@ -8,20 +8,22 @@ import java.util.List;
 
 import th.service.core.TrafficManager;
 
-
-public class ThShape {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYShape {
     public static final int MIN_SIZE = 52;
     private int shapeType;
     private int shapeItemCount;
     private String shapeName;
 
-    private List<ThShapeItem> shapeItemList;
-    public ThShape()
+    private List<YYShapeItem> shapeItemList;
+    public YYShape()
     {
 
     }
 
-    public ThShape(byte[] contents)
+    public YYShape(byte[] contents)
     {
         shapeItemList = new ArrayList<>();
         if(contents.length >= 52)
@@ -37,15 +39,15 @@ public class ThShape {
             while (pos != contents.length)
             {
 
-                if(pos+ThShapeItem.MIN_SIZE - 1>= contents.length)
+                if(pos+ YYShapeItem.MIN_SIZE - 1>= contents.length)
                 {
                     TrafficManager.getInstance().showErrorMessage();
                     break;
                 }
 
-                int miniItemCount =  ConvertUtils.unsignByteToInt(contents[pos+ThShapeItem.MIN_SIZE - 1]);
-                int shapeItemSize =  ThShapeItem.MIN_SIZE
-                        + miniItemCount * ThShapeItem.MiniItem.SIZE;
+                int miniItemCount =  ConvertUtils.unsignByteToInt(contents[pos+ YYShapeItem.MIN_SIZE - 1]);
+                int shapeItemSize =  YYShapeItem.MIN_SIZE
+                        + miniItemCount * YYShapeItem.MiniItem.SIZE;
                 byte[] buffer = new byte[shapeItemSize];
 
                 if(pos + shapeItemSize > contents.length)
@@ -56,7 +58,7 @@ public class ThShape {
 
                 System.arraycopy(contents,pos ,buffer,0,shapeItemSize);
 
-                ThShapeItem thShapeItem = new ThShapeItem(buffer);
+                YYShapeItem thShapeItem = new YYShapeItem(buffer);
                 shapeItemList.add(thShapeItem);
 
                 pos+=shapeItemSize;
@@ -92,11 +94,11 @@ public class ThShape {
         this.shapeName = shapeName;
     }
 
-    public List<ThShapeItem> getShapeItemList() {
+    public List<YYShapeItem> getShapeItemList() {
         return shapeItemList;
     }
 
-    public void setShapeItemList(List<ThShapeItem> shapeItemList) {
+    public void setShapeItemList(List<YYShapeItem> shapeItemList) {
         this.shapeItemList = shapeItemList;
     }
 }

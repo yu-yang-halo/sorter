@@ -1,17 +1,15 @@
 package th.service.data;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/6/1.
+ * Created by YUYANG on 2018/11/6.
  * 配置文件对象
  */
 
-public class ThConfig {
+public class YYConfig {
 
     private int version;
     private Map<String,Map<String,String>> android;
@@ -31,7 +29,7 @@ public class ThConfig {
         return null;
     }
 
-    public ThConfig transferConfig(ThConfig otherConfig){
+    public YYConfig transferConfig(YYConfig otherConfig){
         List<LanguageVersion> languageVersions=otherConfig.getLanguage();
         for(LanguageVersion languageVersion:languageVersions){
            LanguageVersion version=findSameObject(languageVersion);
@@ -64,7 +62,7 @@ public class ThConfig {
 
     @Override
     public String toString() {
-        return "ThConfig{" +
+        return "YYConfig{" +
                 "version=" + version +
                 ", android=" + android +
                 ", ios=" + ios +

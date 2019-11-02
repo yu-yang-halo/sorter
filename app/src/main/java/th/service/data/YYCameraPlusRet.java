@@ -5,14 +5,14 @@ import java.util.Arrays;
 import th.service.core.TrafficManager;
 
 /**
- * Created by Administrator on 2017/4/13.
+ * Created by YUYANG on 2018/11/6.
  *
  * 相机增益返回数据结构
  *
  *
  */
 
-public class ThCameraPlusRet {
+public class YYCameraPlusRet {
     private byte fstRed[];  //2byte 表示数值
     private byte sndRed[];
     private byte fstGreen[];
@@ -22,7 +22,7 @@ public class ThCameraPlusRet {
     private byte fstSndIr1s[];//1byte 表示数值
     private byte fstSndIr2s[];//1byte 表示数值
 
-    public ThCameraPlusRet(byte[] contents) {
+    public YYCameraPlusRet(byte[] contents) {
 
         fstRed=new byte[2];
         sndRed=new byte[2];
@@ -58,7 +58,7 @@ public class ThCameraPlusRet {
 
     @Override
     public String toString() {
-        return "ThCameraPlusRet{" +
+        return "YYCameraPlusRet{" +
                 "fstRed=" + Arrays.toString(fstRed) +
                 ", sndRed=" + Arrays.toString(sndRed) +
                 ", fstGreen=" + Arrays.toString(fstGreen) +

@@ -15,13 +15,12 @@ import th.service.core.AbstractDataServiceFactory;
 
 
 /**
- * Created by Administrator on 2017/3/17
- *
+ * TopManager
  * 顶部容器管理类
  *
  */
 
-public class TopManager implements ThMangerObserver{
+public class TopManager implements YYMangerObserver {
     private static TopManager instance=null;
     private TopManager(){
 

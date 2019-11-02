@@ -13,7 +13,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by Administrator on 2017/3/13.
  * 启动画面
  * 可以在此做一些宣传LOGO
  *

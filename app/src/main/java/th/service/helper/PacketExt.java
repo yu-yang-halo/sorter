@@ -3,7 +3,7 @@ package th.service.helper;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by Administrator on 2017/7/12.
+ * Created by YUYANG on 2018/11/6.
  * 包扩展：用于处理重发机制
  */
 

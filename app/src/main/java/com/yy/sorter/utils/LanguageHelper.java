@@ -22,13 +22,13 @@ import com.yy.sorter.view.LoadProgress;
 import java.util.Locale;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.ThConfig;
+import th.service.data.YYConfig;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
 /**
- * Created by Administrator on 2017/3/13.
+ * LanguageHelper
  * 国际化语言切换实现
  */
 
@@ -134,12 +134,12 @@ public class LanguageHelper {
                 //文件结束
                 switch (thPackage.getData1()[0]){
                     case ThCommand.DOWNLOAD_FILE_TYPE_CONFIG:
-                        ThConfig thConfig = ThPackageHelper.parseThConfig(thPackage, 2);
+                        YYConfig thConfig = ThPackageHelper.parseThConfig(thPackage, 2);
                         System.out.println("服务器端配置文件" + thConfig);
                         if (thConfig != null) {
                             FileManager.getInstance().readLocalConfigFile(new FileManager.IConfigHandler() {
                                 @Override
-                                public void onComplelete(ThConfig thConfig) {
+                                public void onComplelete(YYConfig thConfig) {
                                     if(iProgressListenser!=null){
                                         iProgressListenser.onFinished(thPackage.getData1()[0],true,thConfig);
                                     }
@@ -235,7 +235,7 @@ public class LanguageHelper {
     }
 
     public static interface IProgressListenser{
-        public void onFinished(byte fileType,boolean success,ThConfig config);
+        public void onFinished(byte fileType, boolean success, YYConfig config);
         public void onVersionUpdate(boolean isLastestNew);
     }
 

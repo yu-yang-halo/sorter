@@ -20,8 +20,7 @@ import com.yy.sorter.view.KeyboardDigitalEdit;
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.ThSense;
-import th.service.data.ThSvmInfo;
+import th.service.data.YYSvmInfo;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -29,7 +28,7 @@ import th.service.helper.ThPackageHelper;
 public class SvmPage extends PageBaseUi {
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
-    private List<ThSvmInfo> thSvmInfoList;
+    private List<YYSvmInfo> thSvmInfoList;
     public SvmPage(Context ctx) {
         super(ctx);
     }
@@ -83,7 +82,7 @@ public class SvmPage extends PageBaseUi {
             {
                 byte view = packet.getData1()[1];
                 byte type = packet.getData1()[2];
-                for(ThSvmInfo svmInfo:thSvmInfoList)
+                for(YYSvmInfo svmInfo:thSvmInfoList)
                 {
                     if(type == 1)
                     {
@@ -122,7 +121,7 @@ public class SvmPage extends PageBaseUi {
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
             implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack
     {
-        private List<ThSvmInfo> thSvmInfoList;
+        private List<YYSvmInfo> thSvmInfoList;
         public MyAdapter()
         {
 
@@ -142,7 +141,7 @@ public class SvmPage extends PageBaseUi {
                 onBindViewHolder(holder,position);
             }else
             {
-                ThSvmInfo thSvmInfo = thSvmInfoList.get(position);
+                YYSvmInfo thSvmInfo = thSvmInfoList.get(position);
                 holder.sensor_Edit.setText(String.valueOf(ConvertUtils.unsignByteToInt(thSvmInfo.getSpotSensor())));
                 holder.spotDiff_Edit.setText(String.valueOf(ConvertUtils.bytes2ToInt(thSvmInfo.getSpotDiff())));
 
@@ -152,7 +151,7 @@ public class SvmPage extends PageBaseUi {
 
         @Override
         public void onBindViewHolder(MyItemHolder holder, final int position) {
-            ThSvmInfo thSvmInfo = thSvmInfoList.get(position);
+            YYSvmInfo thSvmInfo = thSvmInfoList.get(position);
             if(thSvmInfo.getView() == 0)
             {
                 holder.tv_front.setText(FileManager.getInstance().getString(75));//75#前视
@@ -194,7 +193,7 @@ public class SvmPage extends PageBaseUi {
                 @Override
                 public void onClick(View v) {
                     byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
-                    ThSvmInfo thSvmInfo = thSvmInfoList.get(position);
+                    YYSvmInfo thSvmInfo = thSvmInfoList.get(position);
                     AbstractDataServiceFactory.getInstance().setSvmInfo(group,thSvmInfo.getView(), (byte) 1,0);
                 }
             });
@@ -202,7 +201,7 @@ public class SvmPage extends PageBaseUi {
                 @Override
                 public void onClick(View v) {
                     byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
-                    ThSvmInfo thSvmInfo = thSvmInfoList.get(position);
+                    YYSvmInfo thSvmInfo = thSvmInfoList.get(position);
                     AbstractDataServiceFactory.getInstance().setSvmInfo(group,thSvmInfo.getView(), (byte) 0,0);
                 }
             });
@@ -230,7 +229,7 @@ public class SvmPage extends PageBaseUi {
         public void onConfirmClick(int value, int par) {
             int pos = par/2;
             int type = par%2;
-            ThSvmInfo thSvmInfo = thSvmInfoList.get(pos);
+            YYSvmInfo thSvmInfo = thSvmInfoList.get(pos);
             byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
 
             if(type == 0)//灵敏度
@@ -250,7 +249,7 @@ public class SvmPage extends PageBaseUi {
                 return;
             }
             int value,max,min;
-            ThSvmInfo thSvmInfo = thSvmInfoList.get(pos);
+            YYSvmInfo thSvmInfo = thSvmInfoList.get(pos);
             value = ConvertUtils.bytes2ToInt(thSvmInfo.getSpotDiff());
             max = ConvertUtils.bytes2ToInt(thSvmInfo.getSpotDiffMax());
             min = 1;
@@ -293,7 +292,7 @@ public class SvmPage extends PageBaseUi {
 
 
             int value,max,min;
-            ThSvmInfo thSvmInfo = thSvmInfoList.get(pos);
+            YYSvmInfo thSvmInfo = thSvmInfoList.get(pos);
             value = ConvertUtils.unsignByteToInt(thSvmInfo.getSpotSensor());
             max = 100;
             min = 0;
@@ -393,7 +392,7 @@ public class SvmPage extends PageBaseUi {
         }
 
 
-        public void setThSvmInfoList(List<ThSvmInfo> thSvmInfoList) {
+        public void setThSvmInfoList(List<YYSvmInfo> thSvmInfoList) {
             this.thSvmInfoList = thSvmInfoList;
         }
     }

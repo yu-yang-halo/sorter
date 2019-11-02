@@ -11,6 +11,7 @@ import th.service.helper.ThStrategy;
 import th.service.helper.ThPackage;
 
 /**
+ * Created by YUYANG on 2018/11/6.
  * 管理所有的UI界面
  * 并负责通知消息给每个页面
  *

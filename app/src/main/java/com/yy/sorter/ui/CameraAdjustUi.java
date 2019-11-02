@@ -35,7 +35,7 @@ import java.util.TimerTask;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThWaveData;
+import th.service.data.YYWaveData;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -368,7 +368,7 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
             if (packet.getExtendType() == ThCommand.WAVE_TYPE_CAMERA_ORIGIN
                     || packet.getExtendType() == ThCommand.WAVE_TYPE_CAMERA_ADJUST
                     || packet.getExtendType() == ThCommand.WAVE_TYPE_CAMERA_TEST) {
-                ThWaveData thWaveRet = ThPackageHelper.parseWaveData(packet);
+                YYWaveData thWaveRet = ThPackageHelper.parseWaveData(packet);
 
                 thWaveView.setThWaveRet(thWaveRet);
                 thWaveView.invalidate();

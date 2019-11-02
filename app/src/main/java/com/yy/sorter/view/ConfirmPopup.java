@@ -20,9 +20,7 @@ import com.yy.sorter.utils.ConvertUtils;
 /**
  * 带确定及取消按钮的
  *
- * @param <V> the type parameter
- * @author 李玉江[QQ:1032694760]
- * @since 2015/10/21
+ * Created by YUYANG on 2018/11/6.
  */
 public abstract class ConfirmPopup<V extends View> extends TopPopup<View> {
     protected boolean topLineVisible = true;

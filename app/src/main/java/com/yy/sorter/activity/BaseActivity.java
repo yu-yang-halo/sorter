@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 /**
- * Created by Administrator on 2017/3/13.
  * Activity Base Class
  */
 

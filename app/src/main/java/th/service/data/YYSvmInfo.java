@@ -2,7 +2,10 @@ package th.service.data;
 
 import th.service.core.TrafficManager;
 
-public class ThSvmInfo {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYSvmInfo {
     public static final int SIZE = 8;
     private byte view;
     private byte used;
@@ -12,7 +15,7 @@ public class ThSvmInfo {
     private byte spotSensor; //灵敏度
 
 
-    public ThSvmInfo(byte[] contents) {
+    public YYSvmInfo(byte[] contents) {
         spotDiff = new byte[2];
         spotDiffMax = new byte[2];
         if(check(contents))

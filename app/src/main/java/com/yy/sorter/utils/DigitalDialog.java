@@ -20,7 +20,7 @@ import com.yy.sorter.view.AlwaysClickButton;
 
 
 /**
- * Created by Administrator on 2017/3/15.
+ * DigitalDialog
  */
 
 public class DigitalDialog extends Dialog {

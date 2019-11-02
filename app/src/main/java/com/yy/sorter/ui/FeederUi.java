@@ -26,8 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.ThFeeder;
-import th.service.data.ThSense;
+import th.service.data.YYFeeder;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -38,7 +37,7 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
     private RecyclerView recyclerView;
     private int tabSelectPos = 0;
     private MyAdapter myAdapter;
-    private ThFeeder thFeeder;
+    private YYFeeder thFeeder;
     private KeyboardDigitalEdit feederEditText;
     private PageSwitchView pageSwitchView;
     private AlwaysClickButton addBtn,minusBtn;

@@ -7,7 +7,10 @@ import java.util.List;
 
 import th.service.core.TrafficManager;
 
-public class ThShapeItem {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYShapeItem {
     public static final int MIN_SIZE = 55;
     private byte  shapeType;//形选类型  基础形选/花生/小麦.....
     private byte  shapeId;//形选项  选长 选短
@@ -17,8 +20,8 @@ public class ThShapeItem {
     private byte   count;//MiniItem 的数量
     private List<MiniItem> miniItemList;
 
-    public ThShapeItem(){};
-    public ThShapeItem(byte[] contents)
+    public YYShapeItem(){};
+    public YYShapeItem(byte[] contents)
     {
         if(contents.length >= 55)
         {

@@ -8,7 +8,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,15 +27,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import th.service.data.ThConfig;
+import th.service.data.YYConfig;
 
 /**
- * Created by Administrator on 2017/4/5.
  * 语言包管理模块
  * 负责：
  *     语言包的下载到本地目录
- *
- *
  */
 
 public class FileManager {
@@ -325,7 +321,7 @@ public class FileManager {
     /**
      * 保存ThConfig文件到本地
      */
-    public ThConfig saveConfig(ThConfig serverConfig){
+    public YYConfig saveConfig(YYConfig serverConfig){
        return readLocalConfig(objectToInputStream(serverConfig));
     }
     private boolean localFileIsExists(String fileName){
@@ -364,7 +360,7 @@ public class FileManager {
     /**
      *读取文件到内存对象 并保存输入流数据
      */
-    private ThConfig readLocalConfig(InputStream is){
+    private YYConfig readLocalConfig(InputStream is){
         File localFile=fetchLocalFile(is,CONFIG_FILE_NAME);
         if(localFile==null){
             return null;
@@ -379,7 +375,7 @@ public class FileManager {
                 sb.append(kv);
             }
             Gson gson=new Gson();
-            ThConfig thConfig=gson.fromJson(sb.toString(), ThConfig.class);
+            YYConfig thConfig=gson.fromJson(sb.toString(), YYConfig.class);
             return thConfig;
         } catch (IOException e) {
             e.printStackTrace();
@@ -393,7 +389,7 @@ public class FileManager {
      * @param serverConfig
      * @return
      */
-    private InputStream objectToInputStream(ThConfig serverConfig){
+    private InputStream objectToInputStream(YYConfig serverConfig){
         InputStream is=null;
         if(serverConfig!=null){
             Gson gson=new Gson();
@@ -412,12 +408,12 @@ public class FileManager {
      * @param handler
      * @param serverConfig
      */
-    public void readLocalConfigFile(final IConfigHandler handler, final ThConfig serverConfig){
+    public void readLocalConfigFile(final IConfigHandler handler, final YYConfig serverConfig){
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                    ThConfig thConfig=readLocalConfig(null);
+                    YYConfig thConfig=readLocalConfig(null);
                     if(serverConfig!=null){
                         if(thConfig==null){
                             //没有本地配置文件
@@ -515,6 +511,6 @@ public class FileManager {
         public void onComplelete(boolean success);
     }
     public static interface IConfigHandler{
-        public void onComplelete(ThConfig thConfig);
+        public void onComplelete(YYConfig thConfig);
     }
 }

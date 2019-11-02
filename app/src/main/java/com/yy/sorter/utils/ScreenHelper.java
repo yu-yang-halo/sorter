@@ -6,7 +6,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
- * Created by Administrator on 2017/5/10.
+ * ScreenHelper
  */
 
 public class ScreenHelper {

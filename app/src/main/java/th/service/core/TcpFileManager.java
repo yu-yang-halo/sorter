@@ -17,6 +17,9 @@ import th.service.helper.ThCommand;
 import th.service.helper.ThLogger;
 import th.service.helper.ThPackage;
 
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
 public class TcpFileManager extends IReceiveListenser{
 	/**
 	 * TCP文件下载管理模块

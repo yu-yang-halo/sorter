@@ -14,7 +14,7 @@ import th.service.helper.ThPackage;
 
 
 /**
- * Created by Administrator on 2017/12/13.
+ * NotFoundUi
  */
 
 public class NotFoundUi extends BaseUi {

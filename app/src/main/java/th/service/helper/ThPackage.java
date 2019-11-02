@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 
 /**
- * 
- * @author Administrator
+ *
+ * Created by YUYANG on 2018/11/6.
  * 
  *         定义发送与接受包的数据结构  包头 15byte    扩展数据  最大2048
  *         type	    ex_type 	Data1	number	len	     crc	ex_data

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by Administrator on 2017/3/13.
+ * TextCacheUtils
  * 文本缓存工具类
  *
  */

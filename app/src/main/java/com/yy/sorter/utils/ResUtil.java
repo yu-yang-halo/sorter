@@ -3,7 +3,6 @@ package com.yy.sorter.utils;
 import android.content.Context;
 
 /**
- * Created by Administrator on 2017/11/1.
  * ResUtil 利用反射获取资源
  */
 public class ResUtil {

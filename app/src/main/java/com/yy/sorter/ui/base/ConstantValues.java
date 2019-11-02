@@ -2,7 +2,7 @@ package com.yy.sorter.ui.base;
 
 
 /**
- * Created by Administrator on 2017/3/17.
+ * ConstantValues
  */
 
 public class ConstantValues {

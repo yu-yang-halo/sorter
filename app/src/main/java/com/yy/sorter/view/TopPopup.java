@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 /**
+ * Created by YUYANG on 2018/11/6.
  * 底部弹窗基类
  */
 public abstract class TopPopup<V extends View> implements DialogInterface.OnKeyListener {

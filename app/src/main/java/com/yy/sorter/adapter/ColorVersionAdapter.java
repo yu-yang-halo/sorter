@@ -11,27 +11,27 @@ import com.yy.sorter.activity.R;
 import com.yy.sorter.utils.ConvertUtils;
 
 import java.util.List;
-import th.service.data.ThSVersion;
+import th.service.data.YYSVersion;
 
 /**
- * Created by Administrator on 2017/4/10.
+ * ColorVersionAdapter
  */
 
 public class ColorVersionAdapter extends BaseAdapter {
     private Context ctx;
-    private List<ThSVersion.ColorVersion> thColorRet;
+    private List<YYSVersion.ColorVersion> thColorRet;
 
 
-    public ColorVersionAdapter(Context ctx, List<ThSVersion.ColorVersion> thValveRet){
+    public ColorVersionAdapter(Context ctx, List<YYSVersion.ColorVersion> thValveRet){
         this.ctx=ctx;
         this.thColorRet=thValveRet;
     }
 
-    public void setRet(List<ThSVersion.ColorVersion> ret) {
+    public void setRet(List<YYSVersion.ColorVersion> ret) {
         this.thColorRet = ret;
     }
 
-    public void setThValveRet(List<ThSVersion.ColorVersion> thColorRet) {
+    public void setThValveRet(List<YYSVersion.ColorVersion> thColorRet) {
         this.thColorRet = thColorRet;
     }
 
@@ -65,7 +65,7 @@ public class ColorVersionAdapter extends BaseAdapter {
         TextView tvHardware = (TextView)convertView.findViewById(R.id.tv_hardware_adapter);
 
         numTxt.setText(Integer.toString(position+1));
-        ThSVersion.ColorVersion ver = thColorRet.get(position);
+        YYSVersion.ColorVersion ver = thColorRet.get(position);
         tvARM.setText(Float.toString(ConvertUtils.bytes2ToFloat(ver.getArm())));
         tvFPGA.setText(Float.toString(ConvertUtils.bytes2ToFloat(ver.getFpga())));
         tvHardware.setText(ver.getHardwareStr());

@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import th.service.core.*;
 
 /**
- * Created by Administrator on 2017/3/23.
+ * YYManagerSubject
  * 目标类
  */
 
-public class ThManagerSubject {
+public class YYManagerSubject {
     private boolean changed = false;
-    private final ArrayList<ThMangerObserver> observers;
+    private final ArrayList<YYMangerObserver> observers;
 
 
-    public ThManagerSubject() {
+    public YYManagerSubject() {
         observers = new ArrayList<>();
     }
 
-    public synchronized void addObserver(ThMangerObserver o) {
+    public synchronized void addObserver(YYMangerObserver o) {
         if (o == null)
             throw new NullPointerException();
         if (!observers.contains(o)) {
@@ -33,13 +33,13 @@ public class ThManagerSubject {
         notifyObservers(null,null);
     }
     public void notifyObservers(Object arg,String message) {
-        ThMangerObserver[] arrLocal;
+        YYMangerObserver[] arrLocal;
 
         synchronized (this) {
             if (!hasChanged())
                 return;
 
-            arrLocal = observers.toArray(new ThMangerObserver[observers.size()]);
+            arrLocal = observers.toArray(new YYMangerObserver[observers.size()]);
             clearChanged();
         }
 

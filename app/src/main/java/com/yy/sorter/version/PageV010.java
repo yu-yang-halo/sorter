@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 
 /**
- * Created by Administrator on 2017/11/6.
- * V020 版本页面配置表
+ *
+ * PageV010 版本页面配置表
  */
 
 public class PageV010 extends BasePageV {

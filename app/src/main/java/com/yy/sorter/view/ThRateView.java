@@ -13,10 +13,10 @@ import android.view.View;
 
 import com.yy.sorter.utils.ConvertUtils;
 
-import th.service.data.ThValveRateRet;
+import th.service.data.YYValveRateRet;
 
 /**
- * Created by Administrator on 2017/3/30.
+ * Created by YUYANG on 2018/11/6.
  * 阀频率绘制组件
  * canvas.drawPath避免循环调用导致UI卡顿
  */
@@ -37,9 +37,9 @@ public class ThRateView extends View {
     int yAxisHeight=0;
     int xAxisWidth=0;
     int vspace=0;
-    private ThValveRateRet thValveRateRet;
+    private YYValveRateRet thValveRateRet;
 
-    public void setThValveRateRet(ThValveRateRet thValveRateRet) {
+    public void setThValveRateRet(YYValveRateRet thValveRateRet) {
         this.thValveRateRet = thValveRateRet;
         buildXaisValues();
     }
@@ -170,7 +170,7 @@ public class ThRateView extends View {
                     contents[index]=1;
                 }
             }
-            thValveRateRet=new ThValveRateRet(64,false,contents);
+            thValveRateRet=new YYValveRateRet(64,false,contents);
 
             mPaint.setPathEffect(null);
             drawScrollLine(canvas,thValveRateRet.getFrontDatas(),Color.RED,Color.RED);

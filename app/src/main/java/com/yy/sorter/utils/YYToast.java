@@ -4,10 +4,10 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * Created by Administrator on 2017/3/18.
+ * YYToast
  */
 
-public class ThToast {
+public class YYToast {
     public static void showToast(Context ctx,String message){
         Toast.makeText(ctx,message,Toast.LENGTH_SHORT).show();
     }

@@ -11,7 +11,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 /**
- * Created by Administrator on 2017/3/17.
+ * FadeUtils
  * 动画功能
  */
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  自定义自动布局
+ * Created by YUYANG on 2018/11/6.
  */
 public class ThAutoLayout extends HorizontalScrollView  implements View.OnClickListener {
     private static final int SCROLL_UPPER = 5;

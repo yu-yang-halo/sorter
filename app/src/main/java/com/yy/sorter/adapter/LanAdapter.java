@@ -18,44 +18,44 @@ import com.yy.sorter.manager.TopManager;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.LanguageHelper;
 import com.yy.sorter.utils.TextCacheUtils;
-import com.yy.sorter.utils.ThToast;
+import com.yy.sorter.utils.YYToast;
 
 
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.ThConfig;
+import th.service.data.YYConfig;
 import th.service.helper.ThCommand;
 
 /**
- * Created by Administrator on 2017/4/6.
+ * LanAdapter
  */
 
 public class LanAdapter extends BaseAdapter {
     Handler mainUIHandler=new Handler(Looper.getMainLooper());
     private Context ctx;
-    private List<ThConfig.LanguageVersion> lanList;
-    private ThConfig newConfig;
+    private List<YYConfig.LanguageVersion> lanList;
+    private YYConfig newConfig;
     private boolean isConnectToInternet;
 
     public void setConnectToInternet(boolean connectToInternet) {
         isConnectToInternet = connectToInternet;
     }
 
-    public LanAdapter(Context ctx, List<ThConfig.LanguageVersion> lanList){
+    public LanAdapter(Context ctx, List<YYConfig.LanguageVersion> lanList){
         this.ctx=ctx;
         this.lanList=lanList;
     }
 
 
-    public void setNewConfig(ThConfig newConfig) {
+    public void setNewConfig(YYConfig newConfig) {
         this.newConfig = newConfig;
         this.lanList = newConfig.getLanguage();
     }
 
 
 
-    public void setLanList(List<ThConfig.LanguageVersion> lanList) {
+    public void setLanList(List<YYConfig.LanguageVersion> lanList) {
         this.lanList = lanList;
     }
 
@@ -84,7 +84,7 @@ public class LanAdapter extends BaseAdapter {
         if(convertView==null){
             convertView= LayoutInflater.from(ctx).inflate(R.layout.adapter_lans,null);
         }
-        ThConfig.LanguageVersion lan=lanList.get(position);
+        YYConfig.LanguageVersion lan=lanList.get(position);
         CheckBox ckLan= (CheckBox) convertView.findViewById(R.id.ckLan);
         TextView lanNameLabel= (TextView) convertView.findViewById(R.id.lanNameLabel);
         Button updateBtn= (Button) convertView.findViewById(R.id.updateBtn);
@@ -189,13 +189,13 @@ public class LanAdapter extends BaseAdapter {
                         if (success){
                             TextCacheUtils.loadInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,lanList.get(position).getCountryId());
                             TextCacheUtils.loadString(TextCacheUtils.KEY_LAN_URL,lanList.get(position).getUrl());
-                            ThToast.showToast(ctx,FileManager.getInstance().getString(1020));//1020#加载语言成功
+                            YYToast.showToast(ctx,FileManager.getInstance().getString(1020));//1020#加载语言成功
 
                             TopManager.getInstance().changeTitle(FileManager.getInstance().getString(3));
                             notifyDataSetChanged();
 
                         }else{
-                            ThToast.showToast(ctx,FileManager.getInstance().getString(1021));//1021#加载语言失败
+                            YYToast.showToast(ctx,FileManager.getInstance().getString(1021));//1021#加载语言失败
                         }
                     }
                 });

@@ -16,7 +16,7 @@
         android:icon="${APP_ICON}"
         android:label="${APP_NAME}"
         android:supportsRtl="true"
-        android:name="com.yy.sorter.application.ThApplication"
+        android:name="com.yy.sorter.application.YYApplication"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup"
         android:allowBackup="false">

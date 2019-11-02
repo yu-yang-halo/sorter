@@ -16,7 +16,7 @@ import com.yy.sorter.utils.ConvertUtils;
 
 
 /**
- * Created by Administrator on 2017/7/26.
+ * Created by YUYANG on 2018/11/6.
  *
  * 基本图像view，主要负责绘制坐标点区域
  *

@@ -7,12 +7,10 @@ import com.yy.sorter.utils.TextCacheUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -24,6 +22,9 @@ import th.service.helper.ThCommand;
 import th.service.helper.ThLogger;
 import th.service.helper.ThPackage;
 
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
 public class TcpCoreManager extends IReceiveListenser{
 	/**
 	 * 单例模式 TCP核心管理模块

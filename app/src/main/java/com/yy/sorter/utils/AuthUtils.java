@@ -1,12 +1,9 @@
 package com.yy.sorter.utils;
-import android.app.Service;
 import android.content.Context;
-import android.telephony.TelephonyManager;
 import java.security.MessageDigest;
-import th.service.helper.ThCommand;
 
 /**
- * Created by Administrator on 2017/5/31.
+ * AuthUtils
  * 用户登录认证工具
  */
 
@@ -33,12 +30,6 @@ public class AuthUtils {
     }
     private static String getThBindID(Context ctx){
 
-//        TelephonyManager telMgr = (TelephonyManager)ctx.getSystemService(Service.TELEPHONY_SERVICE);
-//
-//        String simSerialNumber=telMgr.getSimSerialNumber();
-//        String deviceID=telMgr.getDeviceId();
-//        String bindID=simSerialNumber+""+deviceID;
-
         return BIND_ID;
     }
     public static void buildLocalCertificationFile(Context ctx,String username, String password){
@@ -53,22 +44,6 @@ public class AuthUtils {
         String data=sb.toString();
 
         TextCacheUtils.loadString(TextCacheUtils.KEY_CERTIFICATION_FILE,data);
-    }
-
-    /**
-     * 获取证书文件信息
-     * @return
-     */
-    public static String[] getLocalCertificationFileContents(){
-        String data=TextCacheUtils.getValueString(TextCacheUtils.KEY_CERTIFICATION_FILE,null);
-        if(data==null){
-            return null;
-        }
-        String[] arrs=data.split("#");
-        if(arrs==null||arrs.length!=3){
-            return null;
-        }
-        return arrs;
     }
 
     /***
@@ -97,26 +72,5 @@ public class AuthUtils {
             hexValue.append(Integer.toHexString(val));
         }
         return hexValue.toString();
-
     }
-
-    /**
-     * 获取真实的版本类型 1 用户版 2 工程师版
-     * 通过16进制取余获得
-     * @param buildVersion
-     * @return
-     */
-    public static int getRealVersionType(int buildVersion){
-        return buildVersion%16;
-    }
-
-    /**
-     *  提供一种方便的函数
-     *  直接判断软件版本属于工程师版还是普通用户版
-     */
-//    public static boolean isEngineerVersion(){
-//        int buildVersion=ThCommand.BUILD_VERSION;
-//        return getRealVersionType(buildVersion)!=ThCommand.USER_VERSION_TYPE;
-//    }
-
 }

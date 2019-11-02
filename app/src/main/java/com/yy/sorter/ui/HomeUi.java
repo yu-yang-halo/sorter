@@ -29,15 +29,14 @@ import java.util.TimerTask;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThDevice;
-import th.service.data.ThWorkInfo;
+import th.service.data.YYDevice;
+import th.service.data.YYWorkInfo;
 import th.service.helper.ThCommand;
-import th.service.helper.ThLogger;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
 /**
- * Created by Administrator on 2017/3/17.
+ * HomeUi
  */
 
 public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
@@ -55,7 +54,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     }
 
     private MachineData machineData;
-    private ThWorkInfo thWorkInfo;
+    private YYWorkInfo thWorkInfo;
     private TextView lb_todayTime,lb_totalTime;
     private LinearLayout workLayout;
 
@@ -182,7 +181,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
 
 
     private void refreshDeviceInfo() {
-        ThDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
+        YYDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
         int lanCountryId = TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID, ConstantValues.LAN_COUNTRY_EN);
 
         if (device != null) {
@@ -217,7 +216,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
         initSystemButton(machineData.getStartState(),0);
         initCleanButton(machineData.getCleanState());
 
-        ThDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
+        YYDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
         MachineData machineData = device.getMachineData();
         int screenVersion =  ConvertUtils.getScreenProtocolVersion(machineData);
         int mobileVersion =  ConvertUtils.getPhoneProtocolVersion(machineData);
@@ -451,7 +450,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
         }else if (packet.getType() == ThCommand.LOGIN_CMD) {
             if (packet.getExtendType() == 0x01) {
                 MachineData machineData = ThPackageHelper.parseMachineData(packet);
-                ThDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
+                YYDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
                 if (currentDevice != null) {
                     currentDevice.setMachineData(machineData);
                 }

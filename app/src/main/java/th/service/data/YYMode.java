@@ -1,6 +1,9 @@
 package th.service.data;
 
-public class ThMode {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYMode {
     private byte bigIndex;
     private byte smallIndex;
     private String modeName;
@@ -8,7 +11,7 @@ public class ThMode {
     private byte   flag;
     private boolean isCurrentMode = false;
 
-    public ThMode(byte bigIndex, byte smallIndex, String modeName, String modeTime, byte flag) {
+    public YYMode(byte bigIndex, byte smallIndex, String modeName, String modeTime, byte flag) {
         this.bigIndex = bigIndex;
         this.smallIndex = smallIndex;
         this.modeName = modeName;

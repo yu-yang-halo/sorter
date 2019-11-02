@@ -27,12 +27,12 @@ import th.service.helper.IPUtils;
 import th.service.helper.ThLogger;
 
 /**
- * Created by Administrator on 2017/3/13.
+ *
  * 自定义全局的应用容器
  */
 
-public class ThApplication extends Application {
-    private static final String TAG="ThApplication";
+public class YYApplication extends Application {
+    private static final String TAG="YYApplication";
     Handler mainUIHandler=new Handler(Looper.getMainLooper());
     NetworkReceiver networkReceiver;
     Activity currentActivity;
@@ -45,30 +45,9 @@ public class ThApplication extends Application {
         ThLogger.setContext(this);
 
 
-        try {
-            Class.forName("com.th.colorsorter.utils.ConstantPools");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         TrafficManager.getInstance().setCtx(this);
         languageInit();
 
-//        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-//            @Override
-//            public void uncaughtException(Thread t, final Throwable e) {
-//                StringBuilder sb = new StringBuilder();
-//                sb.append("BUG 收集日志 " + e + "\n");
-//                for (StackTraceElement element : e.getStackTrace()) {
-//                    sb.append(element.toString() + "\n");
-//                }
-//                ThLogger.addErrorLog(sb.toString());
-//                ThLogger.outputErrorLog();
-//
-//
-//                RestartAppUtils.restartAPP(getApplicationContext());
-//            }
-//        });
     }
 
     public void languageInit(){

@@ -20,7 +20,7 @@ import com.yy.sorter.view.KeyboardDigitalEdit;
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.ThSense;
+import th.service.data.YYSense;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -28,7 +28,7 @@ import th.service.helper.ThPackageHelper;
 public class RgbIrPage extends PageBaseUi {
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
-    private List<ThSense> thSenseList;
+    private List<YYSense> thSenseList;
 
     public RgbIrPage(Context ctx) {
         super(ctx);
@@ -127,7 +127,7 @@ public class RgbIrPage extends PageBaseUi {
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyItemHolder>
             implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack
     {
-        private List<ThSense> thSenseList;
+        private List<YYSense> thSenseList;
         public MyAdapter()
         {
 
@@ -168,14 +168,14 @@ public class RgbIrPage extends PageBaseUi {
                 onBindViewHolder(holder,position);
             }else
             {
-                ThSense senseItem = thSenseList.get(position);
+                YYSense senseItem = thSenseList.get(position);
                 holder.editText.setText(String.valueOf(ConvertUtils.bytes2ToInt(senseItem.getSense())));
             }
         }
 
         @Override
         public void onBindViewHolder(MyItemHolder holder, final int position) {
-            ThSense senseItem = thSenseList.get(position);
+            YYSense senseItem = thSenseList.get(position);
             if(holder.getItemViewType() == ConstantValues.VIEW_TYPE_ITEM)
             {
                 holder.editText.setText(String.valueOf(ConvertUtils.bytes2ToInt(senseItem.getSense())));
@@ -189,7 +189,7 @@ public class RgbIrPage extends PageBaseUi {
                     @Override
                     public void onClick(View v) {
                         byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
-                        ThSense thSense = thSenseList.get(position);
+                        YYSense thSense = thSenseList.get(position);
 
                         AbstractDataServiceFactory.getInstance().setSenseEnable(group,thSense.getView(),
                                 thSense.getType(),thSense.getSubType(),thSense.getExtType());
@@ -233,7 +233,7 @@ public class RgbIrPage extends PageBaseUi {
 
         @Override
         public void onConfirmClick(int value, int par) {
-            ThSense thSense = thSenseList.get(par);
+            YYSense thSense = thSenseList.get(par);
             thSense.setSense(ConvertUtils.intTo2Bytes(value));
             byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
 
@@ -257,7 +257,7 @@ public class RgbIrPage extends PageBaseUi {
                 isAdd = true;
                 pos = par;
             }
-            ThSense senseItem = thSenseList.get(pos);
+            YYSense senseItem = thSenseList.get(pos);
             value = ConvertUtils.bytes2ToInt(senseItem.getSense());
             max = ConvertUtils.bytes2ToInt(senseItem.getSenseMax());
             min = ConvertUtils.bytes2ToInt(senseItem.getSenseMin());
@@ -314,7 +314,7 @@ public class RgbIrPage extends PageBaseUi {
             }
         }
 
-        public void setThSenseList(List<ThSense> thSenseList) {
+        public void setThSenseList(List<YYSense> thSenseList) {
             this.thSenseList = thSenseList;
         }
     }

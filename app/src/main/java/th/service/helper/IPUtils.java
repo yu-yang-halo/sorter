@@ -18,8 +18,8 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 /**
- * 
- * @author Administrator
+ *
+ * Created by YUYANG on 2018/11/6.
  * 
  * 获取当前设备ip地址
  * 通过当前IP地址计算当前网段的广播地址

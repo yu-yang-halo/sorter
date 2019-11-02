@@ -9,26 +9,26 @@ import th.service.core.TrafficManager;
 import th.service.helper.ThLogger;
 
 /**
- * Created by Administrator on 2017/4/11.
+ * Created by YUYANG on 2018/11/6.
  */
 
-public class ThSVersion {
-    private static ThSVersion instance;
-    private ThSVersion(){
+public class YYSVersion {
+    private static YYSVersion instance;
+    private YYSVersion(){
 
     }
-    public static ThSVersion getInstance(){
-        synchronized (ThSVersion.class){
+    public static YYSVersion getInstance(){
+        synchronized (YYSVersion.class){
 
             if(instance==null){
-                instance=new ThSVersion();
+                instance=new YYSVersion();
             }
         }
         return instance;
     }
 
     public static void emptyInstance(){
-        synchronized (ThSVersion.class){
+        synchronized (YYSVersion.class){
 
             if(instance!=null){
                 instance=null;

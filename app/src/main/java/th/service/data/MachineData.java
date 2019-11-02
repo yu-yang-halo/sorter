@@ -4,6 +4,9 @@ import com.yy.sorter.utils.StringUtils;
 
 import th.service.core.TrafficManager;
 
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
 public class MachineData {
 	public static final int LEVEL_USER = 0;
 	public static final int LEVEL_ENGINNER = 1;

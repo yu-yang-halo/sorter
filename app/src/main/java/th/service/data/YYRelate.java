@@ -2,14 +2,17 @@ package th.service.data;
 
 import th.service.core.TrafficManager;
 
-public class ThRelate {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYRelate {
     public static final int SIZE = 7;
     private byte index; //形选具体算法  灵敏度 、最小长度
     private byte[] value;
     private byte[] max;
     private byte[] min;
-    public ThRelate(){};
-    public ThRelate(byte[] contents)
+    public YYRelate(){};
+    public YYRelate(byte[] contents)
     {
         value = new byte[2];
         max = new byte[2];

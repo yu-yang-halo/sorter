@@ -12,7 +12,7 @@ import th.service.helper.IPUtils;
 import th.service.helper.ThLogger;
 
 /**
- * Created by Administrator on 2017/4/7.
+ * NetworkReceiver
  * 监听网络变化
  */
 

@@ -8,15 +8,15 @@ import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.page.PageBaseUi;
 import com.yy.sorter.utils.ConvertUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThDevice;
+import th.service.data.YYDevice;
 
 /**
- * Created by YUYANG on 2017/11/6.
+ * Created by YUYANG on 2018/11/6.
+ * PageVersionManager
  * 页面版本管理
  * 负责统一管理各个版本的页面
  *
@@ -35,7 +35,7 @@ public class PageVersionManager {
     }
 
     public Map<Integer,Class> getPagesMap(){
-        ThDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
+        YYDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
         int screenVersion=-1;
         if(!device.isDeviceIsNull()){
             MachineData machineData = device.getMachineData();

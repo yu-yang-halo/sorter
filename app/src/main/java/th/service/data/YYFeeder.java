@@ -4,7 +4,10 @@ import java.util.Arrays;
 
 import th.service.core.TrafficManager;
 
-public class ThFeeder {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYFeeder {
     private static final int SIZE = 30;
     private byte chuteNumber;            // 给料量通道数
     private byte groupNumber;         // 给料量分组数
@@ -14,7 +17,7 @@ public class ThFeeder {
     private byte[] vibOpen;     // 每个通道的给料量开关 10
 
 
-    public ThFeeder(byte[] contents)
+    public YYFeeder(byte[] contents)
     {
         groupData = new byte[4];
         groupOpen = new byte[4];
@@ -92,7 +95,7 @@ public class ThFeeder {
 
     @Override
     public String toString() {
-        return "ThFeeder{" +
+        return "YYFeeder{" +
                 "chuteNumber=" + chuteNumber +
                 ", groupNumber=" + groupNumber +
                 ", groupData=" + Arrays.toString(groupData) +

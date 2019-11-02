@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
@@ -28,8 +26,8 @@ import java.util.TimerTask;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThHsvInfo;
-import th.service.data.ThHsvWave;
+import th.service.data.YYHsvInfo;
+import th.service.data.YYHsvWave;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -38,7 +36,7 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
     private DirectionView directionView;
     private HsvView hsvView;
     private CheckBox imageMoveFlagCK;
-    private List<ThHsvInfo> thHsvInfoList;
+    private List<YYHsvInfo> thHsvInfoList;
     private int m_Channel;
     private KeyboardDigitalEdit et_Chute,vEdit1,vEdit2,sEdit1,sEdit2,hEdit1,hEdit2;
     private byte m_bFlag_PicMove,m_bWave_Color,m_used;
@@ -299,7 +297,7 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
             }else if(packet.getExtendType() == 0x02)
             {
                 senseIndex = packet.getData1()[2];
-                ThHsvInfo thHsvInfo = getSelectedHsv();
+                YYHsvInfo thHsvInfo = getSelectedHsv();
                 int setType = packet.getData1()[3];
                 switch (setType)
                 {
@@ -332,7 +330,7 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
                 /**
                  *   HSV波形
                  */
-                ThHsvWave thHSVWave=ThPackageHelper.parseHSVWaveData(packet);
+                YYHsvWave thHSVWave=ThPackageHelper.parseHSVWaveData(packet);
                 hsvView.setThHSVWave(thHSVWave);
                 hsvView.invalidate();
             }
@@ -350,7 +348,7 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
         hsvView.invalidate();
 
 
-        ThHsvInfo thHsvInfo=getSelectedHsv();
+        YYHsvInfo thHsvInfo=getSelectedHsv();
 
         if(thHsvInfo!=null){
 
@@ -432,14 +430,14 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
         }
     }
 
-    private ThHsvInfo getSelectedHsv()
+    private YYHsvInfo getSelectedHsv()
     {
         if(thHsvInfoList == null)
         {
             return null;
         }
-        ThHsvInfo tmp = null;
-        for(ThHsvInfo hsvInfo:thHsvInfoList)
+        YYHsvInfo tmp = null;
+        for(YYHsvInfo hsvInfo:thHsvInfoList)
         {
             if(hsvInfo.getIndex() == senseIndex)
             {
@@ -467,7 +465,7 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
  *
  */
         Log.e("onMuiltClick","par:"+par+" isSend:"+isSend);
-        ThHsvInfo sense=getSelectedHsv();
+        YYHsvInfo sense=getSelectedHsv();
         byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
         if(sense==null){
             return;

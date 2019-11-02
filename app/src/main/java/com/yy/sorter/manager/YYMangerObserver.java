@@ -1,11 +1,11 @@
 package com.yy.sorter.manager;
 
 /**
- * Created by Administrator on 2017/3/23.
+ * YYMangerObserver
  *  观察者
  */
 
-public interface ThMangerObserver {
+public interface YYMangerObserver {
 
     void update(Object arg, String message);
 }

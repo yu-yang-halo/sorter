@@ -15,13 +15,13 @@ import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.TextCacheUtils;
-import com.yy.sorter.utils.ThToast;
+import com.yy.sorter.utils.YYToast;
 
 import java.util.Set;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThDevice;
+import th.service.data.YYDevice;
 import th.service.helper.IPUtils;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
@@ -48,7 +48,7 @@ public class DeviceListUi extends BaseUi {
                 }
             });
 
-            Set<ThDevice> devices= AbstractDataServiceFactory.getInstance().getDevices();
+            Set<YYDevice> devices= AbstractDataServiceFactory.getInstance().getDevices();
 
             devicesAdapter=new DevicesAdapter(ctx,devices);
             listView.setAdapter(devicesAdapter);
@@ -58,7 +58,7 @@ public class DeviceListUi extends BaseUi {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                    ThDevice device= devicesAdapter.getDevices().get(position);
+                    YYDevice device= devicesAdapter.getDevices().get(position);
                     AbstractDataServiceFactory.getInstance().setCurrentDevice(device);
 
                     int lanCountryId=TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,ConstantValues.LAN_COUNTRY_EN);
@@ -129,8 +129,8 @@ public class DeviceListUi extends BaseUi {
 
                                 if(AbstractDataServiceFactory.getInstance().getDevices().size()<=0
                                         && MiddleManger.getInstance().isCurrentUI(DeviceListUi.this)){
-                                    ThToast.showToast(ctx, FileManager.getInstance().getString(9));
-                                    Set<ThDevice> devices=AbstractDataServiceFactory.getInstance().getDevices();
+                                    YYToast.showToast(ctx, FileManager.getInstance().getString(9));
+                                    Set<YYDevice> devices=AbstractDataServiceFactory.getInstance().getDevices();
 
                                     devicesAdapter.setDevices(devices);
                                     devicesAdapter.notifyDataSetChanged();
@@ -164,12 +164,12 @@ public class DeviceListUi extends BaseUi {
             }
             if(packet.getExtendType()==0x03){
                 if(MiddleManger.getInstance().isCurrentUI(DeviceListUi.this)){
-                    ThToast.showToast(ctx, FileManager.getInstance().getString(1001));  //1001#该屏幕已被锁定
+                    YYToast.showToast(ctx, FileManager.getInstance().getString(1001));  //1001#该屏幕已被锁定
                 }
             }else if(packet.getExtendType()==0x01) {
                 if(MiddleManger.getInstance().isCurrentUI(DeviceListUi.this)){
                     MachineData machineData= ThPackageHelper.parseMachineData(packet);
-                    ThDevice currentDevice=AbstractDataServiceFactory.getInstance().getCurrentDevice();
+                    YYDevice currentDevice=AbstractDataServiceFactory.getInstance().getCurrentDevice();
                     if(currentDevice!=null){
                         currentDevice.setMachineData(machineData);
                     }
@@ -178,11 +178,11 @@ public class DeviceListUi extends BaseUi {
             }
         }else if(packet.getType()== ThCommand.BROADCAST_DEV_CMD){
 
-            final ThDevice device=ThPackageHelper.parseMyDevice(packet);
+            final YYDevice device=ThPackageHelper.parseMyDevice(packet);
             if (device!=null){
                 AbstractDataServiceFactory.getInstance().addDevice(device);
             }
-            final Set<ThDevice> devices=AbstractDataServiceFactory.getInstance().getDevices();
+            final Set<YYDevice> devices=AbstractDataServiceFactory.getInstance().getDevices();
 
 
             mainUIHandler.postDelayed(new Runnable() {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * Created by Administrator on 2017/12/6.
+ * RestartAppUtils
  * APP 异常重启工具类
  */
 

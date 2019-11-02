@@ -16,14 +16,12 @@ import com.yy.sorter.utils.StringUtils;
 
 
 /**
- * Created by Administrator on 2017/3/17.
  *
  * 底部布局管理器
  *
- *
  */
 
-public class BottomManager implements ThMangerObserver{
+public class BottomManager implements YYMangerObserver {
     private Handler mainHandler=new Handler(Looper.getMainLooper());
     private int selectedColor = Color.parseColor("#1b82d2");
     private int unSelectedColor = Color.parseColor("#9c9c9c");

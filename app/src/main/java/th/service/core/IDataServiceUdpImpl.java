@@ -6,7 +6,7 @@ import th.service.helper.ThPackage;
 import th.service.repeat.RepeatManager;
 
 /**
- *
+ * Created by YUYANG on 2018/11/6.
  * UDPManager 代理类
  */
 public class IDataServiceUdpImpl extends AbstractIDataService {

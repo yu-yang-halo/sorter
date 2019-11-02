@@ -12,29 +12,23 @@ import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
-import com.yy.sorter.utils.AuthUtils;
 import com.yy.sorter.utils.LanguageHelper;
 import com.yy.sorter.utils.StringUtils;
 import com.yy.sorter.utils.TextCacheUtils;
-import com.yy.sorter.utils.ThToast;
+import com.yy.sorter.utils.YYToast;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.MachineData;
-import th.service.data.ThConfig;
-import th.service.data.ThDevice;
+import th.service.data.YYConfig;
+import th.service.data.YYDevice;
 import th.service.helper.IPUtils;
 import th.service.helper.ThCommand;
-import th.service.helper.ThLogger;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
 
 /**
- * Created by Administrator on 2017/3/17.
+ * LoginUi
  * 登录页面
  */
 
@@ -166,7 +160,7 @@ public class LoginUi extends BaseUi {
                             hud.dismiss();
                         }
                         if(AbstractDataServiceFactory.getInstance().getDevices().size()<=0){
-                            ThToast.showToast(ctx, FileManager.getInstance().getString(14)); //14#本地无法找到设备
+                            YYToast.showToast(ctx, FileManager.getInstance().getString(14)); //14#本地无法找到设备
                         }else{
 
                             MiddleManger.getInstance().changeUI(ConstantValues.VIEW_DEVICE_LIST, 31);//31#设备列表
@@ -202,12 +196,12 @@ public class LoginUi extends BaseUi {
          */
         LanguageHelper.onCallbackFileHandler(ctx, packet, LoginUi.this, new LanguageHelper.IProgressListenser() {
             @Override
-            public void onFinished(byte fileType, boolean success,ThConfig config) {
+            public void onFinished(byte fileType, boolean success, YYConfig config) {
                 if(config!=null){
                     boolean lanHasUpdate=false;
-                    List<ThConfig.LanguageVersion> languageVersions= config.getLanguage();
+                    List<YYConfig.LanguageVersion> languageVersions= config.getLanguage();
                     if(languageVersions!=null){
-                        for (ThConfig.LanguageVersion languageVersion:languageVersions){
+                        for (YYConfig.LanguageVersion languageVersion:languageVersions){
                             if(languageVersion.getVersion()!=languageVersion.getLastVersion()){
                                 int currentCountryId=TextCacheUtils.getValueInt(TextCacheUtils.KEY_LAN_COUNTRY_ID,0);
                                 if(currentCountryId == languageVersion.getCountryId()){
@@ -237,7 +231,7 @@ public class LoginUi extends BaseUi {
         });
 
         if(packet.getType()== ThCommand.BROADCAST_DEV_CMD){
-            ThDevice device=ThPackageHelper.parseMyDevice(packet);
+            YYDevice device=ThPackageHelper.parseMyDevice(packet);
             AbstractDataServiceFactory.getInstance().addDevice(device);
         }
 

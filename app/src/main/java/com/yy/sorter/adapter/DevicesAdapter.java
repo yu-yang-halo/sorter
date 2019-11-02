@@ -16,38 +16,38 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-import th.service.data.ThDevice;
+import th.service.data.YYDevice;
 
 /**
- * Created by Administrator on 2017/3/18.
+ * DevicesAdapter
  */
 
 public class DevicesAdapter extends BaseAdapter {
-    private List<ThDevice> devices;
+    private List<YYDevice> devices;
     private Context ctx;
-    public DevicesAdapter(Context ctx, Set<ThDevice> devices){
+    public DevicesAdapter(Context ctx, Set<YYDevice> devices){
        setDevices(devices);
        this.ctx=ctx;
     }
 
-    public List<ThDevice> getDevices() {
+    public List<YYDevice> getDevices() {
         return devices;
     }
 
-    public void setDevices(Set<ThDevice> devices) {
+    public void setDevices(Set<YYDevice> devices) {
 
         if(devices==null){
             return;
         }
         this.devices=new ArrayList<>();
-        for (ThDevice d:devices){
+        for (YYDevice d:devices){
             if(d!=null){
                 this.devices.add(d);
             }
         }
-        Collections.sort(this.devices, new Comparator<ThDevice>() {
+        Collections.sort(this.devices, new Comparator<YYDevice>() {
             @Override
-            public int compare(ThDevice o1, ThDevice o2) {
+            public int compare(YYDevice o1, YYDevice o2) {
                 return o1.hashCode()-o2.hashCode();
             }
         });
@@ -83,7 +83,7 @@ public class DevicesAdapter extends BaseAdapter {
         TextView deviceNameLabel= (TextView) convertView.findViewById(R.id.deviceNameLabel);
         TextView deviceSNLabel= (TextView) convertView.findViewById(R.id.deviceSNLabel);
 
-        ThDevice device=devices.get(position);
+        YYDevice device=devices.get(position);
         deviceNameLabel.setText(device.getDeviceName());
 
         StringBuilder builder=new StringBuilder();

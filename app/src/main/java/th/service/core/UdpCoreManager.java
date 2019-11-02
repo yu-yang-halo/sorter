@@ -2,7 +2,6 @@ package th.service.core;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.yy.sorter.utils.ConvertUtils;
 
@@ -22,6 +21,9 @@ import th.service.helper.ThPackage;
 import th.service.repeat.RepeatListenser;
 import th.service.repeat.RepeatManager;
 
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
 public class UdpCoreManager extends IReceiveListenser {
     /**
      * 单例模式 Udp核心管理模块

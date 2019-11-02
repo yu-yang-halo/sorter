@@ -1,10 +1,7 @@
 package com.yy.sorter.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.animation.DynamicAnimation;
 import android.support.animation.SpringAnimation;
@@ -16,7 +13,9 @@ import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
 
-
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
 public class PageSwitchView extends FrameLayout {
 
     private int mMoveDirection=0;//-1 向左  1 向右  0 不移动

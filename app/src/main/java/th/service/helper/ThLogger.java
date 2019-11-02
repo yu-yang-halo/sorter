@@ -10,7 +10,7 @@ import java.util.Date;
 import th.service.core.AbstractDataServiceFactory;
 
 /**
- * Created by Administrator on 2017/3/18.
+ * Created by YUYANG on 2018/11/6.
  */
 
 public class ThLogger {

@@ -13,11 +13,11 @@ import android.view.View;
 import com.yy.sorter.utils.ConvertUtils;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.ThWaveData;
+import th.service.data.YYWaveData;
 import th.service.helper.ThCommand;
 
 /**
- * Created by Administrator on 2017/3/30.
+ * Created by YUYANG on 2018/11/6.
  * 波形绘制组件
  *
  * canvas.drawPath避免循环调用导致UI卡顿
@@ -43,7 +43,7 @@ public class ThWaveView extends View {
     int yAxisHeight=0;
     int xAxisWidth=0;
     int vspace=0;
-    private ThWaveData thWaveData;
+    private YYWaveData thWaveData;
 
     /**
      * 清除波形数据
@@ -52,7 +52,7 @@ public class ThWaveView extends View {
         setThWaveRet(null);
         invalidate();
     }
-    public void setThWaveRet(ThWaveData thWaveRet) {
+    public void setThWaveRet(YYWaveData thWaveRet) {
         this.thWaveData = thWaveRet;
     }
 

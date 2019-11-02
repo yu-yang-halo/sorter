@@ -1,7 +1,7 @@
 package th.service.core;
 
 /**
- * Created by Administrator on 2017/5/22.
+ * Created by YUYANG on 2018/11/6.
  */
 
 public abstract class IReceiveListenser {

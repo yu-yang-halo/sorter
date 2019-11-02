@@ -6,11 +6,11 @@ import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 
 /**
- * Created by Administrator on 2017/3/31.
+ * Created by YUYANG on 2018/11/6.
  * 波形返回数据
  */
 
-public class ThWaveData {
+public class YYWaveData {
 
     private byte waveType;   //波形类型
 
@@ -153,7 +153,7 @@ public class ThWaveData {
     }
 
 
-    public ThWaveData(ThPackage retData) {
+    public YYWaveData(ThPackage retData) {
         this.waveType=retData.getExtendType();
         this.data1_0 = retData.getData1()[0];
         this.data1_1 = retData.getData1()[1];

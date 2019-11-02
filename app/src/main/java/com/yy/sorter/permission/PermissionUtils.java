@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /**
- * Created by Administrator on 2017/6/7.
+ * PermissionUtils
  */
 
 public class PermissionUtils {

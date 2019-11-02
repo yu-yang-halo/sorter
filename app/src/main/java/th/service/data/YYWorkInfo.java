@@ -5,13 +5,16 @@ import com.yy.sorter.utils.ConvertUtils;
 
 import th.service.core.TrafficManager;
 
-public class ThWorkInfo {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYWorkInfo {
     private static final int SIZE = 16;
     private byte[] totalTime;   //总工作时间    （分钟）
     private byte[] todayTime;   //本次工作时间 （分钟）
     private byte[] resever;     //预留
 
-    public ThWorkInfo(byte[] contents)
+    public YYWorkInfo(byte[] contents)
     {
         totalTime = new byte[4];
         todayTime = new byte[4];

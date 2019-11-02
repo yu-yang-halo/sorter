@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/3/18.
+ * Created by YUYANG on 2018/11/6.
  * 消息发送策略
  *
  * 定义给每一个BaseUI 需要接收的消息类型

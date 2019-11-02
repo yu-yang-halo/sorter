@@ -27,7 +27,7 @@ import java.util.TimerTask;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThValveRateRet;
+import th.service.data.YYValveRateRet;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -118,7 +118,7 @@ public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallb
     public void receivePacketData(ThPackage packet) {
         if(packet.getType()== ThCommand.VALVE_RATE_CMD){
             if(packet.getExtendType()==0x01){
-                ThValveRateRet thValveRateRet= ThPackageHelper.parseThValveRateRet(packet);
+                YYValveRateRet thValveRateRet= ThPackageHelper.parseThValveRateRet(packet);
                 thrateView.setThValveRateRet(thValveRateRet);
                 thrateView.invalidate();
 

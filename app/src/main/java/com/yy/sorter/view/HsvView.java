@@ -12,14 +12,13 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import com.yy.sorter.utils.ConvertUtils;
 
-import java.util.ArrayList;
 import java.util.List;
-import th.service.data.ThHsvWave;
-import th.service.data.ThHsvInfo;
+import th.service.data.YYHsvWave;
+import th.service.data.YYHsvInfo;
 import th.service.helper.ThCommand;
 
 /**
- * Created by Administrator on 2017/7/26.
+ * Created by YUYANG on 2018/11/6.
  * 色度图形视图
  */
 
@@ -93,9 +92,9 @@ public class HsvView extends BaseView {
         senseIndex = index;
     }
 
-    public ThHsvInfo findCurrentObj() {
-        ThHsvInfo thHsvInfo = null;
-        for (ThHsvInfo sense : hsvSenses) {
+    public YYHsvInfo findCurrentObj() {
+        YYHsvInfo thHsvInfo = null;
+        for (YYHsvInfo sense : hsvSenses) {
             if (sense.getIndex() == senseIndex) {
                 thHsvInfo = sense;
                 break;
@@ -105,7 +104,7 @@ public class HsvView extends BaseView {
     }
 
     public boolean refreshPage(int moveDirect, int step) {
-        ThHsvInfo sense = findCurrentObj();
+        YYHsvInfo sense = findCurrentObj();
         if(sense == null)
         {
             return false;
@@ -169,15 +168,15 @@ public class HsvView extends BaseView {
 
     private int mColorStart = 0, mColorEnd = 0, mPurerStart = 0, mPurerEnd = 0;
 
-    private List<ThHsvInfo> hsvSenses;
-    private ThHsvWave thHSVWave;
+    private List<YYHsvInfo> hsvSenses;
+    private YYHsvWave thHSVWave;
     private int senseIndex;
 
-    public void setHsvSenses(List<ThHsvInfo> hsvSenses) {
+    public void setHsvSenses(List<YYHsvInfo> hsvSenses) {
         this.hsvSenses = hsvSenses;
     }
 
-    public void setThHSVWave(ThHsvWave thHSVWave) {
+    public void setThHSVWave(YYHsvWave thHSVWave) {
         this.thHSVWave = thHSVWave;
     }
 
@@ -233,7 +232,7 @@ public class HsvView extends BaseView {
             drawRectImageGreen(mColorStart, mColorEnd, mPurerStart, mPurerEnd, false,0);
         } else {
 
-            for(ThHsvInfo thHsvInfo:hsvSenses)
+            for(YYHsvInfo thHsvInfo:hsvSenses)
             {
 
                 if(thHsvInfo.getIndex() == senseIndex)

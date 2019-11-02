@@ -20,7 +20,7 @@ import com.yy.sorter.activity.R;
 import com.yy.sorter.manager.FileManager;
 
 /**
- * Created by Administrator on 2017/6/2.
+ * Created by YUYANG on 2018/11/6.
  */
 
 public final class LoadProgress {

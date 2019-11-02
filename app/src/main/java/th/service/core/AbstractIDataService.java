@@ -1,19 +1,18 @@
 package th.service.core;
 
-import com.yy.sorter.utils.AuthUtils;
 import com.yy.sorter.utils.ConvertUtils;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import th.service.data.ThDevice;
+import th.service.data.YYDevice;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 
 /**
  * 抽象通讯服务类：数据存储部分+公共协议部分
  *
- * Created by Administrator on 2017/3/24.
+ * Created by YUYANG on 2018/11/6.
  */
 
 public abstract class AbstractIDataService implements IDataService{
@@ -21,12 +20,12 @@ public abstract class AbstractIDataService implements IDataService{
      * 当前选中的设备
      */
 
-    private ThDevice currentDevice;
+    private YYDevice currentDevice;
 
-    public ThDevice getCurrentDevice() {
+    public YYDevice getCurrentDevice() {
 
         if(currentDevice==null){
-            ThDevice device=new ThDevice("","","");
+            YYDevice device=new YYDevice("","","");
             device.setDeviceIsNull(true);
             return device;
         }
@@ -34,11 +33,11 @@ public abstract class AbstractIDataService implements IDataService{
         return currentDevice;
     }
 
-    public void setCurrentDevice(ThDevice currentDevice) {
+    public void setCurrentDevice(YYDevice currentDevice) {
         this.currentDevice = currentDevice;
     }
 
-    private  Set<ThDevice> devices=new HashSet<>();
+    private  Set<YYDevice> devices=new HashSet<>();
 
     /**
      * 清空设备集合
@@ -47,10 +46,10 @@ public abstract class AbstractIDataService implements IDataService{
         devices.clear();
     }
 
-    public synchronized Set<ThDevice> getDevices() {
+    public synchronized Set<YYDevice> getDevices() {
         return devices;
     }
-    public synchronized void addDevice(ThDevice device){
+    public synchronized void addDevice(YYDevice device){
         if(devices.contains(device)){
             devices.remove(device);
         }

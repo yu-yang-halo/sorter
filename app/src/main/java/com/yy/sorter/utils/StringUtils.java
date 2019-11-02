@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import th.service.core.AbstractDataServiceFactory;
 
 /**
- * Created by Administrator on 2017/3/17.
+ * StringUtils
  */
 
 public class StringUtils {
@@ -143,70 +143,7 @@ public class StringUtils {
         return rs;
     }
 
-    public static String getOpticsErrorType(int index)
-    {
-        String []strErrorType = new String[10];
-        strErrorType[0] = FileManager.getInstance().getString(199); //199#校准失败
-        strErrorType[1] = FileManager.getInstance().getString(200); //200#校准成功  75#前视 201#平均值低于下限
-        strErrorType[2] = FileManager.getInstance().getString(199)+" "+ FileManager.getInstance().getString(75)+" "+
-                FileManager.getInstance().getString(201);//     "校准失败 前视 平均值低于下限"; 202#有亮点存在
-        strErrorType[3] = FileManager.getInstance().getString(199)+" "+ FileManager.getInstance().getString(75)+" "+
-                FileManager.getInstance().getString(202);//"校准失败 前视 有亮点存在";
-        strErrorType[4] = FileManager.getInstance().getString(199)+" "+ FileManager.getInstance().getString(75)+" "+//"校准失败 前视 有暗点存在";
-                FileManager.getInstance().getString(203);  //203#有暗点存在
-        strErrorType[5] = FileManager.getInstance().getString(199)+" "+ FileManager.getInstance().getString(75)+" "+ //"校准失败 前视 未知异常";
-                FileManager.getInstance().getString(204);  //204#未知异常
-        strErrorType[6] = FileManager.getInstance().getString(199)+" "+ FileManager.getInstance().getString(76)+" "+
-                FileManager.getInstance().getString(201);//"校准失败 后视 平均值低于下限"; 76#后视
-        strErrorType[7] = FileManager.getInstance().getString(199)+" "+ FileManager.getInstance().getString(76)+" "+
-                FileManager.getInstance().getString(202); //"校准失败 后视 有亮点存在";
-        strErrorType[8] = FileManager.getInstance().getString(199)+" "+ FileManager.getInstance().getString(76)+" "+
-                FileManager.getInstance().getString(203); //"校准失败 后视 有暗点存在";
-        strErrorType[9] = FileManager.getInstance().getString(199)+" "+ FileManager.getInstance().getString(76)+" "+
-                FileManager.getInstance().getString(204);// "校准失败 后视 未知异常";
 
-        if(index<strErrorType.length && index>=0){
-            return strErrorType[index];
-        }
-
-        return "ERROR INDEX";
-    }
-
-    public static String getShapeStr(int index)
-    {
-        String[] strShape = new String[23];
-        strShape[0] = "";
-        strShape[1] = FileManager.getInstance().getString(155);//155#无形选
-        strShape[2] = FileManager.getInstance().getString(156);//156#铁观音
-        strShape[3] = FileManager.getInstance().getString(157);//157#大红袍
-        strShape[4] = FileManager.getInstance().getString(158);//158#红茶
-        strShape[5] = FileManager.getInstance().getString(159);//159#斯里兰卡红茶
-        strShape[6] = FileManager.getInstance().getString(160);//160#腰果
-        strShape[7] = FileManager.getInstance().getString(161);//161#玉米
-        strShape[8] = FileManager.getInstance().getString(162);//162#花生芽头
-        strShape[9] = FileManager.getInstance().getString(163);//163#小麦
-        strShape[10] = FileManager.getInstance().getString(164);//164#稻种
-        strShape[11] = FileManager.getInstance().getString(165);//165#葵花籽
-        strShape[12] = FileManager.getInstance().getString(166);//166#枸杞
-        strShape[13] = FileManager.getInstance().getString(167);//167#绿茶
-        strShape[14] = FileManager.getInstance().getString(168);//168#花生
-        strShape[15] = FileManager.getInstance().getString(169);//169#大米形选
-        strShape[16] = FileManager.getInstance().getString(170);//170#标准形选
-        strShape[17] = FileManager.getInstance().getString(171);//171#通用茶叶
-        strShape[18] = FileManager.getInstance().getString(172);//172#甘草
-        strShape[19] = FileManager.getInstance().getString(173);//173#蚕豆
-        strShape[20] = FileManager.getInstance().getString(900);//900#绿茶短梗
-        strShape[21] = FileManager.getInstance().getString(901);//901#选长米
-        strShape[22] = FileManager.getInstance().getString(902);//902#选碎米
-
-
-        if(index<strShape.length&&index>=0){
-            return strShape[index];
-        }
-
-        return "";
-
-    }
     /**
      44#一次
      45#二次

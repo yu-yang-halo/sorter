@@ -18,7 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by Administrator on 2017/5/5.
+ * Created by YUYANG on 2018/11/6.
  */
 
 public class AlwaysClickButton extends AppCompatImageButton{

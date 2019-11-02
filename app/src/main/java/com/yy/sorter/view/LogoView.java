@@ -15,6 +15,9 @@ import android.view.animation.LinearInterpolator;
 
 import com.yy.sorter.activity.R;
 
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
 public class LogoView extends View {
     private Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.icon_404);
     private Paint  mPaint = new Paint();

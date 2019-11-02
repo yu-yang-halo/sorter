@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yy.sorter.activity.R;
@@ -21,19 +19,15 @@ import com.yy.sorter.utils.StringUtils;
 import com.yy.sorter.view.AlwaysClickButton;
 import com.yy.sorter.view.KeyboardDigitalEdit;
 import com.yy.sorter.view.PageSwitchView;
-import com.yy.sorter.view.ThSegmentView;
 import com.yy.sorter.view.ThWaveView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThCameraPlusRet;
-import th.service.data.ThLightRet;
-import th.service.data.ThWaveData;
+import th.service.data.YYLightRet;
+import th.service.data.YYWaveData;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -56,7 +50,7 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
 
     private ThWaveView thwaveView;
     private TextView tvLayer;
-    private ThLightRet ret;
+    private YYLightRet ret;
 
 
     private int m_Channel=0;
@@ -222,7 +216,7 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
         }
         else if(packet.getType()==ThCommand.WAVE_CMD){
             //处理波形数据
-            ThWaveData thWaveRet=ThPackageHelper.parseWaveData(packet);
+            YYWaveData thWaveRet=ThPackageHelper.parseWaveData(packet);
             thWaveRet.setAlgorithm((byte) 0);
 
             thwaveView.setThWaveRet(thWaveRet);

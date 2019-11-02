@@ -2,7 +2,10 @@ package th.service.data;
 
 import th.service.core.TrafficManager;
 
-public class ThHsvInfo {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYHsvInfo {
     public static final int SIZE = 9;
     private byte[] vStartEnd; //v[起点,终点] ,2个字节 明度
     private byte[] sStartEnd; //s[起点,终点] 饱和度
@@ -11,7 +14,7 @@ public class ThHsvInfo {
     private byte index;       //在数组中的索引
 
 
-    public ThHsvInfo(int idx)
+    public YYHsvInfo(int idx)
     {
         vStartEnd = new byte[]{(byte)80,(byte)100};
         sStartEnd = new byte[]{80,100};
@@ -19,7 +22,7 @@ public class ThHsvInfo {
         hEnd = new byte[]{0,100};
         index = (byte) idx;
     }
-    public ThHsvInfo(byte[] contents)
+    public YYHsvInfo(byte[] contents)
     {
         vStartEnd = new byte[2];
         sStartEnd = new byte[2];

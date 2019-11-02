@@ -1,10 +1,10 @@
 package com.yy.sorter.utils;
 
 /**
- * Created by Administrator on 2017/5/3.
+ * YYType
  */
 
-public class ThType {
+public class YYType {
 
     private int lanIndex;
     private String name;
@@ -13,7 +13,7 @@ public class ThType {
 
     @Override
     public String toString() {
-        return "ThType{" +
+        return "YYType{" +
                 "lanIndex='" + lanIndex + '\'' +
                 ", name='" + name + '\'' +
                 ", type=" + type +
@@ -21,7 +21,7 @@ public class ThType {
                 '}';
     }
 
-    public ThType(int lanIndex, String name, int type, int pos) {
+    public YYType(int lanIndex, String name, int type, int pos) {
         this.lanIndex = lanIndex;
         this.name = name;
         this.type = type;

@@ -11,14 +11,14 @@ import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.ui.base.BaseUi;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.AuthUtils;
-import com.yy.sorter.utils.ThToast;
+import com.yy.sorter.utils.YYToast;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 
 /**
- * Created by Administrator on 2017/5/31.
+ * RegisterUi
  */
 
 public class RegisterUi extends BaseUi {
@@ -52,10 +52,10 @@ public class RegisterUi extends BaseUi {
                     String repassword=repasswordEdit.getText().toString();
 
                     if(username.trim().isEmpty()||password.trim().isEmpty()){
-                        ThToast.showToast(ctx, FileManager.getInstance().getString(22)); //22#用户名或密码不能为空
+                        YYToast.showToast(ctx, FileManager.getInstance().getString(22)); //22#用户名或密码不能为空
                         return;
                     }else if(!password.equals(repassword)){
-                        ThToast.showToast(ctx, FileManager.getInstance().getString(23)); //23#两次输入密码不一致
+                        YYToast.showToast(ctx, FileManager.getInstance().getString(23)); //23#两次输入密码不一致
                         return;
                     }
                     AbstractDataServiceFactory.initService(AbstractDataServiceFactory.SERVICE_TYPE_TCP);

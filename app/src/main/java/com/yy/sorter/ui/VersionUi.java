@@ -25,9 +25,8 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.data.ThDevice;
-import th.service.data.ThSVersion;
-import th.service.helper.SystemHelper;
+import th.service.data.YYDevice;
+import th.service.data.YYSVersion;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 import th.service.helper.ThPackageHelper;
@@ -222,7 +221,7 @@ public class VersionUi extends BaseUi implements View.OnClickListener{
             });
 
         }
-        ThDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
+        YYDevice device = AbstractDataServiceFactory.getInstance().getCurrentDevice();
         if(!device.isDeviceIsNull()){
             MachineData machineData = device.getMachineData();
             int bigVersion = ConvertUtils.unsignByteToInt(machineData.getProtocolVersionBig());
@@ -260,7 +259,7 @@ public class VersionUi extends BaseUi implements View.OnClickListener{
     @Override
     public void receivePacketData(ThPackage packet) {
         if(packet.getType()== ThCommand.VERSION_CMD){
-            ThSVersion ts = ThPackageHelper.parseThSVersion(packet);
+            YYSVersion ts = ThPackageHelper.parseThSVersion(packet);
             switch (packet.getExtendType())
             {
                 case 0x01:
@@ -601,7 +600,7 @@ public class VersionUi extends BaseUi implements View.OnClickListener{
         initStatusView();
     }
 
-    private void initBaseVersion(ThSVersion.BaseVersion ts)
+    private void initBaseVersion(YYSVersion.BaseVersion ts)
     {
         tvShowVer.setText(ts.getShowversion());
         tvControlVer.setText(Float.toString(ConvertUtils.bytes2ToFloatV2(ts.getControl())) );
@@ -633,28 +632,28 @@ public class VersionUi extends BaseUi implements View.OnClickListener{
 
     }
 
-    private void initColorVersion( List<ThSVersion.ColorVersion> listColorVersion)
+    private void initColorVersion( List<YYSVersion.ColorVersion> listColorVersion)
     {
         colorVersionAdapter.setRet(listColorVersion);
         initListViewLayout(colorVersionList);
         colorVersionAdapter.notifyDataSetChanged();
     }
 
-    private void initCameraVersion(List<ThSVersion.CameraVersion> ts)
+    private void initCameraVersion(List<YYSVersion.CameraVersion> ts)
     {
         cameraVersionAdapter.setRet(ts);
         initListViewLayout(cameraVersionList);
         cameraVersionAdapter.notifyDataSetChanged();
     }
 
-    private void initIrCameraVersion(List<ThSVersion.CameraVersion> ts)
+    private void initIrCameraVersion(List<YYSVersion.CameraVersion> ts)
     {
         irCameraVersionAdapter.setRet(ts);
         initListViewLayout(irCameraVersionList);
         irCameraVersionAdapter.notifyDataSetChanged();
     }
 
-    private void initIrCamera2Version(List<ThSVersion.CameraVersion> ts)
+    private void initIrCamera2Version(List<YYSVersion.CameraVersion> ts)
     {
         irCameraVersionAdapter2.setRet(ts);
         initListViewLayout(irCameraVersionList2);

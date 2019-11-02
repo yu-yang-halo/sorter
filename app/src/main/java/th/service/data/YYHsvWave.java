@@ -3,18 +3,18 @@ package th.service.data;
 import th.service.core.TrafficManager;
 
 /**
- * Created by Administrator on 2017/7/31.
+ * Created by YUYANG on 2018/11/6.
  *
  * HSV 波形数据结构
  */
 
-public class ThHsvWave {
+public class YYHsvWave {
     private static final int HSV_WAVE_SIZE_UNIT=2304;
     private byte[] waveData1;//1024
     private byte[] waveData2;//1024
     private byte[] waveData3;//256
 
-    public ThHsvWave(byte[] contents){
+    public YYHsvWave(byte[] contents){
         waveData1=new byte[1024];
         waveData2=new byte[1024];
         waveData3=new byte[256];

@@ -19,20 +19,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.data.ThConfig;
+import th.service.data.YYConfig;
 import th.service.helper.IPUtils;
 import th.service.helper.ThCommand;
 import th.service.helper.ThPackage;
 
 /**
- * Created by Administrator on 2017/4/6.
+ * LanUi
  * 语言选择界面
  */
 
 public class LanUi extends BaseUi {
     private View view;
     private ListView lanListView;
-    private List<ThConfig.LanguageVersion> thLanList;
+    private List<YYConfig.LanguageVersion> thLanList;
     private LanAdapter lanAdapter;
     private PullRefreshLayout layout;
     private LoadProgress loadProgress;
@@ -104,7 +104,7 @@ public class LanUi extends BaseUi {
 
         FileManager.getInstance().readLocalConfigFile(new FileManager.IConfigHandler() {
             @Override
-            public void onComplelete(final ThConfig thConfig) {
+            public void onComplelete(final YYConfig thConfig) {
                 mainUIHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -140,7 +140,7 @@ public class LanUi extends BaseUi {
          */
         LanguageHelper.onCallbackFileHandler(ctx, packet, LanUi.this, new LanguageHelper.IProgressListenser() {
             @Override
-            public void onFinished(byte fileType, boolean success, ThConfig config) {
+            public void onFinished(byte fileType, boolean success, YYConfig config) {
                 if (success) {
                     if (fileType == ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE) {
                         lanAdapter.notifyDownloadSuccess();

@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/11/6.
+ * BasePageV
  * 配置界面版本对应表
  *
  */
@@ -38,7 +38,7 @@ public abstract class BasePageV {
     static class VersionNumber{
         /**
          *   版本编号标识：取决于 类型（特殊机型）    大版本        小版本
-         *   类型    ： 0（一般机型） 1（大米机型-特殊系列）
+         *   类型    ： 0（一般机型）
          *   大版本  ： 0-255
          *   小版本  ： 0-255
          */

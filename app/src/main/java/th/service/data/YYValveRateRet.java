@@ -5,11 +5,11 @@ import java.util.Arrays;
 import th.service.core.TrafficManager;
 
 /**
- * Created by Administrator on 2017/4/18.
+ * Created by YUYANG on 2018/11/6.
  * 喷阀频率数据结构
  */
 
-public class ThValveRateRet {
+public class YYValveRateRet {
     private int valveNum;
     private boolean onlyFrontView;
     private byte[]  frontDatas;
@@ -17,7 +17,7 @@ public class ThValveRateRet {
 
 
 
-    public ThValveRateRet(int valveNum, boolean onlyFrontView, byte[] contents) {
+    public YYValveRateRet(int valveNum, boolean onlyFrontView, byte[] contents) {
 
         if(check(valveNum,onlyFrontView,contents)){
             this.valveNum = valveNum;
@@ -69,7 +69,7 @@ public class ThValveRateRet {
 
     @Override
     public String toString() {
-        return "ThValveRateRet{" +
+        return "YYValveRateRet{" +
                 "valveNum=" + valveNum +
                 ", onlyFrontView=" + onlyFrontView +
                 ", frontDatas=" + Arrays.toString(frontDatas) +

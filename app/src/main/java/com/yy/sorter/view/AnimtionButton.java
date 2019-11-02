@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -16,6 +15,9 @@ import android.view.View;
 
 import com.yy.sorter.utils.ConvertUtils;
 
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
 public class AnimtionButton extends View {
     private Paint mPaint = new Paint();
     private String mText = "";

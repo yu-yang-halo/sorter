@@ -5,7 +5,7 @@ import java.util.Arrays;
 import th.service.core.TrafficManager;
 
 /**
- * Created by Administrator on 2017/4/13.
+ * Created by YUYANG on 2018/11/6.
  * BYTE r[2]; 		     	//r
  * BYTE g[2];         	    //g
  * BYTE b[2];            	//b
@@ -14,14 +14,14 @@ import th.service.core.TrafficManager;
  *
  */
 
-public class ThLightRet {
+public class YYLightRet {
     private byte[] fstsndReds;
     private byte[] fstsndGreens;
     private byte[] fstsndBlues;
     private byte[] fstsndMainLights;
     private byte[] fstsndIr;
 
-    public ThLightRet(byte[] contents) {
+    public YYLightRet(byte[] contents) {
         fstsndReds=new byte[2];
         fstsndGreens=new byte[2];
         fstsndBlues=new byte[2];
@@ -47,7 +47,7 @@ public class ThLightRet {
 
     @Override
     public String toString() {
-        return "ThLightRet{" +
+        return "YYLightRet{" +
                 "fstsndReds=" + Arrays.toString(fstsndReds) +
                 ", fstsndGreens=" + Arrays.toString(fstsndGreens) +
                 ", fstsndBlues=" + Arrays.toString(fstsndBlues) +

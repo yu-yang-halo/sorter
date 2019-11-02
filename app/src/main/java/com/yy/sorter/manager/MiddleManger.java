@@ -17,11 +17,11 @@ import java.util.Map;
 import th.service.core.ThUIManger;
 
 /**
- * Created by Administrator on 2017/3/17.
+ * MiddleManger
  * 中间容器管理类
  */
 
-public class MiddleManger extends ThManagerSubject {
+public class MiddleManger extends YYManagerSubject {
     public static final String KEY_TITLE = "key_title";
     private static MiddleManger instance = null;
     private RelativeLayout middleContainer;

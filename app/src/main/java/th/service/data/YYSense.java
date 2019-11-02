@@ -8,7 +8,10 @@ import java.util.Arrays;
 
 import th.service.core.TrafficManager;
 
-public class ThSense {
+/**
+ * Created by YUYANG on 2018/11/6.
+ */
+public class YYSense {
     public static int TEXT_MAX_BYTES = 100;
     private byte type;    //   0-色选,    1-红外,
     private byte subType;
@@ -35,9 +38,9 @@ public class ThSense {
     }
 
 
-    public static ThSense createThSenseNone(byte value)
+    public static YYSense createThSenseNone(byte value)
     {
-        ThSense thSense = new ThSense();
+        YYSense thSense = new YYSense();
 
         thSense.setType((byte) 100);
         thSense.setSubType((byte) 101);
@@ -51,9 +54,9 @@ public class ThSense {
         return thSense;
     }
 
-    public static ThSense createThSense(byte value)
+    public static YYSense createThSense(byte value)
     {
-        ThSense thSense = new ThSense();
+        YYSense thSense = new YYSense();
 
         thSense.setType((byte) 0);
         thSense.setSubType((byte) 6);
@@ -66,12 +69,12 @@ public class ThSense {
         return thSense;
     }
 
-    public ThSense()
+    public YYSense()
     {
 
     }
 
-    public ThSense(byte[] contents) {
+    public YYSense(byte[] contents) {
         byte[] buffer=new byte[TEXT_MAX_BYTES];
         this.sense= new byte[2];
         this.senseMin= new byte[2];

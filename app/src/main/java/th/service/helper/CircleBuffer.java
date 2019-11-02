@@ -3,7 +3,7 @@ package th.service.helper;
 import th.service.core.IReceiveListenser;
 
 /**
- * Created by Administrator on 2017/5/22.
+ * Created by YUYANG on 2018/11/6.
  */
 
 public class CircleBuffer {

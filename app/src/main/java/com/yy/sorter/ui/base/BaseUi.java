@@ -22,13 +22,13 @@ import java.util.concurrent.Executors;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.core.ThObserver;
-import th.service.data.ThDevice;
+import th.service.data.YYDevice;
 import th.service.helper.ThCommand;
 import th.service.helper.ThLogger;
 import th.service.helper.ThPackage;
 
 /**
- * Created by Administrator on 2017/3/17.
+ * BaseUi
  * 所有 UI 界面的基类
  * 后期修复：baseUI界面之间传递数据，后一个页面给前一个页面回传数据
  *           TopManager中的事件通知给baseUI
@@ -210,7 +210,7 @@ public abstract class BaseUi implements ThObserver{
                  *
                  * 返回到设备列表界面时退出
                  */
-                ThDevice currentDevice= AbstractDataServiceFactory.getInstance().getCurrentDevice();
+                YYDevice currentDevice= AbstractDataServiceFactory.getInstance().getCurrentDevice();
                 if(currentDevice!=null){
                     AbstractDataServiceFactory.getInstance().logout();
                 }

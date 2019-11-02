@@ -1,7 +1,7 @@
 package com.yy.sorter.utils;
 
 /**
- * Created by Administrator on 2017/3/22.
+ * ConvertUtils
  */
 
 import android.annotation.TargetApi;
@@ -28,7 +28,6 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ListView;
@@ -56,8 +55,6 @@ import th.service.data.MachineData;
 /**
  * 数据类型转换、单位转换
  *
- * @author 李玉江[QQ :1023694760]
- * @version 2014 -4-18
  */
 public class ConvertUtils {
     /**
