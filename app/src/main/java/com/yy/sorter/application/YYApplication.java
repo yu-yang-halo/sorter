@@ -16,7 +16,6 @@ import com.yy.sorter.manager.MiddleManger;
 import com.yy.sorter.manager.TopManager;
 import com.yy.sorter.receiver.NetworkChangeListenser;
 import com.yy.sorter.receiver.NetworkReceiver;
-import com.yy.sorter.service.RestartAppUtils;
 import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.TextCacheUtils;
 
@@ -24,7 +23,7 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.core.ThUIManger;
 import th.service.core.TrafficManager;
 import th.service.helper.IPUtils;
-import th.service.helper.ThLogger;
+import th.service.helper.YYLogger;
 
 /**
  *
@@ -42,7 +41,7 @@ public class YYApplication extends Application {
         registerActivityLifecycleCallbacks();
         IPUtils.localIpAddress(this);
         TextCacheUtils.setmContext(this);
-        ThLogger.setContext(this);
+        YYLogger.setContext(this);
 
 
         TrafficManager.getInstance().setCtx(this);
@@ -180,8 +179,8 @@ public class YYApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        ThLogger.addErrorLog("............低内存情况...........");
-        ThLogger.outputErrorLog();
+        YYLogger.addErrorLog("............低内存情况...........");
+        YYLogger.outputErrorLog();
     }
 
 }

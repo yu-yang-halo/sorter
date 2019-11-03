@@ -10,8 +10,8 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import th.service.helper.PacketExt;
-import th.service.helper.ThLogger;
-import th.service.helper.ThPackage;
+import th.service.helper.YYLogger;
+import th.service.helper.YYPackage;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -42,7 +42,7 @@ public class RepeatManager {
         sendPackCount=new AtomicLong(0);
         acceptCount=new AtomicLong(0);
     }
-    private ConcurrentMap<Integer,ThPackage> packetMap=new ConcurrentHashMap<>();
+    private ConcurrentMap<Integer, YYPackage> packetMap=new ConcurrentHashMap<>();
     public  void init(){
         packetMap.clear();
     }
@@ -57,10 +57,10 @@ public class RepeatManager {
             acceptCache+=acceptCount.get();
 
 
-            ThLogger.addPacketLog("数据包：已发送："+sendCache
+            YYLogger.addPacketLog("数据包：已发送："+sendCache
                     +" , 已接收："+acceptCache
                     +" 丢失率："+100*(1-acceptCache*1.0f/sendCache)+"%");
-            ThLogger.outputPacketLog();
+            YYLogger.outputPacketLog();
 
             TextCacheUtils.loadLong("Send",sendCache);
             TextCacheUtils.loadLong("Accept",acceptCache);
@@ -71,7 +71,7 @@ public class RepeatManager {
 
 
 
-    public void add(ThPackage thPackage){
+    public void add(YYPackage thPackage){
         /**
          * 只有加入到容器里面的包才会使用循环包号
          * 1-255
@@ -88,7 +88,7 @@ public class RepeatManager {
 
         int pid= ConvertUtils.unsignByteToInt(thPackage.getPacketNumber());
 
-        ThLogger.addLog("加入包号 "+pid +" [packet] type:"+ Integer.toHexString(ConvertUtils.unsignByteToInt(thPackage.getType()))
+        YYLogger.addLog("加入包号 "+pid +" [packet] type:"+ Integer.toHexString(ConvertUtils.unsignByteToInt(thPackage.getType()))
                 +" extendType:"+Integer.toHexString(thPackage.getExtendType()));
         if(sendPackCount!=null){
             sendPackCount.incrementAndGet();
@@ -96,13 +96,13 @@ public class RepeatManager {
 
     }
 
-    private void removeInner(ThPackage thPackage,boolean innerRemoveYN){
+    private void removeInner(YYPackage thPackage, boolean innerRemoveYN){
         if(thPackage==null){
             return;
         }
         int pid=ConvertUtils.unsignByteToInt(thPackage.getPacketNumber());
 
-        ThPackage deletePacket = packetMap.get(pid);
+        YYPackage deletePacket = packetMap.get(pid);
 
         if(deletePacket==null||
                 deletePacket.getType()!=thPackage.getType()||
@@ -119,15 +119,15 @@ public class RepeatManager {
         }
 
         if(innerRemoveYN){
-            ThLogger.addLog("已经完成三次重发，移除该包:"+pid);
+            YYLogger.addLog("已经完成三次重发，移除该包:"+pid);
         }else{
-            ThLogger.addLog("移除包号 "+pid +" [packet] type:"+Integer.toHexString(ConvertUtils.unsignByteToInt(thPackage.getType()))
+            YYLogger.addLog("移除包号 "+pid +" [packet] type:"+Integer.toHexString(ConvertUtils.unsignByteToInt(thPackage.getType()))
                     +" extendType:"+Integer.toHexString(thPackage.getExtendType())
                     +" 是否属于队列中："+(deletePacket!=null));
         }
     }
 
-    public  void remove(ThPackage thPackage){
+    public  void remove(YYPackage thPackage){
         removeInner(thPackage,false);
     }
 
@@ -135,9 +135,9 @@ public class RepeatManager {
         if(listenser==null){
             return;
         }
-        List<ThPackage> reSendPackets=new ArrayList<>();
+        List<YYPackage> reSendPackets=new ArrayList<>();
         long currentTime=System.currentTimeMillis();
-        for(ThPackage thPackage:packetMap.values()){
+        for(YYPackage thPackage:packetMap.values()){
             PacketExt packetExt=thPackage.getPacketExt();
             if(packetExt!=null){
                 if(packetExt.getRepeatCount()>=3){

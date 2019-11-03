@@ -2,8 +2,8 @@ package th.service.data;
 
 import java.util.Arrays;
 
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -153,7 +153,7 @@ public class YYWaveData {
     }
 
 
-    public YYWaveData(ThPackage retData) {
+    public YYWaveData(YYPackage retData) {
         this.waveType=retData.getExtendType();
         this.data1_0 = retData.getData1()[0];
         this.data1_1 = retData.getData1()[1];
@@ -166,9 +166,9 @@ public class YYWaveData {
 
         switch (waveType){
 
-            case ThCommand.WAVE_TYPE_CAMERA_ORIGIN:
-            case ThCommand.WAVE_TYPE_CAMERA_TEST:
-            case ThCommand.WAVE_TYPE_CAMERA_ADJUST:
+            case YYCommand.WAVE_TYPE_CAMERA_ORIGIN:
+            case YYCommand.WAVE_TYPE_CAMERA_TEST:
+            case YYCommand.WAVE_TYPE_CAMERA_ADJUST:
                 rBytes=new byte[512];
 
                 if(waveData.length/512>=3){
@@ -192,8 +192,8 @@ public class YYWaveData {
                     System.arraycopy(waveData,0,rBytes,0,512);
                 }
                 break;
-            case ThCommand.WAVE_TYPE_BACKGROUN_LIGHT:
-            case ThCommand.WAVE_TYPE_CAMERA_GAIN:
+            case YYCommand.WAVE_TYPE_BACKGROUN_LIGHT:
+            case YYCommand.WAVE_TYPE_CAMERA_GAIN:
                 rBytes=new byte[256];
                 gBytes=new byte[256];
                 bBytes=new byte[256];

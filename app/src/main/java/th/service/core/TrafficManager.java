@@ -7,7 +7,7 @@ import com.yy.sorter.manager.FileManager;
 import com.yy.sorter.utils.TextCacheUtils;
 import com.yy.sorter.utils.YYToast;
 
-import th.service.helper.ThLogger;
+import th.service.helper.YYLogger;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -62,7 +62,7 @@ public class TrafficManager {
             return;
         }
         if(acceptSum>1000||forceWrite){
-            ThLogger.debug(TAG,"接收流量：："+acceptSum+" forceWrite:"+forceWrite);
+            YYLogger.debug(TAG,"接收流量：："+acceptSum+" forceWrite:"+forceWrite);
             final long collectSum=acceptSum;
             //重置
             acceptSum=0;
@@ -85,7 +85,7 @@ public class TrafficManager {
             return;
         }
        if(sendSum>200||forceWrite){
-           ThLogger.debug(TAG,"发送流量：："+sendSum+" forceWrite:"+forceWrite);
+           YYLogger.debug(TAG,"发送流量：："+sendSum+" forceWrite:"+forceWrite);
            final long collectSum=sendSum;
            //重置
            sendSum=0;

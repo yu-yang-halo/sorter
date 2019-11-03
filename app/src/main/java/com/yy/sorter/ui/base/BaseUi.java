@@ -23,9 +23,9 @@ import java.util.concurrent.Executors;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.core.ThObserver;
 import th.service.data.YYDevice;
-import th.service.helper.ThCommand;
-import th.service.helper.ThLogger;
-import th.service.helper.ThPackage;
+import th.service.helper.YYCommand;
+import th.service.helper.YYLogger;
+import th.service.helper.YYPackage;
 
 /**
  * BaseUi
@@ -250,7 +250,7 @@ public abstract class BaseUi implements ThObserver{
     }
 
 
-    public  abstract void receivePacketData(ThPackage packet);
+    public  abstract void receivePacketData(YYPackage packet);
 
     @Override
     public void update(Object var1, final Object var2) {
@@ -262,25 +262,25 @@ public abstract class BaseUi implements ThObserver{
                 {
                     return;
                 }
-                if(var2.getClass()== ThPackage.class){
-                    ThPackage thPackage= (ThPackage) var2;
+                if(var2.getClass()== YYPackage.class){
+                    YYPackage thPackage= (YYPackage) var2;
                     receivePacketData(thPackage);
                 }
                 if(MiddleManger.getInstance().isCurrentUI(BaseUi.this)){
 
-                    if(var2.getClass()== ThPackage.class){
-                        ThPackage thPackage= (ThPackage) var2;
+                    if(var2.getClass()== YYPackage.class){
+                        YYPackage thPackage= (YYPackage) var2;
                         if(thPackage.getType()==(byte)0xb0){
                             /**
                              * 刷新当前页面
                              */
-                            ThLogger.addLog("发现重复包，刷新当前页面 包号:"+ ConvertUtils.unsignByteToInt(thPackage.getPacketNumber()));
+                            YYLogger.addLog("发现重复包，刷新当前页面 包号:"+ ConvertUtils.unsignByteToInt(thPackage.getPacketNumber()));
                             refreshPageData();
 
                             return;
                         }
 
-                        if (thPackage.getType()==ThCommand.TCP_DEVICE_OFFLINE_CMD){
+                        if (thPackage.getType()== YYCommand.TCP_DEVICE_OFFLINE_CMD){
                             if(hud!=null){
                                 hud.dismiss();
                             }
@@ -309,46 +309,46 @@ public abstract class BaseUi implements ThObserver{
                         }
                         int errorCode=(int)var2;
                         switch (errorCode){
-                            case ThCommand.NETWORK_TIMEOUT_RECONNECT:
+                            case YYCommand.NETWORK_TIMEOUT_RECONNECT:
                                 showToast(FileManager.getInstance().getString(1008)); //1008#网络不稳定，重连中...
                                 break;
-                            case ThCommand.NETWORK_LOGGIN_SUCCESS:
+                            case YYCommand.NETWORK_LOGGIN_SUCCESS:
                                 showToast(FileManager.getInstance().getString(1009)); //1009#连接成功
                                 break;
-                            case ThCommand.UDP_NETWORK_UNREACHABLE:
+                            case YYCommand.UDP_NETWORK_UNREACHABLE:
                                 showToast(FileManager.getInstance().getString(1010)); //1010#请确保手机与设备处于同一局域网内
                                 BaseUi currentUI= MiddleManger.getInstance().getCurrentUI();
                                 if(!(currentUI instanceof LoginUi)){
                                     MiddleManger.getInstance().goBack(ConstantValues.VIEW_DEVICE_LIST);
                                 }
                                 break;
-                            case ThCommand.UDP_HEART_CMD_TIMEOUT_TIPS:
+                            case YYCommand.UDP_HEART_CMD_TIMEOUT_TIPS:
                                 showToast(FileManager.getInstance().getString(1011)); //1011#信号不稳定或者设备已经下线
                                 break;
-                            case ThCommand.UDP_HEART_CMD_TIMEOUT_TIPS_RETURN: //1012#抱歉,设备不稳定,退出当前设备
+                            case YYCommand.UDP_HEART_CMD_TIMEOUT_TIPS_RETURN: //1012#抱歉,设备不稳定,退出当前设备
                                 showToast(FileManager.getInstance().getString(1012));
                                 MiddleManger.getInstance().goBack(ConstantValues.VIEW_DEVICE_LIST);
                                 break;
-                            case ThCommand.TCP_CONNECT_CLOSE:
+                            case YYCommand.TCP_CONNECT_CLOSE:
                                 //1013#连接已断开,需要重新登录
                                 toLoginUI(1013);
                                 break;
-                            case ThCommand.TCP_CONNECT_TIMEOUT:
+                            case YYCommand.TCP_CONNECT_TIMEOUT:
                                 //1014#连接超时,请重试
                                 toLoginUI(1014);
                                 break;
-                            case ThCommand.TCP_RECEIVE_TIMEOUT:
+                            case YYCommand.TCP_RECEIVE_TIMEOUT:
                                 //1015#网络不稳定，请重新登录
                                 toLoginUI(1015);
                                 break;
-                            case ThCommand.TCP_CONNECT_CLOSE_NOMESSAGE:
+                            case YYCommand.TCP_CONNECT_CLOSE_NOMESSAGE:
                                 toLoginUI(-1);
                                 break;
-                            case ThCommand.TCP_CONNECT_OFFLINE:
+                            case YYCommand.TCP_CONNECT_OFFLINE:
                                 //1016#请检查手机网络是否可用
                                 toLoginUI(1016);
                                 break;
-                            case ThCommand.TCP_UNKNOW_NO_HOST:
+                            case YYCommand.TCP_UNKNOW_NO_HOST:
                                 //1031#未知的主机
                                 toLoginUI(1031);
                                 break;

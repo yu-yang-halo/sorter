@@ -21,9 +21,9 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYSense;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class RgbIrPage extends PageBaseUi {
     private RecyclerView recyclerView;
@@ -74,17 +74,17 @@ public class RgbIrPage extends PageBaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType()== ThCommand.SENSE_CMD)
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType()== YYCommand.SENSE_CMD)
         {
             if(packet.getExtendType() == 0x01)
             {
-                thSenseList = ThPackageHelper.parseThSenses(packet);
+                thSenseList = YYPackageHelper.parseThSenses(packet);
                 myAdapter.setThSenseList(thSenseList);
                 myAdapter.notifyDataSetChanged();
             }else if(packet.getExtendType() == 0x02)
             {
-                int hashId = ThPackageHelper.getHashId(packet.getData1()[1],packet.getData1()[2],
+                int hashId = YYPackageHelper.getHashId(packet.getData1()[1],packet.getData1()[2],
                         packet.getData1()[3],packet.getData1()[4]);
 
                 int updatePos = 0;
@@ -101,7 +101,7 @@ public class RgbIrPage extends PageBaseUi {
                 myAdapter.notifyItemChanged(updatePos);
             }else if(packet.getExtendType() == 0x03)
             {
-                int hashId = ThPackageHelper.getHashId(packet.getData1()[1],packet.getData1()[2],
+                int hashId = YYPackageHelper.getHashId(packet.getData1()[1],packet.getData1()[2],
                         packet.getData1()[3],packet.getData1()[4]);
 
                 int updatePos = 0;

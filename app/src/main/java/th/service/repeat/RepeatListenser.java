@@ -2,7 +2,7 @@ package th.service.repeat;
 
 import java.util.List;
 
-import th.service.helper.ThPackage;
+import th.service.helper.YYPackage;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -10,5 +10,5 @@ import th.service.helper.ThPackage;
  */
 
 public interface RepeatListenser {
-    public void onResult(boolean needRepeatYN,List<ThPackage> needResendPacket);
+    public void onResult(boolean needRepeatYN,List<YYPackage> needResendPacket);
 }

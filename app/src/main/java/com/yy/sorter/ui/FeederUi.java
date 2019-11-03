@@ -27,9 +27,9 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYFeeder;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack{
     private ThSegmentView segmentView;
@@ -162,13 +162,13 @@ public class FeederUi extends BaseUi implements DigitalDialog.Builder.LVCallback
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType() == ThCommand.FEEDER_CMD)
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType() == YYCommand.FEEDER_CMD)
         {
 
             if(packet.getExtendType() == 0x01)
             {
-                thFeeder = ThPackageHelper.parseThFeeder(packet);
+                thFeeder = YYPackageHelper.parseThFeeder(packet);
                 refreshRecycleViewData();
 
             }else if(packet.getExtendType() == 0x02)

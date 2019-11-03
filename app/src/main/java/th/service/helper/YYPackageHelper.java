@@ -43,14 +43,14 @@ import th.service.data.YYWorkInfo;
  * TCP其实可以直接获取len包体长度
  */
 
-public class ThPackageHelper {
-	private static final int PACKET_HEADER_SIZE=ThPackage.PACKET_HEADER_SIZE;
+public class YYPackageHelper {
+	private static final int PACKET_HEADER_SIZE= YYPackage.PACKET_HEADER_SIZE;
 	/**
 	 * 解析UDP搜索到的设备
 	 * @param retData
 	 * @return
 	 */
-	public static YYDevice parseMyDevice(ThPackage retData){
+	public static YYDevice parseMyDevice(YYPackage retData){
 		//茶叶机#SN0000
 
 		if(retData!=null){
@@ -81,7 +81,7 @@ public class ThPackageHelper {
 	static int  buffersLength=0;
 	static int  pos=0;
 
-	public static YYConfig parseThConfig(ThPackage retData, int type){
+	public static YYConfig parseThConfig(YYPackage retData, int type){
 		Log.v("YYConfig",retData+" "+type);
 		if(type==0){
 			buffersLength=0;
@@ -114,7 +114,7 @@ public class ThPackageHelper {
 
 	private static ExecutorService executorService= Executors.newSingleThreadExecutor();
 
-	public static void parseFileData(final ThPackage retData, final int type){
+	public static void parseFileData(final YYPackage retData, final int type){
 		if(type==0){
 			buffersLength=0;
 			pos=0;
@@ -137,7 +137,7 @@ public class ThPackageHelper {
 
 		}
 	}
-	public static void parseLanData(ThPackage retData,int type,String fileName){
+	public static void parseLanData(YYPackage retData, int type, String fileName){
 		if(type==0){
 			buffersLength=0;
 			pos=0;
@@ -155,7 +155,7 @@ public class ThPackageHelper {
 	 * @param retData
 	 * @return
 	 */
-	public static MachineData parseMachineData(ThPackage retData){
+	public static MachineData parseMachineData(YYPackage retData){
 		byte[] contents=retData.getContents();
 		if(contents!=null){
 			MachineData machineData=new MachineData(contents);
@@ -165,7 +165,7 @@ public class ThPackageHelper {
 			machineData.setProtocolVersionType(retData.getData1()[2]);//协议类型 0-普通机型
 
 
-			ThLogger.debug("MachineData",machineData.toString());
+			YYLogger.debug("MachineData",machineData.toString());
 			return machineData;
 		}
 		return null;
@@ -176,7 +176,7 @@ public class ThPackageHelper {
 	 * @param retData
 	 * @return
 	 */
-	public static List<YYMode> parseThModeList(ThPackage retData){
+	public static List<YYMode> parseThModeList(YYPackage retData){
 
 		List<YYMode> modeList=new ArrayList<>();
 
@@ -214,31 +214,31 @@ public class ThPackageHelper {
 	 * @param retData
 	 * @return
 	 */
-	public static YYFeeder parseThFeeder(ThPackage retData){
+	public static YYFeeder parseThFeeder(YYPackage retData){
 		byte[] contents=retData.getContents();
 		if(contents!=null){
 			YYFeeder thFeeder=new YYFeeder(contents);
 
-			ThLogger.debug("thFeeder",thFeeder.toString());
+			YYLogger.debug("thFeeder",thFeeder.toString());
 			return thFeeder;
 		}
 		return null;
 	}
-	public static List<YYSense> parseThSenses(ThPackage retData)
+	public static List<YYSense> parseThSenses(YYPackage retData)
 	{
 		List<YYSense> thSenseList=new ArrayList<>();
 		int size= YYSense.TEXT_MAX_BYTES + 12;
 		int totalSize = (retData.getLength()-PACKET_HEADER_SIZE);
 		if(totalSize % size != 0)
 		{
-			ThLogger.debug("Error","协议格式有误");
+			YYLogger.debug("Error","协议格式有误");
 			return null;
 		}
 		int count=totalSize/size;
 
 		byte[] contents=retData.getContents();
 
-		ThLogger.debug("算法数","count="+count);
+		YYLogger.debug("算法数","count="+count);
 		byte[] buffer=new byte[size];
 
 
@@ -304,13 +304,13 @@ public class ThPackageHelper {
 
 		return thSenseList;
 	}
-	public static List<YYSvmInfo> parseThSvmInfos(ThPackage retData)
+	public static List<YYSvmInfo> parseThSvmInfos(YYPackage retData)
 	{
 		List<YYSvmInfo> thSvmInfoList=new ArrayList<>();
 		int totalSize = (retData.getLength()-PACKET_HEADER_SIZE);
 		if(totalSize % YYSvmInfo.SIZE != 0)
 		{
-			ThLogger.debug("Error","协议格式有误");
+			YYLogger.debug("Error","协议格式有误");
 			return null;
 		}
 		int count=totalSize/ YYSvmInfo.SIZE;
@@ -327,13 +327,13 @@ public class ThPackageHelper {
 		return thSvmInfoList;
 	}
 
-	public static List<YYHsvInfo> parseThHsvInfos(ThPackage retData)
+	public static List<YYHsvInfo> parseThHsvInfos(YYPackage retData)
 	{
 		List<YYHsvInfo> thHsvInfoList=new ArrayList<>();
 		int totalSize = (retData.getLength()-PACKET_HEADER_SIZE);
 		if(totalSize % YYHsvInfo.SIZE != 0)
 		{
-			ThLogger.debug("Error","协议格式有误");
+			YYLogger.debug("Error","协议格式有误");
 			return null;
 		}
 		int count=totalSize/ YYHsvInfo.SIZE;
@@ -351,7 +351,7 @@ public class ThPackageHelper {
 		return thHsvInfoList;
 	}
 
-	public static YYHsvWave parseHSVWaveData(ThPackage retData){
+	public static YYHsvWave parseHSVWaveData(YYPackage retData){
 		YYHsvWave thHSVWave=new YYHsvWave(retData.getContents());
 		return thHSVWave;
 	}
@@ -359,7 +359,7 @@ public class ThPackageHelper {
 	 * 解析波形数据
 	 * @param retData
 	 */
-	public static YYWaveData parseWaveData(ThPackage retData){
+	public static YYWaveData parseWaveData(YYPackage retData){
 
 		YYWaveData ret=new YYWaveData(retData);
 		return ret;
@@ -379,7 +379,7 @@ public class ThPackageHelper {
 	 * @param retData
 	 * @return
 	 */
-	public static YYSVersion parseThSVersion(ThPackage retData){
+	public static YYSVersion parseThSVersion(YYPackage retData){
 		int chuteNumber= AbstractDataServiceFactory.getInstance().getCurrentDevice().getMachineData().getChuteNumber();
 		YYSVersion sVersion= YYSVersion.getInstance();
 		switch (retData.getExtendType()){
@@ -414,14 +414,14 @@ public class ThPackageHelper {
 	 * @param retData
 	 * @return
 	 */
-	public static YYLightRet parseThLightRet(ThPackage retData){
+	public static YYLightRet parseThLightRet(YYPackage retData){
 		byte[] contents=retData.getContents();
 		if(contents!=null){
 			int realLength=retData.getLength()-PACKET_HEADER_SIZE;
 			byte[] buffer=new byte[realLength];
 			System.arraycopy(contents,0,buffer,0,realLength);
 			YYLightRet ret=new YYLightRet(buffer);
-			ThLogger.debug("YYLightRet",ret.toString());
+			YYLogger.debug("YYLightRet",ret.toString());
 			return ret;
 		}
 		return null;
@@ -432,19 +432,19 @@ public class ThPackageHelper {
 	 * @param retData
 	 * @return
 	 */
-	public static YYCameraPlusRet parseThCameraPlusRet(ThPackage retData){
+	public static YYCameraPlusRet parseThCameraPlusRet(YYPackage retData){
 		byte[] contents=retData.getContents();
 		if(contents!=null){
 			int realLength=retData.getLength()-PACKET_HEADER_SIZE;
 			byte[] buffer=new byte[realLength];
 			System.arraycopy(contents,0,buffer,0,realLength);
 			YYCameraPlusRet ret=new YYCameraPlusRet(buffer);
-			ThLogger.debug("YYCameraPlusRet",ret.toString());
+			YYLogger.debug("YYCameraPlusRet",ret.toString());
 			return ret;
 		}
 		return null;
 	}
-	public static YYWorkInfo parseThWorkInfo(ThPackage retData)
+	public static YYWorkInfo parseThWorkInfo(YYPackage retData)
 	{
 		byte[] contents=retData.getContents();
 		if(contents!=null){
@@ -452,7 +452,7 @@ public class ThPackageHelper {
 			byte[] buffer=new byte[realLength];
 			System.arraycopy(contents,0,buffer,0,realLength);
 			YYWorkInfo ret=new YYWorkInfo(buffer);
-			ThLogger.debug("YYWorkInfo",ret.toString());
+			YYLogger.debug("YYWorkInfo",ret.toString());
 			return ret;
 		}
 		return null;
@@ -463,7 +463,7 @@ public class ThPackageHelper {
 	 * @param retData
 	 * @return
 	 */
-	public static YYValveRateRet parseThValveRateRet(ThPackage retData){
+	public static YYValveRateRet parseThValveRateRet(YYPackage retData){
 		byte[] contents=retData.getContents();
 		if(contents!=null){
 			int valveNum=retData.getData1()[0];
@@ -476,13 +476,13 @@ public class ThPackageHelper {
 
 		return null;
 	}
-	public static List<YYRelate> parseThRelateList(ThPackage retData)
+	public static List<YYRelate> parseThRelateList(YYPackage retData)
 	{
 		List<YYRelate> thRelateList=new ArrayList<>();
 		int totalSize = (retData.getLength()-PACKET_HEADER_SIZE);
 		if(totalSize % YYRelate.SIZE != 0)
 		{
-			ThLogger.debug("Error","协议格式有误");
+			YYLogger.debug("Error","协议格式有误");
 			return null;
 		}
 		int count=totalSize/ YYRelate.SIZE;
@@ -500,7 +500,7 @@ public class ThPackageHelper {
 	/**
 	 *  解析形选
 	 */
-	public static List<YYShape> parseThShapeList(ThPackage retData)
+	public static List<YYShape> parseThShapeList(YYPackage retData)
 	{
 		byte[] contents=retData.getContents();
 		List<YYShape> thShapeList = new ArrayList<>();
@@ -561,7 +561,7 @@ public class ThPackageHelper {
 	 * @return
 	 */
 
-	public static  List<YYSVersion.ColorVersion> collectorColorVersion(ThPackage retData, int chuteNumber){
+	public static  List<YYSVersion.ColorVersion> collectorColorVersion(YYPackage retData, int chuteNumber){
 		int COLOR_SIZE=7;
 		List<YYSVersion.ColorVersion> colorVersionList=new ArrayList<>();
 		int len=retData.getLength()-PACKET_HEADER_SIZE;
@@ -598,7 +598,7 @@ public class ThPackageHelper {
 	 * @param chuteNumber
 	 * @return
 	 */
-	public static  List<YYSVersion.CameraVersion> collectorCameraVersion(ThPackage retData, int chuteNumber){
+	public static  List<YYSVersion.CameraVersion> collectorCameraVersion(YYPackage retData, int chuteNumber){
 		int CAMERA_SIZE=9;
 		List<YYSVersion.CameraVersion> cameraVersionList=new ArrayList<>();
 		int len=retData.getLength()-PACKET_HEADER_SIZE;

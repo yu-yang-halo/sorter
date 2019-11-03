@@ -14,8 +14,8 @@ import com.yy.sorter.utils.AuthUtils;
 import com.yy.sorter.utils.YYToast;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
 
 /**
  * RegisterUi
@@ -89,8 +89,8 @@ public class RegisterUi extends BaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType()== ThCommand.TCP_USER_REGISTER_CMD){
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType()== YYCommand.TCP_USER_REGISTER_CMD){
             //1:注册成功 2:用户已经注册 3：用户名或密码错误
             if(packet.getExtendType()==1){
                 showToast(FileManager.getInstance().getString(28));//28#注册成功

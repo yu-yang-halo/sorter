@@ -13,8 +13,8 @@ import th.service.core.AbstractDataServiceFactory;
  * Created by YUYANG on 2018/11/6.
  */
 
-public class ThLogger {
-    private static boolean isDebug=ThCommand.DEBUG;//ThCommand.DEBUG
+public class YYLogger {
+    private static boolean isDebug= YYCommand.DEBUG;//YYCommand.DEBUG
     private static final String UDP_LOG_FILENAME="udpLog";
     private static final String TCP_LOG_FILENAME="tcpLog";
     private static final String ERROR_LOG_FILENAME="errorLog";

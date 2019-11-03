@@ -15,7 +15,7 @@ import com.yy.sorter.utils.ConvertUtils;
 import java.util.List;
 import th.service.data.YYHsvWave;
 import th.service.data.YYHsvInfo;
-import th.service.helper.ThCommand;
+import th.service.helper.YYCommand;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -58,25 +58,25 @@ public class HsvView extends BaseView {
     private int getColorValue(int colorType){
         int color=Color.RED;
         switch (colorType){
-            case ThCommand.COLOR_COMB_CLR_RED:
+            case YYCommand.COLOR_COMB_CLR_RED:
                 color=Color.RED;
                 break;
-            case ThCommand.COLOR_COMB_CLR_GREEN:
+            case YYCommand.COLOR_COMB_CLR_GREEN:
                 color=Color.GREEN;
                 break;
-            case ThCommand.COLOR_COMB_CLR_BLUE:
+            case YYCommand.COLOR_COMB_CLR_BLUE:
                 color=Color.BLUE;
                 break;
-            case ThCommand.COLOR_COMB_CLR_RED_BLUE:
+            case YYCommand.COLOR_COMB_CLR_RED_BLUE:
                 color=Color.parseColor("#FF00FF");
                 break;
-            case ThCommand.COLOR_COMB_CLR_RED_GREEN:
+            case YYCommand.COLOR_COMB_CLR_RED_GREEN:
                 color=Color.parseColor("#FFFF00");
                 break;
-            case ThCommand.COLOR_COMB_CLR_GREEN_BLUE:
+            case YYCommand.COLOR_COMB_CLR_GREEN_BLUE:
                 color=Color.parseColor("#00FFFF");
                 break;
-            case ThCommand.COLOR_COMB_CLR_RED_GREEN_BLUE:
+            case YYCommand.COLOR_COMB_CLR_RED_GREEN_BLUE:
                 color=Color.parseColor("#80000000");
                 break;
             case 7:

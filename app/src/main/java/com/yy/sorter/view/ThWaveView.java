@@ -14,7 +14,7 @@ import com.yy.sorter.utils.ConvertUtils;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYWaveData;
-import th.service.helper.ThCommand;
+import th.service.helper.YYCommand;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -162,13 +162,13 @@ public class ThWaveView extends View {
         if(thWaveData!=null){
             switch (thWaveData.getWaveType()){
 
-                case ThCommand.WAVE_TYPE_CAMERA_ORIGIN:
-                case ThCommand.WAVE_TYPE_CAMERA_TEST:
-                case ThCommand.WAVE_TYPE_CAMERA_ADJUST:
+                case YYCommand.WAVE_TYPE_CAMERA_ORIGIN:
+                case YYCommand.WAVE_TYPE_CAMERA_TEST:
+                case YYCommand.WAVE_TYPE_CAMERA_ADJUST:
 
-                    drawScrollLine(canvas,thWaveData.getrBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_RED));
-                    drawScrollLine(canvas,thWaveData.getgBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_GREEN));
-                    drawScrollLine(canvas,thWaveData.getbBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_BLUE));
+                    drawScrollLine(canvas,thWaveData.getrBytes(),getColorValue(YYCommand.COLOR_COMB_CLR_RED));
+                    drawScrollLine(canvas,thWaveData.getgBytes(),getColorValue(YYCommand.COLOR_COMB_CLR_GREEN));
+                    drawScrollLine(canvas,thWaveData.getbBytes(),getColorValue(YYCommand.COLOR_COMB_CLR_BLUE));
 
                     drawScrollLine(canvas,thWaveData.getIr1Bytes(),IRCOLORS[0]);
                     drawScrollLine(canvas,thWaveData.getIr2Bytes(),IRCOLORS[1]);
@@ -176,11 +176,11 @@ public class ThWaveView extends View {
                     showVerticalLines(canvas,thWaveData.getData1_5());
 
                     break;
-                case ThCommand.WAVE_TYPE_BACKGROUN_LIGHT:
-                case ThCommand.WAVE_TYPE_CAMERA_GAIN:
-                    drawScrollLine(canvas,thWaveData.getrBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_RED));
-                    drawScrollLine(canvas,thWaveData.getgBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_GREEN));
-                    drawScrollLine(canvas,thWaveData.getbBytes(),getColorValue(ThCommand.COLOR_COMB_CLR_BLUE));
+                case YYCommand.WAVE_TYPE_BACKGROUN_LIGHT:
+                case YYCommand.WAVE_TYPE_CAMERA_GAIN:
+                    drawScrollLine(canvas,thWaveData.getrBytes(),getColorValue(YYCommand.COLOR_COMB_CLR_RED));
+                    drawScrollLine(canvas,thWaveData.getgBytes(),getColorValue(YYCommand.COLOR_COMB_CLR_GREEN));
+                    drawScrollLine(canvas,thWaveData.getbBytes(),getColorValue(YYCommand.COLOR_COMB_CLR_BLUE));
 
                     drawScrollLine(canvas,thWaveData.getIr1Bytes(),IRCOLORS[0]);
                     drawScrollLine(canvas,thWaveData.getIr2Bytes(),IRCOLORS[1]);
@@ -224,25 +224,25 @@ public class ThWaveView extends View {
     private int getColorValue(int colorType){
         int color=Color.RED;
         switch (colorType){
-            case ThCommand.COLOR_COMB_CLR_RED:
+            case YYCommand.COLOR_COMB_CLR_RED:
                 color=Color.RED;
                 break;
-            case ThCommand.COLOR_COMB_CLR_GREEN:
+            case YYCommand.COLOR_COMB_CLR_GREEN:
                 color=Color.GREEN;
                 break;
-            case ThCommand.COLOR_COMB_CLR_BLUE:
+            case YYCommand.COLOR_COMB_CLR_BLUE:
                 color=Color.BLUE;
                 break;
-            case ThCommand.COLOR_COMB_CLR_RED_BLUE:
+            case YYCommand.COLOR_COMB_CLR_RED_BLUE:
                 color=Color.parseColor("#FF00FF");
                 break;
-            case ThCommand.COLOR_COMB_CLR_RED_GREEN:
+            case YYCommand.COLOR_COMB_CLR_RED_GREEN:
                 color=Color.parseColor("#FFFF00");
                 break;
-            case ThCommand.COLOR_COMB_CLR_GREEN_BLUE:
+            case YYCommand.COLOR_COMB_CLR_GREEN_BLUE:
                 color=Color.parseColor("#00FFFF");
                 break;
-            case ThCommand.COLOR_COMB_CLR_RED_GREEN_BLUE:
+            case YYCommand.COLOR_COMB_CLR_RED_GREEN_BLUE:
                 color=Color.parseColor("#000000");
                 break;
 

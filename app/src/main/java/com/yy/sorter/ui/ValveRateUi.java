@@ -28,9 +28,9 @@ import java.util.TimerTask;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYValveRateRet;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack{
     private ThRateView thrateView;
@@ -115,10 +115,10 @@ public class ValveRateUi extends BaseUi implements DigitalDialog.Builder.LVCallb
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType()== ThCommand.VALVE_RATE_CMD){
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType()== YYCommand.VALVE_RATE_CMD){
             if(packet.getExtendType()==0x01){
-                YYValveRateRet thValveRateRet= ThPackageHelper.parseThValveRateRet(packet);
+                YYValveRateRet thValveRateRet= YYPackageHelper.parseThValveRateRet(packet);
                 thrateView.setThValveRateRet(thValveRateRet);
                 thrateView.invalidate();
 

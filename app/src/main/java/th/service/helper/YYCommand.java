@@ -5,7 +5,7 @@ import com.yy.sorter.activity.BuildConfig;
 /**
  * Created by YUYANG on 2018/11/6.
  */
-public class ThCommand {
+public class YYCommand {
 
 	/**
 	 * 服务地址端口配置

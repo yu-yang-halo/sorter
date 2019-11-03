@@ -6,9 +6,9 @@ import com.yy.sorter.ui.base.BaseUi;
 
 import java.util.Vector;
 
-import th.service.helper.ThLogger;
-import th.service.helper.ThStrategy;
-import th.service.helper.ThPackage;
+import th.service.helper.YYLogger;
+import th.service.helper.YYStrategy;
+import th.service.helper.YYPackage;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -99,12 +99,12 @@ public class ThUIManger {
                         break;
                     }
                 }else{
-                    if(var1 instanceof ThPackage){
-                        ThPackage packet= (ThPackage) var1;
-                        if(ThStrategy.isMustBeReceiveMessage(packet.getType())){
+                    if(var1 instanceof YYPackage){
+                        YYPackage packet= (YYPackage) var1;
+                        if(YYStrategy.isMustBeReceiveMessage(packet.getType())){
                             baseUi.update(this, var1);
                         }else{
-                            if(ThStrategy.isNeedSendMessage(baseUi,packet.getType())){
+                            if(YYStrategy.isNeedSendMessage(baseUi,packet.getType())){
                                 baseUi.update(this, var1);
                             }
                         }
@@ -118,7 +118,7 @@ public class ThUIManger {
 
 
             }else{
-                ThLogger.debug("提示","不继承之BaseUI 无法通知消息");
+                YYLogger.debug("提示","不继承之BaseUI 无法通知消息");
             }
 
         }

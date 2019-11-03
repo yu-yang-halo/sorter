@@ -18,7 +18,7 @@ import java.util.Arrays;
  *         一条协议最少发送15个字节
  *
  */
-public class ThPackage {
+public class YYPackage {
 	public static final int PACKET_HEADER_SIZE=15;
 	private byte type; // 类型
 	private byte extendType; // 扩展类型
@@ -51,11 +51,11 @@ public class ThPackage {
 	private String senderIP;
 	
 	
-	public ThPackage(){
+	public YYPackage(){
 		
 	}
 
-	public ThPackage(byte type, byte extendType, byte[] data1, byte packetNumber, int len, short crc, byte[] contents) {
+	public YYPackage(byte type, byte extendType, byte[] data1, byte packetNumber, int len, short crc, byte[] contents) {
 		this.type = type;
 		this.extendType = extendType;
 
@@ -79,7 +79,7 @@ public class ThPackage {
 
 	}
 
-	public ThPackage(byte[] all,int length) {
+	public YYPackage(byte[] all, int length) {
 		super();
 		
 		if(length>=PACKET_HEADER_SIZE){
@@ -145,13 +145,13 @@ public class ThPackage {
 			System.arraycopy(contents, 0, all, PACKET_HEADER_SIZE, contents.length);
 		}
 
-		ThLogger.debug("myByteArrays:: ",toString());
+		YYLogger.debug("myByteArrays:: ",toString());
 		return all;
 	}
 
 	@Override
 	public String toString() {
-		return "ThPackage{" +
+		return "YYPackage{" +
 				"type=" + Integer.toHexString(ConvertUtils.unsignByteToInt(type)) +
 				", extendType=" + Integer.toHexString(extendType) +
 				", data1=" + Arrays.toString(data1) +

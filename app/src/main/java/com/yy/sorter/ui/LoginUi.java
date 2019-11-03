@@ -23,9 +23,9 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYConfig;
 import th.service.data.YYDevice;
 import th.service.helper.IPUtils;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 /**
  * LoginUi
@@ -190,7 +190,7 @@ public class LoginUi extends BaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
+    public void receivePacketData(YYPackage packet) {
         /**
          * 网络下载逻辑处理
          */
@@ -230,8 +230,8 @@ public class LoginUi extends BaseUi {
             }
         });
 
-        if(packet.getType()== ThCommand.BROADCAST_DEV_CMD){
-            YYDevice device=ThPackageHelper.parseMyDevice(packet);
+        if(packet.getType()== YYCommand.BROADCAST_DEV_CMD){
+            YYDevice device= YYPackageHelper.parseMyDevice(packet);
             AbstractDataServiceFactory.getInstance().addDevice(device);
         }
 

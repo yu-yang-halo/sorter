@@ -1,7 +1,6 @@
 package th.service.core;
 
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
+import th.service.helper.YYPackage;
 
 /**
  *
@@ -85,8 +84,8 @@ public interface IDataService {
 	 * @param thPackage
 	 * @param ip
      */
-	public void sendPacketData(ThPackage thPackage,String ip);
-	public void sendPacketData(ThPackage thPackage);
+	public void sendPacketData(YYPackage thPackage, String ip);
+	public void sendPacketData(YYPackage thPackage);
 	public void closeConnect();
 	public void reSetReconnectFlag();
 

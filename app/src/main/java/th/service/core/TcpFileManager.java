@@ -13,9 +13,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import th.service.helper.CircleBuffer;
-import th.service.helper.ThCommand;
-import th.service.helper.ThLogger;
-import th.service.helper.ThPackage;
+import th.service.helper.YYCommand;
+import th.service.helper.YYLogger;
+import th.service.helper.YYPackage;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -26,8 +26,8 @@ public class TcpFileManager extends IReceiveListenser{
 	 * 环形缓冲区关闭时要reset，或者开启时reset
 	 */
 	private static final String TAG="TcpFileManager";
-    private final static String TCP_SERVER=ThCommand.TCP_FILE_SERVER_IP;
-	private final static int TCP_PORT = ThCommand.TCP_FILE_SERVER_PORT;
+    private final static String TCP_SERVER= YYCommand.TCP_FILE_SERVER_IP;
+	private final static int TCP_PORT = YYCommand.TCP_FILE_SERVER_PORT;
 	private final static int CONNECT_TIME_OUT=6000;//ms
 	private final static int HEART_RATE=5000;//ms
 	private final static int RECEIVE_TIME_OUT=15*1000;//ms
@@ -71,7 +71,7 @@ public class TcpFileManager extends IReceiveListenser{
 						sendSocket.close();
 					}
 				} catch (IOException e) {
-					ThLogger.debug(TAG,"closeConnect ...."+e);
+					YYLogger.debug(TAG,"closeConnect ...."+e);
 				}
 			}
 		});
@@ -144,7 +144,7 @@ public class TcpFileManager extends IReceiveListenser{
 				@Override
 				public void run() {
 					while (true){
-						ThLogger.debug(TAG,"reciveLoop ...."+isListenserData);
+						YYLogger.debug(TAG,"reciveLoop ...."+isListenserData);
 						while(isListenserData){
 
 							if(sendSocket==null){
@@ -180,9 +180,9 @@ public class TcpFileManager extends IReceiveListenser{
 		 */
 		TrafficManager.getInstance().addAcceptSize(len);
 
-		ThPackage thPackage=new ThPackage(contents,len);
+		YYPackage thPackage=new YYPackage(contents,len);
 
-		ThLogger.debug(TAG,"len:: "+len+"\n"+thPackage);
+		YYLogger.debug(TAG,"len:: "+len+"\n"+thPackage);
 
 		/**
 		 * UIManager 发送消息给【BaseUi】界面
@@ -202,7 +202,7 @@ public class TcpFileManager extends IReceiveListenser{
 		int len=0;
 		try {
 			while ((len=is.read(tcpBuffers))!=-1){
-				ThLogger.debug(TAG,"read execute2:: "+len);
+				YYLogger.debug(TAG,"read execute2:: "+len);
 				cicleBuffer.pushData(tcpBuffers,len);
             }
 			if (len < 0) {

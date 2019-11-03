@@ -27,9 +27,9 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYDevice;
 import th.service.data.YYSVersion;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class VersionUi extends BaseUi implements View.OnClickListener{
     private LinearLayout linearLayout1;
@@ -257,9 +257,9 @@ public class VersionUi extends BaseUi implements View.OnClickListener{
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType()== ThCommand.VERSION_CMD){
-            YYSVersion ts = ThPackageHelper.parseThSVersion(packet);
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType()== YYCommand.VERSION_CMD){
+            YYSVersion ts = YYPackageHelper.parseThSVersion(packet);
             switch (packet.getExtendType())
             {
                 case 0x01:

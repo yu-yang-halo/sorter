@@ -1,8 +1,8 @@
 package th.service.core;
 
 import th.service.helper.PacketExt;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
 import th.service.repeat.RepeatManager;
 
 /**
@@ -28,13 +28,13 @@ public class IDataServiceUdpImpl extends AbstractIDataService {
 	}
 
 	@Override
-	public void sendPacketData(ThPackage thPackage, String ip) {
+	public void sendPacketData(YYPackage thPackage, String ip) {
 		thPackage.setSenderIP(ip);
-		if(thPackage.getType()==ThCommand.BROADCAST_DEV_CMD
-				|| (thPackage.getType()== ThCommand.LOGIN_CMD&&thPackage.getExtendType()==0x02)
-				|| thPackage.getType()==ThCommand.UDP_HEART_CMD
-				|| thPackage.getType()==ThCommand.WAVE_CMD
-				|| thPackage.getType()==ThCommand.VALVE_RATE_CMD){
+		if(thPackage.getType()== YYCommand.BROADCAST_DEV_CMD
+				|| (thPackage.getType()== YYCommand.LOGIN_CMD&&thPackage.getExtendType()==0x02)
+				|| thPackage.getType()== YYCommand.UDP_HEART_CMD
+				|| thPackage.getType()== YYCommand.WAVE_CMD
+				|| thPackage.getType()== YYCommand.VALVE_RATE_CMD){
 
 			/**
 			 * -----忽略------
@@ -56,7 +56,7 @@ public class IDataServiceUdpImpl extends AbstractIDataService {
 	}
 
 	@Override
-	public void sendPacketData(ThPackage thPackage) {
+	public void sendPacketData(YYPackage thPackage) {
 		String currentIp=this.getCurrentDevice().getLocalIp();
 		sendPacketData(thPackage,currentIp);
 	}

@@ -23,9 +23,9 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYDevice;
 import th.service.helper.IPUtils;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class DeviceListUi extends BaseUi {
     private PullRefreshLayout refreshLayout;
@@ -156,8 +156,8 @@ public class DeviceListUi extends BaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType()==ThCommand.LOGIN_CMD){
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType()== YYCommand.LOGIN_CMD){
             if(hud!=null){
                 hud.dismiss();
                 hud=null;
@@ -168,7 +168,7 @@ public class DeviceListUi extends BaseUi {
                 }
             }else if(packet.getExtendType()==0x01) {
                 if(MiddleManger.getInstance().isCurrentUI(DeviceListUi.this)){
-                    MachineData machineData= ThPackageHelper.parseMachineData(packet);
+                    MachineData machineData= YYPackageHelper.parseMachineData(packet);
                     YYDevice currentDevice=AbstractDataServiceFactory.getInstance().getCurrentDevice();
                     if(currentDevice!=null){
                         currentDevice.setMachineData(machineData);
@@ -176,9 +176,9 @@ public class DeviceListUi extends BaseUi {
                     MiddleManger.getInstance().changeUI(ConstantValues.VIEW_HOME, FileManager.getInstance().getString(32));
                 }
             }
-        }else if(packet.getType()== ThCommand.BROADCAST_DEV_CMD){
+        }else if(packet.getType()== YYCommand.BROADCAST_DEV_CMD){
 
-            final YYDevice device=ThPackageHelper.parseMyDevice(packet);
+            final YYDevice device= YYPackageHelper.parseMyDevice(packet);
             if (device!=null){
                 AbstractDataServiceFactory.getInstance().addDevice(device);
             }

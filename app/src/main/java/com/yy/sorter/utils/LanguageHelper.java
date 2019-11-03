@@ -23,9 +23,9 @@ import java.util.Locale;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYConfig;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 /**
  * LanguageHelper
@@ -74,7 +74,7 @@ public class LanguageHelper {
 
     static LoadProgress loadProgress;
 
-    public static void onCallbackFileHandler(final Context ctx, final ThPackage thPackage, BaseUi currentUI, final IProgressListenser iProgressListenser){
+    public static void onCallbackFileHandler(final Context ctx, final YYPackage thPackage, BaseUi currentUI, final IProgressListenser iProgressListenser){
 
         if(!MiddleManger.getInstance().isCurrentUI(currentUI)){
             return;
@@ -82,14 +82,14 @@ public class LanguageHelper {
         if(!AbstractDataServiceFactory.isTcpFile()){
             return;
         }
-        if(thPackage.getType()== ThCommand.TCP_REQ_DOWNLOAD_WHAT_FILE){
+        if(thPackage.getType()== YYCommand.TCP_REQ_DOWNLOAD_WHAT_FILE){
             if(thPackage.getExtendType()==1){
                 switch (thPackage.getData1()[0]){
-                    case ThCommand.DOWNLOAD_FILE_TYPE_CONFIG:
-                        ThPackageHelper.parseThConfig(thPackage, 0);
+                    case YYCommand.DOWNLOAD_FILE_TYPE_CONFIG:
+                        YYPackageHelper.parseThConfig(thPackage, 0);
                         break;
-                    case ThCommand.DOWNLOAD_FILE_TYPE_APK:
-                        ThPackageHelper.parseFileData(thPackage,0);
+                    case YYCommand.DOWNLOAD_FILE_TYPE_APK:
+                        YYPackageHelper.parseFileData(thPackage,0);
                         byte[] bytes=new byte[4];
                         System.arraycopy(thPackage.getData1(),1,bytes,0,bytes.length);
                         int totalLength=ConvertUtils.bytesToInt(bytes);
@@ -104,8 +104,8 @@ public class LanguageHelper {
                         });
                         loadProgress.show();
                         break;
-                    case ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE:
-                        ThPackageHelper.parseLanData(thPackage,0, LanguageHelper.getCurrentDownloadURL());
+                    case YYCommand.DOWNLOAD_FILE_TYPE_LANGUAGE:
+                        YYPackageHelper.parseLanData(thPackage,0, LanguageHelper.getCurrentDownloadURL());
                         break;
 
                 }
@@ -114,18 +114,18 @@ public class LanguageHelper {
             }else{
                 showToast(ctx,FileManager.getInstance().getString(132));//132#没有找到文件
             }
-        }else if(thPackage.getType()==ThCommand.TCP_REQ_DOWNLOAD_FILE) {
+        }else if(thPackage.getType()== YYCommand.TCP_REQ_DOWNLOAD_FILE) {
             if (thPackage.getExtendType() == 0) {
                 switch (thPackage.getData1()[0]){
-                    case ThCommand.DOWNLOAD_FILE_TYPE_CONFIG:
-                        ThPackageHelper.parseThConfig(thPackage, 1);
+                    case YYCommand.DOWNLOAD_FILE_TYPE_CONFIG:
+                        YYPackageHelper.parseThConfig(thPackage, 1);
                         break;
-                    case ThCommand.DOWNLOAD_FILE_TYPE_APK:
-                        ThPackageHelper.parseFileData(thPackage, 1);
+                    case YYCommand.DOWNLOAD_FILE_TYPE_APK:
+                        YYPackageHelper.parseFileData(thPackage, 1);
                         loadProgress.setProgress(thPackage.getLen());
                         break;
-                    case ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE:
-                        ThPackageHelper.parseLanData(thPackage,1, LanguageHelper.getCurrentDownloadURL());
+                    case YYCommand.DOWNLOAD_FILE_TYPE_LANGUAGE:
+                        YYPackageHelper.parseLanData(thPackage,1, LanguageHelper.getCurrentDownloadURL());
                         break;
                 }
                 AbstractDataServiceFactory.getFileDownloadService().requestDownloadFile();
@@ -133,8 +133,8 @@ public class LanguageHelper {
             } else {
                 //文件结束
                 switch (thPackage.getData1()[0]){
-                    case ThCommand.DOWNLOAD_FILE_TYPE_CONFIG:
-                        YYConfig thConfig = ThPackageHelper.parseThConfig(thPackage, 2);
+                    case YYCommand.DOWNLOAD_FILE_TYPE_CONFIG:
+                        YYConfig thConfig = YYPackageHelper.parseThConfig(thPackage, 2);
                         System.out.println("服务器端配置文件" + thConfig);
                         if (thConfig != null) {
                             FileManager.getInstance().readLocalConfigFile(new FileManager.IConfigHandler() {
@@ -181,8 +181,8 @@ public class LanguageHelper {
 
                                                                         if(FileManager.getInstance().isExternalStorageWritable()){
                                                                             AbstractDataServiceFactory.getFileDownloadService().requestDownloadWhatFile(
-                                                                                    (byte) ThCommand.BUILD_VERSION,
-                                                                                    ThCommand.DOWNLOAD_FILE_TYPE_APK, null);
+                                                                                    (byte) YYCommand.BUILD_VERSION,
+                                                                                    YYCommand.DOWNLOAD_FILE_TYPE_APK, null);
                                                                         }else{
                                                                             //9#请检查存储是否可用
                                                                             showToast(ctx,FileManager.getInstance().getString(9));
@@ -216,13 +216,13 @@ public class LanguageHelper {
 
                         }
                         break;
-                    case ThCommand.DOWNLOAD_FILE_TYPE_APK:
-                        ThPackageHelper.parseFileData(thPackage, 2);
+                    case YYCommand.DOWNLOAD_FILE_TYPE_APK:
+                        YYPackageHelper.parseFileData(thPackage, 2);
                         loadProgress.setProgress(thPackage.getLen());
                         showToast(ctx, FileManager.getInstance().getString(11));//11#下载完成
                         break;
-                    case ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE:
-                        ThPackageHelper.parseLanData(thPackage,2, LanguageHelper.getCurrentDownloadURL());
+                    case YYCommand.DOWNLOAD_FILE_TYPE_LANGUAGE:
+                        YYPackageHelper.parseLanData(thPackage,2, LanguageHelper.getCurrentDownloadURL());
                         showToast(ctx,FileManager.getInstance().getString(11));//11#下载完成
                         break;
                 }

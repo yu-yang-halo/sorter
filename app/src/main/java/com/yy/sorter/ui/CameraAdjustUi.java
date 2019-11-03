@@ -36,9 +36,9 @@ import java.util.TimerTask;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYWaveData;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
@@ -56,7 +56,7 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
     private LinearLayout seekLayout,bottomLayout;
     private RelativeLayout layout_spot;
     private Activity activity;
-    private byte dataType=0,waveType= ThCommand.WAVE_TYPE_CAMERA_ORIGIN;
+    private byte dataType=0,waveType= YYCommand.WAVE_TYPE_CAMERA_ORIGIN;
     private int pos=0;
     private int orientation=ORIENTATION_PORTRAIT;
     private long lastTime=0;
@@ -361,14 +361,14 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
+    public void receivePacketData(YYPackage packet) {
 
-        if(packet.getType() == ThCommand.WAVE_CMD)
+        if(packet.getType() == YYCommand.WAVE_CMD)
         {
-            if (packet.getExtendType() == ThCommand.WAVE_TYPE_CAMERA_ORIGIN
-                    || packet.getExtendType() == ThCommand.WAVE_TYPE_CAMERA_ADJUST
-                    || packet.getExtendType() == ThCommand.WAVE_TYPE_CAMERA_TEST) {
-                YYWaveData thWaveRet = ThPackageHelper.parseWaveData(packet);
+            if (packet.getExtendType() == YYCommand.WAVE_TYPE_CAMERA_ORIGIN
+                    || packet.getExtendType() == YYCommand.WAVE_TYPE_CAMERA_ADJUST
+                    || packet.getExtendType() == YYCommand.WAVE_TYPE_CAMERA_TEST) {
+                YYWaveData thWaveRet = YYPackageHelper.parseWaveData(packet);
 
                 thWaveView.setThWaveRet(thWaveRet);
                 thWaveView.invalidate();
@@ -406,16 +406,16 @@ public class CameraAdjustUi extends BaseUi implements DigitalDialog.Builder.LVCa
         switch (type){
             case 0:
                 btnOrigin.setSelected(true);
-                waveType=ThCommand.WAVE_TYPE_CAMERA_ORIGIN;
+                waveType= YYCommand.WAVE_TYPE_CAMERA_ORIGIN;
 
                 break;
             case 1:
                 btnCalibration.setSelected(true);
-                waveType=ThCommand.WAVE_TYPE_CAMERA_ADJUST;
+                waveType= YYCommand.WAVE_TYPE_CAMERA_ADJUST;
                 break;
             case 2:
                 btnTest.setSelected(true);
-                waveType=ThCommand.WAVE_TYPE_CAMERA_TEST;
+                waveType= YYCommand.WAVE_TYPE_CAMERA_TEST;
                 break;
         }
 

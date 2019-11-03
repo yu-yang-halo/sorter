@@ -18,9 +18,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import th.service.helper.CircleBuffer;
 import th.service.helper.IPUtils;
-import th.service.helper.ThCommand;
-import th.service.helper.ThLogger;
-import th.service.helper.ThPackage;
+import th.service.helper.YYCommand;
+import th.service.helper.YYLogger;
+import th.service.helper.YYPackage;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -33,8 +33,8 @@ public class TcpCoreManager extends IReceiveListenser{
 	 * 2.重连机制
 	 */
 	private static final String TAG="TCPCoreManger";
-	private final static String TCP_SERVER=ThCommand.TCP_CORE_SERVER_IP;
-	private final static int TCP_PORT = ThCommand.TCP_CORE_SERVER_PORT;
+	private final static String TCP_SERVER= YYCommand.TCP_CORE_SERVER_IP;
+	private final static int TCP_PORT = YYCommand.TCP_CORE_SERVER_PORT;
 	private final static long KICK_MAX_TIME=600000; //长时间不操作被踢 10分钟
 	private final static int CONNECT_TIME_OUT=6000;//ms
 	private final static int RECEIVE_TIME_OUT=11*1000;//ms
@@ -69,7 +69,7 @@ public class TcpCoreManager extends IReceiveListenser{
 	}
 	public void startReceiveLooper(){
 		if(!isListenserData.get()){
-			ThLogger.addLog("开始启动接收数据监听器");
+			YYLogger.addLog("开始启动接收数据监听器");
 			isListenserData.getAndSet(true);
 			reciveLoop();
 		}
@@ -84,7 +84,7 @@ public class TcpCoreManager extends IReceiveListenser{
 	}
 	public void closeConnect(){
 		if(created.get()){
-			ThLogger.addLog("关闭连接");
+			YYLogger.addLog("关闭连接");
 			created.getAndSet(false);
 			isListenserData.getAndSet(false);
 			loginState.getAndSet(false);
@@ -106,9 +106,9 @@ public class TcpCoreManager extends IReceiveListenser{
 						}
 
 					} catch (IOException e) {
-						ThLogger.debug(TAG,"closeConnect ...."+e);
+						YYLogger.debug(TAG,"closeConnect ...."+e);
 					}finally {
-						ThLogger.outputLog();
+						YYLogger.outputLog();
 					}
 				}
 			});
@@ -150,13 +150,13 @@ public class TcpCoreManager extends IReceiveListenser{
 					if (!created.get()){
 						if(!IPUtils.netAvaliable()){
 							if(!reconnectFlag.get()){
-								sendErrorCloseConnect(ThCommand.TCP_CONNECT_OFFLINE);
+								sendErrorCloseConnect(YYCommand.TCP_CONNECT_OFFLINE);
 							}
 							return;
 						}
 						ipAddress = IPUtils.getServerIp();
 
-						ThLogger.addLog("创建Socket连接");
+						YYLogger.addLog("创建Socket连接");
 						startReceiveLooper();
 						cicleBuffer.reset();
 						sendSocket = new Socket();
@@ -173,8 +173,8 @@ public class TcpCoreManager extends IReceiveListenser{
 							clientIS=sendSocket.getInputStream();
 						} catch (IOException e) {
 							if(!reconnectFlag.get()){
-								ThLogger.addLog("关闭Socket连接 连接超时");
-								sendErrorCloseConnect(ThCommand.TCP_CONNECT_TIMEOUT);
+								YYLogger.addLog("关闭Socket连接 连接超时");
+								sendErrorCloseConnect(YYCommand.TCP_CONNECT_TIMEOUT);
 							}
 						}
 
@@ -217,7 +217,7 @@ public class TcpCoreManager extends IReceiveListenser{
 
 						synchronized (lockObj){
 							if(!isListenserData.get()){
-								ThLogger.addLog("退出接收数据监听器循环。。");
+								YYLogger.addLog("退出接收数据监听器循环。。");
 								break;
 							}
 						}
@@ -244,10 +244,10 @@ public class TcpCoreManager extends IReceiveListenser{
 		 */
 		TrafficManager.getInstance().addAcceptSize(len);
 
-		ThPackage thPackage=new ThPackage(contents,len);
+		YYPackage thPackage=new YYPackage(contents,len);
 
 	    if(thPackage.getType()==0x52&&thPackage.getExtendType()==0x00){
-			ThLogger.addLog("收到心跳");
+			YYLogger.addLog("收到心跳");
 			/**
 			 * 回心跳
 			 */
@@ -255,23 +255,23 @@ public class TcpCoreManager extends IReceiveListenser{
 			currentTime=System.currentTimeMillis();
 			long diff_time=currentTime-lastTime;
 			if(diff_time>KICK_MAX_TIME){
-				ThLogger.addLog("长时间不操作退出应用");
-				sendErrorCloseConnect(ThCommand.TCP_CONNECT_CLOSE);
+				YYLogger.addLog("长时间不操作退出应用");
+				sendErrorCloseConnect(YYCommand.TCP_CONNECT_CLOSE);
 			}
 			return;
 		}else if(thPackage.getType()==0x51&&thPackage.getExtendType()==0x01){
-			ThLogger.addLog("tcp连接成功");
-			sendError(ThCommand.NETWORK_LOGGIN_SUCCESS);
+			YYLogger.addLog("tcp连接成功");
+			sendError(YYCommand.NETWORK_LOGGIN_SUCCESS);
 			lastTime=System.currentTimeMillis();
 		}else if(thPackage.getType()==0x01&&thPackage.getExtendType()==0x01){
-			ThLogger.addLog("tcp获取机器数据成功");
+			YYLogger.addLog("tcp获取机器数据成功");
 			reSetReconnectFlag();
 			loginState.getAndSet(true);
 			lastTime=System.currentTimeMillis();
 		}else{
 			lastTime=System.currentTimeMillis();
 		}
-		ThLogger.debug(TAG,"len:: "+len+"\n"+thPackage);
+		YYLogger.debug(TAG,"len:: "+len+"\n"+thPackage);
 
 		/**
 		 * UIManager 发送消息给【BaseUi】界面
@@ -331,8 +331,8 @@ public class TcpCoreManager extends IReceiveListenser{
 			}
 		} catch (Exception e) {
 			if(!reconnectFlag.get()){
-				ThLogger.addLog("关闭Socket连接 e："+e.getMessage());
-				sendErrorCloseConnect(ThCommand.TCP_CONNECT_CLOSE);
+				YYLogger.addLog("关闭Socket连接 e："+e.getMessage());
+				sendErrorCloseConnect(YYCommand.TCP_CONNECT_CLOSE);
 			}
 
 		}
@@ -356,7 +356,7 @@ public class TcpCoreManager extends IReceiveListenser{
 				clientIS.close();
 			}
 		} catch (IOException e) {
-			ThLogger.debug(TAG,"closeConnect ...."+e);
+			YYLogger.debug(TAG,"closeConnect ...."+e);
 		}
 
 	}
@@ -369,7 +369,7 @@ public class TcpCoreManager extends IReceiveListenser{
 			reconnectFlag.getAndSet(true);
 		}
 		readTimeoutCount.getAndSet(0);
-		ThLogger.addLog("readTimeoutCount::"+readTimeoutCount.get());
+		YYLogger.addLog("readTimeoutCount::"+readTimeoutCount.get());
 		while (readTimeoutCount.getAndIncrement()<RECONNECT_MAX_COUNT){
 			if(!reconnectFlag.get()){
 				break;
@@ -379,14 +379,14 @@ public class TcpCoreManager extends IReceiveListenser{
 			}
 
 			close();
-			ThLogger.addLog("读取超时，开始重连 ******"+readTimeoutCount.get());
+			YYLogger.addLog("读取超时，开始重连 ******"+readTimeoutCount.get());
 			mainUIhandler.post(new Runnable() {
 				@Override
 				public void run() {
 					String deviceNumber=TextCacheUtils.getValueString(TextCacheUtils.KEY_DEVICE_NUMBER,"");
 					int vcode= TextCacheUtils.getValueInt(TextCacheUtils.KEY_VCODE,-1);
-					ThLogger.addLog("重连 deviceNumber："+deviceNumber+" vcode:"+vcode);
-					sendError(ThCommand.NETWORK_TIMEOUT_RECONNECT);
+					YYLogger.addLog("重连 deviceNumber："+deviceNumber+" vcode:"+vcode);
+					sendError(YYCommand.NETWORK_TIMEOUT_RECONNECT);
 					AbstractDataServiceFactory.getInstance().requestDeviceList(deviceNumber,null,null,vcode);
 
 				}
@@ -401,16 +401,16 @@ public class TcpCoreManager extends IReceiveListenser{
 
 		synchronized (lockObj){
 			if(reconnectFlag.getAndSet(false)){
-				sendErrorCloseConnect(ThCommand.TCP_CONNECT_CLOSE);
+				sendErrorCloseConnect(YYCommand.TCP_CONNECT_CLOSE);
 
 				if(loginState.get()){
-					ThLogger.addLog("重连失败");
+					YYLogger.addLog("重连失败");
 				}else{
-					ThLogger.addLog("退出登录，重连失败");
+					YYLogger.addLog("退出登录，重连失败");
 				}
 
 			}else{
-				ThLogger.addLog("重连结束");
+				YYLogger.addLog("重连结束");
 			}
 		}
 

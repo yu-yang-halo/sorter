@@ -28,9 +28,9 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYHsvInfo;
 import th.service.data.YYHsvWave;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack{
     private DirectionView directionView;
@@ -198,7 +198,7 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
             public void run() {
 
                 byte group = AbstractDataServiceFactory.getInstance().getCurrentDevice().getCurrentGroup();
-                AbstractDataServiceFactory.getInstance().requestWave((byte)ThCommand.WAVE_TYPE_HSV,
+                AbstractDataServiceFactory.getInstance().requestWave((byte) YYCommand.WAVE_TYPE_HSV,
                         new byte[]{0,0,currentView,group});
 
             }
@@ -284,12 +284,12 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if (packet.getType() == ThCommand.HSV_CMD) {
+    public void receivePacketData(YYPackage packet) {
+        if (packet.getType() == YYCommand.HSV_CMD) {
 
             if(packet.getExtendType() == 0x01)
             {
-                thHsvInfoList =  ThPackageHelper.parseThHsvInfos(packet);
+                thHsvInfoList =  YYPackageHelper.parseThHsvInfos(packet);
                 m_used = packet.getData1()[2];
                 m_bFlag_PicMove = packet.getData1()[3];
                 updateHsvPage();
@@ -323,14 +323,14 @@ public class HsvPage extends PageBaseUi implements DigitalDialog.Builder.LVCallb
                 updateHsvPage();
 
             }
-        }else if(packet.getType() == ThCommand.WAVE_CMD)
+        }else if(packet.getType() == YYCommand.WAVE_CMD)
         {
-            if(packet.getExtendType() == ThCommand.WAVE_TYPE_HSV)
+            if(packet.getExtendType() == YYCommand.WAVE_TYPE_HSV)
             {
                 /**
                  *   HSV波形
                  */
-                YYHsvWave thHSVWave=ThPackageHelper.parseHSVWaveData(packet);
+                YYHsvWave thHSVWave= YYPackageHelper.parseHSVWaveData(packet);
                 hsvView.setThHSVWave(thHSVWave);
                 hsvView.invalidate();
             }

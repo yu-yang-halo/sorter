@@ -26,9 +26,9 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYRelate;
 import th.service.data.YYShape;
 import th.service.data.YYShapeItem;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class ShapePage extends PageBaseUi {
     private RecyclerView recyclerView;
@@ -128,12 +128,12 @@ public class ShapePage extends PageBaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType() == ThCommand.SHAPE_CMD)
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType() == YYCommand.SHAPE_CMD)
         {
             if(packet.getExtendType() == 0x01)
             {
-               thShapeList = ThPackageHelper.parseThShapeList(packet);
+               thShapeList = YYPackageHelper.parseThShapeList(packet);
                myAdapter.setThShapeList(thShapeList);
                myAdapter.notifyDataSetChanged();
 
@@ -146,7 +146,7 @@ public class ShapePage extends PageBaseUi {
             }
         }
     }
-    private void updateShapeItem(ThPackage packet)
+    private void updateShapeItem(YYPackage packet)
     {
         if(thShapeList == null)
         {
@@ -163,7 +163,7 @@ public class ShapePage extends PageBaseUi {
         List<YYRelate> thRelateList = null;
         if(contents != null && contents.length>0)
         {
-            thRelateList = ThPackageHelper.parseThRelateList(packet);
+            thRelateList = YYPackageHelper.parseThRelateList(packet);
         }
 
         for(YYShape thShape:thShapeList)

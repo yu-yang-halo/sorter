@@ -31,9 +31,9 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYDevice;
 import th.service.data.YYWorkInfo;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 /**
  * HomeUi
@@ -90,14 +90,14 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             btn_switch_feeder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    AbstractDataServiceFactory.getInstance().controlDevice(ThCommand.EXTEND_CONTROL_CMD_FEEDER,isChecked);
+                    AbstractDataServiceFactory.getInstance().controlDevice(YYCommand.EXTEND_CONTROL_CMD_FEEDER,isChecked);
                 }
             });
 
             btn_switch_valve.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    AbstractDataServiceFactory.getInstance().controlDevice(ThCommand.EXTEND_CONTROL_CMD_VALVE,isChecked);
+                    AbstractDataServiceFactory.getInstance().controlDevice(YYCommand.EXTEND_CONTROL_CMD_VALVE,isChecked);
                 }
             });
 
@@ -126,7 +126,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                                 .setPositiveButton(okStr, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        AbstractDataServiceFactory.getInstance().controlDevice(ThCommand.EXTEND_CONTROL_CMD_START,true);
+                                        AbstractDataServiceFactory.getInstance().controlDevice(YYCommand.EXTEND_CONTROL_CMD_START,true);
                                     }
                                 }).setNegativeButton(cancelStr, new DialogInterface.OnClickListener() {
                                     @Override
@@ -146,7 +146,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
             btn_clean.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AbstractDataServiceFactory.getInstance().controlDevice(ThCommand.EXTEND_CONTROL_CMD_CLEAR,true);
+                    AbstractDataServiceFactory.getInstance().controlDevice(YYCommand.EXTEND_CONTROL_CMD_CLEAR,true);
                 }
             });
 
@@ -430,8 +430,8 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if (packet.getType() == ThCommand.CONTROL_CMD) {
+    public void receivePacketData(YYPackage packet) {
+        if (packet.getType() == YYCommand.CONTROL_CMD) {
             switch (packet.getExtendType()) {
                 case 0x01:
                     initFeederStatus(packet.getData1()[0]);
@@ -447,9 +447,9 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                     break;
             }
 
-        }else if (packet.getType() == ThCommand.LOGIN_CMD) {
+        }else if (packet.getType() == YYCommand.LOGIN_CMD) {
             if (packet.getExtendType() == 0x01) {
-                MachineData machineData = ThPackageHelper.parseMachineData(packet);
+                MachineData machineData = YYPackageHelper.parseMachineData(packet);
                 YYDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
                 if (currentDevice != null) {
                     currentDevice.setMachineData(machineData);
@@ -457,7 +457,7 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 onViewStart();
             }
             layout.setRefreshing(false);
-        }else if(packet.getType() == ThCommand.MODE_CMD)
+        }else if(packet.getType() == YYCommand.MODE_CMD)
         {
             if(packet.getExtendType() == 0x03)
             {
@@ -469,9 +469,9 @@ public class HomeUi extends BaseUi implements DigitalDialog.Builder.LVCallback {
                 }
             }
 
-        }else if(packet.getType() == ThCommand.WORKINFO_CMD)
+        }else if(packet.getType() == YYCommand.WORKINFO_CMD)
         {
-            thWorkInfo = ThPackageHelper.parseThWorkInfo(packet);
+            thWorkInfo = YYPackageHelper.parseThWorkInfo(packet);
 
             updateWorkInfo();
         }

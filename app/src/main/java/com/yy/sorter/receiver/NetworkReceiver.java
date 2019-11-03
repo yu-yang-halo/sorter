@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.yy.sorter.manager.FileManager;
 
 import th.service.helper.IPUtils;
-import th.service.helper.ThLogger;
+import th.service.helper.YYLogger;
 
 /**
  * NetworkReceiver
@@ -28,11 +28,11 @@ public class NetworkReceiver extends BroadcastReceiver {
        if(IPUtils.isConnected(context)){
            Toast.makeText(context, FileManager.getInstance().getString(128),Toast.LENGTH_SHORT).show(); //128#网络已连接
            enable=true;
-           ThLogger.addLog("网络改变---网络已连接 ip:"+IPUtils.localIpAddress(context));
+           YYLogger.addLog("网络改变---网络已连接 ip:"+IPUtils.localIpAddress(context));
        }else {
            Toast.makeText(context, FileManager.getInstance().getString(129),Toast.LENGTH_SHORT).show(); //129#没有网络
            enable=false;
-           ThLogger.addLog("网络改变---没有网络 ip:"+IPUtils.localIpAddress(context));
+           YYLogger.addLog("网络改变---没有网络 ip:"+IPUtils.localIpAddress(context));
        }
         if(listenser!=null){
             listenser.onNetworkChange(enable);

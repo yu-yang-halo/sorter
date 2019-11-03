@@ -24,9 +24,10 @@ import java.util.List;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYMode;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
+
 interface ICallBack
 {
     void onDataBeginSend();
@@ -81,12 +82,12 @@ public class ModeListUi extends BaseUi implements ICallBack{
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType() == ThCommand.MODE_CMD)
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType() == YYCommand.MODE_CMD)
         {
             if(packet.getExtendType() == 0x01)
             {
-                thModeList = ThPackageHelper.parseThModeList(packet);
+                thModeList = YYPackageHelper.parseThModeList(packet);
 
                 myAdapter.setThModeList(thModeList);
                 myAdapter.notifyDataSetChanged();

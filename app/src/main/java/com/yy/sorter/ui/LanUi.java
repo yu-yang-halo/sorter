@@ -21,8 +21,8 @@ import java.util.concurrent.Executors;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYConfig;
 import th.service.helper.IPUtils;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
 
 /**
  * LanUi
@@ -61,8 +61,8 @@ public class LanUi extends BaseUi {
                      */
                     AbstractDataServiceFactory
                             .getFileDownloadService()
-                            .requestDownloadWhatFile((byte) ThCommand.BUILD_VERSION,
-                                    ThCommand.DOWNLOAD_FILE_TYPE_CONFIG, null);
+                            .requestDownloadWhatFile((byte) YYCommand.BUILD_VERSION,
+                                    YYCommand.DOWNLOAD_FILE_TYPE_CONFIG, null);
 
                     mainUIHandler.postDelayed(new Runnable() {
                         @Override
@@ -134,7 +134,7 @@ public class LanUi extends BaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
+    public void receivePacketData(YYPackage packet) {
         /**
          * 网络下载逻辑处理
          */
@@ -142,9 +142,9 @@ public class LanUi extends BaseUi {
             @Override
             public void onFinished(byte fileType, boolean success, YYConfig config) {
                 if (success) {
-                    if (fileType == ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE) {
+                    if (fileType == YYCommand.DOWNLOAD_FILE_TYPE_LANGUAGE) {
                         lanAdapter.notifyDownloadSuccess();
-                    } else if (fileType == ThCommand.DOWNLOAD_FILE_TYPE_CONFIG) {
+                    } else if (fileType == YYCommand.DOWNLOAD_FILE_TYPE_CONFIG) {
 
                         onViewStart();
                     }

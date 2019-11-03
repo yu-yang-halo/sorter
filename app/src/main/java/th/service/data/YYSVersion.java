@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import th.service.core.TrafficManager;
-import th.service.helper.ThLogger;
+import th.service.helper.YYLogger;
 
 /**
  * Created by YUYANG on 2018/11/6.
@@ -268,7 +268,7 @@ public class YYSVersion {
 
         }
         private void log(){
-            ThLogger.debug("LOG", ConvertUtils.bytes2ToFloatV2(control)+":"+
+            YYLogger.debug("LOG", ConvertUtils.bytes2ToFloatV2(control)+":"+
                     ConvertUtils.bytes2ToFloatV2(led)+":"+
                     ConvertUtils.bytes2ToFloatV2(sensor)+":"+
                     ConvertUtils.bytes2ToFloatV2(wheel)+":"+

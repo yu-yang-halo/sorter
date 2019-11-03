@@ -25,7 +25,7 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYConfig;
-import th.service.helper.ThCommand;
+import th.service.helper.YYCommand;
 
 /**
  * LanAdapter
@@ -163,7 +163,7 @@ public class LanAdapter extends BaseAdapter {
                     LanguageHelper.setCurrentDownloadURL(lanList.get(position).getUrl());
                     LanguageHelper.setCurrentCountryId(lanList.get(position).getCountryId());
 
-                    AbstractDataServiceFactory.getFileDownloadService().requestDownloadWhatFile((byte) ThCommand.BUILD_VERSION,ThCommand.DOWNLOAD_FILE_TYPE_LANGUAGE,lanList.get(position).getUrl());
+                    AbstractDataServiceFactory.getFileDownloadService().requestDownloadWhatFile((byte) YYCommand.BUILD_VERSION, YYCommand.DOWNLOAD_FILE_TYPE_LANGUAGE,lanList.get(position).getUrl());
                 }
                 }).setNegativeButton(FileManager.getInstance().getString(8), new DialogInterface.OnClickListener() {
                 @Override

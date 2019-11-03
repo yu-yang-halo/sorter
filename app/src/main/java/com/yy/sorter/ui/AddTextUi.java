@@ -14,8 +14,8 @@ import com.yy.sorter.ui.base.ConstantValues;
 import com.yy.sorter.utils.StringUtils;
 
 import th.service.core.AbstractDataServiceFactory;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
 
 public class AddTextUi extends BaseUi {
     private AutoCompleteTextView txtEdit;
@@ -80,8 +80,8 @@ public class AddTextUi extends BaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType() == ThCommand.ADD_TEXT_CMD)
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType() == YYCommand.ADD_TEXT_CMD)
         {
 
             //1034#文本设置成功

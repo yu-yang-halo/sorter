@@ -21,9 +21,9 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.YYSvmInfo;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class SvmPage extends PageBaseUi {
     private RecyclerView recyclerView;
@@ -70,12 +70,12 @@ public class SvmPage extends PageBaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if(packet.getType() == ThCommand.SVM_CMD)
+    public void receivePacketData(YYPackage packet) {
+        if(packet.getType() == YYCommand.SVM_CMD)
         {
             if(packet.getExtendType() == 0x01)
             {
-                thSvmInfoList = ThPackageHelper.parseThSvmInfos(packet);
+                thSvmInfoList = YYPackageHelper.parseThSvmInfos(packet);
                 myAdapter.setThSvmInfoList(thSvmInfoList);
                 myAdapter.notifyDataSetChanged();
             }else if(packet.getExtendType() == 0x02)

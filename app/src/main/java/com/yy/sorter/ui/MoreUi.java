@@ -19,7 +19,7 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.helper.ThPackage;
+import th.service.helper.YYPackage;
 
 public class MoreUi extends BaseUi {
     private RecyclerView recyclerView;
@@ -62,7 +62,7 @@ public class MoreUi extends BaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
+    public void receivePacketData(YYPackage packet) {
 
     }
     public static List<ItemObj> buildItemObjList()

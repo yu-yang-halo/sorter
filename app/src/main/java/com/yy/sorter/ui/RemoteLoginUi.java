@@ -22,9 +22,9 @@ import com.yy.sorter.utils.YYToast;
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYDevice;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class RemoteLoginUi extends BaseUi {
     private Button remoteLogin;
@@ -166,7 +166,7 @@ public class RemoteLoginUi extends BaseUi {
 
 
     @Override
-    public void receivePacketData(ThPackage packet) {
+    public void receivePacketData(YYPackage packet) {
         if(hud!=null){
             hud.dismiss();
         }
@@ -184,7 +184,7 @@ public class RemoteLoginUi extends BaseUi {
                     showToast(FileManager.getInstance().getString(1024)); //1024#用户数据错误
                 }
             }
-        }else if(packet.getType()== ThCommand.LOGIN_CMD) {
+        }else if(packet.getType()== YYCommand.LOGIN_CMD) {
 
             if (packet.getExtendType() == 0x03) {
                 AbstractDataServiceFactory.getInstance().closeConnect();
@@ -203,7 +203,7 @@ public class RemoteLoginUi extends BaseUi {
                 }
             }else if (packet.getExtendType() == 0x01) {
                 if (MiddleManger.getInstance().isCurrentUI(RemoteLoginUi.this)) {
-                    MachineData machineData = ThPackageHelper.parseMachineData(packet);
+                    MachineData machineData = YYPackageHelper.parseMachineData(packet);
                     YYDevice currentDevice = AbstractDataServiceFactory.getInstance().getCurrentDevice();
                     if (currentDevice != null) {
                         currentDevice.setMachineData(machineData);

@@ -12,10 +12,7 @@ import android.os.Build;
 
 import com.yy.sorter.activity.BuildConfig;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.InetAddress;
-import java.net.URL;
 import java.net.UnknownHostException;
 /**
  *
@@ -48,7 +45,7 @@ public class IPUtils {
 		if(BuildConfig.DEBUG){
 			broadcastAddress="192.168.1.255";
 		}
-		ThLogger.debug(TAG,"广播地址为：：："+broadcastAddress);
+		YYLogger.debug(TAG,"广播地址为：：："+broadcastAddress);
 		return broadcastAddress;
 	}
 	public static String getNetworkType(Context ctx){
@@ -58,9 +55,9 @@ public class IPUtils {
 		if(networkInfo!=null&&networkInfo.isConnected()){
 			if(networkInfo.getType()==ConnectivityManager.TYPE_WIFI){
 				networkType="WIFI";
-				ThLogger.debug("TYPE_WIFI",networkInfo.getSubtypeName());
+				YYLogger.debug("TYPE_WIFI",networkInfo.getSubtypeName());
 			}else if(networkInfo.getType()==ConnectivityManager.TYPE_MOBILE){
-				ThLogger.debug("TYPE_MOBILE",networkInfo.getSubtypeName());
+				YYLogger.debug("TYPE_MOBILE",networkInfo.getSubtypeName());
 				networkType="4G";
 			}
 		}
@@ -88,7 +85,7 @@ public class IPUtils {
 		sb.append("\nMacAddress：" + wifiInfo.getMacAddress());
 		sb.append("\ngetNetworkId：" + wifiInfo.getNetworkId());
 		sb.append("\nwifiInfo：" + wifiInfo);
-		ThLogger.debug(TAG,sb.toString());
+		YYLogger.debug(TAG,sb.toString());
 
 
 		return intToIp(dhcpInfo.ipAddress);
@@ -182,7 +179,7 @@ public class IPUtils {
 			try {
 				InetAddress addr = InetAddress.getByName(domain);
 				set(addr);
-				InetAddress addr2 = InetAddress.getByName(ThCommand.TCP_CORE_SERVER_IP);
+				InetAddress addr2 = InetAddress.getByName(YYCommand.TCP_CORE_SERVER_IP);
 				if(addr2 != null)
 				{
 					IPUtils.setServerIp(addr2.getHostAddress());

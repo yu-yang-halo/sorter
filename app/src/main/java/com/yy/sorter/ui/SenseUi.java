@@ -22,7 +22,7 @@ import java.util.List;
 
 import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
-import th.service.helper.ThPackage;
+import th.service.helper.YYPackage;
 
 public class SenseUi extends BaseUi {
     private ThSegmentView segmentView;
@@ -235,7 +235,7 @@ public class SenseUi extends BaseUi {
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
+    public void receivePacketData(YYPackage packet) {
         if(currentPage != null)
         {
             currentPage.receivePacketData(packet);

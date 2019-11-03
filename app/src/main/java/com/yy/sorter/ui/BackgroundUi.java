@@ -28,9 +28,9 @@ import th.service.core.AbstractDataServiceFactory;
 import th.service.data.MachineData;
 import th.service.data.YYLightRet;
 import th.service.data.YYWaveData;
-import th.service.helper.ThCommand;
-import th.service.helper.ThPackage;
-import th.service.helper.ThPackageHelper;
+import th.service.helper.YYCommand;
+import th.service.helper.YYPackage;
+import th.service.helper.YYPackageHelper;
 
 public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCallback,AlwaysClickButton.LVMuiltClickCallBack {
     private final byte TYPE_RED = 1;
@@ -183,10 +183,10 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
     }
 
     @Override
-    public void receivePacketData(ThPackage packet) {
-        if (packet.getType() == ThCommand.LIGHT_CMD) {
+    public void receivePacketData(YYPackage packet) {
+        if (packet.getType() == YYCommand.LIGHT_CMD) {
             if (packet.getExtendType() == 0x01) {
-                ret = ThPackageHelper.parseThLightRet(packet);
+                ret = YYPackageHelper.parseThLightRet(packet);
                 initLight();
             }
             else if (packet.getExtendType() == 0x02)
@@ -214,15 +214,15 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
                 setLight(packet.getData1()[2],packet.getData1()[3]);
             }
         }
-        else if(packet.getType()==ThCommand.WAVE_CMD){
+        else if(packet.getType()== YYCommand.WAVE_CMD){
             //处理波形数据
-            YYWaveData thWaveRet=ThPackageHelper.parseWaveData(packet);
+            YYWaveData thWaveRet= YYPackageHelper.parseWaveData(packet);
             thWaveRet.setAlgorithm((byte) 0);
 
             thwaveView.setThWaveRet(thWaveRet);
             thwaveView.invalidate();
 
-        }else if(packet.getType() == ThCommand.CAMERA_GAIN_CMD) {
+        }else if(packet.getType() == YYCommand.CAMERA_GAIN_CMD) {
 
         }
 
@@ -260,10 +260,10 @@ public class BackgroundUi extends BaseUi implements DigitalDialog.Builder.LVCall
     private void getWave()
     {
 
-        byte[] params=new byte[]{(byte)0,currentLayer,currentView, (byte) m_Channel,ThCommand.WAVE_TYPE_BACKGROUN_LIGHT};
+        byte[] params=new byte[]{(byte)0,currentLayer,currentView, (byte) m_Channel, YYCommand.WAVE_TYPE_BACKGROUN_LIGHT};
 
         AbstractDataServiceFactory.getInstance().requestWave(
-                (byte) ThCommand.WAVE_TYPE_BACKGROUN_LIGHT,
+                (byte) YYCommand.WAVE_TYPE_BACKGROUN_LIGHT,
                 params);
 
 
